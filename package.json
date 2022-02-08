@@ -1,7 +1,7 @@
 {
-  "name": "@lachlanjc/theme-starter",
+  "name": "pangeo-forge.org",
   "version": "0.0.1",
-  "author": "Lachlan Campbell (https://lachlanjc.com) <lachlanjc@hey.com>",
+  "author": "Joe Hamman",
   "license": "MIT",
   "private": true,
   "scripts": {
@@ -19,6 +19,7 @@
     "next": "^12.0.9",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "swr": "^1.2.1",
     "theme-ui": "^0.13.1"
   },
   "devDependencies": {

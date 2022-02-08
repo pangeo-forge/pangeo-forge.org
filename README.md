@@ -59,9 +59,9 @@ import Meta from '../components/meta'
 const AboutPage = () => (
   <>
     <Meta
-      title="About" // page title
-      description="About our nonprofit." // page description
-      image="https://yourdomain.com/special-card.png" // large summary card image URL
+      title='About' // page title
+      description='About our nonprofit.' // page description
+      image='https://yourdomain.com/special-card.png' // large summary card image URL
     />
     {/* … */}
   </>
@@ -146,7 +146,7 @@ import Meta from '../components/meta'
 
 const App = ({ Component, pageProps }) => {
   return (
-    <PlausibleProvider domain="YOURDOMAIN.com">
+    <PlausibleProvider domain='YOURDOMAIN.com'>
       <ThemeProvider theme={theme}>
         <Meta />
         <Component {...pageProps} />
