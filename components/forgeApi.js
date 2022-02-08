@@ -20,8 +20,8 @@ function Bakeries() {
       <h1>Bakeries</h1>
       <Box>
         {data.map((b, i) => (
-          <Box>
-            {b.name} - {b.region} <br></br> {b.description}
+          <Box key={'bakery' + '-' + i}>
+            -&gt;{b.name} - {b.region} <br></br> {b.description}
           </Box>
         ))}
       </Box>
@@ -45,8 +45,8 @@ function Feedstocks() {
       <h1>Feedstocks</h1>
       <Box>
         {data.map((f, i) => (
-          <Box>
-            -> {f.spec} - {f.provider}
+          <Box key={'feedstock' + '-' + i}>
+            -&gt; {f.spec} - {f.provider}
           </Box>
         ))}
       </Box>
@@ -70,8 +70,8 @@ function RecipeRuns() {
       <h1>Recipe Runs</h1>
       <Box>
         {data.map((f, i) => (
-          <Box>
-            -> {f.recipe_id} - {f.started_at} <br></br>
+          <Box key={'recipe-run' + '-' + i}>
+            -&gt; {f.recipe_id} - {f.started_at} <br></br>
             {f.message} <br></br>
             {f.dataset_public_url}
           </Box>
