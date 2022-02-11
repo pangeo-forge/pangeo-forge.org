@@ -1,4 +1,6 @@
 import * as React from 'react'
+import '../global.css'
+import '../fonts.css'
 
 import Meta from '../components/meta'
 import ColorSwitcher from '../components/color-switcher'

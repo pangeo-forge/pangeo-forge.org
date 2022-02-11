@@ -1,6 +1,5 @@
-// import fetch from 'unfetch'
 import useSWR from 'swr'
-import { Box } from 'theme-ui'
+import { Box, Heading } from 'theme-ui'
 
 const fetcher = (url) => fetch(url).then((r) => r.json())
 
@@ -17,7 +16,7 @@ function Bakeries() {
 
   return (
     <Box>
-      <h1>Bakeries</h1>
+      <Heading as='h2'>Bakeries</Heading>
       <Box>
         {data.map((b, i) => (
           <Box key={'bakery' + '-' + i}>
@@ -42,7 +41,7 @@ function Feedstocks() {
 
   return (
     <Box>
-      <h1>Feedstocks</h1>
+      <Heading as='h2'>Feedstocks</Heading>
       <Box>
         {data.map((f, i) => (
           <Box key={'feedstock' + '-' + i}>
@@ -67,7 +66,7 @@ function RecipeRuns() {
 
   return (
     <Box>
-      <h1>Recipe Runs</h1>
+      <Heading as='h2'>Recipe Runs</Heading>
       <Box>
         {data.map((f, i) => (
           <Box key={'recipe-run' + '-' + i}>
