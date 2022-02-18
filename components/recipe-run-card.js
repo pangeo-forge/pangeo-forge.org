@@ -1,13 +1,33 @@
-import { Box, Themed } from 'theme-ui'
+import { Box } from 'theme-ui'
 import Link from 'next/link'
-// import { alpha } from '@theme-ui/color'
 
-const RecipeRunCard = ({
-  recipe_id,
-  started_at,
-  message,
-  dataset_public_url,
-}) => {
+function TimeDeltaFormatter(millis) {
+  const days = millis / 1000 / 86400
+
+  if (days > 2) {
+    return Math.floor(days) + ' days ago'
+  }
+
+  if (days < 1) {
+    const hours = Math.floor(days * 24)
+    if (hours < 1) {
+      const minutes = Math.floor(hours * 60)
+      return minutes + ' minutes ago'
+    }
+    return hours + ' hours ago'
+  }
+  return ''
+}
+
+const RecipeRunCard = ({ props }) => {
+  const { recipe_id, started_at, message, dataset_public_url } = props
+
+  // TODO: have API return timestamps with UTC suffix
+  // Here I'm mannually adding the +Z
+  const timeSinceRun = TimeDeltaFormatter(
+    Date.now() - Date.parse(started_at + 'Z')
+  )
+
   return (
     <Link
       href={recipe_id}
@@ -25,16 +45,12 @@ const RecipeRunCard = ({
           borderColor: 'primary',
           borderWidth: '1px',
           borderStyle: 'solid',
-          padding: [3],
-          mt: [2],
-          mb: [4],
-          pb: [4],
-          transition: 'background-color 0.15s',
-          // '@media (hover: hover) and (pointer: fine)': {
-          //   '&:hover': {
-          //     bg: alpha('primary', 0.05),
-          //   },
-          // },
+          mt: [0],
+          mb: [0],
+          pt: [3],
+          pb: [1],
+          pl: [3],
+          pr: [2],
         }}
       >
         <Box
@@ -79,7 +95,7 @@ const RecipeRunCard = ({
               ml: ['12px'],
             }}
           >
-            {started_at}
+            {timeSinceRun}
           </Box>
         </Box>
       </Box>

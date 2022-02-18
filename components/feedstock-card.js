@@ -1,10 +1,12 @@
-import { Box, Themed } from 'theme-ui'
+import { Box } from 'theme-ui'
 import Link from 'next/link'
-// import { alpha } from '@theme-ui/color'
+import Git from './icons/Git'
 
-const FeedstockCard = ({ spec, provider }) => {
+const FeedstockCard = ({ props }) => {
+  const { spec, provider } = props
+
   // TODO: link to a stand-alone feedstock page
-  const href = 'https://github.com/' + spec
+  const href = 'https://github.com/' + props.spec
 
   return (
     <Link
@@ -20,19 +22,15 @@ const FeedstockCard = ({ spec, provider }) => {
       <Box
         sx={{
           cursor: 'pointer',
-          borderColor: 'primary',
+          borderColor: 'purple',
           borderWidth: '1px',
           borderStyle: 'solid',
-          padding: [3],
-          mt: [2],
-          mb: [4],
-          pb: [4],
-          transition: 'background-color 0.15s',
-          // '@media (hover: hover) and (pointer: fine)': {
-          //   '&:hover': {
-          //     bg: alpha('primary', 0.05),
-          //   },
-          // },
+          mt: [0],
+          mb: [0],
+          pt: [3],
+          pb: [1],
+          pl: [3],
+          pr: [2],
         }}
       >
         <Box
@@ -46,12 +44,20 @@ const FeedstockCard = ({ spec, provider }) => {
         </Box>
         <Box
           sx={{
-            fontSize: [2],
-            my: [2],
-            lineHeight: '1.1em',
+            mt: [1],
           }}
         >
-          {provider}
+          <Git />
+          <Box
+            sx={{
+              fontSize: [1],
+              display: 'inline-block',
+              verticalAlign: 'center',
+              ml: ['4px'],
+            }}
+          >
+            {provider}
+          </Box>
         </Box>
       </Box>
     </Link>

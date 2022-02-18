@@ -20,7 +20,9 @@ function Bakeries() {
 
   return (
     <Box>
-      <Heading as='h2'>Bakeries</Heading>
+      <Heading as='h2' c='purple' sx={{ mb: [2], mt: [4] }}>
+        Bakeries
+      </Heading>
       <Grid gap={2} columns={[1, null, 2]}>
         {data.map((b, i) => (
           <BakeryCard
@@ -48,10 +50,12 @@ function Feedstocks() {
 
   return (
     <Box>
-      <Heading as='h2'>Feedstocks</Heading>
+      <Heading as='h2' sx={{ mb: [2], mt: [4] }}>
+        Feedstocks
+      </Heading>
       <Box>
         {data.map((b, i) => (
-          <FeedstockCard key={i} spec={b.spec} provider={b.provider} />
+          <FeedstockCard key={i} props={b} />
         ))}
       </Box>
     </Box>
@@ -71,15 +75,12 @@ function RecipeRuns() {
 
   return (
     <Box>
-      <Heading as='h2'>Recipe Runs</Heading>
+      <Heading as='h2' sx={{ mb: [2], mt: [4] }}>
+        Recipe Runs
+      </Heading>
       <Box>
         {data.map((b, i) => (
-          <RecipeRunCard
-            key={i}
-            recipe_id={b.recipe_id}
-            started_at={b.started_at}
-            message={b.message}
-          />
+          <RecipeRunCard key={i} props={b} />
         ))}
       </Box>
     </Box>
@@ -95,10 +96,15 @@ const Orchestrator = (props) => {
             fontSize: [5, 6, 7, 8],
             fontFamily: 'heading',
             fontWeight: 'bold',
+            color: 'purple',
           }}
         >
           Orchestrator
         </Box>
+        <Themed.p>
+          Tools for introspecting and executing the various modular components
+          of Pangeo Forge.
+        </Themed.p>
         <Bakeries />
         <Feedstocks />
         <RecipeRuns />

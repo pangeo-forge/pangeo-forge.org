@@ -1,6 +1,5 @@
 import { Box, Themed } from 'theme-ui'
 import Link from 'next/link'
-// import { alpha } from '@theme-ui/color'
 
 const BakeryCard = ({ name, region, description }) => {
   // TODO: get this from the api
@@ -21,19 +20,13 @@ const BakeryCard = ({ name, region, description }) => {
       <Box
         sx={{
           cursor: 'pointer',
-          borderColor: 'primary',
+          borderColor: 'purple',
           borderWidth: '1px',
           borderStyle: 'solid',
           padding: [3],
           mt: [2],
           mb: [4],
           pb: [4],
-          transition: 'background-color 0.15s',
-          // '@media (hover: hover) and (pointer: fine)': {
-          //   '&:hover': {
-          //     bg: alpha('primary', 0.05),
-          //   },
-          // },
         }}
       >
         <Box
