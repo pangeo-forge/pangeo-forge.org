@@ -1,12 +1,35 @@
+import useSWR from 'swr'
+
 import { Box } from 'theme-ui'
 import Link from 'next/link'
 import Git from './icons/Git'
 
-const FeedstockCard = ({ props }) => {
-  const { spec, provider } = props
+const fetcher = (url) => fetch(url).then((r) => r.json())
 
-  // TODO: link to a stand-alone feedstock page
-  const href = 'https://github.com/' + props.spec
+function RepoData(spec) {
+  const { data, error } = useSWR(
+    'https://api.github.com/repos/' + spec,
+    fetcher
+  )
+  return data
+}
+
+const FeedstockCard = ({ props }) => {
+  const { spec, provider, id } = props
+
+  const repo = RepoData(props.spec)
+
+  if (repo) {
+    console.log(repo)
+    const { license, forks, stargazers_count, pushed_at } = repo
+  } else {
+    const license = null
+    const forks = null
+    const stargazers_count = null
+    const pushed_at = null
+  }
+
+  const href = './feedstock/' + id
 
   return (
     <Link
@@ -58,6 +81,54 @@ const FeedstockCard = ({ props }) => {
           >
             {provider}
           </Box>
+          {license && (
+            <Box
+              sx={{
+                fontSize: [1],
+                display: 'inline-block',
+                verticalAlign: 'center',
+                ml: ['4px'],
+              }}
+            >
+              {license.spdx_id}
+            </Box>
+          )}
+          {forks && (
+            <Box
+              sx={{
+                fontSize: [1],
+                display: 'inline-block',
+                verticalAlign: 'center',
+                ml: ['4px'],
+              }}
+            >
+              {forks}
+            </Box>
+          )}
+          {stargazers_count && (
+            <Box
+              sx={{
+                fontSize: [1],
+                display: 'inline-block',
+                verticalAlign: 'center',
+                ml: ['4px'],
+              }}
+            >
+              {stargazers_count}
+            </Box>
+          )}
+          {pushed_at && (
+            <Box
+              sx={{
+                fontSize: [1],
+                display: 'inline-block',
+                verticalAlign: 'center',
+                ml: ['4px'],
+              }}
+            >
+              {pushed_at}
+            </Box>
+          )}
         </Box>
       </Box>
     </Link>

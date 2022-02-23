@@ -8,29 +8,39 @@ function TimeDeltaFormatter(millis) {
     return Math.floor(days) + ' days ago'
   }
 
-  if (days < 1) {
-    const hours = Math.floor(days * 24)
+  if (days < 2) {
+    const hours = days * 24
     if (hours < 1) {
       const minutes = Math.floor(hours * 60)
-      return minutes + ' minutes ago'
+      if (minutes == 1) {
+        return '1 minute ago'
+      }
+      return Math.floor(minutes) + ' minutes ago'
     }
-    return hours + ' hours ago'
+    if (hours < 2) {
+      return '1 hour ago'
+    }
+    return Math.floor(hours) + ' hours ago'
   }
   return ''
 }
 
 const RecipeRunCard = ({ props }) => {
-  const { recipe_id, started_at, message, dataset_public_url } = props
+  console.log(props)
+  const { id, recipe_id, started_at, message, dataset_public_url } = props
 
   // TODO: have API return timestamps with UTC suffix
   // Here I'm mannually adding the +Z
+  console.log(started_at)
   const timeSinceRun = TimeDeltaFormatter(
     Date.now() - Date.parse(started_at + 'Z')
   )
 
+  const href = './recipe-run/' + id
+
   return (
     <Link
-      href={recipe_id}
+      href={href}
       passHref
       sx={{
         textDecoration: 'none',
