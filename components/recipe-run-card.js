@@ -36,7 +36,7 @@ const RecipeRunCard = ({ props }) => {
     Date.now() - Date.parse(started_at + 'Z')
   )
 
-  const href = './recipe-run/' + id
+  const href = '/dashboard/recipe-run/' + id
 
   return (
     <Link

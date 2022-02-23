@@ -29,7 +29,7 @@ const FeedstockCard = ({ props }) => {
     const pushed_at = null
   }
 
-  const href = './feedstock/' + id
+  const href = '/dashboard/feedstock/' + id
 
   return (
     <Link

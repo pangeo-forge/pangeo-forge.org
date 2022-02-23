@@ -20,7 +20,7 @@ const RecipeRun = () => {
 
   console.log(data)
 
-  const feedstockHref = '../feedstock/' + data.feedstock.id
+  const feedstockHref = '/dashboard/feedstock/' + data.feedstock.id
 
   return (
     <Layout container={true}>
