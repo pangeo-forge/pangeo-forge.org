@@ -1,7 +1,8 @@
-import { Box, Container } from 'theme-ui'
+import { Box, Container, Flex } from 'theme-ui'
 import Meta from './meta'
+import Header from './header'
 
-const Layout = ({ children, container }) => {
+const Layout = ({ children, container = true }) => {
   let content = children
 
   if (container) {
@@ -12,11 +13,42 @@ const Layout = ({ children, container }) => {
     )
   }
 
+  const menuItems = {
+    Home: '/',
+    Recipes: 'https://pangeo-forge.readthedocs.io/',
+    Documentation: '/docs',
+    Dashboard: '/dashboard/feedstocks',
+  }
+
   return (
-    <Box>
-      <Meta />
-      {content}
-    </Box>
+    <Flex
+      sx={{
+        flexDirection: 'column',
+        minHeight: '100vh',
+      }}
+    >
+      <Box
+        as='header'
+        sx={{
+          width: '100%',
+          position: 'sticky',
+          top: 0,
+          bg: 'purple',
+          color: 'invert',
+          height: '56px',
+          zIndex: 2000,
+        }}
+      >
+        <Container>
+          <Header menuItems={menuItems} />
+        </Container>
+      </Box>
+
+      <Box>
+        <Meta />
+        {content}
+      </Box>
+    </Flex>
   )
 }
 

@@ -4,22 +4,28 @@ import Layout from '../components/layout'
 
 const Index = (props) => {
   return (
-    <Layout>
+    <Layout container={false}>
       <Box sx={{ bg: 'purple', color: 'invert' }}>
         <Container sx={{ py: [6, 6, 6, 7] }}>
-          <Box
-            sx={{
-              fontSize: [5, 6, 7, 8],
-              fontFamily: 'heading',
-              fontWeight: 'bold',
-            }}
-          >
-            Pangeo-Forge
+          <Box sx={{ mx: 'auto' }}>
+            <Image
+              src='https://pangeo-forge.org/img/pangeo-forge-logo-white.cb96c4cf.png'
+              alt='Pangeo-Forge logo'
+              width={550}
+              height={343}
+            />
+            <Themed.p>
+              A cloud-native data repository for ocean, weather, and climate
+              science.
+            </Themed.p>
           </Box>
-          <Themed.p>
-            A cloud-native data repository for ocean, weather, and climate
-            science.
-          </Themed.p>
+        </Container>
+      </Box>
+      <Box sx={{ bg: '#eee', color: 'text' }}>
+        <Container sx={{ py: [1, 1, 1, 2] }}>
+          <Box>
+            <Themed.p>Space for top-level stats</Themed.p>
+          </Box>
         </Container>
       </Box>
       <Container sx={{ mb: [5, 5, 5, 6] }}>
