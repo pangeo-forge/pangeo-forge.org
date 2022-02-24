@@ -1,7 +1,6 @@
-import { themed } from '@theme-ui/mdx'
 import { useRouter } from 'next/router'
-import useSWR from 'swr'
 import { Box, Container, Themed } from 'theme-ui'
+import useSWR from 'swr'
 import Layout from '../../../components/layout'
 import RecipeRunCard from '../../../components/recipe-run-card'
 
