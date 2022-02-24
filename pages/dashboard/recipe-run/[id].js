@@ -15,8 +15,13 @@ const RecipeRun = () => {
     fetcher
   )
 
-  if (!id || !data) return <Box>Loading...</Box>
-  if (error) return <Box>Failed to load</Box>
+  if (!id || !data) return <Layout container={true} />
+  if (error)
+    return (
+      <Layout container={true}>
+        <Box>Failed to load...</Box>
+      </Layout>
+    )
 
   console.log(data)
 
