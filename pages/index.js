@@ -1,4 +1,4 @@
-import { Box, Container, Themed } from 'theme-ui'
+import { Box, Container, Flex, Themed } from 'theme-ui'
 import Image from 'next/image'
 import Layout from '../components/layout'
 
@@ -7,7 +7,7 @@ const Index = (props) => {
     <Layout container={false}>
       <Box sx={{ bg: 'purple', color: 'invert' }}>
         <Container sx={{ py: [6, 6, 6, 7] }}>
-          <Box sx={{ mx: 'auto' }}>
+          <Flex sx={{flexDirection: 'column', alignItems: 'center'}}>
             <Image
               src='https://pangeo-forge.org/img/pangeo-forge-logo-white.cb96c4cf.png'
               alt='Pangeo-Forge logo'
@@ -18,7 +18,7 @@ const Index = (props) => {
               A cloud-native data repository for ocean, weather, and climate
               science.
             </Themed.p>
-          </Box>
+          </Flex>
         </Container>
       </Box>
       <Box sx={{ bg: '#eee', color: 'text' }}>
