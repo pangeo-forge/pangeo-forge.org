@@ -1,40 +1,37 @@
 import { useRouter } from 'next/router'
-import useSWR from 'swr'
 import Link from 'next/link'
 import { Box, Themed } from 'theme-ui'
 import Layout from '../../../components/layout'
-
-const fetcher = (url) => fetch(url).then((r) => r.json())
+import DashboardMenu from '../../../components/dashboard-menu'
+import { useRecipeRun } from '../../../lib/endpoints'
 
 const RecipeRun = () => {
   const router = useRouter()
   const { id } = router.query
 
-  const { data, error } = useSWR(
-    'https://api-staging.pangeo-forge.org/recipe_runs/' + id,
-    fetcher
-  )
+  const { recipeRun, recipeRunError } = useRecipeRun(id)
+  console.log(recipeRun)
 
-  if (!id || !data) return <Layout container={true} />
-  if (error)
+  if (recipeRunError) {
     return (
       <Layout container={true}>
         <Box>Failed to load...</Box>
       </Layout>
     )
+  }
+  if (!recipeRun) return <Layout container={true} />
 
-  console.log(data)
-
-  const feedstockHref = '/dashboard/feedstock/' + data.feedstock.id
+  const feedstockHref = '/dashboard/feedstock/' + recipeRun.feedstock.id
 
   return (
     <Layout container={true}>
+      <DashboardMenu />
       <Link href={feedstockHref} passHref>
-        <Themed.h1>{data.recipe_id}</Themed.h1>
+        <Themed.h1>{recipeRun.recipe_id}</Themed.h1>
       </Link>
       <Themed.p>Recipe description</Themed.p>
-      <Themed.h2>{data.status}</Themed.h2>
-      <Themed.h2>{data.head_sha}</Themed.h2>
+      <Themed.h2>{recipeRun.status}</Themed.h2>
+      <Themed.h2>{recipeRun.head_sha}</Themed.h2>
     </Layout>
   )
 }

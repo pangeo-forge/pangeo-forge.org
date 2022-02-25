@@ -1,24 +1,22 @@
-import useSWR from 'swr'
 import { Box, Heading } from 'theme-ui'
 import Layout from '../../components/layout'
 import RecipeRunCard from '../../components/recipe-run-card'
 import DashboardMenu from '../../components/dashboard-menu'
+import { useRecipeRuns } from '../../lib/endpoints'
 
 const fetcher = (url) => fetch(url).then((r) => r.json())
 
 const RecipeRuns = () => {
-  const { data, error } = useSWR(
-    'https://api-staging.pangeo-forge.org/recipe_runs',
-    fetcher
-  )
+  const { recipeRuns, recipeRunsError } = useRecipeRuns()
 
-  if (error)
+  if (recipeRunsError) {
     return (
       <Layout container={true}>
         <Box>Failed to load...</Box>
       </Layout>
     )
-  if (!data) return <Layout container={true} />
+  }
+  if (!recipeRuns) return <Layout container={true} />
 
   return (
     <Layout container={true}>
@@ -29,7 +27,7 @@ const RecipeRuns = () => {
           Recipe Runs
         </Heading>
         <Box>
-          {data.reverse().map((b, i) => (
+          {recipeRuns.reverse().map((b, i) => (
             <RecipeRunCard key={i} props={b} />
           ))}
         </Box>

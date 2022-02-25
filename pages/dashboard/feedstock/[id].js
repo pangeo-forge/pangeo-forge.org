@@ -1,22 +1,19 @@
 import { useRouter } from 'next/router'
-import { Box, Container, Themed } from 'theme-ui'
-import useSWR from 'swr'
+import { Box, Button, Flex, Themed } from 'theme-ui'
 import Layout from '../../../components/layout'
 import RecipeRunCard from '../../../components/recipe-run-card'
-
-const fetcher = (url) => fetch(url).then((r) => r.json())
+import DashboardMenu from '../../../components/dashboard-menu'
+import { useFeedstock, useMeta } from '../../../lib/endpoints'
 
 const Feedstock = () => {
   const router = useRouter()
   const { id } = router.query
 
-  const { data, error } = useSWR(
-    'https://api-staging.pangeo-forge.org/feedstocks/' + id,
-    fetcher
-  )
+  const { fs, fsError } = useFeedstock(id)
+  const { meta, metaError } = useMeta(fs.spec)
 
-  if (!id || !data) return <Layout container={true} />
-  if (error)
+  if (!fs || !meta) return <Layout container={true} />
+  if (fsError || metaError)
     return (
       <Layout container={true}>
         <Box>Failed to load...</Box>
@@ -25,16 +22,29 @@ const Feedstock = () => {
 
   return (
     <Layout>
-      <Container sx={{ mb: [5, 5, 5, 6] }}>
-        <Themed.h1>{data.spec}</Themed.h1>
-        <Themed.p>Feedstock description</Themed.p>
-        <Themed.h2>Recipe Runs</Themed.h2>
-        <Box>
-          {data.recipe_runs.reverse().map((b, i) => (
-            <RecipeRunCard key={i} props={b} />
-          ))}
+      <DashboardMenu />
+      <Flex>
+        <Box
+          sx={{
+            fontFamily: 'heading',
+            display: 'inline-block',
+            flex: '1 1 auto',
+          }}
+        >
+          {fs.spec.replace('pangeo-forge/', '')}
         </Box>
-      </Container>
+        <Button sx={{ display: 'inline-block', float: 'right' }}>
+          View Git Repository
+        </Button>
+      </Flex>
+
+      <Themed.p>{meta.description}</Themed.p>
+      <Themed.h2>Recipe Runs</Themed.h2>
+      <Box>
+        {fs.recipe_runs.reverse().map((b, i) => (
+          <RecipeRunCard key={i} props={b} />
+        ))}
+      </Box>
     </Layout>
   )
 }

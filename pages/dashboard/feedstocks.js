@@ -1,24 +1,20 @@
-import useSWR from 'swr'
-import { Box, Heading } from 'theme-ui'
+import { Box, Grid, Heading } from 'theme-ui'
 import Layout from '../../components/layout'
 import FeedstockCard from '../../components/feedstock-card'
 import DashboardMenu from '../../components/dashboard-menu'
-
-const fetcher = (url) => fetch(url).then((r) => r.json())
+import { useFeedstocks } from '../../lib/endpoints'
 
 const Feedstocks = () => {
-  const { data, error } = useSWR(
-    'https://api-staging.pangeo-forge.org/feedstocks',
-    fetcher
-  )
+  const { feedstocks, feedstocksError } = useFeedstocks()
 
-  if (error)
+  if (feedstocksError) {
     return (
       <Layout container={true}>
         <Box>Failed to load...</Box>
       </Layout>
     )
-  if (!data) return <Layout container={true} />
+  }
+  if (!feedstocks) return <Layout container={true} />
 
   return (
     <Layout container={true}>
@@ -28,23 +24,23 @@ const Feedstocks = () => {
         <Heading as='h2' sx={{ mb: [2], mt: [4] }}>
           Feedstocks
         </Heading>
-        <Box>
-          {data
+        <Grid gap={2} columns={[1, null, 2]}>
+          {feedstocks
             .filter((d) => !d.spec.includes('staged-recipes'))
             .map((b, i) => (
               <FeedstockCard key={i} props={b} />
             ))}
-        </Box>
-        <Heading as='h2' sx={{ mb: [2], mt: [4] }}>
+        </Grid>
+        {/* <Heading as='h2' sx={{ mb: [2], mt: [4] }}>
           Staged Recipes
         </Heading>
-        <Box>
-          {data
+        <Grid gap={2} columns={[1, null, 2]}>
+          {feedstocks
             .filter((d) => d.spec.includes('staged-recipes'))
             .map((b, i) => (
               <FeedstockCard key={i} props={b} />
             ))}
-        </Box>
+        </Grid> */}
       </Box>
     </Layout>
   )
