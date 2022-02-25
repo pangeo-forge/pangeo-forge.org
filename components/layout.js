@@ -16,7 +16,7 @@ const Layout = ({ children, container = true }) => {
   const menuItems = {
     Home: '/',
     Recipes: 'https://pangeo-forge.readthedocs.io/',
-    Documentation: '/docs',
+    Docs: '/docs',
     Dashboard: '/dashboard/feedstocks',
   }
 

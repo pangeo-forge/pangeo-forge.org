@@ -1,13 +1,26 @@
 import { Box, Container, Flex, Themed } from 'theme-ui'
 import Image from 'next/image'
 import Layout from '../components/layout'
+import { useFeedstocks, useRecipeRuns } from '../lib/endpoints'
 
-const Index = (props) => {
+const Stat = ({ name, number }) => {
+  return (
+    <Box sx={{ flex: '1 1 auto' }}>
+      <Box sx={{ textAlign: 'center' }}>{name}</Box>
+      <Box sx={{ textAlign: 'center' }}>{number}</Box>
+    </Box>
+  )
+}
+
+const Index = () => {
+  const { feedstocks = [] } = useFeedstocks()
+  const { recipeRuns = [] } = useRecipeRuns()
+
   return (
     <Layout container={false}>
       <Box sx={{ bg: 'purple', color: 'invert' }}>
         <Container sx={{ py: [6, 6, 6, 7] }}>
-          <Flex sx={{flexDirection: 'column', alignItems: 'center'}}>
+          <Flex sx={{ flexDirection: 'column', alignItems: 'center' }}>
             <Image
               src='https://pangeo-forge.org/img/pangeo-forge-logo-white.cb96c4cf.png'
               alt='Pangeo-Forge logo'
@@ -23,9 +36,17 @@ const Index = (props) => {
       </Box>
       <Box sx={{ bg: '#eee', color: 'text' }}>
         <Container sx={{ py: [1, 1, 1, 2] }}>
-          <Box>
-            <Themed.p>Space for top-level stats</Themed.p>
-          </Box>
+          <Flex
+            sx={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              layoutAlign: 'center',
+            }}
+          >
+            <Stat name='Feedstocks' number={feedstocks.length} />
+            <Stat name='Recipes' number={recipeRuns.length} />
+            <Stat name='Datasets' number='-' />
+          </Flex>
         </Container>
       </Box>
       <Container sx={{ mb: [5, 5, 5, 6] }}>
