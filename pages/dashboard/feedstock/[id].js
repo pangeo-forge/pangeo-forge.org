@@ -9,10 +9,10 @@ const Feedstock = () => {
   const router = useRouter()
   const { id } = router.query
 
-  const { fs, fsError } = useFeedstock(id)
-  const { meta, metaError } = useMeta(fs.spec)
+  const { fs: { spec = '', recipe_runs = [] } = {}, fsError } = useFeedstock(id)
+  const { meta, metaError } = useMeta(spec)
 
-  if (!fs || !meta) return <Layout container={true} />
+  if (!spec || !meta) return <Layout container={true} />
   if (fsError || metaError)
     return (
       <Layout container={true}>
@@ -31,7 +31,7 @@ const Feedstock = () => {
             flex: '1 1 auto',
           }}
         >
-          {fs.spec.replace('pangeo-forge/', '')}
+          {spec.replace('pangeo-forge/', '')}
         </Box>
         <Button sx={{ display: 'inline-block', float: 'right' }}>
           View Git Repository
@@ -41,7 +41,7 @@ const Feedstock = () => {
       <Themed.p>{meta.description}</Themed.p>
       <Themed.h2>Recipe Runs</Themed.h2>
       <Box>
-        {fs.recipe_runs.reverse().map((b, i) => (
+        {recipe_runs.reverse().map((b, i) => (
           <RecipeRunCard key={i} props={b} />
         ))}
       </Box>

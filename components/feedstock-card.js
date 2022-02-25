@@ -2,6 +2,7 @@ import { Box } from 'theme-ui'
 import Link from 'next/link'
 import { useRepo } from '../lib/endpoints'
 import { GoMarkGithub } from 'react-icons/go'
+import { GiAnvil } from 'react-icons/gi'
 
 const FeedstockCard = ({ props }) => {
   const { spec, provider, id } = props
@@ -33,11 +34,14 @@ const FeedstockCard = ({ props }) => {
           pb: [4],
         }}
       >
+        <GiAnvil />
+
         <Box
           sx={{
             fontSize: [4],
             fontFamily: 'heading',
             fontWeight: 'heading',
+            display: 'inline-block',
           }}
         >
           {spec.replace('pangeo-forge/', '')}
