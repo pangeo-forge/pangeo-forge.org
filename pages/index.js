@@ -1,8 +1,7 @@
-import { Box, Container, Flex, Heading } from 'theme-ui'
+import { Box, Container, Flex, Themed, Link } from 'theme-ui'
 import Image from 'next/image'
 import Layout from '../components/layout'
 import { useFeedstocks, useRecipeRuns } from '../lib/endpoints'
-import { alpha } from '@theme-ui/color'
 
 const Stat = ({ name, number }) => {
   return (
@@ -73,19 +72,10 @@ const Index = () => {
       </Box>
       <Container sx={{ mb: [5, 5, 5, 6] }}>
         <Flex sx={{ flexDirection: 'column', alignItems: 'center' }}>
+          <Themed.h1>About Pangeo Forge</Themed.h1>
           <Box
-            sx={{
-              fontFamily: 'title',
-              fontWeight: 'title',
-              fontSize: [6],
-              color: 'blue',
-              py: [4],
-            }}
-          >
-            About Pangeo Forge
-          </Box>
-          <Box
-            sx={{ fontFamily: 'body', textAlign: 'center', px: [6, 6, 8, 10] }}
+            varient='styles.p'
+            sx={{ textAlign: 'center', px: [6, 6, 8, 10] }}
           >
             Pangeo Forge is an open source platform for data Extraction,
             Transformation, and Loading (ETL). The goal of Pangeo Forge is to
@@ -95,17 +85,7 @@ const Index = () => {
             community-led collection of recipes for building conda packages. We
             hope that Pangeo Forge can play the same role for datasets.
           </Box>
-          <Box
-            sx={{
-              fontFamily: 'title',
-              fontWeight: 'title',
-              fontSize: [6],
-              color: 'blue',
-              py: [4],
-            }}
-          >
-            How it works
-          </Box>
+          <Themed.h1>How it works</Themed.h1>
           <Box>
             <Image
               src='https://pangeo-forge.org/img/pangeo-forge-diagram.b8332f39.png'

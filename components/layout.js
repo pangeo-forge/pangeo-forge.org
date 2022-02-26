@@ -1,4 +1,4 @@
-import { Box, Container, Flex } from 'theme-ui'
+import { Box, Button, Container, Flex, Link } from 'theme-ui'
 import Meta from './meta'
 import Header from './header'
 
@@ -22,34 +22,67 @@ const Layout = ({ children, container = true }) => {
   }
 
   return (
-    <Flex
-      sx={{
-        flexDirection: 'column',
-        minHeight: '100vh',
-      }}
-    >
-      <Box
-        as='header'
+    <Box>
+      <Flex
         sx={{
-          width: '100%',
-          position: 'sticky',
-          top: 0,
-          bg: 'purple',
-          color: 'invert',
-          height: '56px',
-          zIndex: 2000,
+          flexDirection: 'column',
+          minHeight: '100vh',
         }}
       >
-        <Container>
-          <Header menuItems={menuItems} />
-        </Container>
-      </Box>
+        <Box
+          as='header'
+          sx={{
+            width: '100%',
+            position: 'sticky',
+            top: 0,
+            bg: 'purple',
+            color: 'invert',
+            height: '56px',
+            zIndex: 2000,
+          }}
+        >
+          <Container>
+            <Header menuItems={menuItems} />
+          </Container>
+        </Box>
 
-      <Box>
-        <Meta />
-        {content}
-      </Box>
-    </Flex>
+        <Box>
+          <Meta />
+          {content}
+        </Box>
+      </Flex>
+      <Flex
+        sx={{
+          alignItems: 'center',
+        }}
+      >
+        <Button
+          bg='black'
+          color='white'
+          px='4'
+          py='2'
+          rounded='lg'
+          sx={{ margin: 'auto' }}
+        >
+          {' '}
+          <Link
+            sx={{
+              fontFamily: 'body',
+              color: 'white',
+              textDecoration: 'none',
+              '&:hover': { color: 'white', textDecoration: 'underline' },
+            }}
+            href='https://vercel.com?utm_source=pangeo-forge&utm_campaign=oss'
+          >
+            {'Powered by'}{' '}
+            <span role='img' aria-label='Vercel logo'>
+              ▲
+            </span>{' '}
+            Vercel
+          </Link>
+        </Button>
+      </Flex>
+    </Box>
   )
 }
 

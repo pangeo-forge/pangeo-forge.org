@@ -8,7 +8,6 @@ const RecipeRunCard = ({ props }) => {
 
   // TODO: have API return timestamps with UTC suffix
   // Here I'm mannually adding the +Z
-  console.log(started_at)
   const timeSinceRun = TimeDeltaFormatter(
     Date.now() - Date.parse(started_at + 'Z')
   )
@@ -43,8 +42,8 @@ const RecipeRunCard = ({ props }) => {
         <Box
           sx={{
             fontSize: [4],
-            fontFamily: 'heading',
-            fontWeight: 'heading',
+            fontFamily: 'subtitle',
+            fontWeight: 'subtitle',
           }}
         >
           {recipe_id}
@@ -76,7 +75,7 @@ const RecipeRunCard = ({ props }) => {
           <Box
             sx={{
               fontSize: [2],
-              fontFamily: 'monospace',
+              fontFamily: 'body',
               display: 'inline-block',
               verticalAlign: 'bottom',
               ml: ['12px'],

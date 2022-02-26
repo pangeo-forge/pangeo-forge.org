@@ -3,11 +3,17 @@ import Link from 'next/link'
 import { useRepo } from '../lib/endpoints'
 import { GoMarkGithub } from 'react-icons/go'
 import { GiAnvil } from 'react-icons/gi'
+import { TimeDeltaFormatter } from '../lib/time-delta'
 
 const FeedstockCard = ({ props }) => {
   const { spec, provider, id } = props
 
-  const { repo: { commit: { message = '' } = {} } = {} } = useRepo(spec) || {}
+  // const { repo: { commit: { message = '', committer: { date=''} = {} } = {} } = {} } = useRepo(spec) || {}
+  const message = 'My latest commit message'
+  // const timeSinceRun = TimeDeltaFormatter(
+  //   Date.now() - Date.parse(date)
+  // )
+  const timeSinceRun = '19 days'
 
   const href = '/dashboard/feedstock/' + id
 
@@ -29,37 +35,51 @@ const FeedstockCard = ({ props }) => {
           borderWidth: '1px',
           borderStyle: 'solid',
           padding: [3],
-          mt: [2],
-          mb: [4],
-          pb: [4],
         }}
       >
-        <GiAnvil />
+        <Box>
+          <Box sx={{ display: 'inline-block', verticalAlign: 'bottom' }}>
+            <GiAnvil size={24} />
+          </Box>
 
-        <Box
-          sx={{
-            fontSize: [4],
-            fontFamily: 'heading',
-            fontWeight: 'heading',
-            display: 'inline-block',
-          }}
-        >
-          {spec.replace('pangeo-forge/', '')}
-        </Box>
-
-        {message && (
           <Box
             sx={{
-              fontSize: [1],
-              fontFamily: 'monospace',
+              fontSize: [4],
+              fontFamily: 'subtitle',
+              fontWeight: 'subtitle',
               display: 'inline-block',
+              verticalAlign: 'bottom',
+              ml: [2],
             }}
           >
-            {message}
+            {spec.replace('pangeo-forge/', '')}
           </Box>
-        )}
-        <Box sx={{ display: 'inline-block' }}>
-          <GoMarkGithub />
+        </Box>
+        <Box
+          sx={{
+            fontSize: [3],
+            fontFamily: 'body',
+            display: 'inline-block',
+            mt: [2],
+            mb: [2],
+          }}
+        >
+          {message}
+        </Box>
+        <Box>
+          <Box
+            sx={{
+              display: 'inline-block',
+              fontSize: [3],
+              fontFamily: 'body',
+              color: 'text',
+            }}
+          >
+            {timeSinceRun} ago via
+          </Box>
+          <Box sx={{ px: [2], display: 'inline-block' }}>
+            <GoMarkGithub />
+          </Box>
         </Box>
       </Box>
     </Link>

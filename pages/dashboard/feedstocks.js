@@ -21,9 +21,17 @@ const Feedstocks = () => {
       <DashboardMenu />
 
       <Box>
-        <Heading as='h2' sx={{ mb: [2], mt: [4] }}>
+        <Box
+          sx={{
+            fontFamily: 'title',
+            fontSize: [6],
+            color: 'blue',
+            mb: [2],
+            mt: [4],
+          }}
+        >
           Feedstocks
-        </Heading>
+        </Box>
         <Grid gap={2} columns={[1, null, 2]}>
           {feedstocks
             .filter((d) => !d.spec.includes('staged-recipes'))
