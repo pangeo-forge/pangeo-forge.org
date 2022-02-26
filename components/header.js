@@ -25,6 +25,7 @@ const Header = ({ menuItems }) => {
               display: 'inline-block',
               float: 'right',
               fontSize: [3],
+              '&:hover': { textDecoration: 'underline' },
             }}
           >
             {key}

@@ -2,6 +2,7 @@ import { Box, Container, Flex, Heading } from 'theme-ui'
 import Image from 'next/image'
 import Layout from '../components/layout'
 import { useFeedstocks, useRecipeRuns } from '../lib/endpoints'
+import { alpha } from '@theme-ui/color'
 
 const Stat = ({ name, number }) => {
   return (
@@ -9,8 +10,8 @@ const Stat = ({ name, number }) => {
       <Box
         sx={{
           textAlign: 'center',
-          fontFamily: 'heading',
-          fontWeight: 'heading',
+          fontFamily: 'subtitle',
+          fontWeight: 'subtitle',
           fontSize: [1],
           pt: [2],
           pb: [1],
@@ -48,7 +49,7 @@ const Index = () => {
               width={550}
               height={343}
             />
-            <Box sx={{ fontFamily: 'heading', fontWeight: 'heading' }}>
+            <Box sx={{ fontFamily: 'subtitle', fontWeight: 'subtitle' }}>
               A cloud-native data repository for ocean, weather, and climate
               science.
             </Box>
@@ -65,25 +66,27 @@ const Index = () => {
             }}
           >
             <Stat name='Feedstocks' number={feedstocks.length} />
-            <Stat name='Recipes' number={recipeRuns.length} />
+            <Stat name='Recipes Runs' number={recipeRuns.length} />
             <Stat name='Datasets' number='-' />
           </Flex>
         </Container>
       </Box>
       <Container sx={{ mb: [5, 5, 5, 6] }}>
         <Flex sx={{ flexDirection: 'column', alignItems: 'center' }}>
-          <Heading
-            as='h1'
+          <Box
             sx={{
-              textAlign: 'center',
-              fontWeight: 'bold',
+              fontFamily: 'title',
+              fontWeight: 'title',
+              fontSize: [6],
               color: 'blue',
-              py: [5],
+              py: [4],
             }}
           >
             About Pangeo Forge
-          </Heading>
-          <Box sx={{ textAlign: 'center', px: [6, 6, 8, 10] }}>
+          </Box>
+          <Box
+            sx={{ fontFamily: 'body', textAlign: 'center', px: [6, 6, 8, 10] }}
+          >
             Pangeo Forge is an open source platform for data Extraction,
             Transformation, and Loading (ETL). The goal of Pangeo Forge is to
             make it easy to extract data from traditional data repositories and
@@ -92,17 +95,17 @@ const Index = () => {
             community-led collection of recipes for building conda packages. We
             hope that Pangeo Forge can play the same role for datasets.
           </Box>
-          <Heading
-            as='h1'
+          <Box
             sx={{
-              textAlign: 'center',
-              fontWeight: 'bold',
+              fontFamily: 'title',
+              fontWeight: 'title',
+              fontSize: [6],
               color: 'blue',
-              py: [5],
+              py: [4],
             }}
           >
             How it works
-          </Heading>
+          </Box>
           <Box>
             <Image
               src='https://pangeo-forge.org/img/pangeo-forge-diagram.b8332f39.png'

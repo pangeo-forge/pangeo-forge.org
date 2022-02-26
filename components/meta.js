@@ -9,7 +9,7 @@ const Meta = ({
   name = 'Pangeo-Forge',
   description = 'A cloud-native data repository for ocean, weather, and climate science.',
   image = '', // social card image URL
-  url = 'https://next-theme-starter.vercel.app',
+  url = 'pangeo-forge.org',
   children,
 }) => (
   <Head>

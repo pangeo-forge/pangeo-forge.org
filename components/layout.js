@@ -15,9 +15,10 @@ const Layout = ({ children, container = true }) => {
 
   const menuItems = {
     Home: '/',
-    Recipes: 'https://pangeo-forge.readthedocs.io/',
-    Docs: '/docs',
     Dashboard: '/dashboard/feedstocks',
+    Docs: '/docs',
+    Recipes: 'https://pangeo-forge.readthedocs.io/',
+    GitHub: 'https://github.com/pangeo-forge',
   }
 
   return (
