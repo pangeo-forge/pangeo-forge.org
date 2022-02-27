@@ -6,14 +6,12 @@ import { GiAnvil } from 'react-icons/gi'
 import { TimeDeltaFormatter } from '../lib/time-delta'
 
 const FeedstockCard = ({ props }) => {
-  const { spec, provider, id } = props
+  const { spec, id } = props
 
-  // const { repo: { commit: { message = '', committer: { date=''} = {} } = {} } = {} } = useRepo(spec) || {}
-  const message = 'My latest commit message'
-  // const timeSinceRun = TimeDeltaFormatter(
-  //   Date.now() - Date.parse(date)
-  // )
-  const timeSinceRun = '19 days'
+  const {
+    repo: { commit: { message = '', committer: { date = '' } = {} } = {} } = {},
+  } = useRepo(spec) || {}
+  const timeSinceRun = TimeDeltaFormatter(Date.now() - Date.parse(date))
 
   const href = '/dashboard/feedstock/' + id
 

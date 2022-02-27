@@ -1,5 +1,6 @@
-import { Box, Themed } from 'theme-ui'
+import { Box } from 'theme-ui'
 import Link from 'next/link'
+import { BsGlobe2 } from 'react-icons/bs'
 
 const BakeryCard = ({ name, region, description }) => {
   // TODO: get this from the api
@@ -32,17 +33,22 @@ const BakeryCard = ({ name, region, description }) => {
         <Box
           sx={{
             fontSize: [4],
-            fontFamily: 'heading',
-            fontWeight: 'heading',
+            fontFamily: 'subtitle',
+            fontWeight: 'subtitle',
+            display: 'inline-block',
+            verticalAlign: 'bottom',
+            ml: [2],
           }}
         >
           {name}
         </Box>
         <Box
           sx={{
-            fontSize: [2],
-            my: [2],
-            lineHeight: '1.1em',
+            fontSize: [3],
+            fontFamily: 'body',
+            display: 'inline-block',
+            mt: [2],
+            mb: [2],
           }}
         >
           {description}
@@ -52,22 +58,13 @@ const BakeryCard = ({ name, region, description }) => {
             mt: [3],
           }}
         >
+          <BsGlobe2 />
           <Box
             sx={{
               display: 'inline-block',
-              width: '16px',
-              height: '16px',
-              backgroundColor: 'green',
-              borderRadius: '8px',
-              verticalAlign: 'bottom',
-            }}
-          ></Box>
-          <Box
-            sx={{
-              fontSize: [2],
-              fontFamily: 'faux',
-              display: 'inline-block',
-              verticalAlign: 'bottom',
+              fontSize: [3],
+              fontFamily: 'body',
+              color: 'text',
               ml: ['12px'],
             }}
           >

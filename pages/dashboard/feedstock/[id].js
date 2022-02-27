@@ -11,6 +11,7 @@ const Feedstock = () => {
 
   const { fs: { spec = '', recipe_runs = [] } = {}, fsError } = useFeedstock(id)
   const { meta, metaError } = useMeta(spec)
+  console.log('meta', meta)
 
   if (!spec || !meta) return <Layout container={true} />
   if (fsError || metaError)
@@ -25,8 +26,11 @@ const Feedstock = () => {
       <DashboardMenu />
       <Flex>
         <Box
+          variant='h1'
           sx={{
-            fontFamily: 'heading',
+            fontFamily: 'title',
+            fontSize: [6],
+            color: 'blue',
             display: 'inline-block',
             flex: '1 1 auto',
           }}
@@ -38,7 +42,14 @@ const Feedstock = () => {
         </Button>
       </Flex>
 
-      <Themed.p>{meta.description}</Themed.p>
+      <Themed.p>Title: {meta.title}</Themed.p>
+      <Themed.p>Description: {meta.description}</Themed.p>
+      <Themed.p>pangeo_forge_version: {meta.pangeo_forge_version}</Themed.p>
+      <Themed.p>
+        pangeo_notebook_version: {meta.pangeo_notebook_version}
+      </Themed.p>
+      <Themed.p>bakery: {meta.bakery.id}</Themed.p>
+
       <Themed.h2>Recipe Runs</Themed.h2>
       <Box>
         {recipe_runs.reverse().map((b, i) => (

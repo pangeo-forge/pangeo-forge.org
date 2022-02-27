@@ -1,10 +1,55 @@
-import { Box } from 'theme-ui'
+import { Box, Flex } from 'theme-ui'
 import Link from 'next/link'
 import { TimeDeltaFormatter } from '../lib/time-delta'
+import { GoCalendar, GoTag } from 'react-icons/go'
 
 const RecipeRunCard = ({ props }) => {
   console.log(props)
-  const { id, recipe_id, started_at, message, dataset_public_url } = props
+  const { id, recipe_id, started_at, message, status, version } = props
+
+  console.log(message)
+
+  let statusIcon
+  if (status == 'queued') {
+    statusIcon = (
+      <Box
+        sx={{
+          display: 'inline-block',
+          width: '16px',
+          height: '16px',
+          backgroundColor: 'yellow',
+          borderRadius: '8px',
+          verticalAlign: 'top',
+        }}
+      />
+    )
+  } else if (status == 'in_progress') {
+    statusIcon = (
+      <Box
+        sx={{
+          display: 'inline-block',
+          width: '16px',
+          height: '16px',
+          backgroundColor: 'orange',
+          borderRadius: '8px',
+          verticalAlign: 'top',
+        }}
+      />
+    )
+  } else if (status == 'completed') {
+    statusIcon = (
+      <Box
+        sx={{
+          display: 'inline-block',
+          width: '16px',
+          height: '16px',
+          backgroundColor: 'green',
+          borderRadius: '8px',
+          verticalAlign: 'top',
+        }}
+      />
+    )
+  }
 
   // TODO: have API return timestamps with UTC suffix
   // Here I'm mannually adding the +Z
@@ -25,7 +70,7 @@ const RecipeRunCard = ({ props }) => {
         },
       }}
     >
-      <Box
+      <Flex
         sx={{
           cursor: 'pointer',
           borderColor: 'primary',
@@ -39,52 +84,36 @@ const RecipeRunCard = ({ props }) => {
           pr: [2],
         }}
       >
-        <Box
-          sx={{
-            fontSize: [4],
-            fontFamily: 'subtitle',
-            fontWeight: 'subtitle',
-          }}
-        >
-          {recipe_id}
-        </Box>
-        <Box
-          sx={{
-            fontSize: [2],
-            my: [2],
-            lineHeight: '1.1em',
-          }}
-        >
-          {message}
-        </Box>
-        <Box
-          sx={{
-            mt: [3],
-          }}
-        >
+        {statusIcon}
+
+        <Box sx={{ flex: '1 1 auto', ml: [2] }}>
           <Box
             sx={{
-              display: 'inline-block',
-              width: '16px',
-              height: '16px',
-              backgroundColor: 'green',
-              borderRadius: '8px',
-              verticalAlign: 'bottom',
+              fontSize: [4],
+              fontFamily: 'subtitle',
+              fontWeight: 'subtitle',
             }}
-          ></Box>
+          >
+            {recipe_id}
+          </Box>
           <Box
             sx={{
               fontSize: [2],
-              fontFamily: 'body',
-              display: 'inline-block',
-              verticalAlign: 'bottom',
-              ml: ['12px'],
+              my: [2],
             }}
           >
-            {timeSinceRun}
+            {message}
           </Box>
         </Box>
-      </Box>
+        <Box sx={{ display: 'inline-block', mr: [2] }}>
+          <Box>
+            <GoCalendar /> {timeSinceRun}
+          </Box>
+          <Box sx={{ my: [2] }}>
+            <GoTag /> {version}
+          </Box>
+        </Box>
+      </Flex>
     </Link>
   )
 }

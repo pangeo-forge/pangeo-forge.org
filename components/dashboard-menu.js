@@ -1,7 +1,10 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { Box } from 'theme-ui'
 
 const DashboardMenu = () => {
+  const router = useRouter()
+
   const menuItems = {
     Feedstocks: '/dashboard/feedstocks',
     Bakeries: '/dashboard/bakeries',
@@ -18,6 +21,7 @@ const DashboardMenu = () => {
               ml: [5],
               display: 'inline-block',
               fontSize: [3],
+              borderBottom: router.asPath == menuItems[key] ? 'solid' : null,
             }}
           >
             {key}

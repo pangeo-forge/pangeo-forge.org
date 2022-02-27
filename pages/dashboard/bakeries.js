@@ -1,5 +1,5 @@
 import useSWR from 'swr'
-import { Box, Grid, Heading } from 'theme-ui'
+import { Box, Grid } from 'theme-ui'
 import Layout from '../../components/layout'
 import BakeryCard from '../../components/bakery-card'
 import DashboardMenu from '../../components/dashboard-menu'
@@ -27,9 +27,6 @@ const Bakeries = () => {
       <DashboardMenu />
 
       <Box>
-        <Heading as='h2' c='purple' sx={{ mb: [2], mt: [4] }}>
-          Bakeries
-        </Heading>
         <Grid gap={2} columns={[1, null, 2]}>
           {data.map((b, i) => (
             <BakeryCard

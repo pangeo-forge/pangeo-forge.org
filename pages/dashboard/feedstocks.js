@@ -1,4 +1,4 @@
-import { Box, Grid, Heading } from 'theme-ui'
+import { Box, Grid } from 'theme-ui'
 import Layout from '../../components/layout'
 import FeedstockCard from '../../components/feedstock-card'
 import DashboardMenu from '../../components/dashboard-menu'
@@ -19,19 +19,7 @@ const Feedstocks = () => {
   return (
     <Layout container={true}>
       <DashboardMenu />
-
       <Box>
-        <Box
-          sx={{
-            fontFamily: 'title',
-            fontSize: [6],
-            color: 'blue',
-            mb: [2],
-            mt: [4],
-          }}
-        >
-          Feedstocks
-        </Box>
         <Grid gap={2} columns={[1, null, 2]}>
           {feedstocks
             .filter((d) => !d.spec.includes('staged-recipes'))

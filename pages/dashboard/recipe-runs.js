@@ -1,4 +1,4 @@
-import { Box, Heading } from 'theme-ui'
+import { Box } from 'theme-ui'
 import Layout from '../../components/layout'
 import RecipeRunCard from '../../components/recipe-run-card'
 import DashboardMenu from '../../components/dashboard-menu'
@@ -21,11 +21,7 @@ const RecipeRuns = () => {
   return (
     <Layout container={true}>
       <DashboardMenu />
-
       <Box>
-        <Heading as='h2' sx={{ mb: [2], mt: [4] }}>
-          Recipe Runs
-        </Heading>
         <Box>
           {recipeRuns.reverse().map((b, i) => (
             <RecipeRunCard key={i} props={b} />
