@@ -30,7 +30,10 @@ const DashboardMenu = () => {
               mr: [5],
               display: 'inline-block',
               fontSize: [3],
+              color: 'purple',
               borderBottom: router.asPath == menuItems[key] ? 'solid' : null,
+              borderWidth: '1px',
+              borderColor: 'purple',
             }}
           >
             {key}

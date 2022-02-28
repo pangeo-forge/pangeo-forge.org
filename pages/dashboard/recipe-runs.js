@@ -1,7 +1,6 @@
 import { Box } from 'theme-ui'
 import Layout from '../../components/layout'
 import RecipeRunCard from '../../components/recipe-run-card'
-import DashboardMenu from '../../components/dashboard-menu'
 import { useRecipeRuns } from '../../lib/endpoints'
 
 const RecipeRuns = () => {
@@ -9,16 +8,15 @@ const RecipeRuns = () => {
 
   if (recipeRunsError) {
     return (
-      <Layout container={true}>
+      <Layout container={true} menu={true}>
         <Box>Failed to load...</Box>
       </Layout>
     )
   }
-  if (!recipeRuns) return <Layout container={true} />
+  if (!recipeRuns) return <Layout container={true} menu={true} />
 
   return (
-    <Layout container={true}>
-      <DashboardMenu />
+    <Layout container={true} menu={true}>
       <Box>
         <Box>
           {recipeRuns.reverse().map((b, i) => (

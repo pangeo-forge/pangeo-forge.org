@@ -2,7 +2,6 @@ import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { Box, Themed } from 'theme-ui'
 import Layout from '../../../components/layout'
-import DashboardMenu from '../../../components/dashboard-menu'
 import { useRecipeRun } from '../../../lib/endpoints'
 
 const RecipeRun = () => {
@@ -10,7 +9,6 @@ const RecipeRun = () => {
   const { id } = router.query
 
   const { recipeRun, recipeRunError } = useRecipeRun(id)
-  console.log(recipeRun)
 
   if (recipeRunError) {
     return (
@@ -23,15 +21,33 @@ const RecipeRun = () => {
 
   const feedstockHref = '/dashboard/feedstock/' + recipeRun.feedstock.id
 
+  let details = {}
+
+  if (recipeRun) {
+    details = {
+      'Started at': recipeRun.started_at,
+      Status: recipeRun.status,
+      Version: recipeRun.version,
+      Message: recipeRun.message,
+      'Head SHA': recipeRun.head_sha,
+    }
+  }
+
   return (
     <Layout container={true}>
-      <DashboardMenu />
       <Link href={feedstockHref} passHref>
         <Themed.h1>{recipeRun.recipe_id}</Themed.h1>
       </Link>
-      <Themed.p>Recipe description</Themed.p>
-      <Themed.h2>{recipeRun.status}</Themed.h2>
-      <Themed.h2>{recipeRun.head_sha}</Themed.h2>
+      <Box>
+        {Object.keys(details).map((key, i) => (
+          <Box key={key} sx={{ mb: [2] }}>
+            <Box sx={{ fontWeight: 'bold', display: 'inline-block' }}>
+              {key}:
+            </Box>
+            <Box sx={{ ml: [2], display: 'inline-block' }}>{details[key]}</Box>
+          </Box>
+        ))}
+      </Box>
     </Layout>
   )
 }

@@ -1,8 +1,7 @@
 import { useRouter } from 'next/router'
-import { Box, Button, Flex, Themed } from 'theme-ui'
+import { Box, Button, Themed, Link } from 'theme-ui'
 import Layout from '../../../components/layout'
 import RecipeRunCard from '../../../components/recipe-run-card'
-import DashboardMenu from '../../../components/dashboard-menu'
 import { useFeedstock, useMeta } from '../../../lib/endpoints'
 
 const Feedstock = () => {
@@ -11,7 +10,20 @@ const Feedstock = () => {
 
   const { fs: { spec = '', recipe_runs = [] } = {}, fsError } = useFeedstock(id)
   const { meta, metaError } = useMeta(spec)
-  console.log('meta', meta)
+  const repoUrl = `https://github.com/${spec}`
+
+  let details = {}
+
+  if (meta) {
+    // these can be expanded once the meta.yaml file spec is stable
+    details = {
+      Title: meta.title,
+      Description: meta.description,
+      'Pangeo-Forge Version': meta.pangeo_forge_version,
+      'Pangeo Notebook Version': meta.pangeo_notebook_version,
+      Bakery: meta.bakery ? meta.bakery.id : null,
+    }
+  }
 
   if (!spec || !meta) return <Layout container={true} />
   if (fsError || metaError)
@@ -23,32 +35,21 @@ const Feedstock = () => {
 
   return (
     <Layout>
-      <DashboardMenu />
-      <Flex>
-        <Box
-          variant='h1'
-          sx={{
-            fontFamily: 'title',
-            fontSize: [6],
-            color: 'blue',
-            display: 'inline-block',
-            flex: '1 1 auto',
-          }}
-        >
-          {spec.replace('pangeo-forge/', '')}
-        </Box>
-        <Button sx={{ display: 'inline-block', float: 'right' }}>
-          View Git Repository
-        </Button>
-      </Flex>
+      <Themed.h1>{spec.replace('pangeo-forge/', '')}</Themed.h1>
+      <Link href={repoUrl}>
+        <Button sx={{ float: 'right' }}>View Git Repository</Button>
+      </Link>
 
-      <Themed.p>Title: {meta.title}</Themed.p>
-      <Themed.p>Description: {meta.description}</Themed.p>
-      <Themed.p>pangeo_forge_version: {meta.pangeo_forge_version}</Themed.p>
-      <Themed.p>
-        pangeo_notebook_version: {meta.pangeo_notebook_version}
-      </Themed.p>
-      <Themed.p>bakery: {meta.bakery.id}</Themed.p>
+      <Box>
+        {Object.keys(details).map((key, i) => (
+          <Box key={key} sx={{ mb: [2] }}>
+            <Box sx={{ fontWeight: 'bold', display: 'inline-block' }}>
+              {key}:
+            </Box>
+            <Box sx={{ ml: [2], display: 'inline-block' }}>{details[key]}</Box>
+          </Box>
+        ))}
+      </Box>
 
       <Themed.h2>Recipe Runs</Themed.h2>
       <Box>

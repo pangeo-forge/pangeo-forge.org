@@ -1,7 +1,6 @@
 import { Box, Grid } from 'theme-ui'
 import Layout from '../../components/layout'
 import FeedstockCard from '../../components/feedstock-card'
-import DashboardMenu from '../../components/dashboard-menu'
 import { useFeedstocks } from '../../lib/endpoints'
 
 const Feedstocks = () => {
@@ -9,16 +8,16 @@ const Feedstocks = () => {
 
   if (feedstocksError) {
     return (
-      <Layout container={true}>
+      <Layout container={true} menu={true}>
         <Box>Failed to load...</Box>
       </Layout>
     )
   }
-  if (!feedstocks) return <Layout container={true} />
+  if (!feedstocks) return <Layout container={true} menu={true} />
 
   return (
-    <Layout container={true}>
-      <DashboardMenu />
+    <Layout container={true} menu={true}>
+      {/* <DashboardMenu /> */}
       <Box>
         <Grid gap={3} columns={[1, 2, 3]}>
           {feedstocks

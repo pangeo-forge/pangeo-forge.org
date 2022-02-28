@@ -1,19 +1,25 @@
 import { Box, Button, Container, Flex, Link } from 'theme-ui'
 import Meta from './meta'
 import Header from './header'
+import DashboardMenu from './dashboard-menu'
 
-const Layout = ({ children, container = true }) => {
+const Layout = ({ children, container = true, menu = null }) => {
   let content = children
+  let menuContent = <></>
 
   if (container) {
     content = (
-      <Box sx={{ mb: [8, 8, 9, 10] }}>
+      <Box>
         <Container>{content}</Container>
       </Box>
     )
   }
 
-  const menuItems = {
+  if (menu) {
+    menuContent = <DashboardMenu></DashboardMenu>
+  }
+
+  const headerItems = {
     Home: '/',
     Dashboard: '/dashboard/feedstocks',
     Docs: '/docs',
@@ -22,7 +28,7 @@ const Layout = ({ children, container = true }) => {
   }
 
   return (
-    <Box>
+    <Box sx={{ mb: [8, 8, 9, 10] }}>
       <Flex
         sx={{
           flexDirection: 'column',
@@ -42,10 +48,10 @@ const Layout = ({ children, container = true }) => {
           }}
         >
           <Container>
-            <Header menuItems={menuItems} />
+            <Header headerItems={headerItems} />
           </Container>
         </Box>
-
+        <Container>{menuContent}</Container>
         <Box>
           <Meta />
           {content}
@@ -62,7 +68,7 @@ const Layout = ({ children, container = true }) => {
           px='4'
           py='2'
           rounded='lg'
-          sx={{ margin: 'auto' }}
+          sx={{ margin: 'auto', mt: [4, 4, 4, 5] }}
         >
           {' '}
           <Link

@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { Box, Flex } from 'theme-ui'
 
-const Header = ({ menuItems }) => {
+const Header = ({ headerItems }) => {
   return (
     <Flex sx={{ mt: [3], mb: [3] }}>
       <Link href={'/'} passHref>
@@ -16,8 +16,8 @@ const Header = ({ menuItems }) => {
           />
         </Box>
       </Link>
-      {Object.keys(menuItems).map((key, i) => (
-        <Link key={i} href={menuItems[key]} passHref>
+      {Object.keys(headerItems).map((key, i) => (
+        <Link key={i} href={headerItems[key]} passHref>
           <Box
             key={i}
             sx={{

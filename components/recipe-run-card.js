@@ -76,12 +76,14 @@ const RecipeRunCard = ({ props }) => {
           borderColor: 'primary',
           borderWidth: '1px',
           borderStyle: 'solid',
+          borderColor: 'purple',
           mt: [0],
           mb: [0],
           pt: [3],
           pb: [1],
           pl: [3],
           pr: [2],
+          // borderBottomWidth: 0
         }}
       >
         {statusIcon}
