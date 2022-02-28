@@ -12,13 +12,22 @@ const DashboardMenu = () => {
   }
 
   return (
-    <Box sx={{ mt: [3], mb: [3] }}>
+    <Box
+      sx={{
+        mt: [3],
+        mb: [3],
+        pb: [2],
+        borderBottom: 'solid',
+        borderColor: 'purple',
+        borderWidth: '1px',
+      }}
+    >
       {Object.keys(menuItems).map((key, i) => (
         <Link key={i} href={menuItems[key]} passHref>
           <Box
             key={i}
             sx={{
-              ml: [5],
+              mr: [5],
               display: 'inline-block',
               fontSize: [3],
               borderBottom: router.asPath == menuItems[key] ? 'solid' : null,

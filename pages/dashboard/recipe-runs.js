@@ -4,8 +4,6 @@ import RecipeRunCard from '../../components/recipe-run-card'
 import DashboardMenu from '../../components/dashboard-menu'
 import { useRecipeRuns } from '../../lib/endpoints'
 
-const fetcher = (url) => fetch(url).then((r) => r.json())
-
 const RecipeRuns = () => {
   const { recipeRuns, recipeRunsError } = useRecipeRuns()
 

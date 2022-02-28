@@ -20,7 +20,7 @@ const Feedstocks = () => {
     <Layout container={true}>
       <DashboardMenu />
       <Box>
-        <Grid gap={2} columns={[1, null, 2]}>
+        <Grid gap={3} columns={[1, 2, 3]}>
           {feedstocks
             .filter((d) => !d.spec.includes('staged-recipes'))
             .map((b, i) => (
