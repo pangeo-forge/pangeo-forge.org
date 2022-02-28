@@ -22,8 +22,7 @@ const Layout = ({ children, container = true, menu = null }) => {
   const headerItems = {
     Home: '/',
     Dashboard: '/dashboard/feedstocks',
-    Docs: '/docs',
-    Recipes: 'https://pangeo-forge.readthedocs.io/',
+    Docs: 'https://pangeo-forge.readthedocs.io/',
     GitHub: 'https://github.com/pangeo-forge',
   }
 
