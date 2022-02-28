@@ -46,7 +46,6 @@ const FeedstockCard = ({ props }) => {
                 fontSize: [3],
                 fontFamily: 'subtitle',
                 fontWeight: 'subtitle',
-                // display: 'inline-block',
                 verticalAlign: 'bottom',
               }}
             >
@@ -81,9 +80,7 @@ const FeedstockCard = ({ props }) => {
               {timeSinceRun} ago via
             </Box>
             <Box sx={{ px: [2], display: 'inline-block' }}>
-              <IconContext.Provider
-                value={{ color: 'DimGray', className: 'global-class-name' }}
-              >
+              <IconContext.Provider value={{ color: 'DimGray' }}>
                 <GoMarkGithub />
               </IconContext.Provider>
             </Box>

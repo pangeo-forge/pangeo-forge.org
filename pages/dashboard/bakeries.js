@@ -22,7 +22,7 @@ const Bakeries = () => {
   return (
     <Layout container={true} menu={true}>
       <Box>
-        <Grid gap={2} columns={[1, null, 2]}>
+        <Grid gap={3} columns={[1, 2, 3]}>
           {data.map((b, i) => (
             <BakeryCard
               key={i}

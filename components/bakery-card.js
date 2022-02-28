@@ -1,6 +1,7 @@
 import { Box } from 'theme-ui'
 import Link from 'next/link'
 import { BsGlobe2 } from 'react-icons/bs'
+import { IconContext } from 'react-icons'
 
 const BakeryCard = ({ name, region, description }) => {
   // TODO: get this from the api
@@ -25,30 +26,25 @@ const BakeryCard = ({ name, region, description }) => {
           borderWidth: '1px',
           borderStyle: 'solid',
           padding: [3],
-          mt: [2],
-          mb: [4],
-          pb: [4],
         }}
       >
         <Box
           sx={{
-            fontSize: [4],
+            fontSize: [3],
             fontFamily: 'subtitle',
             fontWeight: 'subtitle',
             display: 'inline-block',
             verticalAlign: 'bottom',
-            ml: [2],
           }}
         >
           {name}
         </Box>
         <Box
           sx={{
-            fontSize: [3],
+            fontSize: [2],
             fontFamily: 'body',
             display: 'inline-block',
             mt: [2],
-            mb: [2],
           }}
         >
           {description}
@@ -56,19 +52,25 @@ const BakeryCard = ({ name, region, description }) => {
         <Box
           sx={{
             mt: [3],
+            textAlign: 'right',
           }}
         >
-          <BsGlobe2 />
           <Box
             sx={{
               display: 'inline-block',
-              fontSize: [3],
+              fontSize: [2],
               fontFamily: 'body',
-              color: 'text',
-              ml: ['12px'],
+              color: 'DimGray',
+              verticalAlign: 'top',
             }}
           >
             {region}
+          </Box>
+
+          <Box sx={{ px: [2], display: 'inline-block' }}>
+            <IconContext.Provider value={{ color: 'DimGray' }}>
+              <BsGlobe2 />
+            </IconContext.Provider>
           </Box>
         </Box>
       </Box>

@@ -83,7 +83,6 @@ const RecipeRunCard = ({ props }) => {
           pb: [1],
           pl: [3],
           pr: [2],
-          // borderBottomWidth: 0
         }}
       >
         {statusIcon}
@@ -91,7 +90,7 @@ const RecipeRunCard = ({ props }) => {
         <Box sx={{ flex: '1 1 auto', ml: [2] }}>
           <Box
             sx={{
-              fontSize: [4],
+              fontSize: [3],
               fontFamily: 'subtitle',
               fontWeight: 'subtitle',
             }}
@@ -107,7 +106,7 @@ const RecipeRunCard = ({ props }) => {
             {message}
           </Box>
         </Box>
-        <Box sx={{ display: 'inline-block', mr: [2] }}>
+        <Box sx={{ display: 'inline-block', fontSize: [2], mr: [2] }}>
           <Box>
             <GoCalendar /> {timeSinceRun}
           </Box>
