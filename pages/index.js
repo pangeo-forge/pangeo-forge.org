@@ -1,11 +1,12 @@
-import { Box, Container, Flex, Themed, Link } from 'theme-ui'
+import { Box, Container, Flex, Themed } from 'theme-ui'
+import Link from 'next/link'
 import Image from 'next/image'
 import Layout from '../components/layout'
-import { useFeedstocks, useRecipeRuns } from '../lib/endpoints'
+import { useStats } from '../lib/endpoints'
 
 const Stat = ({ name, number }) => {
   return (
-    <Box sx={{ flex: '1 1 auto' }}>
+    <Box>
       <Box
         sx={{
           textAlign: 'center',
@@ -34,8 +35,9 @@ const Stat = ({ name, number }) => {
 }
 
 const Index = () => {
-  const { feedstocks = [] } = useFeedstocks()
-  const { recipeRuns = [] } = useRecipeRuns()
+  const feedstocks = useStats('feedstocks')
+  const recipeRuns = useStats('recipe_runs')
+  const datasets = useStats('datasets')
 
   return (
     <Layout container={false}>
@@ -64,9 +66,30 @@ const Index = () => {
               layoutAlign: 'center',
             }}
           >
-            <Stat name='Feedstocks' number={feedstocks.length} />
-            <Stat name='Recipes Runs' number={recipeRuns.length} />
-            <Stat name='Datasets' number='-' />
+            <Link href={'/dashboard/feedstocks'} passHref>
+              <Box sx={{ flex: '1 1 auto' }}>
+                <Stat
+                  name='Feedstocks'
+                  number={feedstocks.stat ? feedstocks.stat.count : '-'}
+                />
+              </Box>
+            </Link>
+            <Link href={'/dashboard/recipe-runs'} passHref>
+              <Box sx={{ flex: '1 1 auto' }}>
+                <Stat
+                  name='Recipes Runs'
+                  number={recipeRuns.stat ? recipeRuns.stat.count : '-'}
+                />
+              </Box>
+            </Link>
+            <Link href={'/datasets'} passHref>
+              <Box sx={{ flex: '1 1 auto' }}>
+                <Stat
+                  name='Datasets'
+                  number={datasets.stat ? datasets.stat.count : '-'}
+                />
+              </Box>
+            </Link>
           </Flex>
         </Container>
       </Box>
