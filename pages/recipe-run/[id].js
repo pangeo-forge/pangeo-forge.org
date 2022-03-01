@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import { Box, Themed } from 'theme-ui'
-import Layout from '../../../components/layout'
-import { useRecipeRun } from '../../../lib/endpoints'
+import Layout from '../../components/layout'
+import { useRecipeRun } from '../../lib/endpoints'
 
 const RecipeRun = () => {
   const router = useRouter()

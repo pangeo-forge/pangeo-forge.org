@@ -14,7 +14,7 @@ const FeedstockCard = ({ props }) => {
   } = useRepo(spec) || {}
   const timeSinceRun = TimeDeltaFormatter(Date.now() - Date.parse(date))
 
-  const href = '/dashboard/feedstock/' + id
+  const href = '/feedstock/' + id
 
   return (
     <Link

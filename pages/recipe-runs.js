@@ -1,7 +1,7 @@
 import { Box } from 'theme-ui'
-import Layout from '../../components/layout'
-import RecipeRunCard from '../../components/recipe-run-card'
-import { useRecipeRuns } from '../../lib/endpoints'
+import Layout from '../components/layout'
+import RecipeRunCard from '../components/recipe-run-card'
+import { useRecipeRuns } from '../lib/endpoints'
 
 const RecipeRuns = () => {
   const { recipeRuns, recipeRunsError } = useRecipeRuns()

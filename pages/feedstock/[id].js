@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router'
 import { Box, Button, Themed, Link } from 'theme-ui'
-import Layout from '../../../components/layout'
-import RecipeRunCard from '../../../components/recipe-run-card'
-import { useFeedstock, useMeta } from '../../../lib/endpoints'
+import Layout from '../../components/layout'
+import RecipeRunCard from '../../components/recipe-run-card'
+import { useFeedstock, useMeta } from '../../lib/endpoints'
 
 const Feedstock = () => {
   const router = useRouter()

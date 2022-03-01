@@ -1,7 +1,7 @@
 import useSWR from 'swr'
-import { Box, Grid, Link } from 'theme-ui'
-import Layout from '../../components/layout'
-import BakeryCard from '../../components/bakery-card'
+import { Box, Grid } from 'theme-ui'
+import Layout from '../components/layout'
+import BakeryCard from '../components/bakery-card'
 
 const fetcher = (url) => fetch(url).then((r) => r.json())
 

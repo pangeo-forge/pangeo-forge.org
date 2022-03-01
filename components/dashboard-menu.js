@@ -6,9 +6,9 @@ const DashboardMenu = () => {
   const router = useRouter()
 
   const menuItems = {
-    Feedstocks: '/dashboard/feedstocks',
-    Bakeries: '/dashboard/bakeries',
-    'Recipe-Runs': '/dashboard/recipe-runs',
+    Feedstocks: '/feedstocks',
+    Bakeries: '/bakeries',
+    'Recipe-Runs': '/recipe-runs',
   }
 
   return (
