@@ -12,6 +12,8 @@ const Bakery = () => {
 
   const repoUrl = 'https://github.com/pangeo-forge/pangeo-forge-gcs-bakery'
 
+  if (!bakery) return <Layout container={true} />
+
   if (bakeryError)
     return (
       <Layout container={true}>
