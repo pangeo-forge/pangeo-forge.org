@@ -4,10 +4,7 @@ import { TimeDeltaFormatter } from '../lib/time-delta'
 import { GoCalendar, GoTag } from 'react-icons/go'
 
 const RecipeRunCard = ({ props }) => {
-  console.log(props)
   const { id, recipe_id, started_at, message, status, version } = props
-
-  console.log(message)
 
   let statusIcon
   if (status == 'queued') {
