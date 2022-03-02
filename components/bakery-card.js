@@ -3,10 +3,8 @@ import Link from 'next/link'
 import { BsGlobe2 } from 'react-icons/bs'
 import { IconContext } from 'react-icons'
 
-const BakeryCard = ({ name, region, description }) => {
-  // TODO: get this from the api
-  // or link to a stand-alone bakery page
-  const href = 'https://github.com/pangeo-forge/pangeo-forge-gcs-bakery'
+const BakeryCard = ({ name, region, description, id }) => {
+  const href = `/dashboard/bakeries/${id}`
 
   return (
     <Link
