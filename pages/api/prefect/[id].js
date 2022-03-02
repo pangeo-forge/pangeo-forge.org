@@ -5,14 +5,11 @@ import {
   InMemoryCache,
 } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
+import { orchestratorEndpoint } from '../../../lib/endpoints'
 
 const QUERY = gql`
-  query {
-    flow_run(
-      where: {
-        name: { _ilike: "https_api-staging.pangeo-forge.org_recipe_runs_41%" }
-      }
-    ) {
+  query FlowRun($name: String!) {
+    flow_run(where: { name: { _ilike: $name } }) {
       logs {
         timestamp
         level
@@ -45,18 +42,18 @@ const client = new ApolloClient({
 })
 
 export default async function handler(req, res) {
+  // Inspired by:
   // https://learn.vonage.com/blog/2020/03/12/using-apollo-to-query-graphql-from-node-js-dr/
 
-  let variables = undefined
-  if (req.body.variables) {
-    variables = JSON.parse(decodeURIComponent(req.body.variables))
-  }
+  const { id } = req.query
+
+  const name = `https_${orchestratorEndpoint}_recipe_runs_${id}%`
 
   try {
-    const result = await client.query({ query: QUERY, variables: variables })
+    const result = await client.query({ query: QUERY, variables: { name } })
     res.status(200).json(result)
   } catch (err) {
     console.log(err)
-    res.sendStatus(500).send(JSON.stringify(err))
+    res.status(500).json(JSON.stringify(err))
   }
 }

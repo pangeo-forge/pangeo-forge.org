@@ -22,7 +22,7 @@ const RecipeRun = () => {
   const { id } = router.query
 
   const { recipeRun, recipeRunError } = useRecipeRun(id)
-  const { prefect } = usePrefect()
+  const { prefect, prefectError } = usePrefect(id)
 
   if (recipeRunError) {
     return (
@@ -64,8 +64,9 @@ const RecipeRun = () => {
       </Box>
       <Box>
         <Themed.h2>Logs</Themed.h2>
-
+        {prefectError && <Box>Error loading prefect logs</Box>}
         {prefect &&
+          !prefectError &&
           prefect.data.flow_run.map((run, i) => (
             <FlowRun key={i} i={i} data={run} />
           ))}
