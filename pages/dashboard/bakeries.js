@@ -24,6 +24,7 @@ const Bakeries = () => {
               name={b.name}
               region={b.region}
               description={b.description}
+              id={b.id}
             />
           ))}
         </Grid>
