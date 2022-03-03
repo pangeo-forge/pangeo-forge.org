@@ -9,6 +9,7 @@ const Bakery = () => {
   const { id } = router.query
 
   const { bakery, bakeryError } = useBakery(id)
+  console.log(bakery)
 
   const repoUrl = 'https://github.com/pangeo-forge/pangeo-forge-gcs-bakery'
 

@@ -8,11 +8,13 @@ const FlowRun = ({ i, data }) => {
   return (
     <Box key={i}>
       <Themed.h3>Flow Run {i}</Themed.h3>
-      {data.logs.map((log, i) => (
-        <Box key={i} sx={{ fontFamily: 'monospace', fontSize: [1] }}>
-          {log.timestamp} ({log.level}) - {log.message}
-        </Box>
-      ))}
+      <Box sx={{ bg: '#F5F5F5', p: [2] }}>
+        {data.logs.map((log, i) => (
+          <Box key={i} sx={{ fontFamily: 'monospace', fontSize: [1] }}>
+            {log.timestamp} ({log.level}) - {log.message}
+          </Box>
+        ))}
+      </Box>
     </Box>
   )
 }
@@ -50,7 +52,7 @@ const RecipeRun = () => {
   return (
     <Layout container={true}>
       <Link href={feedstockHref} passHref>
-        <Themed.h2>{recipeRun.recipe_id}</Themed.h2>
+        <Themed.h2>Recipe Run: {recipeRun.recipe_id}</Themed.h2>
       </Link>
       <Box>
         {Object.keys(details).map((key, i) => (

@@ -1,6 +1,7 @@
-import { Box, Button, Container, Flex, Link } from 'theme-ui'
+import { Box, Container, Flex } from 'theme-ui'
 import Meta from './meta'
 import Header from './header'
+import Footer from './footer'
 import DashboardMenu from './dashboard-menu'
 
 const Layout = ({ children, container = true, menu = null }) => {
@@ -17,14 +18,6 @@ const Layout = ({ children, container = true, menu = null }) => {
 
   if (menu) {
     menuContent = <DashboardMenu></DashboardMenu>
-  }
-
-  const headerItems = {
-    Home: '/',
-    Catalog: '/catalog',
-    Dashboard: '/dashboard/feedstocks',
-    Docs: 'https://pangeo-forge.readthedocs.io/',
-    GitHub: 'https://github.com/pangeo-forge',
   }
 
   return (
@@ -48,7 +41,7 @@ const Layout = ({ children, container = true, menu = null }) => {
           }}
         >
           <Container>
-            <Header headerItems={headerItems} />
+            <Header />
           </Container>
         </Box>
         <Container>{menuContent}</Container>
@@ -57,7 +50,7 @@ const Layout = ({ children, container = true, menu = null }) => {
           {content}
         </Box>
       </Flex>
-      <Flex
+      {/* <Flex
         sx={{
           alignItems: 'center',
         }}
@@ -87,7 +80,10 @@ const Layout = ({ children, container = true, menu = null }) => {
             Vercel
           </Link>
         </Button>
-      </Flex>
+      </Flex> */}
+      <Container>
+        <Footer />
+      </Container>
     </Box>
   )
 }

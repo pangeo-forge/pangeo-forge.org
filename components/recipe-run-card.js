@@ -43,6 +43,8 @@ const RecipeRunCard = ({ props }) => {
           backgroundColor: 'green',
           borderRadius: '8px',
           verticalAlign: 'top',
+          borderColor: 'black',
+          borderWidth: '1px',
         }}
       />
     )
