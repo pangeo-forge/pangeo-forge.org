@@ -61,7 +61,7 @@ const Feedstock = () => {
       {spec == 'pangeo-forge/staged-recipes' && (
         <Box>
           A place to submit pangeo-forge recipes before they become fully
-          fledged pangeo-forge feedstocks
+          fledged pangeo-forge feedstocks.
         </Box>
       )}
 
