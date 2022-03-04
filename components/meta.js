@@ -8,7 +8,7 @@ const Meta = ({
   title = 'Pangeo-Forge',
   name = 'Pangeo-Forge',
   description = 'A cloud-native data repository for ocean, weather, and climate science.',
-  image = '', // social card image URL
+  image = 'pangeo-forge.org/pangeo-forge-logo-white.png', // social card image URL
   url = 'pangeo-forge.org',
   children,
 }) => (
@@ -46,30 +46,30 @@ const Meta = ({
     <link
       key='safari_icon'
       rel='mask-icon'
-      href={`${url}/safari-pinned-tab.png`}
+      href={`${url}/favicon.ico`}
       color={theme.colors.primary}
     />
     <link
       key='apple_icon'
       rel='apple-touch-icon'
       sizes='180x180'
-      href={`${url}/apple-touch-icon.png`}
+      href={`${url}/favicon.ico`}
     />
     <link
       key='favicon_32'
       rel='icon'
       type='image/png'
       sizes='32x32'
-      href={`${url}/favicon-32x32.png`}
+      href={`${url}/favicon.ico`}
     />
     <link
       key='favicon_16'
       rel='icon'
       type='image/png'
       sizes='16x16'
-      href={`${url}/favicon-16x16.png`}
+      href={`${url}/favicon.ico`}
     />
-    <link key='manifest' rel='manifest' href={`${url}/site.webmanifest`} />
+    {/* <link key='manifest' rel='manifest' href={`${url}/site.webmanifest`} /> */}
     {children}
   </Head>
 )

@@ -37,9 +37,9 @@ const FeedstockCard = ({ props }) => {
         }}
       >
         <Box>
-          <Box sx={{ display: 'inline-block', verticalAlign: 'top' }}>
+          {/* <Box sx={{ display: 'inline-block', verticalAlign: 'top' }}>
             <GiAnvil size={20} />
-          </Box>
+          </Box> */}
           <Box sx={{ display: 'inline-block', ml: [2] }}>
             <Box
               sx={{
