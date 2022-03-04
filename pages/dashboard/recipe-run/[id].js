@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import Link from 'next/link'
-import { Badge, Box, Button, Grid, Themed } from 'theme-ui'
+import { Badge, Box, Button, Flex, Grid, Themed } from 'theme-ui'
 import Layout from '../../../components/layout'
 import { useRecipeRun, usePrefect } from '../../../lib/endpoints'
 
@@ -44,7 +44,7 @@ const StatusBadge = ({ status }) => {
   }
 
   return (
-    <Badge bg={color} sx={{ fontSize: [2] }}>
+    <Badge bg={color} sx={{ fontSize: [3] }}>
       {status}
     </Badge>
   )
@@ -57,10 +57,6 @@ const RecipeRun = () => {
   const { recipeRun, recipeRunError } = useRecipeRun(id)
   const { prefect, prefectError } = usePrefect(id)
 
-  console.log('recipeRun', recipeRun)
-  console.log('prefect', prefect)
-  console.log('prefectError', prefectError)
-
   if (recipeRunError) {
     return (
       <Layout container={true}>
@@ -70,16 +66,25 @@ const RecipeRun = () => {
   }
   if (!recipeRun) return <Layout container={true} />
 
-  const feedstockHref = '/dashboard/feedstock/' + recipeRun.feedstock.id
-
   let details = {}
 
   if (recipeRun) {
     details = {
-      Status: <StatusBadge status={recipeRun.status} />,
+      Name: recipeRun.recipe_id,
       'Started at': recipeRun.started_at,
-      Version: recipeRun.version,
-      Feedstock: recipeRun.message,
+      Status: <StatusBadge status={recipeRun.status} />,
+      Version: (
+        <Badge
+          sx={{
+            bg: 'lightgray',
+            color: 'black',
+            fontSize: [3],
+            fontWeight: 'body',
+          }}
+        >
+          {recipeRun.version}
+        </Badge>
+      ),
     }
   }
 
@@ -89,9 +94,60 @@ const RecipeRun = () => {
 
   return (
     <Layout container={true}>
-      <Link href={feedstockHref} passHref>
-        <Themed.h2>Recipe Run: {recipeRun.recipe_id}</Themed.h2>
-      </Link>
+      <Flex>
+        <Box sx={{ flex: '1 1 auto' }}>
+          <Themed.h2>Recipe Run: {recipeRun.id}</Themed.h2>
+        </Box>
+
+        <Link href={feedstockUrl} passHref>
+          <Button
+            sx={{
+              float: 'right',
+              ml: [1, null, 2],
+              maxHeight: 36,
+              mt: [3, null, 4],
+              bg: 'white',
+              color: 'purple',
+              fontSize: [3],
+              '&:hover': { textDecoration: 'underline' },
+            }}
+          >
+            Feedstock
+          </Button>
+        </Link>
+        <Link href={bakeryUrl} passHref>
+          <Button
+            sx={{
+              float: 'right',
+              ml: [1, null, 2],
+              maxHeight: 36,
+              mt: [3, null, 4],
+              bg: 'white',
+              color: 'purple',
+              fontSize: [3],
+              '&:hover': { textDecoration: 'underline' },
+            }}
+          >
+            Bakery
+          </Button>
+        </Link>
+        <Link href={gitHubUrl} passHref>
+          <Button
+            sx={{
+              float: 'right',
+              ml: [1, null, 2],
+              maxHeight: 36,
+              mt: [3, null, 4],
+              bg: 'white',
+              color: 'purple',
+              fontSize: [3],
+              '&:hover': { textDecoration: 'underline' },
+            }}
+          >
+            Git Repository
+          </Button>
+        </Link>
+      </Flex>
       <Box>
         {Object.keys(details).map((key, i) => (
           <Box key={key} sx={{ mb: [2] }}>
@@ -105,18 +161,17 @@ const RecipeRun = () => {
           Head SHA:
         </Box>
         <Link href={gitHubUrl} passHref>
-          <Box sx={{ ml: [2], display: 'inline-block' }}>
-            {recipeRun.head_sha}
-          </Box>
-        </Link>
-        <Link href={feedstockUrl} passHref>
-          <Button sx={{ float: 'right' }}>Feedstock</Button>
-        </Link>
-        <Link href={bakeryUrl} passHref>
-          <Button sx={{ float: 'right' }}>Bakery</Button>
-        </Link>
-        <Link href={gitHubUrl} passHref>
-          <Button sx={{ float: 'right' }}>Git Repository</Button>
+          <Badge
+            sx={{
+              bg: 'lightgray',
+              color: 'black',
+              fontSize: [3],
+              fontWeight: 'body',
+              ml: [2],
+            }}
+          >
+            {recipeRun.head_sha.slice(0, 7)}
+          </Badge>
         </Link>
       </Box>
       <Box>

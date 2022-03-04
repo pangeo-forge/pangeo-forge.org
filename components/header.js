@@ -29,10 +29,11 @@ const Header = () => {
           <Box
             key={i}
             sx={{
-              ml: [5],
+              ml: [3, 4, 5],
               display: 'inline-block',
               float: 'right',
-              fontSize: [3],
+              fontSize: [2, null, 3],
+              mt: [1, null, 0],
               '&:hover': { textDecoration: 'underline' },
             }}
           >

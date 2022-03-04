@@ -17,7 +17,6 @@ const Feedstocks = () => {
 
   return (
     <Layout container={true} menu={true}>
-      {/* <DashboardMenu /> */}
       <Box>
         <Grid gap={3} columns={[1, 2, 3]}>
           {feedstocks
@@ -26,9 +25,6 @@ const Feedstocks = () => {
               <FeedstockCard key={i} props={b} />
             ))}
         </Grid>
-        {/* <Heading as='h2' sx={{ mb: [2], mt: [4] }}>
-          Staged Recipes
-        </Heading> */}
         <Themed.h2>Staged Recipes</Themed.h2>
         <Grid gap={3} columns={[1, 2, 3]}>
           {feedstocks

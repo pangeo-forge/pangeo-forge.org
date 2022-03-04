@@ -2,7 +2,6 @@ import { Box } from 'theme-ui'
 import Link from 'next/link'
 import { useRepo } from '../lib/endpoints'
 import { GoMarkGithub } from 'react-icons/go'
-import { GiAnvil } from 'react-icons/gi'
 import { TimeDeltaFormatter } from '../lib/time-delta'
 import { IconContext } from 'react-icons'
 
@@ -37,9 +36,6 @@ const FeedstockCard = ({ props }) => {
         }}
       >
         <Box>
-          {/* <Box sx={{ display: 'inline-block', verticalAlign: 'top' }}>
-            <GiAnvil size={20} />
-          </Box> */}
           <Box sx={{ display: 'inline-block', ml: [2] }}>
             <Box
               sx={{

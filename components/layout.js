@@ -1,7 +1,6 @@
 import { Box, Container, Flex } from 'theme-ui'
 import Meta from './meta'
 import Header from './header'
-import Footer from './footer'
 import DashboardMenu from './dashboard-menu'
 
 const Layout = ({ children, container = true, menu = null }) => {
@@ -50,40 +49,6 @@ const Layout = ({ children, container = true, menu = null }) => {
           {content}
         </Box>
       </Flex>
-      {/* <Flex
-        sx={{
-          alignItems: 'center',
-        }}
-      >
-        <Button
-          bg='black'
-          color='white'
-          px='4'
-          py='2'
-          rounded='lg'
-          sx={{ margin: 'auto', mt: [4, 4, 4, 5] }}
-        >
-          {' '}
-          <Link
-            sx={{
-              fontFamily: 'body',
-              color: 'white',
-              textDecoration: 'none',
-              '&:hover': { color: 'white', textDecoration: 'underline' },
-            }}
-            href='https://vercel.com?utm_source=pangeo-forge&utm_campaign=oss'
-          >
-            {'Powered by'}{' '}
-            <span role='img' aria-label='Vercel logo'>
-              ▲
-            </span>{' '}
-            Vercel
-          </Link>
-        </Button>
-      </Flex> */}
-      <Container>
-        <Footer />
-      </Container>
     </Box>
   )
 }

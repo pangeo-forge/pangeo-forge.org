@@ -76,7 +76,7 @@ const RecipeRunCard = ({ props }) => {
           borderWidth: '1px',
           borderStyle: 'solid',
           borderColor: 'purple',
-          mt: [0],
+          mt: '-1px',
           mb: [0],
           pt: [3],
           pb: [1],
