@@ -24,7 +24,7 @@ const Bakery = () => {
 
   return (
     <Layout>
-      <Themed.h1>{bakery.name}</Themed.h1>
+      <Themed.h1>{bakery.name} Bakery</Themed.h1>
       <Themed.p>{bakery.description}</Themed.p>
       <Link href={repoUrl}>
         <Button sx={{ float: 'right' }}>View Git Repository</Button>

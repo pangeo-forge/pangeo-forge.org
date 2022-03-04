@@ -12,9 +12,11 @@ const Feedstock = () => {
   const { meta, metaError } = useMeta(spec)
   const repoUrl = `https://github.com/${spec}`
 
+  console.log(meta)
+
   let details = {}
 
-  if (meta) {
+  if (meta && !meta['404']) {
     // these can be expanded once the meta.yaml file spec is stable
     details = {
       Title: meta.title,

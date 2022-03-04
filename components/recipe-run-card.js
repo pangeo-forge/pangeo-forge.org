@@ -90,8 +90,8 @@ const RecipeRunCard = ({ props }) => {
           <Box
             sx={{
               fontSize: [3],
-              fontFamily: 'subtitle',
-              fontWeight: 'subtitle',
+              fontFamily: 'body',
+              fontWeight: 'body',
             }}
           >
             {recipe_id}
@@ -100,6 +100,9 @@ const RecipeRunCard = ({ props }) => {
             sx={{
               fontSize: [2],
               my: [2],
+              fontFamily: 'monospace',
+              fontWeight: 'body',
+              color: 'gray',
             }}
           >
             {message}

@@ -45,7 +45,7 @@ const Index = () => {
         <Container sx={{ py: [6, 6, 6, 7] }}>
           <Flex sx={{ flexDirection: 'column', alignItems: 'center' }}>
             <Image
-              src='https://pangeo-forge.org/img/pangeo-forge-logo-white.cb96c4cf.png'
+              src='/pangeo-forge-logo-white.png'
               alt='Pangeo-Forge logo'
               width={550}
               height={343}
@@ -111,7 +111,7 @@ const Index = () => {
           <Themed.h1>How it works</Themed.h1>
           <Box>
             <Image
-              src='https://pangeo-forge.org/img/pangeo-forge-diagram.b8332f39.png'
+              src='/pangeo-forge-diagram.png'
               alt='Pangeo-Forge schematic'
               width={740.5}
               height={368.16}

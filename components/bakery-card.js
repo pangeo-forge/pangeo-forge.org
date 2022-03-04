@@ -4,7 +4,7 @@ import { BsGlobe2 } from 'react-icons/bs'
 import { IconContext } from 'react-icons'
 
 const BakeryCard = ({ name, region, description, id }) => {
-  const href = `/dashboard/bakeries/${id}`
+  const href = `/dashboard/bakery/${id}`
 
   return (
     <Link
