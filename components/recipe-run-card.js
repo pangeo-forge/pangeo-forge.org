@@ -43,6 +43,8 @@ const RecipeRunCard = ({ props }) => {
           backgroundColor: 'green',
           borderRadius: '8px',
           verticalAlign: 'top',
+          borderColor: 'black',
+          borderWidth: '1px',
         }}
       />
     )
@@ -74,7 +76,7 @@ const RecipeRunCard = ({ props }) => {
           borderWidth: '1px',
           borderStyle: 'solid',
           borderColor: 'purple',
-          mt: [0],
+          mt: '-1px',
           mb: [0],
           pt: [3],
           pb: [1],
@@ -88,8 +90,8 @@ const RecipeRunCard = ({ props }) => {
           <Box
             sx={{
               fontSize: [3],
-              fontFamily: 'subtitle',
-              fontWeight: 'subtitle',
+              fontFamily: 'body',
+              fontWeight: 'body',
             }}
           >
             {recipe_id}
@@ -98,6 +100,9 @@ const RecipeRunCard = ({ props }) => {
             sx={{
               fontSize: [2],
               my: [2],
+              fontFamily: 'monospace',
+              fontWeight: 'body',
+              color: 'gray',
             }}
           >
             {message}

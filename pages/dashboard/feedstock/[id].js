@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { Box, Button, Themed, Link } from 'theme-ui'
+import { Box, Button, Flex, Themed, Link } from 'theme-ui'
 import Layout from '../../../components/layout'
 import RecipeRunCard from '../../../components/recipe-run-card'
 import { useFeedstock, useMeta } from '../../../lib/endpoints'
@@ -14,7 +14,7 @@ const Feedstock = () => {
 
   let details = {}
 
-  if (meta) {
+  if (meta && !meta['404']) {
     // these can be expanded once the meta.yaml file spec is stable
     details = {
       Title: meta.title,
@@ -34,11 +34,36 @@ const Feedstock = () => {
     )
 
   return (
-    <Layout>
-      <Themed.h1>{spec.replace('pangeo-forge/', '')}</Themed.h1>
-      <Link href={repoUrl}>
-        <Button sx={{ float: 'right' }}>View Git Repository</Button>
-      </Link>
+    <Layout container={true}>
+      <Flex>
+        <Box sx={{ flex: '1 1 auto' }}>
+          <Themed.h2>{spec.replace('pangeo-forge/', '')}</Themed.h2>
+        </Box>
+
+        <Link href={repoUrl}>
+          <Button
+            sx={{
+              float: 'right',
+              ml: [1, null, 2],
+              maxHeight: 36,
+              mt: [3, null, 4],
+              bg: 'white',
+              color: 'purple',
+              fontSize: [3],
+              '&:hover': { textDecoration: 'underline' },
+            }}
+          >
+            Git Repository
+          </Button>
+        </Link>
+      </Flex>
+
+      {spec == 'pangeo-forge/staged-recipes' && (
+        <Box>
+          A place to submit pangeo-forge recipes before they become fully
+          fledged pangeo-forge feedstocks.
+        </Box>
+      )}
 
       <Box>
         {Object.keys(details).map((key, i) => (

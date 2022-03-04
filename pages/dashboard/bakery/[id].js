@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import { Box, Button, Themed, Link } from 'theme-ui'
+import { Box, Button, Flex, Themed, Link } from 'theme-ui'
 import Layout from '../../../components/layout'
 import RecipeRunCard from '../../../components/recipe-run-card'
 import { useBakery } from '../../../lib/endpoints'
@@ -23,11 +23,29 @@ const Bakery = () => {
 
   return (
     <Layout>
-      <Themed.h1>{bakery.name}</Themed.h1>
+      <Flex>
+        <Box sx={{ flex: '1 1 auto' }}>
+          <Themed.h2>{bakery.name}</Themed.h2>
+        </Box>
+
+        <Link href={repoUrl}>
+          <Button
+            sx={{
+              float: 'right',
+              ml: [1, null, 2],
+              maxHeight: 36,
+              mt: [3, null, 4],
+              bg: 'white',
+              color: 'purple',
+              fontSize: [3],
+              '&:hover': { textDecoration: 'underline' },
+            }}
+          >
+            Git Repository
+          </Button>
+        </Link>
+      </Flex>
       <Themed.p>{bakery.description}</Themed.p>
-      <Link href={repoUrl}>
-        <Button sx={{ float: 'right' }}>View Git Repository</Button>
-      </Link>
 
       <Themed.h2>Recipe Runs</Themed.h2>
       <Box>
