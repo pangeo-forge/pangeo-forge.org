@@ -2,6 +2,7 @@ import { Box, Container, Flex } from 'theme-ui'
 import Meta from './meta'
 import Header from './header'
 import DashboardMenu from './dashboard-menu'
+import Footer from './footer'
 
 const Layout = ({ children, container = true, menu = null }) => {
   let content = children
@@ -48,6 +49,7 @@ const Layout = ({ children, container = true, menu = null }) => {
           <Meta />
           {content}
         </Box>
+        <Footer />
       </Flex>
     </Box>
   )
