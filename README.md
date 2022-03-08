@@ -32,7 +32,7 @@ This is a Next.js site. It is continuously deployed on [Vercel](https://vercel.c
    Open http://localhost:3000 with your browser.
 
 <a href="https://vercel.com?utm_source=pangeo-forge&utm_campaign=oss">
-<p align="center">
-  <img src="https://www.datocms-assets.com/31049/1618983297-powered-by-vercel.svg">
-</p>
+  <p align="center">
+    <img src="https://www.datocms-assets.com/31049/1618983297-powered-by-vercel.svg">
+  </p>
 </a>
