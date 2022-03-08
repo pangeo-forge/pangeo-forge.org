@@ -55,7 +55,14 @@ const RecipeRun = () => {
   const { id } = router.query
 
   const { recipeRun, recipeRunError } = useRecipeRun(id)
-  const { prefect, prefectError } = usePrefect(id)
+
+  let active = false
+
+  if (recipeRun) {
+    active = recipeRun.status != 'completed'
+  }
+
+  const { prefect, prefectError } = usePrefect(id, active)
 
   if (recipeRunError) {
     return (
