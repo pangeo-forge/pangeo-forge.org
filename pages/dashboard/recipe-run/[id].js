@@ -31,20 +31,24 @@ const FlowRun = ({ i, data }) => {
 }
 
 const StatusBadge = ({ status }) => {
-  let color
+  let bg
+  let color = 'background'
 
   if (status == 'queued') {
-    color = 'yellow'
+    bg = 'yellow'
+    color = 'text'
   } else if (status == 'in_progress') {
-    color = 'orange'
+    bg = 'orange'
+    color = 'text'
   } else if (status == 'completed') {
-    color = 'green'
+    bg = 'green'
   } else {
-    color = 'gray'
+    bg = 'gray'
+    color = 'text'
   }
 
   return (
-    <Badge bg={color} sx={{ fontSize: [3] }}>
+    <Badge bg={bg} color={color} sx={{ fontSize: [3], fontWeight: 'body' }}>
       {status}
     </Badge>
   )
@@ -84,7 +88,7 @@ const RecipeRun = () => {
         <Badge
           sx={{
             bg: 'lightgray',
-            color: 'black',
+            color: 'text',
             fontSize: [3],
             fontWeight: 'body',
           }}
@@ -171,7 +175,7 @@ const RecipeRun = () => {
           <Badge
             sx={{
               bg: 'lightgray',
-              color: 'black',
+              color: 'text',
               fontSize: [3],
               fontWeight: 'body',
               ml: [2],
