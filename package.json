@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.5.10",
-    "@emotion/react": "^11.8.2",
+    "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.6.0",
     "@mdx-js/loader": "^2.1.0",
     "@mdx-js/react": "^1.6.22",
