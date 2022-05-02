@@ -77,7 +77,7 @@ const Index = () => {
             <Link href={'/dashboard/recipe-runs'} passHref>
               <Box sx={{ flex: '1 1 auto' }}>
                 <Stat
-                  name='Recipes Runs'
+                  name='Recipe Runs'
                   number={recipeRuns.stat ? recipeRuns.stat.count : '-'}
                 />
               </Box>
@@ -97,7 +97,7 @@ const Index = () => {
         <Flex sx={{ flexDirection: 'column', alignItems: 'center' }}>
           <Themed.h1>About Pangeo Forge</Themed.h1>
           <Box
-            varient='styles.p'
+            variant='styles.p'
             sx={{ textAlign: 'center', px: [6, 6, 8, 10] }}
           >
             Pangeo Forge is an open source platform for data Extraction,
