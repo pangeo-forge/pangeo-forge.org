@@ -14,22 +14,22 @@ const Link = ({ href, children, ...props }, ref) => {
     )
   }
 
-    return (
-      /**
-       * Anchor link to an external url,
-       * adds the default `target="_blank" rel="noopener noreferrer"` props.
-       */
-        
-      <ThemeUILink
-        ref={ref}
-        href={href}
-        {...props}
-        target='_blank'
-        rel='noopener noreferrer'
-      >
-        {children}
-      </ThemeUILink>
-    )
+  return (
+    /**
+     * Anchor link to an external url,
+     * adds the default `target="_blank" rel="noopener noreferrer"` props.
+     */
+
+    <ThemeUILink
+      ref={ref}
+      href={href}
+      {...props}
+      target='_blank'
+      rel='noopener noreferrer'
+    >
+      {children}
+    </ThemeUILink>
+  )
 }
 
 export default forwardRef(Link)

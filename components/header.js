@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import { Box, Flex } from 'theme-ui'
-import Link  from './link'
+import Link from './link'
 
 const Header = () => {
   const headerItems = {
