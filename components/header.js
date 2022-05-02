@@ -1,5 +1,6 @@
 import Image from 'next/image'
-import { Box, Flex, NavLink } from 'theme-ui'
+import { Box, Flex } from 'theme-ui'
+import Link  from './link'
 
 const Header = () => {
   const headerItems = {
@@ -12,7 +13,7 @@ const Header = () => {
 
   return (
     <Flex sx={{ mt: [3], mb: [3], justifyContent: 'space-between' }}>
-      <NavLink href={'/'} passHref>
+      <Link href={'/'}>
         <Box sx={{ flex: '1 1 auto' }}>
           {/* TODO: replace with vector version */}
           <Image
@@ -22,10 +23,10 @@ const Header = () => {
             height={28}
           />
         </Box>
-      </NavLink>
+      </Link>
       <Flex>
         {Object.keys(headerItems).map((key, i) => (
-          <NavLink key={i} href={headerItems[key]} px={3} passHref>
+          <Link key={i} href={headerItems[key]} px={3}>
             <Box
               key={i}
               sx={{
@@ -39,7 +40,7 @@ const Header = () => {
             >
               {key}
             </Box>
-          </NavLink>
+          </Link>
         ))}
       </Flex>
     </Flex>
