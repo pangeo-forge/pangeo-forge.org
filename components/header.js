@@ -1,6 +1,5 @@
 import Image from 'next/image'
-import Link from 'next/link'
-import { Box, Flex } from 'theme-ui'
+import { Box, Flex, NavLink } from 'theme-ui'
 
 const Header = () => {
   const headerItems = {
@@ -12,8 +11,8 @@ const Header = () => {
   }
 
   return (
-    <Flex sx={{ mt: [3], mb: [3] }}>
-      <Link href={'/'} passHref>
+    <Flex sx={{ mt: [3], mb: [3], justifyContent: 'space-between' }}>
+      <NavLink href={'/'} passHref>
         <Box sx={{ flex: '1 1 auto' }}>
           {/* TODO: replace with vector version */}
           <Image
@@ -23,24 +22,26 @@ const Header = () => {
             height={28}
           />
         </Box>
-      </Link>
-      {Object.keys(headerItems).map((key, i) => (
-        <Link key={i} href={headerItems[key]} passHref>
-          <Box
-            key={i}
-            sx={{
-              ml: [3, 4, 5],
-              display: 'inline-block',
-              float: 'right',
-              fontSize: [2, null, 3],
-              mt: [1, null, 0],
-              '&:hover': { textDecoration: 'underline' },
-            }}
-          >
-            {key}
-          </Box>
-        </Link>
-      ))}
+      </NavLink>
+      <Flex>
+        {Object.keys(headerItems).map((key, i) => (
+          <NavLink key={i} href={headerItems[key]} p={2} passHref>
+            <Box
+              key={i}
+              sx={{
+                ml: [3, 4, 5],
+                display: 'inline-block',
+                float: 'right',
+                fontSize: [2, null, 3],
+                mt: [1, null, 0],
+                '&:hover': { textDecoration: 'none' },
+              }}
+            >
+              {key}
+            </Box>
+          </NavLink>
+        ))}
+      </Flex>
     </Flex>
   )
 }
