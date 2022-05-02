@@ -1,15 +1,20 @@
 import Image from 'next/image'
 import { Box, Flex } from 'theme-ui'
+import { GoMarkGithub } from 'react-icons/go'
 import Link from './link'
 
 const Header = () => {
-  const headerItems = {
-    Home: '/',
-    Catalog: '/catalog',
-    Dashboard: '/dashboard/feedstocks',
-    Docs: 'https://pangeo-forge.readthedocs.io/',
-    GitHub: 'https://github.com/pangeo-forge',
-  }
+  const headerItems = [
+    { label: 'Home', href: '/' },
+    { label: 'Catalog', href: '/catalog' },
+    { label: 'Dashboard', href: '/dashboard/feedstocks' },
+    { label: 'Docs', href: 'https://pangeo-forge.readthedocs.io/' },
+    {
+      label: 'GitHub',
+      href: 'https://github.com/pangeo-forge',
+      logo: <GoMarkGithub />,
+    },
+  ]
 
   return (
     <Flex sx={{ mt: [3], mb: [3], justifyContent: 'space-between' }}>
@@ -24,24 +29,30 @@ const Header = () => {
           />
         </Box>
       </Link>
+
       <Flex>
-        {Object.keys(headerItems).map((key, i) => (
-          <Link key={i} href={headerItems[key]} px={3}>
-            <Box
-              key={i}
-              sx={{
-                ml: [3, 4, 5],
-                display: 'inline-block',
-                float: 'right',
-                fontSize: [2, null, 3],
-                mt: [1, null, 0],
-                '&:hover': { textDecoration: 'none' },
-              }}
-            >
-              {key}
-            </Box>
-          </Link>
-        ))}
+        {headerItems.map(function ({ label, href, logo }) {
+          
+           let _label = label
+          if (typeof logo !== 'undefined'){
+            _label = logo
+          }
+
+          return (
+            <Link key={label} href={href} px={3}>
+              <Box
+                sx={{
+                  ml: [3, 4, 5],
+                  display: 'inline-block',
+                  float: 'right',
+                  fontSize: [2, null, 3],
+                  mt: [1, null, 0],
+                  '&:hover': { textDecoration: 'none' },
+                }}
+              >{_label}</Box>
+            </Link>
+          )
+        })}
       </Flex>
     </Flex>
   )
