@@ -32,9 +32,8 @@ const Header = () => {
 
       <Flex>
         {headerItems.map(function ({ label, href, logo }) {
-          
-           let _label = label
-          if (typeof logo !== 'undefined'){
+          let _label = label
+          if (typeof logo !== 'undefined') {
             _label = logo
           }
 
@@ -49,7 +48,9 @@ const Header = () => {
                   mt: [1, null, 0],
                   '&:hover': { textDecoration: 'none' },
                 }}
-              >{_label}</Box>
+              >
+                {_label}
+              </Box>
             </Link>
           )
         })}
