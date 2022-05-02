@@ -25,7 +25,7 @@ const Header = () => {
       </NavLink>
       <Flex>
         {Object.keys(headerItems).map((key, i) => (
-          <NavLink key={i} href={headerItems[key]} p={2} passHref>
+          <NavLink key={i} href={headerItems[key]} px={3} passHref>
             <Box
               key={i}
               sx={{
