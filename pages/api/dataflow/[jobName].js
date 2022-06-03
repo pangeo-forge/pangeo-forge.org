@@ -5,17 +5,29 @@ const projectName = 'projects/pangeo-forge-4967'
 const logName = projectName + '/logs/dataflow.googleapis.com%2Fjob-message'
 
 export default async function handler(req, res) {
-  const { jobName } = req.query
+  const { jobName, startTime, stopTime, severity } = req.query
+
+  /* e.g., this works:
+      http://localhost:3000/api/dataflow/wordcount-example-0?
+      startTime="2022-06-01T19:23:26.133337225Z"
+      &stopTime="2022-06-01T19:23:29.133337225Z"
+      &severity=INFO
+  */
 
   const options = {
     resourceNames: ['projects/pangeo-forge-4967'],
     filter:
-      'timestamp = "2022-06-01T19:23:27.133337225Z"' +
-      ' AND resource.type = dataflow_step' +
+      'resource.type = dataflow_step' +
       ' AND logName = ' +
       logName +
       ' AND resource.labels.job_name = ' +
-      jobName,
+      jobName +
+      ' AND timestamp > ' +
+      startTime +
+      ' AND timestamp < ' +
+      stopTime +
+      ' AND severity = ' +
+      severity,
   }
 
   try {
