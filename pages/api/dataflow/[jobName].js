@@ -16,18 +16,12 @@ export default async function handler(req, res) {
 
   const options = {
     resourceNames: ['projects/pangeo-forge-4967'],
-    filter:
-      'resource.type = dataflow_step' +
-      ' AND logName = ' +
-      logName +
-      ' AND resource.labels.job_name = ' +
-      jobName +
-      ' AND timestamp > ' +
-      startTime +
-      ' AND timestamp < ' +
-      stopTime +
-      ' AND severity = ' +
-      severity,
+    filter: `resource.type = dataflow_step \
+      AND logName = ${logName} \
+      AND resource.labels.job_name = ${jobName} \
+      AND timestamp > ${startTime} \
+      AND timestamp < ${stopTime} \
+      AND severity = ${severity}`,
   }
 
   try {
