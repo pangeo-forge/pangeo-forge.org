@@ -1,5 +1,6 @@
 import { Badge, Box, Button, Flex, Grid, Themed } from 'theme-ui'
 import Layout from '../components/layout'
+import { useDataflow } from '../lib/endpoints'
 
 const i = 1
 
@@ -32,17 +33,26 @@ const DataflowLogs = ({ i, data }) => {
 }
 
 const LogsBrowser = ({ i, data }) => {
-  const logsError = null
-  const logs = { data: [] }
+  const { dataflow, dataflowError } = useDataflow(
+    // TODO: remove hardcoded args
+    'wordcount-example-0',
+    '2022-06-01T19:23:26.133337225Z',
+    '2022-06-01T19:23:29.133337225Z',
+    'INFO',
+    true
+  )
+
+  console.log('\n\n DATAFLOW:', dataflow, '\n\n')
 
   return (
     <Layout>
       <Box>
         <Themed.h2>Logs</Themed.h2>
-        {logsError && <Box>Error loading logs</Box>}
-        {logs &&
-          !logsError &&
-          logs.data.map((run, i) => <DataflowLogs key={i} i={i} data={run} />)}
+        {dataflowError && <Box>Error loading logs</Box>}
+        {dataflow && !dataflowError && (
+          // logs.data.map((run, i) => <DataflowLogs key={i} i={i} data={run} />)}
+          <Box> {dataflow.timestamp} </Box>
+        )}
       </Box>
     </Layout>
   )
