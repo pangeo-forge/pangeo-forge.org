@@ -15,15 +15,12 @@ const LogLine = ({ log }) => {
 
 const DataflowLogs = ({ allLogLines }) => {
   return (
-    <Box>
-      <Themed.h3>Logs</Themed.h3>
-      <Box sx={{ bg: '#F5F5F5', p: [2] }}>
-        {allLogLines.map((log) => (
-          <Box sx={{ fontFamily: 'monospace', fontSize: [1] }}>
-            <LogLine log={log} />
-          </Box>
-        ))}
-      </Box>
+    <Box sx={{ bg: '#F5F5F5', p: [2] }}>
+      {allLogLines.map((log, i) => (
+        <Box key={i} sx={{ fontFamily: 'monospace', fontSize: [1] }}>
+          <LogLine log={log} />
+        </Box>
+      ))}
     </Box>
   )
 }
@@ -38,13 +35,15 @@ const LogsBrowser = () => {
     true
   )
 
-  if (dataflowError) return <Box>Error loading logs</Box>
-
   return (
     <Layout>
       <Box>
         <Themed.h2>Logs</Themed.h2>
-        {<DataflowLogs allLogLines={dataflow} />}
+        {dataflowError && <Box>Error loading logs</Box>}
+        {!dataflow && !dataflowError && <Box></Box>}
+        {dataflow && !dataflowError && (
+          <DataflowLogs allLogLines={dataflow.reverse()} />
+        )}
       </Box>
     </Layout>
   )
