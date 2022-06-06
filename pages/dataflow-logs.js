@@ -10,19 +10,19 @@ const LogLine = ({ log }) => {
   return (
     <Grid columns={[2, '1fr 3fr']}>
       <Box>
-        {log.timestamp} ({log.level})
+        {log.timestamp} ({log.severity})
       </Box>
-      <Box>{log.message}</Box>
+      <Box>{log.textPayload}</Box>
     </Grid>
   )
 }
 
-const DataflowLogs = ({ i, data }) => {
+const DataflowLogs = ({ allLogLines }) => {
   return (
     <Box key={i}>
-      <Themed.h3>Flow Run {i}</Themed.h3>
+      <Themed.h3>Logs</Themed.h3>
       <Box sx={{ bg: '#F5F5F5', p: [2] }}>
-        {data.logs.map((log, i) => (
+        {allLogLines.map((log, i) => (
           <Box key={i} sx={{ fontFamily: 'monospace', fontSize: [1] }}>
             <LogLine log={log} />
           </Box>
@@ -42,21 +42,13 @@ const LogsBrowser = ({ i, data }) => {
     true
   )
 
- if (dataflowError) return <Box>Error loading logs</Box>
- if (!dataflow)
-    return (
-      <Box>Loading dataflow logs....<Box/> // this can be replaced with an interactive widget/spinner to indicate the progress
-    )
-  console.log('\n\n DATAFLOW:', dataflow, '\n\n')
+  if (dataflowError) return <Box>Error loading logs</Box>
 
   return (
     <Layout>
       <Box>
         <Themed.h2>Logs</Themed.h2>
-        {
-          // logs.data.map((run, i) => <DataflowLogs key={i} i={i} data={run} />)}
-          <Box> {dataflow.timestamp} </Box>
-        }
+        {<DataflowLogs allLogLines={dataflow} />}
       </Box>
     </Layout>
   )
