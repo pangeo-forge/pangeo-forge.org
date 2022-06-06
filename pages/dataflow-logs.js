@@ -1,10 +1,6 @@
-import { Badge, Box, Button, Flex, Grid, Themed } from 'theme-ui'
+import { Box, Grid, Themed } from 'theme-ui'
 import Layout from '../components/layout'
 import { useDataflow } from '../lib/endpoints'
-
-const i = 1
-
-const data = { logs: { 1: 'hello' } }
 
 const LogLine = ({ log }) => {
   return (
@@ -19,11 +15,11 @@ const LogLine = ({ log }) => {
 
 const DataflowLogs = ({ allLogLines }) => {
   return (
-    <Box key={i}>
+    <Box>
       <Themed.h3>Logs</Themed.h3>
       <Box sx={{ bg: '#F5F5F5', p: [2] }}>
-        {allLogLines.map((log, i) => (
-          <Box key={i} sx={{ fontFamily: 'monospace', fontSize: [1] }}>
+        {allLogLines.map((log) => (
+          <Box sx={{ fontFamily: 'monospace', fontSize: [1] }}>
             <LogLine log={log} />
           </Box>
         ))}
@@ -32,7 +28,7 @@ const DataflowLogs = ({ allLogLines }) => {
   )
 }
 
-const LogsBrowser = ({ i, data }) => {
+const LogsBrowser = () => {
   const { dataflow, dataflowError } = useDataflow(
     // TODO: remove hardcoded args
     'wordcount-example-0',
