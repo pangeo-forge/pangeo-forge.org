@@ -42,17 +42,21 @@ const LogsBrowser = ({ i, data }) => {
     true
   )
 
+ if (dataflowError) return <Box>Error loading logs</Box>
+ if (!dataflow)
+    return (
+      <Box>Loading dataflow logs....<Box/> // this can be replaced with an interactive widget/spinner to indicate the progress
+    )
   console.log('\n\n DATAFLOW:', dataflow, '\n\n')
 
   return (
     <Layout>
       <Box>
         <Themed.h2>Logs</Themed.h2>
-        {dataflowError && <Box>Error loading logs</Box>}
-        {dataflow && !dataflowError && (
+        {
           // logs.data.map((run, i) => <DataflowLogs key={i} i={i} data={run} />)}
           <Box> {dataflow.timestamp} </Box>
-        )}
+        }
       </Box>
     </Layout>
   )
