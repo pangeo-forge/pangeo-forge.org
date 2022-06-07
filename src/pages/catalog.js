@@ -1,6 +1,6 @@
+import Layout from '@/components/layout'
+import { useRecipeRuns } from '@/lib/endpoints'
 import { Box, Themed } from 'theme-ui'
-import Layout from '../components/layout'
-import { useRecipeRuns } from '../lib/endpoints'
 
 const Catalog = () => {
   const { recipeRuns, recipeRunsError } = useRecipeRuns()

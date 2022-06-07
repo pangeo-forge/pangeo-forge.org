@@ -4,5 +4,8 @@
   "singleQuote": true,
   "printWidth": 80,
   "quoteProps": "as-needed",
-  "jsxSingleQuote": true
+  "jsxSingleQuote": true,
+  "importOrder": ["^components/(.*)$", "^lib/(.*)$", "^[./]"],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true
 }

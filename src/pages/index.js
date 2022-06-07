@@ -1,8 +1,8 @@
-import { Box, Container, Flex, Themed } from 'theme-ui'
-import Link from 'next/link'
+import Layout from '@/components/layout'
+import { useStats } from '@/lib/endpoints'
 import Image from 'next/image'
-import Layout from '../components/layout'
-import { useStats } from '../lib/endpoints'
+import Link from 'next/link'
+import { Box, Container, Flex, Themed } from 'theme-ui'
 
 const Stat = ({ name, number }) => {
   return (

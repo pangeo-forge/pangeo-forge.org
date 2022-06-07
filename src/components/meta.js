@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import theme from '../lib/theme'
+import theme from '@/lib/theme'
 
 const makeTitle = (title, name) =>
   title === name ? title : `${title} – ${name}`
