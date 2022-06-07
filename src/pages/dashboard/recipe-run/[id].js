@@ -1,8 +1,8 @@
-import { useRouter } from 'next/router'
+import Layout from '@/components/layout'
+import { usePrefect, useRecipeRun } from '@/lib/endpoints'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { Badge, Box, Button, Flex, Grid, Themed } from 'theme-ui'
-import Layout from '../../../components/layout'
-import { useRecipeRun, usePrefect } from '../../../lib/endpoints'
 
 const LogLine = ({ log }) => {
   return (

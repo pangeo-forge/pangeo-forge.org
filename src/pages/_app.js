@@ -1,10 +1,9 @@
+import '@/assets/fonts.css'
+import '@/assets/global.css'
+import ColorSwitcher from '@/components/color-switcher'
+import Meta from '@/components/meta'
+import theme from '@/lib/theme'
 import * as React from 'react'
-import '../global.css'
-import '../fonts.css'
-
-import Meta from '../components/meta'
-import ColorSwitcher from '../components/color-switcher'
-import theme from '../lib/theme'
 import { ThemeProvider } from 'theme-ui'
 
 const App = ({ Component, pageProps }) => {

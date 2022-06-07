@@ -1,6 +1,6 @@
 import { Box, Flex } from 'theme-ui'
 import Link from 'next/link'
-import { TimeDeltaFormatter } from '../lib/time-delta'
+import { TimeDeltaFormatter } from '@/lib/time-delta'
 import { GoCalendar, GoTag } from 'react-icons/go'
 
 const RecipeRunCard = ({ props }) => {

@@ -1,7 +1,7 @@
+import BakeryCard from '@/components/bakery-card'
+import Layout from '@/components/layout'
+import { useBakeries } from '@/lib/endpoints'
 import { Box, Grid } from 'theme-ui'
-import Layout from '../../components/layout'
-import BakeryCard from '../../components/bakery-card'
-import { useBakeries } from '../../lib/endpoints'
 
 const Bakeries = () => {
   const { bakeries, bakeriesError } = useBakeries()

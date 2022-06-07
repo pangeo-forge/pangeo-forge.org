@@ -1,11 +1,11 @@
+import { orchestratorEndpoint } from '@/lib/endpoints'
 import {
-  gql,
-  createHttpLink,
   ApolloClient,
   InMemoryCache,
+  createHttpLink,
+  gql,
 } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
-import { orchestratorEndpoint } from '../../../lib/endpoints'
 
 const QUERY = gql`
   query FlowRun($name: String!) {

@@ -1,8 +1,8 @@
+import DashboardMenu from '@/components/dashboard-menu'
+import Footer from '@/components/footer'
+import Header from '@/components/header'
+import Meta from '@/components/meta'
 import { Box, Container, Flex } from 'theme-ui'
-import Meta from './meta'
-import Header from './header'
-import DashboardMenu from './dashboard-menu'
-import Footer from './footer'
 
 const Layout = ({ children, container = true, menu = null }) => {
   let content = children

@@ -1,7 +1,7 @@
+import FeedstockCard from '@/components/feedstock-card'
+import Layout from '@/components/layout'
+import { useFeedstocks } from '@/lib/endpoints'
 import { Box, Grid, Themed } from 'theme-ui'
-import Layout from '../../components/layout'
-import FeedstockCard from '../../components/feedstock-card'
-import { useFeedstocks } from '../../lib/endpoints'
 
 const Feedstocks = () => {
   const { feedstocks, feedstocksError } = useFeedstocks()

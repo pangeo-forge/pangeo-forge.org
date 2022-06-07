@@ -1,5 +1,5 @@
+import { jsonFetcher, yamlFetcher } from '@/lib/fetchers'
 import useSWR from 'swr'
-import { jsonFetcher, yamlFetcher } from './fetchers'
 
 export const orchestratorEndpoint = 'api.pangeo-forge.org'
 

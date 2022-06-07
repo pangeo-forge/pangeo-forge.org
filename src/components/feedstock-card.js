@@ -1,9 +1,9 @@
-import { Box } from 'theme-ui'
+import { useRepo } from '@/lib/endpoints'
+import { TimeDeltaFormatter } from '@/lib/time-delta'
 import Link from 'next/link'
-import { useRepo } from '../lib/endpoints'
-import { GoMarkGithub } from 'react-icons/go'
-import { TimeDeltaFormatter } from '../lib/time-delta'
 import { IconContext } from 'react-icons'
+import { GoMarkGithub } from 'react-icons/go'
+import { Box } from 'theme-ui'
 
 const FeedstockCard = ({ props }) => {
   const { spec, id } = props
