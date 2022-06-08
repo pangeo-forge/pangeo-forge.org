@@ -24,6 +24,7 @@ const Feedstock = () => {
 
   const { fs: { spec = '', recipe_runs = [] } = {}, fsError } = useFeedstock(id)
   const { meta, metaError } = useMeta(spec)
+
   const repoUrl = `https://github.com/${spec}`
 
   let details = {}
@@ -66,6 +67,10 @@ const Feedstock = () => {
         <Skeleton minH={'100vh'}></Skeleton>
       </Layout>
     )
+
+  const name = spec.replace('pangeo-forge/', '')
+
+  const { isProduction, catalogUrl } = getProductionRunInfo(id, recipe_runs)
 
   return (
     <Layout>
