@@ -23,7 +23,13 @@ const Catalog = () => {
     <Layout container={true}>
       <Box>
         <Themed.h1>{name} Catalog</Themed.h1>
-        {isProduction && <Box> {datasets} </Box>}
+        {isProduction && (
+          <Box as='ol'>
+            {datasets.map((dataset, index) => {
+              return <li key={index}>{dataset}</li>
+            })}
+          </Box>
+        )}
       </Box>
       <Box>
         <Button>
