@@ -23,13 +23,14 @@ export function getDatasets(runs) {
 }
 
 export function getProductionRunInfo(id, runs) {
-  const datasets = getDatasets(runs)
+  let datasets = getDatasets(runs)
   let catalogUrl = ''
   let isProduction = false
 
   if (datasets && datasets.length > 0) {
     isProduction = true
     catalogUrl = `/catalog/${id}`
+    datasets = [...new Set(datasets)]
   }
 
   return {
