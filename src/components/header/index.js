@@ -5,21 +5,16 @@ import { MobileNav } from '@/components/header/mobile-nav'
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons'
 import {
   Box,
-  Button,
-  ButtonGroup,
   Container,
   Flex,
-  HStack,
   IconButton,
   Image,
   Stack,
-  useBreakpointValue,
   useColorMode,
   useColorModeValue,
   useDisclosure,
 } from '@chakra-ui/react'
 import React from 'react'
-import { FiMenu } from 'react-icons/fi'
 import { IoMoon, IoSunny } from 'react-icons/io5'
 
 export const Header = () => {

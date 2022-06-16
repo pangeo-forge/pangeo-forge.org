@@ -1,6 +1,5 @@
 import { Link } from '@/components'
 import {
-  Box,
   Collapse,
   Flex,
   Icon,
@@ -13,6 +12,11 @@ import React from 'react'
 
 const MobileNavItem = ({ href, children, label }) => {
   const { isOpen, onToggle } = useDisclosure()
+  const textColor = useColorModeValue('gray.600', 'gray.200')
+  const bg = useColorModeValue(
+    'rgba(255, 255, 255, 0.8)',
+    'rgba(26, 32, 44, 0.8)'
+  )
 
   const handleToggle = (e) => {
     if (children) {
@@ -33,10 +37,7 @@ const MobileNavItem = ({ href, children, label }) => {
           textDecoration: 'none',
         }}
       >
-        <Text
-          fontWeight={600}
-          color={useColorModeValue('gray.600', 'gray.200')}
-        >
+        <Text fontWeight={600} color={textColor}>
           {label}
         </Text>
         {children && (
@@ -85,10 +86,7 @@ export const MobileNav = ({ isOpen, navItems }) => {
       minH={'calc(100vh - 60px)'}
       css={{
         backdropFilter: 'saturate(180%) blur(5px)',
-        backgroundColor: useColorModeValue(
-          'rgba(255, 255, 255, 0.8)',
-          'rgba(26, 32, 44, 0.8)'
-        ),
+        backgroundColor: bg,
       }}
     >
       {navItems.map((item) => (
