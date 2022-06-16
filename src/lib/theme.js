@@ -1,7 +1,10 @@
+import { theme as defaultTheme, extendTheme } from '@chakra-ui/react'
+
 const fonts = `system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Helvetica, sans-serif`
 
-const theme = {
+export const theme = extendTheme({
   colors: {
+    ...defaultTheme.colors,
     text: 'black',
     background: 'white',
     primary: 'black',
@@ -10,20 +13,20 @@ const theme = {
     teal: '#00a3b0',
     green: '#5eb130',
     blue: '#003b71',
-    purple: '#322173',
-    // modes: {
-    //   dark: {
-    //     text: 'white',
-    //     background: 'black',
-    //     primary: 'white',
-    //     invert: 'black',
-    //     pink: '#e50051',
-    //     teal: '#00a3b0',
-    //     green: '#5eb130',
-    //     blue: '#003b71',
-    //     purple: '#6141dd',
-    //   },
-    // },
+    purple: '#322173', // '#322173'
+    modes: {
+      dark: {
+        text: 'white',
+        background: 'black',
+        primary: 'white',
+        invert: 'black',
+        pink: '#e50051',
+        teal: '#00a3b0',
+        green: '#5eb130',
+        blue: '#003b71',
+        purple: '#6141dd',
+      },
+    },
   },
   space: [0, 4, 8, 16, 24, 32, 48, 64, 96, 128, 172, 256, 512],
   fonts: {
@@ -102,6 +105,4 @@ const theme = {
     printColorModeName: 'light',
     useColorSchemeMediaQuery: false,
   },
-}
-
-export default theme
+})

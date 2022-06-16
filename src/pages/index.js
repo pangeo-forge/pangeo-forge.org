@@ -1,8 +1,8 @@
+import { Link } from '@/components'
 import Layout from '@/components/layout'
 import { useStats } from '@/lib/endpoints'
+import { Box, Container, Flex, Heading } from '@chakra-ui/react'
 import Image from 'next/image'
-import Link from 'next/link'
-import { Box, Container, Flex, Themed } from 'theme-ui'
 
 const Stat = ({ name, number }) => {
   return (
@@ -41,7 +41,7 @@ const Index = () => {
 
   return (
     <Layout container={false}>
-      <Box sx={{ bg: 'purple', color: 'invert' }}>
+      {/* <Box sx={{ bg: 'purple', color: 'invert' }}>
         <Container sx={{ py: [6, 6, 6, 7] }}>
           <Flex sx={{ flexDirection: 'column', alignItems: 'center' }}>
             <Image
@@ -95,7 +95,7 @@ const Index = () => {
       </Box>
       <Container sx={{ mb: [5, 5, 5, 6] }}>
         <Flex sx={{ flexDirection: 'column', alignItems: 'center' }}>
-          <Themed.h1>About Pangeo Forge</Themed.h1>
+          <Heading as='h1'>About Pangeo Forge</Heading>
           <Box
             variant='styles.p'
             sx={{ textAlign: 'center', px: [6, 6, 8, 10] }}
@@ -108,7 +108,7 @@ const Index = () => {
             community-led collection of recipes for building conda packages. We
             hope that Pangeo Forge can play the same role for datasets.
           </Box>
-          <Themed.h1>How it works</Themed.h1>
+          <Heading as='h1'>How it works</Heading>
           <Box>
             <Image
               src='/pangeo-forge-diagram.png'
@@ -118,7 +118,7 @@ const Index = () => {
             />
           </Box>
         </Flex>
-      </Container>
+      </Container> */}
     </Layout>
   )
 }

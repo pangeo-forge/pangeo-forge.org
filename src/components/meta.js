@@ -1,10 +1,10 @@
+import { theme } from '@/lib/theme'
 import Head from 'next/head'
-import theme from '@/lib/theme'
 
 const makeTitle = (title, name) =>
   title === name ? title : `${title} – ${name}`
 
-const Meta = ({
+export const Meta = ({
   title = 'Pangeo-Forge',
   name = 'Pangeo-Forge',
   description = 'A cloud-native data repository for ocean, weather, and climate science.',
@@ -73,5 +73,3 @@ const Meta = ({
     {children}
   </Head>
 )
-
-export default Meta

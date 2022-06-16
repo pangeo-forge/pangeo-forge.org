@@ -1,4 +1,5 @@
-import { Box, Link } from 'theme-ui'
+import { Link } from '@/components'
+import { Box } from '@chakra-ui/react'
 
 const Vercel = () => {
   return (
@@ -22,7 +23,7 @@ const Vercel = () => {
   )
 }
 
-const Footer = () => {
+export const Footer = () => {
   return (
     <Box as='footer' sx={{ mt: [6] }}>
       <Box sx={{ margin: '40px auto', textAlign: 'center' }}>
@@ -31,5 +32,3 @@ const Footer = () => {
     </Box>
   )
 }
-
-export default Footer

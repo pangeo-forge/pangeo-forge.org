@@ -1,0 +1,5 @@
+export { Link } from '@/components/link'
+export { Footer } from '@/components/footer'
+export { Meta } from '@/components/meta'
+export { Header } from '@/components/header'
+export { ColorSwitcher } from '@/components/color-switcher'
