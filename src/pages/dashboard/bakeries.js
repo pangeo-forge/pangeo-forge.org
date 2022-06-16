@@ -1,5 +1,5 @@
 import BakeryCard from '@/components/bakery-card'
-import Layout from '@/components/layout'
+import { Layout } from '@/components/layout'
 import { useBakeries } from '@/lib/endpoints'
 import { Box, Grid } from 'theme-ui'
 

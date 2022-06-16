@@ -1,4 +1,4 @@
-import Layout from '@/components/layout'
+import { Layout } from '@/components/layout'
 import RecipeRunCard from '@/components/recipe-run-card'
 import { useBakery } from '@/lib/endpoints'
 import { useRouter } from 'next/router'

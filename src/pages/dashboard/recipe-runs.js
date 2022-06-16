@@ -1,4 +1,4 @@
-import Layout from '@/components/layout'
+import { Layout } from '@/components/layout'
 import RecipeRunCard from '@/components/recipe-run-card'
 import { useRecipeRuns } from '@/lib/endpoints'
 import { Box } from 'theme-ui'
