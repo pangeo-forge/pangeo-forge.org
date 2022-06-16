@@ -1,5 +1,5 @@
-import { Layout, Link } from '@/components'
-import { useStats } from '@/lib/endpoints'
+import { Layout, Link, Hero } from '@/components'
+import { Summary } from '@/components/dashboard'
 import { Box, Container, Flex, Heading } from '@chakra-ui/react'
 import Image from 'next/image'
 
@@ -34,64 +34,14 @@ const Stat = ({ name, number }) => {
 }
 
 const Index = () => {
-  const feedstocks = useStats('feedstocks')
-  const recipeRuns = useStats('recipe_runs')
-  const datasets = useStats('datasets')
-
   return (
     <Layout container={false}>
-      <Box sx={{ bg: 'purple.900', color: 'invert' }}>
-        <Container sx={{ py: [6, 6, 6, 7] }}>
-          <Flex sx={{ flexDirection: 'column', alignItems: 'center' }}>
-            <Image
-              src='/pangeo-forge-logo-white.png'
-              alt='Pangeo-Forge logo'
-              width={550}
-              height={343}
-            />
-            <Box sx={{ fontFamily: 'subtitle', fontWeight: 'subtitle' }}>
-              A cloud-native data repository for ocean, weather, and climate
-              science.
-            </Box>
-          </Flex>
-        </Container>
+      <Hero />
+      <Summary />
+      {/* <Box sx={{ bg: 'purple.900', color: 'invert' }}>
+        
       </Box>
-      <Box sx={{ bg: '#eee', color: 'text' }}>
-        <Container sx={{ py: [1, 1, 1, 2] }}>
-          <Flex
-            sx={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              layoutAlign: 'center',
-            }}
-          >
-            <Link href={'/dashboard/feedstocks'}>
-              <Box sx={{ flex: '1 1 auto' }}>
-                <Stat
-                  name='Feedstocks'
-                  number={feedstocks.stat ? feedstocks.stat.count : '-'}
-                />
-              </Box>
-            </Link>
-            <Link href={'/dashboard/recipe-runs'}>
-              <Box sx={{ flex: '1 1 auto' }}>
-                <Stat
-                  name='Recipe Runs'
-                  number={recipeRuns.stat ? recipeRuns.stat.count : '-'}
-                />
-              </Box>
-            </Link>
-            <Link href={'/datasets'}>
-              <Box sx={{ flex: '1 1 auto' }}>
-                <Stat
-                  name='Datasets'
-                  number={datasets.stat ? datasets.stat.count : '-'}
-                />
-              </Box>
-            </Link>
-          </Flex>
-        </Container>
-      </Box>
+      
       <Container sx={{ mb: [5, 5, 5, 6] }}>
         <Flex sx={{ flexDirection: 'column', alignItems: 'center' }}>
           <Heading as='h1'>About Pangeo Forge</Heading>
@@ -117,7 +67,7 @@ const Index = () => {
             />
           </Box>
         </Flex>
-      </Container>
+      </Container> */}
     </Layout>
   )
 }
