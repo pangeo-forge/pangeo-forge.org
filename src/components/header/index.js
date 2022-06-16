@@ -24,11 +24,11 @@ export const Header = () => {
   const { colorMode, toggleColorMode } = useColorMode()
   const bg = useColorModeValue(
     'rgba(255, 255, 255, 0.8)',
-    'rgba(255, 255, 255, 0.8)'
+    'rgba(26, 32, 44, 0.8)'
   )
 
   return (
-    <Box color={bg}>
+    <Box>
       <Flex
         as={'header'}
         pos='fixed'
@@ -40,10 +40,7 @@ export const Header = () => {
         justify={'center'}
         css={{
           backdropFilter: 'saturate(180%) blur(5px)',
-          backgroundColor: useColorModeValue(
-            'rgba(50, 33, 115, 1)',
-            'rgba(26, 32, 44, 0.8)'
-          ),
+          backgroundColor: bg,
         }}
       >
         <Container as={Flex} maxW={'7xl'} align={'center'}>

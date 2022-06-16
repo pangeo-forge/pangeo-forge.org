@@ -65,7 +65,7 @@ const Index = () => {
               layoutAlign: 'center',
             }}
           >
-            <Link href={'/dashboard/feedstocks'} passHref>
+            <Link href={'/dashboard/feedstocks'}>
               <Box sx={{ flex: '1 1 auto' }}>
                 <Stat
                   name='Feedstocks'
@@ -73,7 +73,7 @@ const Index = () => {
                 />
               </Box>
             </Link>
-            <Link href={'/dashboard/recipe-runs'} passHref>
+            <Link href={'/dashboard/recipe-runs'}>
               <Box sx={{ flex: '1 1 auto' }}>
                 <Stat
                   name='Recipe Runs'
@@ -81,7 +81,7 @@ const Index = () => {
                 />
               </Box>
             </Link>
-            <Link href={'/datasets'} passHref>
+            <Link href={'/datasets'}>
               <Box sx={{ flex: '1 1 auto' }}>
                 <Stat
                   name='Datasets'

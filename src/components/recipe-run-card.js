@@ -61,7 +61,6 @@ const RecipeRunCard = ({ props }) => {
   return (
     <Link
       href={href}
-      passHref
       sx={{
         textDecoration: 'none',
         '&:hover': {

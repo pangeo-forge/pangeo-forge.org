@@ -10,6 +10,7 @@ import {
 import { ChevronRightIcon } from '@chakra-ui/icons'
 
 export const DesktopSubNav = ({ label, href, subLabel }) => {
+  const hoverBg = useColorModeValue('green.50', 'gray.900')
   return (
     <Link
       href={href ?? '#'}
@@ -17,13 +18,13 @@ export const DesktopSubNav = ({ label, href, subLabel }) => {
       display={'block'}
       p={2}
       rounded={'md'}
-      _hover={{ bg: useColorModeValue('purple.800', 'gray.900') }}
+      _hover={{ bg: hoverBg }}
     >
       <Stack direction={'row'} align={'center'}>
         <Box>
           <Text
             transition={'all .3s ease'}
-            _groupHover={{ color: 'blue.400' }}
+            _groupHover={{ color: 'green.400' }}
             fontWeight={500}
           >
             {label}
@@ -39,7 +40,7 @@ export const DesktopSubNav = ({ label, href, subLabel }) => {
           align={'center'}
           flex={1}
         >
-          <Icon color={'blue.400'} w={5} h={5} as={ChevronRightIcon} />
+          <Icon color={'green.400'} w={5} h={5} as={ChevronRightIcon} />
         </Flex>
       </Stack>
     </Link>
