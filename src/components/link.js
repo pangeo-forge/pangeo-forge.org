@@ -8,8 +8,10 @@ export const Link = React.forwardRef(function CustomLink(props, ref) {
 
   if (isInternalLink) {
     return (
-      <NextLink href={href} passHref ref={ref}>
-        <ChakraLink {...props} />
+      <NextLink href={href} passHref>
+        <ChakraLink ref={ref} {...props}>
+          {props.children}
+        </ChakraLink>
       </NextLink>
     )
   }

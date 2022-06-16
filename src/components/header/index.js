@@ -5,6 +5,7 @@ import { MobileNav } from '@/components/header/mobile-nav'
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons'
 import {
   Box,
+  Collapse,
   Container,
   Flex,
   IconButton,
@@ -15,15 +16,19 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import React from 'react'
-import { IoMoon, IoSunny } from 'react-icons/io5'
+import { IoLogoGithub, IoMoon, IoSunny } from 'react-icons/io5'
 
 export const Header = () => {
   const navItems = React.useMemo(() => menuItems, [])
   const { isOpen: isMobileNavOpen, onToggle } = useDisclosure()
   const { colorMode, toggleColorMode } = useColorMode()
+  const bg = useColorModeValue(
+    'rgba(255, 255, 255, 0.8)',
+    'rgba(255, 255, 255, 0.8)'
+  )
 
   return (
-    <Box>
+    <Box color={bg}>
       <Flex
         as={'header'}
         pos='fixed'
@@ -50,8 +55,14 @@ export const Header = () => {
           >
             <IconButton
               onClick={onToggle}
-              icon={isMobileNavOpen ? <CloseIcon /> : <HamburgerIcon />}
-              //variant='ghost'
+              icon={
+                isMobileNavOpen ? (
+                  <CloseIcon w={5} h={5} />
+                ) : (
+                  <HamburgerIcon w={5} h={5} />
+                )
+              }
+              variant='ghost'
               size={'sm'}
               aria-label={'Toggle Navigation'}
             />
@@ -87,6 +98,15 @@ export const Header = () => {
               navItems={navItems}
               display={{ base: 'none', md: 'flex' }}
             />
+
+            <IconButton
+              as={Link}
+              href={'https://github.com/pangeo-forge'}
+              size={'sm'}
+              variant={'ghost'}
+              aria-label={'GitHub logo'}
+              icon={<IoLogoGithub size={20} />}
+            />
             <IconButton
               size={'sm'}
               variant={'ghost'}
@@ -94,16 +114,18 @@ export const Header = () => {
               onClick={toggleColorMode}
               icon={
                 colorMode == 'light' ? (
-                  <IoMoon size={18} />
+                  <IoMoon size={20} />
                 ) : (
-                  <IoSunny size={18} />
+                  <IoSunny size={20} />
                 )
               }
             />
           </Stack>
         </Container>
       </Flex>
-      <MobileNav isOpen={isMobileNavOpen} navItems={navItems} />
+      <Collapse in={isMobileNavOpen} animateOpacity>
+        <MobileNav isOpen={isMobileNavOpen} navItems={navItems} />
+      </Collapse>
     </Box>
   )
 }

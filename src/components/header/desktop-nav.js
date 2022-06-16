@@ -11,6 +11,9 @@ import {
 import React from 'react'
 
 export const DesktopNav = ({ navItems, ...props }) => {
+  const hoverColor = useColorModeValue('gray.800', 'white')
+  const popoverColor = useColorModeValue('white', 'gray.800')
+  const color = useColorModeValue('white.800', 'white.200')
   return (
     <Stack direction={'row'} spacing={4} {...props}>
       {navItems.map((item) => (
@@ -22,8 +25,10 @@ export const DesktopNav = ({ navItems, ...props }) => {
                 href={item.href ?? '#'}
                 fontSize={'sm'}
                 fontWeight={500}
+                color={color}
                 _hover={{
                   textDecoration: 'none',
+                  color: hoverColor,
                 }}
               >
                 {item.label}
@@ -34,7 +39,7 @@ export const DesktopNav = ({ navItems, ...props }) => {
               <PopoverContent
                 border={0}
                 boxShadow={'xl'}
-                bg={bg}
+                bg={popoverColor}
                 p={4}
                 rounded={'xl'}
                 minW={'sm'}

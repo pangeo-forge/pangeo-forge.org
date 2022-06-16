@@ -1,4 +1,5 @@
 import { Link } from '@/components'
+import { ChevronDownIcon } from '@chakra-ui/icons'
 import {
   Collapse,
   Flex,
@@ -13,10 +14,6 @@ import React from 'react'
 const MobileNavItem = ({ href, children, label }) => {
   const { isOpen, onToggle } = useDisclosure()
   const textColor = useColorModeValue('gray.600', 'gray.200')
-  const bg = useColorModeValue(
-    'rgba(255, 255, 255, 0.8)',
-    'rgba(26, 32, 44, 0.8)'
-  )
 
   const handleToggle = (e) => {
     if (children) {
@@ -73,6 +70,10 @@ const MobileNavItem = ({ href, children, label }) => {
 }
 
 export const MobileNav = ({ isOpen, navItems }) => {
+  const bg = useColorModeValue(
+    'rgba(255, 255, 255, 0.8)',
+    'rgba(26, 32, 44, 0.8)'
+  )
   if (!isOpen) return null
   return (
     <Stack

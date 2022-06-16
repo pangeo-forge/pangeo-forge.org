@@ -2,7 +2,7 @@ import '@/assets/fonts.css'
 import '@/assets/global.css'
 import { Meta } from '@/components'
 import { ChakraProvider } from '@chakra-ui/react'
-import { theme } from '@/lib/theme'
+import { theme } from '@/theme'
 import * as React from 'react'
 
 const App = ({ Component, pageProps }) => {

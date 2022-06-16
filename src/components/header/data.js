@@ -1,7 +1,13 @@
 export const navItems = [
   { label: 'Home', href: '/' },
-  { label: 'Catalog', href: '/' },
-  { label: 'Dashboard', href: '/' },
-  { label: 'Docs', href: '/' },
-  { label: 'GitHub', href: '/', variant: 'ghost' },
+  { label: 'Catalog', href: '/catalog' },
+  {
+    label: 'Dashboard',
+    children: [
+      { label: 'Feedstocks', href: '/dashboard/feedstocks', subLabel: '' },
+      { label: 'Backeries', href: '/dashboard/backeries' },
+      { label: 'Recipe-Runs', href: '/dashboard/recipe-runs' },
+    ],
+  },
+  { label: 'Docs', href: 'https://pangeo-forge.readthedocs.io/en/latest/' },
 ]

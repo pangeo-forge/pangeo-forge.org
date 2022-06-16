@@ -1,16 +1,14 @@
 import { Footer, Header, Meta } from '@/components'
 import { Box, Container, Flex } from '@chakra-ui/react'
 
-const Layout = ({ children, container = true, menu = null }) => {
+export const Layout = ({ children }) => {
   let content = children
 
   return (
     <>
       <Header />
-      {content}
+      {children}
       <Footer />
     </>
   )
 }
-
-export default Layout

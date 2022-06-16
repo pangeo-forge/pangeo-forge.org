@@ -1,4 +1,4 @@
-import { theme } from '@/lib/theme'
+import { theme } from '@/theme'
 import Head from 'next/head'
 
 const makeTitle = (title, name) =>

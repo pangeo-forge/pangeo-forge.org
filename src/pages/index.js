@@ -1,5 +1,4 @@
-import { Link } from '@/components'
-import Layout from '@/components/layout'
+import { Layout, Link } from '@/components'
 import { useStats } from '@/lib/endpoints'
 import { Box, Container, Flex, Heading } from '@chakra-ui/react'
 import Image from 'next/image'
@@ -41,7 +40,7 @@ const Index = () => {
 
   return (
     <Layout container={false}>
-      {/* <Box sx={{ bg: 'purple', color: 'invert' }}>
+      <Box sx={{ bg: 'purple.900', color: 'invert' }}>
         <Container sx={{ py: [6, 6, 6, 7] }}>
           <Flex sx={{ flexDirection: 'column', alignItems: 'center' }}>
             <Image
@@ -118,7 +117,7 @@ const Index = () => {
             />
           </Box>
         </Flex>
-      </Container> */}
+      </Container>
     </Layout>
   )
 }
