@@ -11,8 +11,6 @@ export const HowItWorks = () => {
             <Image
               src='/pangeo-forge-diagram.png'
               alt='Pangeo-Forge schematic'
-              width={740.5}
-              height={368.16}
             />
           </Box>
         </Flex>
