@@ -3,7 +3,6 @@ import { useStats } from '@/lib/endpoints'
 import {
   Box,
   Container,
-  Flex,
   Heading,
   SimpleGrid,
   Stack,
@@ -38,6 +37,7 @@ const Stat = (props) => {
 }
 
 export const Summary = () => {
+  const borderColor = useColorModeValue('gray.800', 'gray.500')
   const feedstocks = useStats('feedstocks')
   const recipeRuns = useStats('recipe_runs')
   const datasets = useStats('datasets')
@@ -58,6 +58,10 @@ export const Summary = () => {
               textAlign={'center'}
               as={Link}
               href={href}
+              shadow={'xl'}
+              border={'1px solid'}
+              borderColor={borderColor}
+              rounded={'lg'}
               key={label}
               label={label}
               value={stats.stat ? stats.stat.count : '-'}
