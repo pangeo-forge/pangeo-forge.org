@@ -13,6 +13,7 @@ import {
 import { FaDiscourse, FaGithub, FaTwitter } from 'react-icons/fa'
 
 export const Footer = () => {
+  const color = useColorModeValue('white', 'purple.100')
   return (
     <Box
       css={{
@@ -21,6 +22,7 @@ export const Footer = () => {
           'rgba(26, 32, 44, 0.8)'
         ),
       }}
+      color={color}
     >
       <Container
         maxW='container.lg'

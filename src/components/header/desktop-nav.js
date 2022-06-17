@@ -12,8 +12,12 @@ import React from 'react'
 
 export const DesktopNav = ({ navItems, ...props }) => {
   const hoverColor = useColorModeValue('gray.800', 'white')
-  const popoverColor = useColorModeValue('white', 'gray.800')
+  const popoverColor = useColorModeValue(
+    'rgba(50, 33, 115, 0.9)',
+    'rgba(26, 32, 44, 0.8)'
+  )
   const color = useColorModeValue('white.800', 'white.200')
+
   return (
     <Stack direction={'row'} spacing={4} {...props}>
       {navItems.map((item) => (

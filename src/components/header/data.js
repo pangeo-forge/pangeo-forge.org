@@ -5,7 +5,7 @@ export const navItems = [
     label: 'Dashboard',
     children: [
       { label: 'Feedstocks', href: '/dashboard/feedstocks', subLabel: '' },
-      { label: 'Backeries', href: '/dashboard/backeries' },
+      { label: 'Bakeries', href: '/dashboard/bakeries' },
       { label: 'Recipe-Runs', href: '/dashboard/recipe-runs' },
     ],
   },

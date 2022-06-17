@@ -22,10 +22,17 @@ export const Header = () => {
   const navItems = React.useMemo(() => menuItems, [])
   const { isOpen: isMobileNavOpen, onToggle } = useDisclosure()
   const { colorMode, toggleColorMode } = useColorMode()
+  // const bg = useColorModeValue(
+  //   'rgba(255, 255, 255, 0.8)',
+  //   'rgba(26, 32, 44, 0.8)'
+  // )
+
   const bg = useColorModeValue(
-    'rgba(255, 255, 255, 0.8)',
+    'rgba(50, 33, 115, 0.9)',
     'rgba(26, 32, 44, 0.8)'
   )
+
+  const color = useColorModeValue('white', 'white')
 
   return (
     <Box>
@@ -42,6 +49,7 @@ export const Header = () => {
           backdropFilter: 'saturate(180%) blur(5px)',
           backgroundColor: bg,
         }}
+        color={color}
       >
         <Container as={Flex} maxW={'7xl'} align={'center'}>
           <Flex

@@ -3,7 +3,7 @@ import { Summary } from '@/components/dashboard'
 
 const Index = () => {
   return (
-    <Layout container={false}>
+    <Layout>
       <Hero />
       <Summary />
       <About />

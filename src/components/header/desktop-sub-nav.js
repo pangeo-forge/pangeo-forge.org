@@ -11,6 +11,7 @@ import { ChevronRightIcon } from '@chakra-ui/icons'
 
 export const DesktopSubNav = ({ label, href, subLabel }) => {
   const hoverBg = useColorModeValue('green.50', 'gray.900')
+
   return (
     <Link
       href={href ?? '#'}

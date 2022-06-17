@@ -16,7 +16,7 @@ export const Hero = () => {
   return (
     <Box as='section' sx={{ bg: bg, color: 'invert' }}>
       {' '}
-      <Container maxW='container.sm' py={90} centerContent>
+      <Container maxW='container.lg' py={90} centerContent>
         <Flex direction='column'>
           <Image src='/pangeo-forge-logo-white.png' alt='Pangeo-Forge logo' />
           <Text

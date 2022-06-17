@@ -18,8 +18,14 @@ export const About = () => {
             </Link>
             . The goal of Pangeo Forge is to make it easy to extract data from
             traditional data repositories and deposit in cloud object storage in
-            analysis-ready, cloud-optimized (ARCO) format. Pangeo Forge is
-            inspired directly by{' '}
+            <Link
+              href='https://ieeexplore.ieee.org/abstract/document/9354557'
+              color={'blue.400'}
+            >
+              {' '}
+              analysis-ready, cloud-optimized (ARCO)
+            </Link>{' '}
+            format. Pangeo Forge is inspired directly by{' '}
             <Link href='https://conda-forge.org/' color={'blue.400'}>
               Conda Forge
             </Link>

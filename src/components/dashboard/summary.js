@@ -57,6 +57,16 @@ export const Summary = () => {
               pb={[2]}
               textAlign={'center'}
               as={Link}
+              transitionProperty='all'
+              transitionDuration='slower'
+              transitionTimingFunction='ease-out'
+              bg='gray.50'
+              _dark={{ bg: 'gray.700' }}
+              _hover={{
+                transform: 'scale(1.025)',
+                boxShadow: 'var(--chakra-shadows-md)',
+                textDecoration: 'none',
+              }}
               href={href}
               shadow={'xl'}
               border={'1px solid'}
