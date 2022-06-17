@@ -8,6 +8,7 @@ import {
   Spinner,
   Heading,
   Text,
+  VStack,
 } from '@chakra-ui/react'
 
 const Bakeries = () => {
@@ -36,17 +37,16 @@ const Bakeries = () => {
     <Layout>
       <Box as='section'>
         <Container maxW='container.lg' py={90}>
-          <Heading as={'h1'} p={7} textAlign={'center'}>
-            Bakeries
-          </Heading>
-          <Text>
-            Bakeries turn recipes into data. They do the heavy lifting of
-            actually executing the recipes: extracting data from its source,
-            transforming it, and loading it into its target destination.
-            Bakeries are controlled by triggers from GitHub workflows. Bakeries
-            can run in cloud or on-premises compute nodes; they should be placed
-            in close network proximity to data sources and / or targets.
-          </Text>
+          <VStack p={8}>
+            <Heading as={'h1'}>Bakeries</Heading>
+            <Text>
+              Bakeries turn recipes into data. They do the heavy lifting of
+              actually executing the recipes: extracting data from its source,
+              transforming it, and loading it into its target destination.
+              Bakeries are controlled by triggers from GitHub workflows.
+            </Text>
+          </VStack>
+
           <SimpleGrid columns={{ base: 1, md: 3 }} gap={{ base: '5', md: '6' }}>
             {bakeries.map((bakery, index) => (
               <BakeryCard

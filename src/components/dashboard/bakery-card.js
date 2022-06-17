@@ -1,17 +1,14 @@
-import { Link } from '@/components'
 import {
   Badge,
-  Box,
-  Center,
   Heading,
   LinkBox,
   LinkOverlay,
   Stack,
   Text,
   VStack,
-  Wrap,
   WrapItem,
 } from '@chakra-ui/react'
+import { BsGlobe2 } from 'react-icons/bs'
 import React from 'react'
 
 export const BakeryCard = ({ name, region, description, id }) => {
@@ -31,18 +28,6 @@ export const BakeryCard = ({ name, region, description, id }) => {
       }}
     >
       <VStack spacing={2} align='stretch'>
-        <Badge
-          as='a'
-          rel='tag'
-          color='teal.600'
-          _dark={{ color: 'teal.400' }}
-          textTransform='uppercase'
-          fontSize='xs'
-          fontWeight='bold'
-          whiteSpace='break-spaces'
-        >
-          {region}
-        </Badge>
         <LinkOverlay href={href}>
           <VStack spacing={2} align='stretch'>
             <Heading as={'h3'} size='sm' textTransform='uppercase'>
@@ -51,6 +36,24 @@ export const BakeryCard = ({ name, region, description, id }) => {
             <Text lineHeight='tall' opacity={0.8}>
               {description}
             </Text>
+            <Stack py={4} justify={'right'} direction='row' spacing={4}>
+              <WrapItem overflow='hidden'>
+                <Badge
+                  as='a'
+                  rel='tag'
+                  color='teal.600'
+                  _dark={{ color: 'teal.400' }}
+                  textTransform='uppercase'
+                  fontSize='xs'
+                  fontWeight='bold'
+                  whiteSpace='break-spaces'
+                  variant='outline'
+                >
+                  {region}
+                </Badge>
+              </WrapItem>
+              <BsGlobe2 />
+            </Stack>
           </VStack>
         </LinkOverlay>
       </VStack>
