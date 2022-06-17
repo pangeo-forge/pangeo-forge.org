@@ -1,10 +1,9 @@
-import { Link } from '@/components'
 import { Box, Container, Flex, Image, Text } from '@chakra-ui/react'
 import React from 'react'
 
 export const Hero = () => {
   return (
-    <Box as='section'>
+    <Box as='section' sx={{ bg: 'purple.900', color: 'invert' }}>
       {' '}
       <Container maxW='container.sm' py={90} centerContent>
         <Flex direction='column'>
