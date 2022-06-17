@@ -65,7 +65,7 @@ export const Footer = () => {
               />
             </ButtonGroup>
           </Stack>
-          <Text fontSize='sm' color='subtle'>
+          <Text fontSize='sm' color={'white'}>
             &copy; {new Date().getFullYear()} The Pangeo Community. Apache
             License 2.0 Licensed.
           </Text>

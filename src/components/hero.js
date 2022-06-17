@@ -19,7 +19,12 @@ export const Hero = () => {
       <Container maxW='container.sm' py={90} centerContent>
         <Flex direction='column'>
           <Image src='/pangeo-forge-logo-white.png' alt='Pangeo-Forge logo' />
-          <Text fontFamily={'subtitle'} fontWeight={'subtitle'} fontSize={'xl'}>
+          <Text
+            fontFamily={'subtitle'}
+            fontWeight={'subtitle'}
+            fontSize={'xl'}
+            color={'white'}
+          >
             {' '}
             A cloud-native data repository for ocean, weather, and climate
             science.
