@@ -1,9 +1,20 @@
-import { Box, Container, Flex, Image, Text } from '@chakra-ui/react'
+import {
+  Box,
+  Container,
+  Flex,
+  Image,
+  Text,
+  useColorModeValue,
+} from '@chakra-ui/react'
 import React from 'react'
 
 export const Hero = () => {
+  const bg = useColorModeValue(
+    'rgba(50, 33, 115, 0.9)',
+    'rgba(26, 32, 44, 0.8)'
+  )
   return (
-    <Box as='section' sx={{ bg: 'purple.900', color: 'invert' }}>
+    <Box as='section' sx={{ bg: bg, color: 'invert' }}>
       {' '}
       <Container maxW='container.sm' py={90} centerContent>
         <Flex direction='column'>

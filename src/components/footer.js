@@ -8,17 +8,25 @@ import {
   Image,
   Stack,
   Text,
+  useColorModeValue,
 } from '@chakra-ui/react'
 import { FaDiscourse, FaGithub, FaTwitter } from 'react-icons/fa'
 
 export const Footer = () => {
   return (
-    <Box>
+    <Box
+      css={{
+        backgroundColor: useColorModeValue(
+          'rgba(50, 33, 115, 0.9)',
+          'rgba(26, 32, 44, 0.8)'
+        ),
+      }}
+    >
       <Container
         maxW='container.lg'
         as='footer'
         role='contentinfo'
-        py={{ base: '12', md: '16' }}
+        py={{ base: '3', md: '4' }}
       >
         <Stack spacing={{ base: '4', md: '5' }}>
           <Stack justify='space-between' direction='row' align='center'>
@@ -62,7 +70,8 @@ export const Footer = () => {
             License 2.0 Licensed.
           </Text>
         </Stack>
-        <Container py={10} centerContent>
+
+        <Container py={4} centerContent>
           {' '}
           <Vercel />
         </Container>
