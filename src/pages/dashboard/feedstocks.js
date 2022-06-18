@@ -6,6 +6,7 @@ import {
   Container,
   Heading,
   SimpleGrid,
+  Spinner,
   Text,
   VStack,
 } from '@chakra-ui/react'
@@ -15,12 +16,24 @@ const Feedstocks = () => {
 
   if (feedstocksError) {
     return (
-      <Layout container={true} menu={true}>
+      <Layout>
         <Box>Failed to load...</Box>
       </Layout>
     )
   }
-  if (!feedstocks) return <Layout container={true} menu={true} />
+  if (!feedstocks)
+    return (
+      <Layout>
+        {' '}
+        <Spinner
+          thickness='4px'
+          speed='0.65s'
+          emptyColor='gray.200'
+          color='blue.500'
+          size='xl'
+        />
+      </Layout>
+    )
 
   return (
     <Layout>
