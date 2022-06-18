@@ -49,7 +49,7 @@ export const Summary = () => {
   ]
   return (
     <Box as='section' py={{ base: '4', md: '8' }}>
-      <Container maxW='container.lg'>
+      <Container maxW='container.xl'>
         <SimpleGrid columns={{ base: 1, md: 3 }} gap={{ base: '5', md: '6' }}>
           {reports.map(({ label, href, stats }) => (
             <Stat

@@ -5,7 +5,7 @@ import React from 'react'
 export const About = () => {
   return (
     <Box as='section'>
-      <Container maxW='container.lg' py={90}>
+      <Container maxW='container.xl' py={90} centerContent>
         <Flex direction='column' alignItems={'center'}>
           <Heading as={'h1'}>About Pangeo Forge</Heading>
           <Text py={[6, 6, 8, 10]} textAlign={'center'}>

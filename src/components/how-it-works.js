@@ -4,7 +4,7 @@ import React from 'react'
 export const HowItWorks = () => {
   return (
     <Box as='section'>
-      <Container maxW='container.lg'>
+      <Container maxW='container.lg' centerContent>
         <Flex direction='column' alignItems={'center'}>
           <Heading as={'h1'}>How It Works</Heading>
           <Box py={[6, 6, 8, 10]}>

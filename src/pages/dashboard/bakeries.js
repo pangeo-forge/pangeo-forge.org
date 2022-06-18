@@ -36,7 +36,7 @@ const Bakeries = () => {
   return (
     <Layout>
       <Box as='section'>
-        <Container maxW='container.lg' py={90}>
+        <Container maxW='container.xl' py={90} centerContent>
           <VStack p={8}>
             <Heading as={'h1'}>Bakeries</Heading>
             <Text>

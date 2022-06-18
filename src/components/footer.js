@@ -25,7 +25,7 @@ export const Footer = () => {
       color={color}
     >
       <Container
-        maxW='container.lg'
+        maxW='container.xl'
         as='footer'
         role='contentinfo'
         py={{ base: '3', md: '4' }}
