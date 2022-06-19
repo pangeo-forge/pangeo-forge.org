@@ -1,4 +1,5 @@
 import { Link } from '@/components'
+import { RecipeRunCard } from '@/components/dashboard'
 import { Layout } from '@/components/layout'
 import { useFeedstock, useMeta } from '@/lib/endpoints'
 import {
@@ -104,11 +105,24 @@ const Feedstock = () => {
             </Box>
 
             <Heading as={'h2'}>Recipe Runs</Heading>
-            <Box>
-              Test
-              {/* {recipe_runs.reverse().map((b, i) => (
-          <RecipeRunCard key={i} props={b} />
-        ))} */}
+            <Box mt={4}>
+              <SimpleGrid columns={{ base: 1, md: 1, lg: 1 }} spacing={2}>
+                {/* TODO: Add filter options */}
+                {recipe_runs
+                  .sort((a, b) => a.started_at.localeCompare(b.started_at))
+                  .reverse()
+                  .map((recipe, index) => (
+                    <RecipeRunCard
+                      key={index}
+                      recipe_id={recipe.recipe_id}
+                      id={recipe.id}
+                      started_at={recipe.started_at}
+                      status={recipe.status}
+                      version={recipe.version}
+                      message={recipe.message}
+                    />
+                  ))}
+              </SimpleGrid>
             </Box>
           </Container>
         </Box>
