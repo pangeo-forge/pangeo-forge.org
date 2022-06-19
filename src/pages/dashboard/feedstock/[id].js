@@ -1,8 +1,21 @@
+import { Link } from '@/components'
 import { Layout } from '@/components/layout'
-import RecipeRunCard from '@/components/recipe-run-card'
 import { useFeedstock, useMeta } from '@/lib/endpoints'
+import {
+  Box,
+  Container,
+  Flex,
+  Stack,
+  Heading,
+  SimpleGrid,
+  HStack,
+  VStack,
+  IconButton,
+  Skeleton,
+  Text,
+} from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { Box, Button, Flex, Link, Themed } from 'theme-ui'
+import { GoRepo } from 'react-icons/go'
 
 const Feedstock = () => {
   const router = useRouter()
@@ -25,62 +38,84 @@ const Feedstock = () => {
     }
   }
 
-  if (!spec || !meta) return <Layout container={true} />
+  if (!spec || !meta)
+    return (
+      <Layout>
+        <Box as='section'>
+          <Skeleton>
+            {' '}
+            <Container maxW='container.xl' py={90} centerContent></Container>
+          </Skeleton>
+        </Box>
+      </Layout>
+    )
   if (fsError || metaError)
     return (
-      <Layout container={true}>
-        <Box>Failed to load...</Box>
+      <Layout>
+        <Box as='section'>
+          <Container maxW='container.xl' py={90} centerContent>
+            Failed to load...
+          </Container>
+        </Box>
       </Layout>
     )
 
   return (
-    <Layout container={true}>
-      <Flex>
-        <Box sx={{ flex: '1 1 auto' }}>
-          <Themed.h2>{spec.replace('pangeo-forge/', '')}</Themed.h2>
-        </Box>
+    <Layout>
+      <Box as='section'>
+        <Container maxW='container.xl' py={90}>
+          <Flex direction='column'>
+            <Stack as={Link} href={repoUrl} direction={'row'} align={'center'}>
+              <Flex
+                w={8}
+                h={8}
+                align={'center'}
+                justify={'center'}
+                rounded={'full'}
+                //bg={iconBg}
+              >
+                <IconButton
+                  aria-label='GitHub Repository'
+                  icon={<GoRepo fontSize='1.85rem' />}
+                  variant='ghost'
+                />
+              </Flex>
 
-        <Link href={repoUrl}>
-          <Button
-            sx={{
-              float: 'right',
-              ml: [1, null, 2],
-              maxHeight: 36,
-              mt: [3, null, 4],
-              bg: 'white',
-              color: 'purple',
-              fontSize: [3],
-              '&:hover': { textDecoration: 'underline' },
-            }}
-          >
-            Git Repository
-          </Button>
-        </Link>
-      </Flex>
+              <Heading as={'h2'} textTransform={'uppercase'}>
+                {spec.replace('pangeo-forge/', '')}
+              </Heading>
+            </Stack>
+          </Flex>
 
-      {spec == 'pangeo-forge/staged-recipes' && (
-        <Box>
-          A place to submit pangeo-forge recipes before they become fully
-          fledged pangeo-forge feedstocks.
-        </Box>
-      )}
+          {spec == 'pangeo-forge/staged-recipes' && (
+            <Text>
+              A place to submit pangeo-forge recipes before they become fully
+              fledged pangeo-forge feedstocks.
+            </Text>
+          )}
 
-      <Box>
-        {Object.keys(details).map((key, i) => (
-          <Box key={key} sx={{ mb: [2] }}>
-            <Box sx={{ fontWeight: 'bold', display: 'inline-block' }}>
-              {key}:
-            </Box>
-            <Box sx={{ ml: [2], display: 'inline-block' }}>{details[key]}</Box>
+          <Box py={4}>
+            <SimpleGrid columns={{ base: 1, md: 1, lg: 1 }} spacing={1}>
+              {Object.keys(details).map((key, index) => (
+                <HStack key={index} align={'top'} py={2}>
+                  {' '}
+                  <VStack align={'start'}>
+                    <Text color={'gray.600'}>{key}</Text>
+                    <Text fontWeight={600}>{details[key]}</Text>
+                  </VStack>
+                </HStack>
+              ))}
+            </SimpleGrid>
           </Box>
-        ))}
-      </Box>
 
-      <Themed.h2>Recipe Runs</Themed.h2>
-      <Box>
-        {recipe_runs.reverse().map((b, i) => (
+          <Heading as={'h2'}>Recipe Runs</Heading>
+          <Box>
+            Test
+            {/* {recipe_runs.reverse().map((b, i) => (
           <RecipeRunCard key={i} props={b} />
-        ))}
+        ))} */}
+          </Box>
+        </Container>
       </Box>
     </Layout>
   )
