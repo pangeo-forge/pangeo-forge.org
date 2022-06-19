@@ -1,8 +1,9 @@
+import { Link } from '@/components'
+import { RecipeRunCard } from '@/components/dashboard'
 import { Layout } from '@/components/layout'
-import RecipeRunCard from '@/components/recipe-run-card'
 import { useBakery } from '@/lib/endpoints'
+import { Box, Button, Flex, Heading, Spinner, Text } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { Box, Button, Flex, Link, Themed } from 'theme-ui'
 
 const Bakery = () => {
   const router = useRouter()
@@ -12,11 +13,16 @@ const Bakery = () => {
 
   const repoUrl = 'https://github.com/pangeo-forge/pangeo-forge-gcs-bakery'
 
-  if (!bakery) return <Layout container={true} />
+  if (!bakery)
+    return (
+      <Layout>
+        <Spinner />
+      </Layout>
+    )
 
   if (bakeryError)
     return (
-      <Layout container={true}>
+      <Layout>
         <Box>Failed to load...</Box>
       </Layout>
     )
@@ -25,7 +31,7 @@ const Bakery = () => {
     <Layout>
       <Flex>
         <Box sx={{ flex: '1 1 auto' }}>
-          <Themed.h2>{bakery.name}</Themed.h2>
+          <Heading as={'h2'}>{bakery.name}</Heading>
         </Box>
 
         <Link href={repoUrl}>
@@ -45,12 +51,20 @@ const Bakery = () => {
           </Button>
         </Link>
       </Flex>
-      <Themed.p>{bakery.description}</Themed.p>
+      <Text>{bakery.description}</Text>
 
-      <Themed.h2>Recipe Runs</Themed.h2>
+      <Heading as={'h2'}>Recipe Runs</Heading>
       <Box>
-        {bakery.recipe_runs.reverse().map((b, i) => (
-          <RecipeRunCard key={i} props={b} />
+        {bakery.recipe_runs.reverse().map((recipe, index) => (
+          <RecipeRunCard
+            key={index}
+            recipe_id={recipe.recipe_id}
+            id={recipe.id}
+            started_at={recipe.started_at}
+            status={recipe.status}
+            version={recipe.version}
+            message={recipe.message}
+          />
         ))}
       </Box>
     </Layout>
