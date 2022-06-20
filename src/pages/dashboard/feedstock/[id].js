@@ -92,7 +92,7 @@ const Feedstock = () => {
           )}
 
           <Box py={4}>
-            <SimpleGrid columns={{ base: 1, md: 2, lg: 2 }} spacing={1}>
+            <SimpleGrid columns={{ base: 1, md: 1, lg: 2 }} spacing={1}>
               {Object.keys(details).map((key, index) => (
                 <HStack key={index} align={'top'} py={2}>
                   {' '}
