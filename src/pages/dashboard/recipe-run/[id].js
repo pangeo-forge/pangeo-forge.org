@@ -159,7 +159,7 @@ const RecipeRun = () => {
             <Box>
               {prefect &&
                 prefect.data?.flow_run.map((run, index) => (
-                  <Text>{JSON.stringfy(run)}</Text>
+                  <Text key={index}>{JSON.stringfy(run)}</Text>
                 ))}
             </Box>
           </Box>
