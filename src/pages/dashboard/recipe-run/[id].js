@@ -1,13 +1,18 @@
 import { Link } from '@/components'
+import { StatusBadge } from '@/components/dashboard'
 import { Layout } from '@/components/layout'
 import { usePrefect, useRecipeRun } from '@/lib/endpoints'
 import {
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
   Badge,
   Box,
   Button,
   Container,
   Flex,
-  Grid,
+  HStack,
   Heading,
   SimpleGrid,
   Skeleton,
@@ -59,10 +64,33 @@ const RecipeRun = () => {
   const bakeryUrl = `/dashboard/bakery/${recipeRun.bakery_id}`
   const gitHubUrl = `https://github.com/${recipeRun.feedstock.spec}/tree/${recipeRun.head_sha}`
 
+  if (recipeRun) {
+    details = {
+      Name: recipeRun.recipe_id,
+      'Started at': recipeRun.started_at,
+      Status: <StatusBadge status={recipeRun.status} />,
+      Version: (
+        <Badge variant='outline' colorScheme='gray' fontWeight='body'>
+          {recipeRun.version}
+        </Badge>
+      ),
+      'Git SHA': (
+        <Badge
+          as={Link}
+          href={gitHubUrl}
+          variant='outline'
+          colorScheme='gray'
+          fontWeight='body'
+        >
+          {recipeRun.head_sha.slice(0, 7)}
+        </Badge>
+      ),
+    }
+  }
+
   const urls = {
     Bakery: bakeryUrl,
     Feedstock: feedstockUrl,
-    'Git Commit': gitHubUrl,
   }
 
   return (
@@ -99,6 +127,42 @@ const RecipeRun = () => {
               ))}
             </Stack>
           </Stack>
+
+          <Box py={4}>
+            <SimpleGrid columns={{ base: 1, md: 2, lg: 3 }} spacing={1}>
+              {Object.keys(details).map((key, index) => (
+                <HStack key={index} align={'top'} py={2}>
+                  {' '}
+                  <VStack align={'start'}>
+                    <Text color={'gray.600'}>{key}</Text>
+                    <Text fontWeight={600}>{details[key]}</Text>
+                  </VStack>
+                </HStack>
+              ))}
+            </SimpleGrid>
+          </Box>
+          <Box>
+            <Heading as={'h3'} mb={4}>
+              Logs
+            </Heading>
+            {prefectError && (
+              <Box>
+                <Alert status='error'>
+                  <AlertIcon />
+                  <AlertTitle>Error!</AlertTitle>
+                  <AlertDescription>
+                    Unable to load prefect logs.
+                  </AlertDescription>
+                </Alert>
+              </Box>
+            )}
+            <Box>
+              {prefect &&
+                prefect.data?.flow_run.map((run, index) => (
+                  <Text>{JSON.stringfy(run)}</Text>
+                ))}
+            </Box>
+          </Box>
         </Container>
       </Box>
     </Layout>

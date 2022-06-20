@@ -30,7 +30,7 @@ const RecipeRuns = () => {
   return (
     <Layout>
       <Box as='section'>
-        <Container maxW='container.xl' py={90} centerContent>
+        <Container maxW='container.xl' py={90}>
           <VStack p={8}>
             <Heading as={'h1'} mb={2}>
               Recipe Runs
