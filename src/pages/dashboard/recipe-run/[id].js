@@ -135,7 +135,7 @@ const RecipeRun = () => {
               {Object.keys(details).map((key, index) => (
                 <HStack key={index} align={'top'} py={2}>
                   {' '}
-                  <VStack align={'start'}>
+                  <VStack align={'start'} overflow={'hidden'}>
                     <Text color={'gray.600'}>{key}</Text>
                     <Text fontWeight={600}>{details[key]}</Text>
                   </VStack>
