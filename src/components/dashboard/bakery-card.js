@@ -10,6 +10,7 @@ import {
 } from '@chakra-ui/react'
 import { BsGlobe2 } from 'react-icons/bs'
 import React from 'react'
+import { Link } from '@/components'
 
 export const BakeryCard = ({ name, region, description, id }) => {
   const href = `/dashboard/bakery/${id}`
@@ -28,7 +29,13 @@ export const BakeryCard = ({ name, region, description, id }) => {
       }}
     >
       <VStack spacing={2} align='stretch'>
-        <LinkOverlay href={href}>
+        <LinkOverlay
+          href={href}
+          as={Link}
+          _hover={{
+            textDecoration: 'none',
+          }}
+        >
           <VStack spacing={2} align='stretch'>
             <Heading as={'h3'} size='sm' textTransform='uppercase'>
               {name}

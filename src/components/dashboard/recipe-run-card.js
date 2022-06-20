@@ -49,7 +49,13 @@ export const RecipeRunCard = ({
         boxShadow: 'var(--chakra-shadows-md)',
       }}
     >
-      <LinkOverlay href={href}>
+      <LinkOverlay
+        href={href}
+        as={Link}
+        _hover={{
+          textDecoration: 'none',
+        }}
+      >
         <SimpleGrid
           columns={{ base: 1, md: 1, lg: 2, xl: 2 }}
           spacing={1}

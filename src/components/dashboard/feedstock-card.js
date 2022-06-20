@@ -9,9 +9,11 @@ import {
   Text,
   VStack,
   Spinner,
+  Skeleton,
 } from '@chakra-ui/react'
 import React from 'react'
 import { GoMarkGithub } from 'react-icons/go'
+import { Link } from '@/components'
 
 export const FeedstockCard = ({ spec, id }) => {
   const href = `/dashboard/feedstock/${id}`
@@ -19,16 +21,7 @@ export const FeedstockCard = ({ spec, id }) => {
   const { repo, repoError } = useRepo(spec)
 
   if (repoError) return <Box>{'error'}</Box>
-  if (!repo)
-    return (
-      <Spinner
-        thickness='4px'
-        speed='0.65s'
-        emptyColor='gray.200'
-        color='blue.500'
-        size='xl'
-      />
-    )
+  if (!repo) return <Box>Loading....</Box>
 
   return (
     <LinkBox
@@ -45,7 +38,13 @@ export const FeedstockCard = ({ spec, id }) => {
       }}
     >
       <VStack spacing={2} align='stretch'>
-        <LinkOverlay href={href}>
+        <LinkOverlay
+          href={href}
+          as={Link}
+          _hover={{
+            textDecoration: 'none',
+          }}
+        >
           <VStack spacing={2} align='stretch'>
             <Heading as={'h3'} size='xs' textTransform='uppercase'>
               {spec
