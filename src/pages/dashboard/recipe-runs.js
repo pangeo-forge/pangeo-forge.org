@@ -29,7 +29,6 @@ const RecipeRuns = () => {
             {recipeRuns
               .sort((a, b) => a.recipe_id.localeCompare(b.recipe_id))
               .sort((a, b) => a.started_at.localeCompare(b.started_at))
-
               .reverse()
               .map((recipe, index) => (
                 <RecipeRunCard
