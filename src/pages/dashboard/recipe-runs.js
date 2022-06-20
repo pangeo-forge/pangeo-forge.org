@@ -1,7 +1,14 @@
 import { RecipeRunCard } from '@/components/dashboard'
 import { Layout } from '@/components/layout'
 import { useRecipeRuns } from '@/lib/endpoints'
-import { Box, Container, SimpleGrid, Heading, VStack } from '@chakra-ui/react'
+import {
+  Box,
+  Container,
+  Skeleton,
+  SimpleGrid,
+  Heading,
+  VStack,
+} from '@chakra-ui/react'
 
 const RecipeRuns = () => {
   const { recipeRuns, recipeRunsError } = useRecipeRuns()
@@ -13,7 +20,12 @@ const RecipeRuns = () => {
       </Layout>
     )
   }
-  if (!recipeRuns) return <Layout />
+  if (!recipeRuns)
+    return (
+      <Layout>
+        <Skeleton minH={'100vh'}></Skeleton>
+      </Layout>
+    )
 
   return (
     <Layout>

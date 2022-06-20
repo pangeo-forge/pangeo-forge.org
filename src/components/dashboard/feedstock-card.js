@@ -8,7 +8,6 @@ import {
   Stack,
   Text,
   VStack,
-  Spinner,
   Skeleton,
 } from '@chakra-ui/react'
 import React from 'react'
@@ -21,7 +20,7 @@ export const FeedstockCard = ({ spec, id }) => {
   const { repo, repoError } = useRepo(spec)
 
   if (repoError) return <Box>{'error'}</Box>
-  if (!repo) return <Box>Loading....</Box>
+  if (!repo) return <Skeleton minH={'100vh'}></Skeleton>
 
   return (
     <LinkBox
