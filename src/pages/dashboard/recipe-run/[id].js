@@ -1,8 +1,10 @@
 import { Link } from '@/components'
-import { StatusBadge } from '@/components/dashboard'
+import { FlowRun, StatusBadge } from '@/components/dashboard'
 import { Layout } from '@/components/layout'
 import { usePrefect, useRecipeRun } from '@/lib/endpoints'
 import {
+  Accordion,
+  AccordionItem,
   Alert,
   AlertDescription,
   AlertIcon,
@@ -157,10 +159,14 @@ const RecipeRun = () => {
               </Box>
             )}
             <Box>
-              {prefect &&
-                prefect.data?.flow_run.map((run, index) => (
-                  <Text key={index}>{JSON.stringify(run)}</Text>
-                ))}
+              <Accordion allowMultiple>
+                {prefect &&
+                  prefect.data?.flow_run.map((run, index) => (
+                    <FlowRun key={index} index={index} run={run}>
+                      {JSON.stringify(run)}
+                    </FlowRun>
+                  ))}
+              </Accordion>
             </Box>
           </Box>
         </Container>
