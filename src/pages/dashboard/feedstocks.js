@@ -6,7 +6,7 @@ import {
   Container,
   Heading,
   SimpleGrid,
-  Spinner,
+  Skeleton,
   Text,
   VStack,
 } from '@chakra-ui/react'
@@ -24,14 +24,7 @@ const Feedstocks = () => {
   if (!feedstocks)
     return (
       <Layout>
-        {' '}
-        <Spinner
-          thickness='4px'
-          speed='0.65s'
-          emptyColor='gray.200'
-          color='blue.500'
-          size='xl'
-        />
+        <Skeleton minH={'100vh'}></Skeleton>
       </Layout>
     )
 
@@ -39,7 +32,7 @@ const Feedstocks = () => {
     <Layout>
       <Box as='section'>
         <Container maxW='container.xl' py={90} centerContent>
-          <VStack p={8}>
+          <VStack py={8}>
             <Heading as={'h1'}>Feedstocks</Heading>
             <Text>
               Feedstocks are recipes that are managed and executed by Pangeo

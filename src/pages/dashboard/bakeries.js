@@ -5,7 +5,7 @@ import {
   Box,
   SimpleGrid,
   Container,
-  Spinner,
+  Skeleton,
   Heading,
   Text,
   VStack,
@@ -23,13 +23,7 @@ const Bakeries = () => {
   if (!bakeries)
     return (
       <Layout>
-        <Spinner
-          thickness='4px'
-          speed='0.65s'
-          emptyColor='gray.200'
-          color='blue.500'
-          size='xl'
-        />
+        <Skeleton minH={'100vh'}></Skeleton>
       </Layout>
     )
 
@@ -37,7 +31,7 @@ const Bakeries = () => {
     <Layout>
       <Box as='section'>
         <Container maxW='container.xl' py={90} centerContent>
-          <VStack p={8}>
+          <VStack py={8}>
             <Heading as={'h1'}>Bakeries</Heading>
             <Text>
               Bakeries turn recipes into data. They do the heavy lifting of
