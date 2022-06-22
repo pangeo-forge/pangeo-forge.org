@@ -59,8 +59,9 @@ const Bakery = () => {
                 rounded={'full'}
               >
                 <IconButton
+                  fontSize={'3xl'}
                   aria-label='GitHub Repository'
-                  icon={<GoRepo fontSize='1.85rem' />}
+                  icon={<GoRepo />}
                   variant='ghost'
                 />
               </Flex>

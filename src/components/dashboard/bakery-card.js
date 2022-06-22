@@ -59,7 +59,7 @@ export const BakeryCard = ({ name, region, description, id }) => {
                   {region}
                 </Badge>
               </WrapItem>
-              <BsGlobe2 />
+              <BsGlobe2 size={20} />
             </Stack>
           </VStack>
         </LinkOverlay>

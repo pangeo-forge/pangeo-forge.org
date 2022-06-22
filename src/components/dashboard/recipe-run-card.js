@@ -73,17 +73,18 @@ export const RecipeRunCard = ({
           </VStack>
           <VStack mr={2} my={2} align={'left'}>
             <Flex>
-              <GoCalendar size={'1.45em'} />
+              <Icon as={GoCalendar} fontSize={'2xl'} />
+
               <Text px={2}>
                 {started_at} ({timeSinceRun})
               </Text>
             </Flex>
             <Flex>
-              <GiSandsOfTime size={'1.45em'} />
+              <Icon as={GiSandsOfTime} fontSize={'2xl'} />
               <Text px={2}>{status}</Text>
             </Flex>
             <Flex>
-              <GoTag size={'1.45em'} />
+              <Icon as={GoTag} fontSize={'2xl'} />
               <Text px={2}>{version}</Text>
             </Flex>
           </VStack>

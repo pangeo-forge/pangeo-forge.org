@@ -72,8 +72,9 @@ const Feedstock = () => {
                 //bg={iconBg}
               >
                 <IconButton
+                  fontSize={'3xl'}
                   aria-label='GitHub Repository'
-                  icon={<GoRepo fontSize='1.85rem' />}
+                  icon={<GoRepo />}
                   variant='ghost'
                 />
               </Flex>
@@ -96,9 +97,11 @@ const Feedstock = () => {
               {Object.keys(details).map((key, index) => (
                 <HStack key={index} align={'top'} py={2}>
                   {' '}
-                  <VStack align={'start'} overflow={'hidden'}>
+                  <VStack align={'start'}>
                     <Text color={'gray.600'}>{key}</Text>
-                    <Text fontWeight={600}>{details[key]}</Text>
+                    <Text fontWeight={600} maxW={'90vw'}>
+                      {details[key]}
+                    </Text>
                   </VStack>
                 </HStack>
               ))}

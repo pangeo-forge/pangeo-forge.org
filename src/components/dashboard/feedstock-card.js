@@ -67,7 +67,7 @@ export const FeedstockCard = ({ spec, id }) => {
                 )}{' '}
                 via
               </Text>
-              <GoMarkGithub />
+              <GoMarkGithub size={20} />
             </Stack>
           </VStack>
         </LinkOverlay>

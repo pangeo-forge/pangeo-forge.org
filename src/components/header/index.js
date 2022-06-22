@@ -34,10 +34,7 @@ export const Header = () => {
 
   const color = useColorModeValue('white', 'white')
 
-  const themeSwitchIcon = useColorModeValue(
-    <IoMoon size={20} />,
-    <IoSunny size={20} />
-  )
+  const themeSwitchIcon = useColorModeValue(<IoMoon />, <IoSunny />)
 
   return (
     <Box>
@@ -56,7 +53,7 @@ export const Header = () => {
         }}
         color={color}
       >
-        <Container as={Flex} maxW='container.xl'>
+        <Container as={Flex} maxW='container.xl' align={'center'}>
           <Flex
             flex={{ base: '0', md: 'auto' }}
             ml={{ base: -2 }}
@@ -64,14 +61,9 @@ export const Header = () => {
             display={{ base: 'flex', md: 'none' }}
           >
             <IconButton
+              fontSize={'3xl'}
               onClick={onToggle}
-              icon={
-                isMobileNavOpen ? (
-                  <CloseIcon w={5} h={5} />
-                ) : (
-                  <HamburgerIcon w={5} h={5} />
-                )
-              }
+              icon={isMobileNavOpen ? <CloseIcon /> : <HamburgerIcon />}
               variant='ghost'
               size={'sm'}
               aria-label={'Toggle Navigation'}
@@ -115,7 +107,8 @@ export const Header = () => {
               size={'sm'}
               variant={'ghost'}
               aria-label={'GitHub logo'}
-              icon={<IoLogoGithub size={20} />}
+              icon={<IoLogoGithub />}
+              fontSize={'2xl'}
             />
             <IconButton
               size={'sm'}
@@ -123,6 +116,7 @@ export const Header = () => {
               aria-label={'Toggle Color Mode'}
               onClick={toggleColorMode}
               icon={themeSwitchIcon}
+              fontSize={'2xl'}
             />
           </Stack>
         </Container>

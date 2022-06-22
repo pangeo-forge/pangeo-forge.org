@@ -51,19 +51,22 @@ export const Footer = () => {
                 as={Link}
                 href='https://discourse.pangeo.io/'
                 aria-label='Discourse'
-                icon={<FaDiscourse fontSize='1.85rem' />}
+                icon={<FaDiscourse />}
+                fontSize={'3xl'}
               />
               <IconButton
                 as={Link}
                 href='https://github.com/pangeo-forge'
                 aria-label='GitHub'
-                icon={<FaGithub fontSize='1.85rem' />}
+                icon={<FaGithub />}
+                fontSize={'3xl'}
               />
               <IconButton
                 as={Link}
                 href='https://twitter.com/pangeo_data'
                 aria-label='Twitter'
-                icon={<FaTwitter fontSize='1.85rem' />}
+                icon={<FaTwitter />}
+                fontSize={'3xl'}
               />
             </ButtonGroup>
           </Stack>

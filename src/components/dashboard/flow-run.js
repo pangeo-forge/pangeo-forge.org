@@ -24,9 +24,9 @@ export const FlowRun = ({ index, run }) => {
                 Flow Run {index}
               </Box>
               {isExpanded ? (
-                <MinusIcon fontSize='12px' />
+                <MinusIcon fontSize='xl' />
               ) : (
-                <AddIcon fontSize='12px' />
+                <AddIcon fontSize='xl' />
               )}
             </AccordionButton>
           </h2>

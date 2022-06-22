@@ -4,7 +4,6 @@ import { Layout } from '@/components/layout'
 import { usePrefect, useRecipeRun } from '@/lib/endpoints'
 import {
   Accordion,
-  AccordionItem,
   Alert,
   AlertDescription,
   AlertIcon,
@@ -13,7 +12,6 @@ import {
   Box,
   Button,
   Container,
-  Flex,
   HStack,
   Heading,
   SimpleGrid,
