@@ -43,11 +43,11 @@ const Feedstocks = () => {
             {feedstocks
               .filter((feedstock) => !feedstock.spec.includes('staged-recipes'))
               .sort((a, b) => a.spec.localeCompare(b.spec))
-              .map((feedstock, index) => (
+              .map((feedstock) => (
                 <FeedstockCard
                   spec={feedstock.spec}
                   id={feedstock.id}
-                  key={index}
+                  key={feedstock.id}
                 ></FeedstockCard>
               ))}
           </SimpleGrid>
@@ -58,11 +58,11 @@ const Feedstocks = () => {
             {feedstocks
               .filter((feedstock) => feedstock.spec.includes('staged-recipes'))
               .sort((a, b) => a.spec.localeCompare(b.spec))
-              .map((feedstock, index) => (
+              .map((feedstock) => (
                 <FeedstockCard
                   spec={feedstock.spec}
                   id={feedstock.id}
-                  key={index}
+                  key={feedstock.id}
                 ></FeedstockCard>
               ))}
           </SimpleGrid>
