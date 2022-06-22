@@ -34,6 +34,11 @@ export const Header = () => {
 
   const color = useColorModeValue('white', 'white')
 
+  const themeSwitchIcon = useColorModeValue(
+    <IoMoon size={20} />,
+    <IoSunny size={20} />
+  )
+
   return (
     <Box>
       <Flex
@@ -117,13 +122,7 @@ export const Header = () => {
               variant={'ghost'}
               aria-label={'Toggle Color Mode'}
               onClick={toggleColorMode}
-              icon={
-                colorMode == 'light' ? (
-                  <IoMoon size={20} />
-                ) : (
-                  <IoSunny size={20} />
-                )
-              }
+              icon={themeSwitchIcon}
             />
           </Stack>
         </Container>
