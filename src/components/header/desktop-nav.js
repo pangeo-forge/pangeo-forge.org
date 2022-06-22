@@ -11,7 +11,7 @@ import {
 import React from 'react'
 
 export const DesktopNav = ({ navItems, ...props }) => {
-  const hoverColor = useColorModeValue('gray.800', 'white')
+  const hoverColor = useColorModeValue('green.300', 'green.400')
   const popoverColor = useColorModeValue(
     'rgba(50, 33, 115, 0.9)',
     'rgba(26, 32, 44, 0.8)'
