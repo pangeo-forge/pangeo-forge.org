@@ -33,7 +33,7 @@ export const FeedstockCard = ({ spec, id }) => {
       _dark={{ bg: 'gray.700' }}
       _hover={{
         transform: 'scale(1.025)',
-        boxShadow: 'var(--chakra-shadows-md)',
+        boxShadow: 'md',
       }}
     >
       <VStack spacing={2} align='stretch'>
