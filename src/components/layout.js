@@ -1,13 +1,19 @@
-import { Footer, Header, Meta } from '@/components'
-import { Box, Container, Flex } from '@chakra-ui/react'
+import { Footer, Header } from '@/components'
+import { Box, Flex } from '@chakra-ui/react'
 
 export const Layout = ({ children }) => {
   return (
-    <>
-      <Header />
-      {children}
-
+    <Flex
+      direction={'column'}
+      justify={'space-between'}
+      gap={0}
+      minHeight={'100vh'}
+    >
+      <Box>
+        <Header />
+        {children}
+      </Box>
       <Footer />
-    </>
+    </Flex>
   )
 }
