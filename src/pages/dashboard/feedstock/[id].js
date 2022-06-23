@@ -8,6 +8,7 @@ import {
   Flex,
   HStack,
   Heading,
+  Icon,
   IconButton,
   SimpleGrid,
   Skeleton,
@@ -16,7 +17,7 @@ import {
   VStack,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { GoRepo } from 'react-icons/go'
+import { GoRepo, GoTag } from 'react-icons/go'
 
 const Feedstock = () => {
   const router = useRouter()
@@ -33,8 +34,18 @@ const Feedstock = () => {
     details = {
       Title: meta.title,
       Description: meta.description,
-      'Pangeo-Forge Version': meta.pangeo_forge_version,
-      'Pangeo Notebook Version': meta.pangeo_notebook_version,
+      'Pangeo-Forge Version': (
+        <Flex>
+          <Icon as={GoTag} fontSize={'2xl'} />
+          <Text px={2}>{meta.pangeo_forge_version}</Text>
+        </Flex>
+      ),
+      'Pangeo Notebook Version': (
+        <Flex>
+          <Icon as={GoTag} fontSize={'2xl'} />
+          <Text px={2}>{meta.pangeo_notebook_version}</Text>
+        </Flex>
+      ),
       Bakery: meta.bakery ? meta.bakery.id : null,
     }
   }
@@ -115,9 +126,9 @@ const Feedstock = () => {
               {recipe_runs
                 .sort((a, b) => a.started_at.localeCompare(b.started_at))
                 .reverse()
-                .map((recipe, index) => (
+                .map((recipe) => (
                   <RecipeRunCard
-                    key={index}
+                    key={recipe.id}
                     recipe_id={recipe.recipe_id}
                     id={recipe.id}
                     started_at={recipe.started_at}

@@ -1,4 +1,5 @@
 import { Link } from '@/components'
+import { StatusBadge } from '@/components/dashboard'
 import { TimeDeltaFormatter } from '@/lib/time-delta'
 import {
   Flex,
@@ -10,8 +11,8 @@ import {
   VStack,
 } from '@chakra-ui/react'
 import { FaCircle } from 'react-icons/fa'
-import { GoCalendar, GoTag } from 'react-icons/go'
 import { GiSandsOfTime } from 'react-icons/gi'
+import { GoCalendar, GoTag } from 'react-icons/go'
 
 export const RecipeRunCard = ({
   id,
@@ -46,7 +47,7 @@ export const RecipeRunCard = ({
       _dark={{ bg: 'gray.700' }}
       _hover={{
         transform: 'scale(1.025)',
-        boxShadow: 'var(--chakra-shadows-md)',
+        boxShadow: 'md',
       }}
     >
       <LinkOverlay
@@ -59,12 +60,12 @@ export const RecipeRunCard = ({
         <SimpleGrid
           columns={{ base: 1, md: 1, lg: 2, xl: 2 }}
           spacing={1}
-          overflow={'hidden'}
+          alignItems='center'
+          justifyContent={'space-between'}
         >
-          <VStack mr={2} my={2} align={'left'}>
-            <Flex>
+          <VStack mr={2} my={2} align={'left'} justifyContent={'space-between'}>
+            <Flex align='center'>
               <Icon as={FaCircle} color={statusIConColor[status]} />
-
               <Text px={2}>{recipe_id}</Text>
             </Flex>
             <Text lineHeight='tall' opacity={0.8} px={5}>
@@ -81,7 +82,10 @@ export const RecipeRunCard = ({
             </Flex>
             <Flex>
               <Icon as={GiSandsOfTime} fontSize={'2xl'} />
-              <Text px={2}>{status}</Text>
+              <Text px={2}>
+                {' '}
+                <StatusBadge status={status} />
+              </Text>
             </Flex>
             <Flex>
               <Icon as={GoTag} fontSize={'2xl'} />

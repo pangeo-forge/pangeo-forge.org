@@ -64,7 +64,7 @@ export const Summary = () => {
               _dark={{ bg: 'gray.700' }}
               _hover={{
                 transform: 'scale(1.025)',
-                boxShadow: 'var(--chakra-shadows-md)',
+                boxShadow: 'md',
                 textDecoration: 'none',
               }}
               href={href}
