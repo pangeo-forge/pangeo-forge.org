@@ -1,8 +1,36 @@
-import { theme as defaultTheme, extendTheme } from '@chakra-ui/react'
+import { extendTheme } from '@chakra-ui/react'
 
-const fonts = `system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Helvetica, sans-serif`
+const fonts = {
+  body: `Helvetica-Light, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Helvetica, sans-serif`,
+  title: 'Panton',
+  subtitle: 'Panton',
+  monospace: 'Menlo, monospace',
+}
+const semanticTokens = {
+  colors: {},
+  shadows: {},
+}
 
-export const theme = defaultTheme
+const tokens = {
+  colors: { light: {}, dark: {} },
+}
+
+const styles = {
+  global: {
+    html: { scrollBehavior: 'smooth' },
+    body: {},
+  },
+}
+
+const theme = extendTheme({
+  styles,
+  semanticTokens,
+  tokens,
+  fonts,
+})
+
+export default theme
+
 // export const theme = extendTheme({
 //   colors: {
 //     ...defaultTheme.colors,

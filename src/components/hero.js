@@ -20,7 +20,7 @@ export const Hero = () => {
         <Flex direction='column'>
           <Image src='/pangeo-forge-logo-white.png' alt='Pangeo-Forge logo' />
           <Text
-            fontFamily={'subtitle'}
+            fontFamily={'Panton'}
             fontWeight={'subtitle'}
             fontSize={'xl'}
             color={'white'}

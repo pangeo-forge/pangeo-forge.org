@@ -1,8 +1,7 @@
-import '@/assets/fonts.css'
-import '@/assets/global.css'
 import { Meta } from '@/components'
-import { ChakraProvider } from '@chakra-ui/react'
 import { theme } from '@/theme'
+import { Fonts } from '@/theme/fonts'
+import { ChakraProvider } from '@chakra-ui/react'
 import * as React from 'react'
 
 const App = ({ Component, pageProps }) => {

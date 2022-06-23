@@ -25,9 +25,7 @@ const Stat = (props) => {
     >
       {' '}
       <Stack>
-        <Text fontSize='sm' color='muted'>
-          {label}
-        </Text>
+        <Text fontSize='sm'>{label}</Text>
         <Heading size={useBreakpointValue({ base: 'sm', md: 'md' })}>
           {value}
         </Heading>

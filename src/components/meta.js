@@ -37,37 +37,41 @@ export const Meta = ({
         <meta key='tw_img' name='twitter:image' content={image} />
       </>
     )}
-    <meta key='theme_color' name='theme-color' content={theme.colors.primary} />
+    <meta
+      key='theme_color'
+      name='theme-color'
+      //content={theme.colors.primary}
+    />
     <meta
       key='tile_color'
       name='msapplication-TileColor'
-      content={theme.colors.primary}
+      //content={theme.colors.primary}
     />
     <link
       key='safari_icon'
       rel='mask-icon'
       href={`${url}/favicon.ico`}
-      color={theme.colors.primary}
+      //color={theme.colors.primary}
     />
     <link
       key='apple_icon'
       rel='apple-touch-icon'
       sizes='180x180'
-      href={`${url}/favicon.ico`}
+      href={`/favicon.ico`}
     />
     <link
       key='favicon_32'
       rel='icon'
       type='image/png'
       sizes='32x32'
-      href={`${url}/favicon.ico`}
+      href={`/favicon.ico`}
     />
     <link
       key='favicon_16'
       rel='icon'
       type='image/png'
       sizes='16x16'
-      href={`${url}/favicon.ico`}
+      href={`/favicon.ico`}
     />
     {/* <link key='manifest' rel='manifest' href={`${url}/site.webmanifest`} /> */}
     {children}
