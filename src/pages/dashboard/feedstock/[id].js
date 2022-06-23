@@ -54,7 +54,7 @@ const Feedstock = () => {
     return (
       <Layout>
         <Box as='section'>
-          <Container maxW='container.xl' py={90} centerContent>
+          <Container maxW='container.xl' py={90}>
             Failed to load...
           </Container>
         </Box>
@@ -119,7 +119,10 @@ const Feedstock = () => {
             </SimpleGrid>
           </Box>
 
-          <Heading as={'h2'}>Recipe Runs</Heading>
+          <Heading py={4} as={'h3'}>
+            Recipe Runs
+          </Heading>
+
           <Box mt={4}>
             <SimpleGrid columns={{ base: 1, md: 1, lg: 1 }} spacing={2}>
               {/* TODO: Add filter options */}
