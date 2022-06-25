@@ -1,35 +1,12 @@
-import { extendTheme } from '@chakra-ui/react'
+import { theme as baseTheme, extendTheme } from '@chakra-ui/react'
+import * as components from './components'
+import { foundations } from '@/theme/foundations'
 
-const fonts = {
-  body: `Helvetica-Light, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Helvetica, sans-serif`,
-  title: 'Panton',
-  subtitle: 'Panton',
-  monospace: 'Menlo, monospace',
-}
-const semanticTokens = {
-  colors: {},
-  shadows: {},
-}
-
-const tokens = {
-  colors: { light: {}, dark: {} },
-}
-
-const styles = {
-  global: {
-    html: { scrollBehavior: 'smooth' },
-    body: {},
-  },
-}
-
-const theme = extendTheme({
-  styles,
-  semanticTokens,
-  tokens,
-  fonts,
+export const theme = extendTheme({
+  ...foundations,
 })
 
-export default theme
+console.log(theme.fontWeights)
 
 // export const theme = extendTheme({
 //   colors: {
