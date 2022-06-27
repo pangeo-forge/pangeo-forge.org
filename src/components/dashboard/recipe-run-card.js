@@ -2,19 +2,17 @@ import { Link } from '@/components'
 import { StatusBadge } from '@/components/dashboard'
 import { TimeDeltaFormatter } from '@/lib/time-delta'
 import {
-  Flex,
+  HStack,
   Icon,
   LinkBox,
   LinkOverlay,
   SimpleGrid,
-  Text,
   Stack,
-  HStack,
-  Box,
+  Text,
 } from '@chakra-ui/react'
 import { FaCircle } from 'react-icons/fa'
 import { GiSandsOfTime } from 'react-icons/gi'
-import { GoCalendar, GoTag } from 'react-icons/go'
+import { GoCalendar, GoNote, GoTag } from 'react-icons/go'
 
 export const RecipeRunCard = ({
   id,
@@ -70,38 +68,46 @@ export const RecipeRunCard = ({
             justifyContent={'space-between'}
           >
             <HStack>
-              <Icon as={FaCircle} color={statusIConColor[status]} />
-              <Box>
-                <Text maxW={'80vw'}>{recipe_id}</Text>
-              </Box>
+              <Icon
+                as={FaCircle}
+                fontSize={'2xl'}
+                color={statusIConColor[status]}
+              />
+
+              <Text maxW={'80vw'}>{recipe_id}</Text>
             </HStack>
-            <Text lineHeight='tall' opacity={0.8} px={6}>
-              {message}
-            </Text>
+            {message && (
+              <HStack>
+                <Icon as={GoNote} fontSize={'2xl'} />
+                <Text lineHeight='tall' opacity={0.8}>
+                  {message}
+                </Text>
+              </HStack>
+            )}
           </Stack>
           <Stack
             direction='column'
             align={'left'}
             justifyContent={'space-between'}
           >
-            <Flex>
+            <HStack>
               <Icon as={GoCalendar} fontSize={'2xl'} />
 
-              <Text ml={2}>
+              <Text>
                 {started_at} ({timeSinceRun})
               </Text>
-            </Flex>
-            <Flex>
+            </HStack>
+            <HStack>
               <Icon as={GiSandsOfTime} fontSize={'2xl'} />
-              <Text ml={2}>
+              <Text>
                 {' '}
                 <StatusBadge status={status} />
               </Text>
-            </Flex>
-            <Flex>
+            </HStack>
+            <HStack>
               <Icon as={GoTag} fontSize={'2xl'} />
-              <Text ml={2}>{version}</Text>
-            </Flex>
+              <Text>{version}</Text>
+            </HStack>
           </Stack>
         </SimpleGrid>
       </LinkOverlay>
