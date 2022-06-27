@@ -8,34 +8,34 @@ const RecipeRuns = () => {
 
   if (recipeRunsError) {
     return (
-      <Layout>
+      <Layout menu={true}>
         <Box>Failed to load...</Box>
       </Layout>
     )
   }
-  if (!recipeRuns)
-    return (
-      <Layout>
-        <Skeleton minH={'100vh'}></Skeleton>
-      </Layout>
-    )
+  if (!recipeRuns) return <Layout menu={true}></Layout>
 
   return (
-    <Layout>
-      <Box as='section'>
-        <Container maxW='container.xl' py={90}>
-          <Heading as={'h2'} py={8}>
+    <Layout menu={true}>
+      <Box as='section' mb={8}>
+        <Container maxW='container.xl' centerContent>
+          <Heading as={'h2'} mb={4}>
             Recipe Runs
           </Heading>
 
-          <SimpleGrid columns={{ base: 1, md: 1, lg: 1 }} spacing={2}>
+          <SimpleGrid
+            py={8}
+            columns={{ base: 1, md: 1, lg: 1 }}
+            spacing={4}
+            justifyContent={'space-between'}
+          >
             {recipeRuns
               .sort((a, b) => a.recipe_id.localeCompare(b.recipe_id))
               .sort((a, b) => a.started_at.localeCompare(b.started_at))
               .reverse()
-              .map((recipe) => (
+              .map((recipe, index) => (
                 <RecipeRunCard
-                  key={recipe.recipe_id}
+                  key={index}
                   recipe_id={recipe.recipe_id}
                   id={recipe.id}
                   started_at={recipe.started_at}

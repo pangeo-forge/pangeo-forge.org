@@ -1,7 +1,8 @@
 import { Footer, Header } from '@/components'
+import { Menu } from '@/components/dashboard'
 import { Box, Flex } from '@chakra-ui/react'
 
-export const Layout = ({ children }) => {
+export const Layout = ({ children, container = true, menu = null }) => {
   return (
     <Flex
       direction={'column'}
@@ -11,6 +12,7 @@ export const Layout = ({ children }) => {
     >
       <Box>
         <Header />
+        {menu && <Menu />}
         {children}
       </Box>
       <Footer />

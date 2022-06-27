@@ -7,8 +7,8 @@ import {
   Heading,
   SimpleGrid,
   Skeleton,
+  Stack,
   Text,
-  VStack,
 } from '@chakra-ui/react'
 
 const Feedstocks = () => {
@@ -29,20 +29,27 @@ const Feedstocks = () => {
     )
 
   return (
-    <Layout>
-      <Box as='section'>
-        <Container maxW='container.xl' py={90} centerContent>
-          <VStack py={8}>
-            <Heading as={'h1'}>Feedstocks</Heading>
-            <Text>
-              Feedstocks are recipes that are managed and executed by Pangeo
-              Forge cloud automation.
-            </Text>
-          </VStack>
-          <SimpleGrid columns={{ base: 1, md: 3 }} gap={{ base: '5', md: '6' }}>
+    <Layout menu={true}>
+      <Box as='section' mb={8}>
+        <Container maxW='container.xl' centerContent>
+          <Heading as={'h2'} mb={4}>
+            Feedstocks
+          </Heading>
+          <Text>
+            Feedstocks are recipes that are managed and executed by Pangeo Forge
+            cloud automation.
+          </Text>
+
+          <SimpleGrid
+            mt={8}
+            columns={{ base: 1, md: 2, lg: 3 }}
+            spacing={4}
+            justifyContent={'space-between'}
+          >
             {feedstocks
               .filter((feedstock) => !feedstock.spec.includes('staged-recipes'))
               .sort((a, b) => a.spec.localeCompare(b.spec))
+
               .map((feedstock) => (
                 <FeedstockCard
                   spec={feedstock.spec}
@@ -51,10 +58,17 @@ const Feedstocks = () => {
                 ></FeedstockCard>
               ))}
           </SimpleGrid>
-          <Heading as={'h2'} py={6}>
+
+          <Heading as={'h2'} mt={6}>
             Staged Recipes
           </Heading>
-          <SimpleGrid columns={{ base: 1, md: 3 }} gap={{ base: '5', md: '6' }}>
+
+          <SimpleGrid
+            mt={8}
+            columns={{ base: 1, md: 2, lg: 3 }}
+            spacing={4}
+            justifyContent={'space-between'}
+          >
             {feedstocks
               .filter((feedstock) => feedstock.spec.includes('staged-recipes'))
               .sort((a, b) => a.spec.localeCompare(b.spec))

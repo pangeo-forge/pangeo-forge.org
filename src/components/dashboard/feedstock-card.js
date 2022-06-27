@@ -35,8 +35,9 @@ export const FeedstockCard = ({ spec, id }) => {
         transform: 'scale(1.025)',
         boxShadow: 'md',
       }}
+      align='center'
     >
-      <VStack spacing={2} align='stretch'>
+      <VStack spacing={2}>
         <LinkOverlay
           href={href}
           as={Link}
@@ -44,7 +45,7 @@ export const FeedstockCard = ({ spec, id }) => {
             textDecoration: 'none',
           }}
         >
-          <VStack spacing={2} align='stretch'>
+          <VStack spacing={2}>
             <Heading as={'h3'} size='xs' textTransform='uppercase'>
               {spec
                 .toLowerCase()

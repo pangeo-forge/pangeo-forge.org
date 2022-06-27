@@ -8,7 +8,9 @@ import {
   LinkOverlay,
   SimpleGrid,
   Text,
-  VStack,
+  Stack,
+  HStack,
+  Box,
 } from '@chakra-ui/react'
 import { FaCircle } from 'react-icons/fa'
 import { GiSandsOfTime } from 'react-icons/gi'
@@ -59,39 +61,48 @@ export const RecipeRunCard = ({
       >
         <SimpleGrid
           columns={{ base: 1, md: 1, lg: 2, xl: 2 }}
-          spacing={1}
-          alignItems='center'
+          spacing={4}
           justifyContent={'space-between'}
         >
-          <VStack mr={2} my={2} align={'left'} justifyContent={'space-between'}>
-            <Flex align='center'>
+          <Stack
+            direction='column'
+            align={'left'}
+            justifyContent={'space-between'}
+          >
+            <HStack>
               <Icon as={FaCircle} color={statusIConColor[status]} />
-              <Text px={2}>{recipe_id}</Text>
-            </Flex>
-            <Text lineHeight='tall' opacity={0.8} px={5}>
+              <Box>
+                <Text maxW={'80vw'}>{recipe_id}</Text>
+              </Box>
+            </HStack>
+            <Text lineHeight='tall' opacity={0.8} px={6}>
               {message}
             </Text>
-          </VStack>
-          <VStack mr={2} my={2} align={'left'}>
+          </Stack>
+          <Stack
+            direction='column'
+            align={'left'}
+            justifyContent={'space-between'}
+          >
             <Flex>
               <Icon as={GoCalendar} fontSize={'2xl'} />
 
-              <Text px={2}>
+              <Text ml={2}>
                 {started_at} ({timeSinceRun})
               </Text>
             </Flex>
             <Flex>
               <Icon as={GiSandsOfTime} fontSize={'2xl'} />
-              <Text px={2}>
+              <Text ml={2}>
                 {' '}
                 <StatusBadge status={status} />
               </Text>
             </Flex>
             <Flex>
               <Icon as={GoTag} fontSize={'2xl'} />
-              <Text px={2}>{version}</Text>
+              <Text ml={2}>{version}</Text>
             </Flex>
-          </VStack>
+          </Stack>
         </SimpleGrid>
       </LinkOverlay>
     </LinkBox>

@@ -3,6 +3,7 @@ export const navItems = [
   { label: 'Catalog', href: '/catalog' },
   {
     label: 'Dashboard',
+    href: '/dashboard/feedstocks',
     children: [
       { label: 'Feedstocks', href: '/dashboard/feedstocks', subLabel: '' },
       { label: 'Bakeries', href: '/dashboard/bakeries' },

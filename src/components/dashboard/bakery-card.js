@@ -46,7 +46,6 @@ export const BakeryCard = ({ name, region, description, id }) => {
             <Stack py={4} justify={'right'} direction='row' spacing={4}>
               <WrapItem overflow='hidden'>
                 <Badge
-                  as='a'
                   rel='tag'
                   color='teal.600'
                   _dark={{ color: 'teal.400' }}
