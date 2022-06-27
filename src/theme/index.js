@@ -6,8 +6,6 @@ export const theme = extendTheme({
   ...foundations,
 })
 
-console.log(theme.fontWeights)
-
 // export const theme = extendTheme({
 //   colors: {
 //     ...defaultTheme.colors,
