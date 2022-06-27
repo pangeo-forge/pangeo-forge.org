@@ -75,7 +75,6 @@ const Feedstock = () => {
             as={Link}
             href={repoUrl}
             fontSize={'2xl'}
-            rounded={'full'}
             colorScheme='teal'
             variant='outline'
           >

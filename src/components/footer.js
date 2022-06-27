@@ -46,7 +46,7 @@ export const Footer = () => {
               />
             </Stack>
 
-            <ButtonGroup variant='ghost'>
+            <ButtonGroup variant='outline'>
               <IconButton
                 as={Link}
                 href='https://discourse.pangeo.io/'

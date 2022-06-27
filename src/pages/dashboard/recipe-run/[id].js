@@ -128,7 +128,6 @@ const RecipeRun = () => {
                   as={Link}
                   href={url}
                   p={2}
-                  rounded={'full'}
                   colorScheme='teal'
                   variant='outline'
                 >
