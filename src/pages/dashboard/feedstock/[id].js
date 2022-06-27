@@ -101,37 +101,41 @@ const Feedstock = () => {
                 {' '}
                 <VStack align={'start'}>
                   <Text color={'gray.600'}>{key}</Text>
-                  <Text fontWeight={600} maxW={'90vw'}>
+
+                  <Box fontWeight={600} maxW={'90vw'}>
                     {details[key]}
-                  </Text>
+                  </Box>
                 </VStack>
               </HStack>
             ))}
           </SimpleGrid>
 
-          <Heading py={4} as={'h3'}>
+          <Heading mt={8} as={'h3'}>
             Recipe Runs
           </Heading>
 
-          <Box mt={4}>
-            <SimpleGrid columns={{ base: 1, md: 1, lg: 1 }} spacing={2}>
-              {/* TODO: Add filter options */}
-              {recipe_runs
-                .sort((a, b) => a.started_at.localeCompare(b.started_at))
-                .reverse()
-                .map((recipe) => (
-                  <RecipeRunCard
-                    key={recipe.id}
-                    recipe_id={recipe.recipe_id}
-                    id={recipe.id}
-                    started_at={recipe.started_at}
-                    status={recipe.status}
-                    version={recipe.version}
-                    message={recipe.message}
-                  />
-                ))}
-            </SimpleGrid>
-          </Box>
+          <SimpleGrid
+            columns={{ base: 1, md: 1, lg: 1 }}
+            spacing={4}
+            mt={8}
+            justifyContent={'space-between'}
+          >
+            {/* TODO: Add filter options */}
+            {recipe_runs
+              .sort((a, b) => a.started_at.localeCompare(b.started_at))
+              .reverse()
+              .map((recipe) => (
+                <RecipeRunCard
+                  key={recipe.id}
+                  recipe_id={recipe.recipe_id}
+                  id={recipe.id}
+                  started_at={recipe.started_at}
+                  status={recipe.status}
+                  version={recipe.version}
+                  message={recipe.message}
+                />
+              ))}
+          </SimpleGrid>
         </Container>
       </Box>
     </Layout>
