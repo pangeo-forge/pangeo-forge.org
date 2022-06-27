@@ -123,7 +123,15 @@ const RecipeRun = () => {
               }}
             >
               {Object.entries(urls).map(([name, url]) => (
-                <Button key={name} as={Link} href={url} p={2}>
+                <Button
+                  key={name}
+                  as={Link}
+                  href={url}
+                  p={2}
+                  rounded={'full'}
+                  colorScheme='teal'
+                  variant='outline'
+                >
                   {name}
                 </Button>
               ))}

@@ -4,15 +4,14 @@ import { Layout } from '@/components/layout'
 import { useFeedstock, useMeta } from '@/lib/endpoints'
 import {
   Box,
+  Button,
   Container,
   Flex,
   HStack,
   Heading,
   Icon,
-  IconButton,
   SimpleGrid,
   Skeleton,
-  Stack,
   Text,
   VStack,
 } from '@chakra-ui/react'
@@ -71,30 +70,19 @@ const Feedstock = () => {
   return (
     <Layout>
       <Box as='section'>
-        <Container maxW='container.xl' py={90}>
-          <Flex direction='column'>
-            <Stack as={Link} href={repoUrl} direction={'row'} align={'center'}>
-              <Flex
-                w={8}
-                h={8}
-                align={'center'}
-                justify={'center'}
-                rounded={'full'}
-                //bg={iconBg}
-              >
-                <IconButton
-                  fontSize={'3xl'}
-                  aria-label='GitHub Repository'
-                  icon={<GoRepo />}
-                  variant='ghost'
-                />
-              </Flex>
-
-              <Heading as={'h3'} size='lg' textTransform={'uppercase'}>
-                {spec.replace('pangeo-forge/', '')}
-              </Heading>
-            </Stack>
-          </Flex>
+        <Container maxW='container.xl' mt={90}>
+          <Button
+            as={Link}
+            href={repoUrl}
+            fontSize={'2xl'}
+            rounded={'full'}
+            colorScheme='teal'
+            variant='outline'
+          >
+            {' '}
+            <GoRepo />
+            <Text ml={2}>{spec.replace('pangeo-forge/', '')}</Text>
+          </Button>
 
           {spec == 'pangeo-forge/staged-recipes' && (
             <Text>
