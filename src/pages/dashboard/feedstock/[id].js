@@ -90,21 +90,24 @@ const Feedstock = () => {
             </Text>
           )}
 
-          <Box py={4}>
-            <SimpleGrid columns={{ base: 1, md: 1, lg: 2 }} spacing={1}>
-              {Object.keys(details).map((key, index) => (
-                <HStack key={index} align={'top'} py={2}>
-                  {' '}
-                  <VStack align={'start'}>
-                    <Text color={'gray.600'}>{key}</Text>
-                    <Text fontWeight={600} maxW={'90vw'}>
-                      {details[key]}
-                    </Text>
-                  </VStack>
-                </HStack>
-              ))}
-            </SimpleGrid>
-          </Box>
+          <SimpleGrid
+            columns={{ base: 1, md: 1, lg: 2 }}
+            spacing={4}
+            mt={8}
+            justifyContent={'space-between'}
+          >
+            {Object.keys(details).map((key, index) => (
+              <HStack key={index} align={'top'}>
+                {' '}
+                <VStack align={'start'}>
+                  <Text color={'gray.600'}>{key}</Text>
+                  <Text fontWeight={600} maxW={'90vw'}>
+                    {details[key]}
+                  </Text>
+                </VStack>
+              </HStack>
+            ))}
+          </SimpleGrid>
 
           <Heading py={4} as={'h3'}>
             Recipe Runs
