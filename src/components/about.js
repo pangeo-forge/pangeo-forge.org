@@ -7,7 +7,9 @@ export const About = () => {
     <Box as='section'>
       <Container maxW='container.xl' py={90} centerContent>
         <Flex direction='column' alignItems={'center'}>
-          <Heading as={'h1'}>About Pangeo Forge</Heading>
+          <Heading as={'h1'} size='2xl'>
+            About Pangeo Forge
+          </Heading>
           <Text py={[6, 6, 8, 10]} textAlign={'center'}>
             Pangeo Forge is an open source platform for data{' '}
             <Link

@@ -4,7 +4,6 @@ import { Layout } from '@/components/layout'
 import { useBakery } from '@/lib/endpoints'
 import {
   Box,
-  Button,
   Container,
   Flex,
   Heading,
@@ -43,13 +42,13 @@ const Bakery = () => {
     <Layout>
       <Box as='section'>
         <Container maxW='container.xl' py={90}>
-          <Flex direction='column'>
+          <Flex direction='column' mb={8}>
             <Stack
               as={Link}
               href={repoUrl}
               direction={'row'}
               align={'center'}
-              mb={5}
+              mb={8}
             >
               <Flex
                 w={8}
@@ -66,7 +65,7 @@ const Bakery = () => {
                 />
               </Flex>
 
-              <Heading as={'h2'} textTransform={'uppercase'}>
+              <Heading as={'h3'} size='lg' textTransform={'uppercase'}>
                 {bakery.name}
               </Heading>
             </Stack>
@@ -74,8 +73,10 @@ const Bakery = () => {
           </Flex>
 
           <Box py={4}>
-            <Heading as={'h2'}>Recipe Runs</Heading>
-            <SimpleGrid columns={{ base: 1, md: 1, lg: 1 }} spacing={2} py={4}>
+            <Heading as={'h3'} size='lg' mb={8}>
+              Recipe Runs
+            </Heading>
+            <SimpleGrid columns={{ base: 1, md: 1, lg: 1 }} spacing={4}>
               {bakery.recipe_runs
                 .sort((a, b) => a.started_at.localeCompare(b.started_at))
                 .reverse()

@@ -23,7 +23,9 @@ const Catalog = () => {
     <Layout>
       <Box as='section'>
         <Container maxW='container.xl' py={90}>
-          <Heading as={'h1'}>Catalog</Heading>
+          <Heading as={'h1'} size='2xl'>
+            Catalog
+          </Heading>
           <Box>
             {recipeRuns
               .filter((r) => r.dataset_public_url)

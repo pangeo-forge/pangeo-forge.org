@@ -2,7 +2,7 @@ import { Footer, Header } from '@/components'
 import { Menu } from '@/components/dashboard'
 import { Box, Flex } from '@chakra-ui/react'
 
-export const Layout = ({ children, container = true, menu = null }) => {
+export const Layout = ({ children, menu = null }) => {
   return (
     <Flex
       direction={'column'}

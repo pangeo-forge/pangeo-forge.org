@@ -109,7 +109,9 @@ const RecipeRun = () => {
             justify={'space-between'}
             align={'left'}
           >
-            <Heading as={'h2'}>Recipe Run: {recipeRun.id}</Heading>
+            <Heading as={'h3'} size='lg'>
+              Recipe Run: {recipeRun.id}
+            </Heading>
             <Stack
               spacing={4}
               direction={{

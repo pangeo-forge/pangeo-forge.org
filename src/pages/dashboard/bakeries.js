@@ -3,12 +3,12 @@ import { Layout } from '@/components/layout'
 import { useBakeries } from '@/lib/endpoints'
 import {
   Box,
-  SimpleGrid,
   Container,
-  Skeleton,
   Heading,
-  Text,
+  SimpleGrid,
+  Skeleton,
   Stack,
+  Text,
 } from '@chakra-ui/react'
 
 const Bakeries = () => {
@@ -26,7 +26,7 @@ const Bakeries = () => {
     <Layout menu={true}>
       <Box as='section' mb={8}>
         <Container maxW='container.xl' centerContent>
-          <Heading as={'h2'} mb={4}>
+          <Heading as={'h3'} size='lg' mb={4}>
             Bakeries
           </Heading>
           <Text>

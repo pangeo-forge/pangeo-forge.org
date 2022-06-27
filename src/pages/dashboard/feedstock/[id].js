@@ -90,7 +90,7 @@ const Feedstock = () => {
                 />
               </Flex>
 
-              <Heading as={'h2'} textTransform={'uppercase'}>
+              <Heading as={'h3'} size='lg' textTransform={'uppercase'}>
                 {spec.replace('pangeo-forge/', '')}
               </Heading>
             </Stack>
