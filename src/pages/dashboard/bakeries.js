@@ -1,33 +1,58 @@
-import BakeryCard from '@/components/bakery-card'
-import Layout from '@/components/layout'
+import { BakeryCard } from '@/components/dashboard'
+import { Layout } from '@/components/layout'
 import { useBakeries } from '@/lib/endpoints'
-import { Box, Grid } from 'theme-ui'
+import {
+  Box,
+  Container,
+  Heading,
+  SimpleGrid,
+  Skeleton,
+  Stack,
+  Text,
+} from '@chakra-ui/react'
 
 const Bakeries = () => {
   const { bakeries, bakeriesError } = useBakeries()
 
   if (bakeriesError)
     return (
-      <Layout container={true} menu={true}>
+      <Layout menu={true}>
         <Box>Failed to load...</Box>
       </Layout>
     )
-  if (!bakeries) return <Layout container={true} menu={true} />
+  if (!bakeries) return <Layout menu={true}></Layout>
 
   return (
-    <Layout container={true} menu={true}>
-      <Box>
-        <Grid gap={3} columns={[1, 2, 3]}>
-          {bakeries.map((b, i) => (
-            <BakeryCard
-              key={i}
-              name={b.name}
-              region={b.region}
-              description={b.description}
-              id={b.id}
-            />
-          ))}
-        </Grid>
+    <Layout menu={true}>
+      <Box as='section' mb={8}>
+        <Container maxW='container.xl' centerContent>
+          <Heading as={'h3'} size='lg' mb={4}>
+            Bakeries
+          </Heading>
+          <Text>
+            Bakeries turn recipes into data. They do the heavy lifting of
+            actually executing the recipes: extracting data from its source,
+            transforming it, and loading it into its target destination.
+            Bakeries are controlled by triggers from GitHub workflows.
+          </Text>
+
+          <SimpleGrid
+            mt={8}
+            columns={{ base: 1, md: 2, lg: 3 }}
+            spacing={4}
+            justifyContent={'space-between'}
+          >
+            {bakeries.map((bakery, index) => (
+              <BakeryCard
+                key={index}
+                name={bakery.name}
+                region={bakery.region}
+                description={bakery.description}
+                id={bakery.id}
+              />
+            ))}
+          </SimpleGrid>
+        </Container>
       </Box>
     </Layout>
   )

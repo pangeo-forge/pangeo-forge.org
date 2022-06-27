@@ -1,58 +1,26 @@
-import Layout from '@/components/layout'
+import { Link } from '@/components'
+import { FlowRun, StatusBadge } from '@/components/dashboard'
+import { Layout } from '@/components/layout'
 import { usePrefect, useRecipeRun } from '@/lib/endpoints'
-import Link from 'next/link'
+import {
+  Accordion,
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
+  Badge,
+  Box,
+  Button,
+  Container,
+  HStack,
+  Heading,
+  SimpleGrid,
+  Skeleton,
+  Stack,
+  Text,
+  VStack,
+} from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { Badge, Box, Button, Flex, Grid, Themed } from 'theme-ui'
-
-const LogLine = ({ log }) => {
-  return (
-    <Grid columns={[2, '1fr 3fr']}>
-      <Box>
-        {log.timestamp} ({log.level})
-      </Box>
-      <Box>{log.message}</Box>
-    </Grid>
-  )
-}
-
-const FlowRun = ({ i, data }) => {
-  return (
-    <Box key={i}>
-      <Themed.h3>Flow Run {i}</Themed.h3>
-      <Box sx={{ bg: '#F5F5F5', p: [2] }}>
-        {data.logs.map((log, i) => (
-          <Box key={i} sx={{ fontFamily: 'monospace', fontSize: [1] }}>
-            <LogLine log={log} />
-          </Box>
-        ))}
-      </Box>
-    </Box>
-  )
-}
-
-const StatusBadge = ({ status }) => {
-  let bg
-  let color = 'background'
-
-  if (status == 'queued') {
-    bg = 'yellow'
-    color = 'text'
-  } else if (status == 'in_progress') {
-    bg = 'orange'
-    color = 'text'
-  } else if (status == 'completed') {
-    bg = 'green'
-  } else {
-    bg = 'gray'
-    color = 'text'
-  }
-
-  return (
-    <Badge bg={bg} color={color} sx={{ fontSize: [3], fontWeight: 'body' }}>
-      {status}
-    </Badge>
-  )
-}
 
 const RecipeRun = () => {
   const router = useRouter()
@@ -70,14 +38,31 @@ const RecipeRun = () => {
 
   if (recipeRunError) {
     return (
-      <Layout container={true}>
-        <Box>Failed to load...</Box>
+      <Layout>
+        <Box as='section'>
+          <Container maxW='container.xl' py={90}>
+            Failed to load...
+          </Container>
+        </Box>
       </Layout>
     )
   }
-  if (!recipeRun) return <Layout container={true} />
+  if (!recipeRun)
+    return (
+      <Layout>
+        <Skeleton minH={'100vh'}>
+          <Box as='section'>
+            <Container maxW='container.xl' py={90}></Container>
+          </Box>
+        </Skeleton>
+      </Layout>
+    )
 
   let details = {}
+
+  const feedstockUrl = `/dashboard/feedstock/${recipeRun.feedstock_id}`
+  const bakeryUrl = `/dashboard/bakery/${recipeRun.bakery_id}`
+  const gitHubUrl = `https://github.com/${recipeRun.feedstock.spec}/tree/${recipeRun.head_sha}`
 
   if (recipeRun) {
     details = {
@@ -85,114 +70,115 @@ const RecipeRun = () => {
       'Started at': recipeRun.started_at,
       Status: <StatusBadge status={recipeRun.status} />,
       Version: (
-        <Badge
-          sx={{
-            bg: 'lightgray',
-            color: 'text',
-            fontSize: [3],
-            fontWeight: 'body',
-          }}
-        >
+        <Badge variant='outline' colorScheme='gray' fontWeight='body'>
           {recipeRun.version}
+        </Badge>
+      ),
+      'Git SHA': (
+        <Badge
+          as={Link}
+          href={gitHubUrl}
+          variant='outline'
+          colorScheme='gray'
+          fontWeight='body'
+        >
+          {recipeRun.head_sha.slice(0, 7)}
         </Badge>
       ),
     }
   }
 
-  const feedstockUrl = `/dashboard/feedstock/${recipeRun.feedstock_id}`
-  const bakeryUrl = `/dashboard/bakery/${recipeRun.bakery_id}`
-  const gitHubUrl = `https://github.com/${recipeRun.feedstock.spec}/tree/${recipeRun.head_sha}`
+  const urls = {
+    Bakery: bakeryUrl,
+    Feedstock: feedstockUrl,
+  }
 
   return (
-    <Layout container={true}>
-      <Flex>
-        <Box sx={{ flex: '1 1 auto' }}>
-          <Themed.h2>Recipe Run: {recipeRun.id}</Themed.h2>
-        </Box>
+    <Layout>
+      <Box as='section'>
+        <Container maxW='container.xl' py={90}>
+          <Stack
+            direction={{
+              base: 'column',
+              sm: 'column',
+              md: 'row',
+              lg: 'row',
+              xl: 'row',
+            }}
+            spacing={{ base: 4, sm: 12 }}
+            justify={'space-between'}
+            align={'left'}
+          >
+            <Heading as={'h3'} size='lg'>
+              Recipe Run: {recipeRun.id}
+            </Heading>
+            <Stack
+              spacing={4}
+              direction={{
+                base: 'column',
+                sm: 'row',
+                md: 'row',
+                lg: 'row',
+                xl: 'row',
+              }}
+            >
+              {Object.entries(urls).map(([name, url]) => (
+                <Button
+                  key={name}
+                  as={Link}
+                  href={url}
+                  p={2}
+                  colorScheme='teal'
+                  variant='outline'
+                >
+                  {name}
+                </Button>
+              ))}
+            </Stack>
+          </Stack>
 
-        <Link href={feedstockUrl} passHref>
-          <Button
-            sx={{
-              float: 'right',
-              ml: [1, null, 2],
-              maxHeight: 36,
-              mt: [3, null, 4],
-              bg: 'white',
-              color: 'purple',
-              fontSize: [3],
-              '&:hover': { textDecoration: 'underline' },
-            }}
-          >
-            Feedstock
-          </Button>
-        </Link>
-        <Link href={bakeryUrl} passHref>
-          <Button
-            sx={{
-              float: 'right',
-              ml: [1, null, 2],
-              maxHeight: 36,
-              mt: [3, null, 4],
-              bg: 'white',
-              color: 'purple',
-              fontSize: [3],
-              '&:hover': { textDecoration: 'underline' },
-            }}
-          >
-            Bakery
-          </Button>
-        </Link>
-        <Link href={gitHubUrl} passHref>
-          <Button
-            sx={{
-              float: 'right',
-              ml: [1, null, 2],
-              maxHeight: 36,
-              mt: [3, null, 4],
-              bg: 'white',
-              color: 'purple',
-              fontSize: [3],
-              '&:hover': { textDecoration: 'underline' },
-            }}
-          >
-            Git Repository
-          </Button>
-        </Link>
-      </Flex>
-      <Box>
-        {Object.keys(details).map((key, i) => (
-          <Box key={key} sx={{ mb: [2] }}>
-            <Box sx={{ fontWeight: 'bold', display: 'inline-block' }}>
-              {key}:
-            </Box>
-            <Box sx={{ ml: [2], display: 'inline-block' }}>{details[key]}</Box>
+          <Box py={4}>
+            <SimpleGrid columns={{ base: 1, md: 1, lg: 2 }} spacing={1}>
+              {Object.keys(details).map((key, index) => (
+                <HStack key={index} align={'top'} py={2}>
+                  {' '}
+                  <VStack align={'start'}>
+                    <Text color={'gray.600'}>{key}</Text>
+                    <Text fontWeight={600} maxW={'90vw'}>
+                      {details[key]}
+                    </Text>
+                  </VStack>
+                </HStack>
+              ))}
+            </SimpleGrid>
           </Box>
-        ))}
-        <Box sx={{ fontWeight: 'bold', display: 'inline-block' }}>
-          Head SHA:
-        </Box>
-        <Link href={gitHubUrl} passHref>
-          <Badge
-            sx={{
-              bg: 'lightgray',
-              color: 'text',
-              fontSize: [3],
-              fontWeight: 'body',
-              ml: [2],
-            }}
-          >
-            {recipeRun.head_sha.slice(0, 7)}
-          </Badge>
-        </Link>
-      </Box>
-      <Box>
-        <Themed.h2>Logs</Themed.h2>
-        {prefectError && <Box>Error loading prefect logs</Box>}
-        {prefect &&
-          !prefectError &&
-          prefect.data.flow_run.map((run, i) => (
-            <FlowRun key={i} i={i} data={run} />
-          ))}
+          <Box>
+            <Heading as={'h3'} mb={4}>
+              Logs
+            </Heading>
+            {prefectError && (
+              <Box>
+                <Alert status='error'>
+                  <AlertIcon />
+                  <AlertTitle>Error!</AlertTitle>
+                  <AlertDescription>
+                    Unable to load prefect logs.
+                  </AlertDescription>
+                </Alert>
+              </Box>
+            )}
+            <Box>
+              <Accordion allowMultiple>
+                {prefect &&
+                  prefect.data?.flow_run.map((run, index) => (
+                    <FlowRun key={index} index={index} run={run}>
+                      {JSON.stringify(run)}
+                    </FlowRun>
+                  ))}
+              </Accordion>
+            </Box>
+          </Box>
+        </Container>
       </Box>
     </Layout>
   )

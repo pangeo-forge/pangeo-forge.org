@@ -1,8 +1,20 @@
-import Layout from '@/components/layout'
-import RecipeRunCard from '@/components/recipe-run-card'
+import { Link } from '@/components'
+import { RecipeRunCard } from '@/components/dashboard'
+import { Layout } from '@/components/layout'
 import { useBakery } from '@/lib/endpoints'
+import {
+  Box,
+  Container,
+  Flex,
+  Heading,
+  IconButton,
+  SimpleGrid,
+  Skeleton,
+  Stack,
+  Text,
+} from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { Box, Button, Flex, Link, Themed } from 'theme-ui'
+import { GoRepo } from 'react-icons/go'
 
 const Bakery = () => {
   const router = useRouter()
@@ -12,46 +24,76 @@ const Bakery = () => {
 
   const repoUrl = 'https://github.com/pangeo-forge/pangeo-forge-gcs-bakery'
 
-  if (!bakery) return <Layout container={true} />
-
   if (bakeryError)
     return (
-      <Layout container={true}>
+      <Layout>
         <Box>Failed to load...</Box>
+      </Layout>
+    )
+
+  if (!bakery)
+    return (
+      <Layout>
+        <Skeleton minH={'100vh'}></Skeleton>
       </Layout>
     )
 
   return (
     <Layout>
-      <Flex>
-        <Box sx={{ flex: '1 1 auto' }}>
-          <Themed.h2>{bakery.name}</Themed.h2>
-        </Box>
+      <Box as='section'>
+        <Container maxW='container.xl' py={90}>
+          <Flex direction='column' mb={8}>
+            <Stack
+              as={Link}
+              href={repoUrl}
+              direction={'row'}
+              align={'center'}
+              mb={8}
+            >
+              <Flex
+                w={8}
+                h={8}
+                align={'center'}
+                justify={'center'}
+                rounded={'full'}
+              >
+                <IconButton
+                  fontSize={'3xl'}
+                  aria-label='GitHub Repository'
+                  icon={<GoRepo />}
+                  variant='ghost'
+                />
+              </Flex>
 
-        <Link href={repoUrl}>
-          <Button
-            sx={{
-              float: 'right',
-              ml: [1, null, 2],
-              maxHeight: 36,
-              mt: [3, null, 4],
-              bg: 'white',
-              color: 'purple',
-              fontSize: [3],
-              '&:hover': { textDecoration: 'underline' },
-            }}
-          >
-            Git Repository
-          </Button>
-        </Link>
-      </Flex>
-      <Themed.p>{bakery.description}</Themed.p>
+              <Heading as={'h3'} size='lg' textTransform={'uppercase'}>
+                {bakery.name}
+              </Heading>
+            </Stack>
+            <Text>{bakery.description}</Text>
+          </Flex>
 
-      <Themed.h2>Recipe Runs</Themed.h2>
-      <Box>
-        {bakery.recipe_runs.reverse().map((b, i) => (
-          <RecipeRunCard key={i} props={b} />
-        ))}
+          <Box py={4}>
+            <Heading as={'h3'} size='lg' mb={8}>
+              Recipe Runs
+            </Heading>
+            <SimpleGrid columns={{ base: 1, md: 1, lg: 1 }} spacing={4}>
+              {bakery.recipe_runs
+                .sort((a, b) => a.started_at.localeCompare(b.started_at))
+                .reverse()
+                .map((recipe, index) => (
+                  <RecipeRunCard
+                    key={index}
+                    recipe_id={recipe.recipe_id}
+                    id={recipe.id}
+                    started_at={recipe.started_at}
+                    status={recipe.status}
+                    version={recipe.version}
+                    message={recipe.message}
+                  />
+                ))}
+            </SimpleGrid>
+          </Box>
+        </Container>
       </Box>
     </Layout>
   )

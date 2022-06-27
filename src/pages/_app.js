@@ -1,18 +1,16 @@
-import '@/assets/fonts.css'
-import '@/assets/global.css'
-import ColorSwitcher from '@/components/color-switcher'
-import Meta from '@/components/meta'
-import theme from '@/lib/theme'
+import { Meta } from '@/components'
+import { theme } from '@/theme'
+import { Fonts } from '@/theme/foundations/fonts'
+import { ChakraProvider } from '@chakra-ui/react'
 import * as React from 'react'
-import { ThemeProvider } from 'theme-ui'
 
 const App = ({ Component, pageProps }) => {
   return (
-    <ThemeProvider theme={theme}>
+    <ChakraProvider resetCSS={theme}>
+      <Fonts />
       <Meta />
-      <ColorSwitcher />
       <Component {...pageProps} />
-    </ThemeProvider>
+    </ChakraProvider>
   )
 }
 
