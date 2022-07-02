@@ -17,7 +17,7 @@ import {
   VStack,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { GoRepo, GoTag } from 'react-icons/go'
+import { GoDatabase, GoRepo, GoTag } from 'react-icons/go'
 
 const Feedstock = () => {
   const router = useRouter()
@@ -86,11 +86,11 @@ const Feedstock = () => {
           >
             {' '}
             <GoRepo />
-            <Text ml={2}>{spec.replace('pangeo-forge/', '')}</Text>
+            <Text ml={2}>{name}</Text>
           </Button>
 
           {spec == 'pangeo-forge/staged-recipes' && (
-            <Text>
+            <Text my={4}>
               A place to submit pangeo-forge recipes before they become fully
               fledged pangeo-forge feedstocks.
             </Text>
@@ -99,7 +99,7 @@ const Feedstock = () => {
           <SimpleGrid
             columns={{ base: 1, md: 1, lg: 2 }}
             spacing={4}
-            mt={8}
+            my={8}
             justifyContent={'space-between'}
           >
             {Object.keys(details).map((key, index) => (
@@ -121,21 +121,24 @@ const Feedstock = () => {
                   href={datasetsUrl}
                   colorScheme='teal'
                   variant='outline'
+                  fontSize={'lg'}
                 >
-                  Datasets for this feedstock
+                  {' '}
+                  <GoDatabase />
+                  <Text ml={2}>Datasets for this feedstock</Text>
                 </Button>
               </VStack>
             )}
           </SimpleGrid>
 
-          <Heading mt={8} as={'h3'}>
+          <Heading my={4} as={'h3'}>
             Recipe Runs
           </Heading>
 
           <SimpleGrid
             columns={{ base: 1, md: 1, lg: 1 }}
             spacing={4}
-            mt={8}
+            my={8}
             justifyContent={'space-between'}
           >
             {/* TODO: Add filter options */}
