@@ -1,11 +1,11 @@
 import { CodeBlock } from '@/components'
 import { AddIcon, MinusIcon } from '@chakra-ui/icons'
 import {
+  Accordion,
   AccordionButton,
   AccordionItem,
   AccordionPanel,
   Box,
-  Text,
 } from '@chakra-ui/react'
 import React from 'react'
 
@@ -21,19 +21,18 @@ print(ds)`
     <AccordionItem>
       {({ isExpanded }) => (
         <>
-          <Text>
-            <AccordionButton>
-              <Box flex='1' textAlign='left'>
-                {name}
-              </Box>
+          <AccordionButton>
+            <Box flex='1' textAlign='left'>
+              {name}
+            </Box>
 
-              {isExpanded ? (
-                <MinusIcon fontSize='xl' />
-              ) : (
-                <AddIcon fontSize='xl' />
-              )}
-            </AccordionButton>
-          </Text>
+            {isExpanded ? (
+              <MinusIcon fontSize='xl' />
+            ) : (
+              <AddIcon fontSize='xl' />
+            )}
+          </AccordionButton>
+
           <AccordionPanel pb={4}>
             <CodeBlock showLineNumbers language={'python'}>
               {code}
@@ -42,5 +41,15 @@ print(ds)`
         </>
       )}
     </AccordionItem>
+  )
+}
+
+export const DatasetsAccordion = ({ datasets }) => {
+  return (
+    <Accordion allowMultiple>
+      {datasets.map((dataset, index) => {
+        return <DatasetCard key={index} dataset={dataset} />
+      })}
+    </Accordion>
   )
 }

@@ -23,7 +23,7 @@ const Feedstocks = () => {
   }
   if (!feedstocks)
     return (
-      <Layout>
+      <Layout menu={true}>
         <Skeleton minH={'100vh'}></Skeleton>
       </Layout>
     )

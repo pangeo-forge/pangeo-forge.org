@@ -13,7 +13,12 @@ const RecipeRuns = () => {
       </Layout>
     )
   }
-  if (!recipeRuns) return <Layout menu={true}></Layout>
+  if (!recipeRuns)
+    return (
+      <Layout menu={true}>
+        <Skeleton minH={'100vh'}></Skeleton>
+      </Layout>
+    )
 
   return (
     <Layout menu={true}>

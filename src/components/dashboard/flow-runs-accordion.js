@@ -4,6 +4,7 @@ import {
   AccordionButton,
   AccordionItem,
   AccordionPanel,
+  Accordion,
   Box,
 } from '@chakra-ui/react'
 import React from 'react'
@@ -39,5 +40,15 @@ export const FlowRun = ({ index, run }) => {
         </>
       )}
     </AccordionItem>
+  )
+}
+
+export const FlowRunsAccordion = ({ runs }) => {
+  return (
+    <Accordion allowMultiple>
+      {runs.map((run, index) => {
+        return <FlowRun key={index} index={index} run={run} />
+      })}
+    </Accordion>
   )
 }

@@ -1,16 +1,16 @@
 import { Link } from '@/components'
-import { DatasetCard } from '@/components/dashboard'
+import { DatasetsAccordion } from '@/components/dashboard'
 import { Layout } from '@/components/layout'
 import { useFeedstock } from '@/lib/endpoints'
 import { getProductionRunInfo } from '@/lib/recipe-run-utils'
 import {
-  Accordion,
   Alert,
   AlertIcon,
   Box,
   Button,
   Container,
   Heading,
+  Skeleton,
   Stack,
   Text,
 } from '@chakra-ui/react'
@@ -26,6 +26,13 @@ const Dataset = () => {
     return (
       <Layout>
         <Box>Failed to load...</Box>
+      </Layout>
+    )
+
+  if (!spec)
+    return (
+      <Layout>
+        <Skeleton minH={'100vh'}></Skeleton>
       </Layout>
     )
 
@@ -86,7 +93,7 @@ const Dataset = () => {
           <Box my={4}>
             <Alert status='info'>
               <AlertIcon />
-              <Text mt={4}>
+              <Text>
                 Each dataset can be accessed by running the Python code
                 available under the dataset&apos;s respective section below.
                 This code can be run on{' '}
@@ -99,13 +106,7 @@ const Dataset = () => {
           </Box>
 
           <Stack my={8}>
-            {isProduction && (
-              <Accordion allowMultiple>
-                {datasets.map((dataset, index) => {
-                  return <DatasetCard key={index} dataset={dataset} />
-                })}
-              </Accordion>
-            )}
+            {isProduction && <DatasetsAccordion datasets={datasets} />}
           </Stack>
         </Container>
       </Box>
