@@ -2,6 +2,7 @@ import { CopyButton } from '@/components/copy-button'
 import { Box } from '@chakra-ui/react'
 import React from 'react'
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter'
+import { a11yDark as style } from 'react-syntax-highlighter/dist/cjs/styles/prism'
 
 export const CodeBlock = ({ className, ...props }) => {
   const match = /language-(\w+)/.exec(className || '')
@@ -13,6 +14,7 @@ export const CodeBlock = ({ className, ...props }) => {
           {' '}
           <SyntaxHighlighter
             language={props.language ? props.language : match ? match[1] : null}
+            style={style}
             {...props}
           />
         </Box>
