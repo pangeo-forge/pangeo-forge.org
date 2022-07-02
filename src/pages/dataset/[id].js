@@ -5,11 +5,14 @@ import { useFeedstock } from '@/lib/endpoints'
 import { getProductionRunInfo } from '@/lib/recipe-run-utils'
 import {
   Accordion,
+  Alert,
+  AlertIcon,
   Box,
   Button,
   Container,
   Heading,
   Stack,
+  Text,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import React from 'react'
@@ -32,6 +35,9 @@ const Dataset = () => {
     Bakery: `/dashboard/feedstock/${id}`,
     Feedstock: `/dashboard/feedstock/${id}`,
   }
+
+  const myBinderLink =
+    'https://mybinder.org/v2/gh/pangeo-forge/sandbox/binder?urlpath=git-pull%3Frepo%3Dhttps%253A%252F%252Fgithub.com%252Fpangeo-forge%252Fsandbox%26urlpath%3Dlab%252Ftree%252Fsandbox%252Fscratch.ipynb%26branch%3Dmain'
   return (
     <Layout>
       <Box as='section'>
@@ -77,7 +83,22 @@ const Dataset = () => {
             </Stack>
           </Stack>
 
-          <Stack mt={12} mb={8}>
+          <Box my={4}>
+            <Alert status='info'>
+              <AlertIcon />
+              <Text mt={4}>
+                Each dataset can be accessed by running the Python code
+                available under the dataset&apos;s respective section below.
+                This code can be run on{' '}
+                <Link href={myBinderLink} color={'blue.400'}>
+                  MyBinder
+                </Link>
+                .
+              </Text>
+            </Alert>
+          </Box>
+
+          <Stack my={8}>
             {isProduction && (
               <Accordion allowMultiple>
                 {datasets.map((dataset, index) => {
