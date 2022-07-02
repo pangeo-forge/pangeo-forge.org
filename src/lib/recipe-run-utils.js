@@ -24,18 +24,20 @@ export function getDatasets(runs) {
 
 export function getProductionRunInfo(id, runs) {
   let datasets = getDatasets(runs)
-  let catalogUrl = ''
+  let datasetsUrl = ''
   let isProduction = false
 
   if (datasets && datasets.length > 0) {
     isProduction = true
-    catalogUrl = `/catalog/${id}`
-    datasets = [...new Set(datasets)]
+    datasetsUrl = `/dataset/${id}`
+    datasets = [...new Set(datasets)].sort((a, b) =>
+      a.localeCompare(b, undefined, { sensitivity: 'base' })
+    )
   }
 
   return {
     isProduction,
-    catalogUrl,
+    datasetsUrl,
     datasets,
   }
 }

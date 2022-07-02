@@ -1,40 +1,43 @@
-import { LogLine } from '@/components/dashboard'
+import { CodeBlock } from '@/components'
 import { AddIcon, MinusIcon } from '@chakra-ui/icons'
 import {
   AccordionButton,
   AccordionItem,
   AccordionPanel,
   Box,
+  Text,
 } from '@chakra-ui/react'
 import React from 'react'
 
-export const FlowRun = ({ index, run }) => {
+export const DatasetCard = ({ dataset }) => {
+  const parts = dataset.split('/')
+  const name = parts[parts.length - 1]
+  const code = `import xarray as xr
+
+store = '${dataset}'
+ds = xr.open_dataset(store, engine='zarr', chunks={})
+print(ds)`
   return (
     <AccordionItem>
       {({ isExpanded }) => (
         <>
-          <h2>
+          <Text>
             <AccordionButton>
               <Box flex='1' textAlign='left'>
-                Flow Run {index}
+                {name}
               </Box>
+
               {isExpanded ? (
                 <MinusIcon fontSize='xl' />
               ) : (
                 <AddIcon fontSize='xl' />
               )}
             </AccordionButton>
-          </h2>
+          </Text>
           <AccordionPanel pb={4}>
-            {run.logs?.map((log, index) => (
-              <Box key={index}>
-                <LogLine
-                  timestamp={log.timestamp}
-                  level={log.level}
-                  message={log.message}
-                ></LogLine>
-              </Box>
-            ))}
+            <CodeBlock showLineNumbers language={'python'}>
+              {code}
+            </CodeBlock>
           </AccordionPanel>
         </>
       )}

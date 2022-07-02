@@ -1,8 +1,8 @@
-import Layout from '@/components/layout'
+import { Layout } from '@/components/layout'
 import { useFeedstock } from '@/lib/endpoints'
 import { getProductionRunInfo } from '@/lib/recipe-run-utils'
 import { useRouter } from 'next/router'
-import { Box, Button, Flex, Link, Themed } from 'theme-ui'
+import { Box, Button, Flex, Link, Heading } from '@chakra-ui/react'
 
 const Catalog = () => {
   const router = useRouter()
@@ -11,7 +11,7 @@ const Catalog = () => {
   const { fs: { spec = '', recipe_runs = [] } = {}, fsError } = useFeedstock(id)
   if (fsError)
     return (
-      <Layout container={true}>
+      <Layout>
         <Box>Failed to load...</Box>
       </Layout>
     )
@@ -20,9 +20,9 @@ const Catalog = () => {
 
   const name = spec.replace('pangeo-forge/', '')
   return (
-    <Layout container={true}>
+    <Layout>
       <Box>
-        <Themed.h1>{name} Catalog</Themed.h1>
+        <Heading as={h1}>{name} Catalog</Heading>
         {isProduction && (
           <Box as='ol'>
             {datasets.map((dataset, index) => {

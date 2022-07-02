@@ -2,6 +2,7 @@ import { Link } from '@/components'
 import { RecipeRunCard } from '@/components/dashboard'
 import { Layout } from '@/components/layout'
 import { useFeedstock, useMeta } from '@/lib/endpoints'
+import { getProductionRunInfo } from '@/lib/recipe-run-utils'
 import {
   Box,
   Button,
@@ -70,7 +71,7 @@ const Feedstock = () => {
 
   const name = spec.replace('pangeo-forge/', '')
 
-  const { isProduction, catalogUrl } = getProductionRunInfo(id, recipe_runs)
+  const { isProduction, datasetsUrl } = getProductionRunInfo(id, recipe_runs)
 
   return (
     <Layout>
@@ -113,6 +114,18 @@ const Feedstock = () => {
                 </VStack>
               </HStack>
             ))}
+            {isProduction && (
+              <VStack align={'start'}>
+                <Button
+                  as={Link}
+                  href={datasetsUrl}
+                  colorScheme='teal'
+                  variant='outline'
+                >
+                  Datasets for this feedstock
+                </Button>
+              </VStack>
+            )}
           </SimpleGrid>
 
           <Heading mt={8} as={'h3'}>
