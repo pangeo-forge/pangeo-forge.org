@@ -29,7 +29,7 @@ const Bakeries = () => {
 
   return (
     <Layout menu={true}>
-      <Box as='section' mb={8}>
+      <Box as='section'>
         <Container maxW='container.xl' centerContent>
           <Heading as={'h3'} size='lg' mb={4}>
             Bakeries

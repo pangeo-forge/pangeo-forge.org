@@ -9,7 +9,7 @@ import {
 } from '@chakra-ui/react'
 import React from 'react'
 
-export const FlowRun = ({ index, run }) => {
+const FlowRun = ({ index, run }) => {
   return (
     <AccordionItem>
       {({ isExpanded }) => (

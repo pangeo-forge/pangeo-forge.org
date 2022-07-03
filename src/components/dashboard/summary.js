@@ -43,7 +43,7 @@ export const Summary = () => {
   const reports = [
     { label: 'Feedstocks', href: '/dashboard/feedstocks', stats: feedstocks },
     { label: 'Recipe Runs', href: '/dashboard/recipe-runs', stats: recipeRuns },
-    { label: 'Datasets', href: '/dashboard/datasets', stats: datasets },
+    { label: 'Datasets', href: '/catalog', stats: datasets },
   ]
   return (
     <Box as='section' py={{ base: '4', md: '8' }}>

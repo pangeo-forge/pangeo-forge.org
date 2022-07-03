@@ -1,18 +1,18 @@
+import { Link } from '@/components'
 import { useRepo } from '@/lib/endpoints'
 import { TimeDeltaFormatter } from '@/lib/time-delta'
+import { getProductionRunInfo } from '@/lib/recipe-run-utils'
 import {
   Box,
   Heading,
   LinkBox,
   LinkOverlay,
+  Skeleton,
   Stack,
   Text,
-  VStack,
-  Skeleton,
 } from '@chakra-ui/react'
 import React from 'react'
 import { GoMarkGithub } from 'react-icons/go'
-import { Link } from '@/components'
 
 export const FeedstockCard = ({ spec, id }) => {
   const href = `/dashboard/feedstock/${id}`
@@ -35,27 +35,31 @@ export const FeedstockCard = ({ spec, id }) => {
         transform: 'scale(1.025)',
         boxShadow: 'md',
       }}
-      align='center'
     >
-      <VStack spacing={2}>
+      <Stack spacing={2} direction='column'>
         <LinkOverlay
           href={href}
           as={Link}
           _hover={{
             textDecoration: 'none',
           }}
+          justify={'left'}
         >
-          <VStack spacing={2}>
+          <Stack spacing={2}>
             <Heading as={'h3'} size='xs' textTransform='uppercase'>
               {spec
+
                 .toLowerCase()
                 .replace('pangeo-forge/', '')
                 .replace('-feedstock', '')}
             </Heading>
-            <Text lineHeight='tall' opacity={0.8}>
-              {repo.commit.message}
-            </Text>
-            <Stack justify={'right'} direction='row' spacing={4}>
+            <Box py={4}>
+              <Text opacity={0.8} noOfLines={2}>
+                {repo.commit.message}
+              </Text>
+            </Box>
+
+            <Stack justify={'left'} direction='row' spacing={2}>
               <Text
                 _dark={{ color: 'teal.400' }}
                 fontSize='xs'
@@ -70,9 +74,9 @@ export const FeedstockCard = ({ spec, id }) => {
               </Text>
               <GoMarkGithub size={20} />
             </Stack>
-          </VStack>
+          </Stack>
         </LinkOverlay>
-      </VStack>
+      </Stack>
     </LinkBox>
   )
 }

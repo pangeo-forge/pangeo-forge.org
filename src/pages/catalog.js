@@ -1,5 +1,6 @@
 import { Layout } from '@/components/layout'
 import { useRecipeRuns } from '@/lib/endpoints'
+import { groupProductionRuns } from '@/lib/recipe-run-utils'
 import { Box, Container, Heading, Skeleton, Text } from '@chakra-ui/react'
 
 const Catalog = () => {

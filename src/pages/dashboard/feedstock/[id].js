@@ -71,7 +71,10 @@ const Feedstock = () => {
 
   const name = spec.replace('pangeo-forge/', '')
 
-  const { isProduction, datasetsUrl } = getProductionRunInfo(id, recipe_runs)
+  const { isProduction, datasetsUrl, datasets } = getProductionRunInfo(
+    id,
+    recipe_runs
+  )
 
   return (
     <Layout>
@@ -125,7 +128,9 @@ const Feedstock = () => {
                 >
                   {' '}
                   <GoDatabase />
-                  <Text ml={2}>Datasets for this feedstock</Text>
+                  <Text ml={2}>{`${datasets.length} dataset${
+                    datasets.length > 1 ? 's' : ''
+                  } for this feedstock`}</Text>
                 </Button>
               </VStack>
             )}

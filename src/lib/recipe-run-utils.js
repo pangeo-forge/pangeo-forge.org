@@ -41,3 +41,22 @@ export function getProductionRunInfo(id, runs) {
     datasets,
   }
 }
+
+export function groupProductionRuns(runs, key = 'feedstock_id') {
+  let groupedRuns = runs.reduce(
+    (entryMap, run) =>
+      entryMap.set(
+        run[key],
+        [
+          ...(entryMap.get(run[key]) || []),
+          isSuccessfulProductionRun(run) ? run : undefined,
+        ].filter(Boolean)
+      ),
+    new Map()
+  )
+
+  groupedRuns = [...groupedRuns]
+    .map(([key, value]) => ({ key, value }))
+    .filter((item) => item.value.length !== 0)
+  return groupedRuns
+}

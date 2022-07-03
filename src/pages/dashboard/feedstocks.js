@@ -30,7 +30,7 @@ const Feedstocks = () => {
 
   return (
     <Layout menu={true}>
-      <Box as='section' mb={8}>
+      <Box as='section'>
         <Container maxW='container.xl' centerContent>
           <Heading as={'h3'} size='lg' mb={4}>
             Feedstocks
@@ -41,7 +41,7 @@ const Feedstocks = () => {
           </Text>
 
           <SimpleGrid
-            mt={8}
+            my={8}
             columns={{ base: 1, md: 2, lg: 3 }}
             spacing={4}
             justifyContent={'space-between'}
@@ -59,12 +59,12 @@ const Feedstocks = () => {
               ))}
           </SimpleGrid>
 
-          <Heading as={'h3'} size='lg' mt={6}>
+          <Heading as={'h3'} size='lg' my={8}>
             Staged Recipes
           </Heading>
 
           <SimpleGrid
-            mt={8}
+            my={8}
             columns={{ base: 1, md: 2, lg: 3 }}
             spacing={4}
             justifyContent={'space-between'}
