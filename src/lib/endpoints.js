@@ -89,7 +89,7 @@ export const useStats = (key) => {
 
 export const useRepo = (spec) => {
   const { data, error } = useSWR(
-    spec ? `https://api.github.com/repos/${spec}/commits/HEAD` : null,
+    spec ? `/api/github/feedstock-meta?spec=${spec}` : null,
     jsonFetcher
   )
   return {
