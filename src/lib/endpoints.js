@@ -89,7 +89,7 @@ export const useStats = (key) => {
 
 export const useRepo = (spec) => {
   const { data, error } = useSWR(
-    spec ? `https://api.github.com/repos/${spec}/commits/HEAD` : null,
+    spec ? `/api/github/feedstock-meta?spec=${spec}` : null,
     jsonFetcher
   )
   return {
@@ -118,7 +118,12 @@ export const usePrefect = (id, active = true) => {
     options = { refreshInterval: 1000 }
   }
 
-  const { data, error } = useSWR(`/api/prefect/${id}`, jsonFetcher, options)
+  const { data, error } = useSWR(
+    `/api/
+  /${id}`,
+    jsonFetcher,
+    options
+  )
   return {
     prefect: data,
     prefectError: error,
