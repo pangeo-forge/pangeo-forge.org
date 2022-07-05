@@ -118,12 +118,7 @@ export const usePrefect = (id, active = true) => {
     options = { refreshInterval: 1000 }
   }
 
-  const { data, error } = useSWR(
-    `/api/
-  /${id}`,
-    jsonFetcher,
-    options
-  )
+  const { data, error } = useSWR(`/api/prefect/${id}`, jsonFetcher, options)
   return {
     prefect: data,
     prefectError: error,
