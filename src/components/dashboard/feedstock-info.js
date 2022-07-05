@@ -1,14 +1,6 @@
-import { Link } from '@/components'
-import { Box, Button, HStack, SimpleGrid, Text, VStack } from '@chakra-ui/react'
-import React from 'react'
-import { GoDatabase, GoRepo, GoTag } from 'react-icons/go'
+import { Box, HStack, SimpleGrid, Text, VStack } from '@chakra-ui/react'
 
-export const FeedstockInfo = ({
-  details,
-  isProduction,
-  datasetsUrl,
-  datasets,
-}) => {
+export const FeedstockInfo = ({ details }) => {
   return (
     <>
       {' '}
@@ -30,23 +22,6 @@ export const FeedstockInfo = ({
             </VStack>
           </HStack>
         ))}
-        {isProduction && (
-          <VStack align={'start'}>
-            <Button
-              as={Link}
-              href={datasetsUrl}
-              colorScheme='teal'
-              variant='outline'
-              fontSize={'lg'}
-            >
-              {' '}
-              <GoDatabase />
-              <Text ml={2}>{`${datasets.length} dataset${
-                datasets.length > 1 ? 's' : ''
-              } for this feedstock`}</Text>
-            </Button>
-          </VStack>
-        )}
       </SimpleGrid>
     </>
   )

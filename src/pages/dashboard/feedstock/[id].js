@@ -1,5 +1,9 @@
 import { Link } from '@/components'
-import { FeedstockInfo, RecipeRuns } from '@/components/dashboard'
+import {
+  FeedstockDatasets,
+  FeedstockInfo,
+  RecipeRuns,
+} from '@/components/dashboard'
 import { Layout } from '@/components/layout'
 import { useFeedstock, useMeta } from '@/lib/endpoints'
 import { getProductionRunInfo } from '@/lib/recipe-run-utils'
@@ -10,10 +14,15 @@ import {
   Flex,
   Icon,
   Skeleton,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
   Text,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { GoRepo, GoTag } from 'react-icons/go'
+import { GoDatabase, GoRepo, GoTag } from 'react-icons/go'
 
 const Feedstock = () => {
   const router = useRouter()
@@ -67,10 +76,7 @@ const Feedstock = () => {
 
   const name = spec.replace('pangeo-forge/', '')
 
-  const { isProduction, datasetsUrl, datasets } = getProductionRunInfo(
-    id,
-    recipe_runs
-  )
+  const { isProduction, datasets } = getProductionRunInfo(id, recipe_runs)
 
   return (
     <Layout>
@@ -95,14 +101,31 @@ const Feedstock = () => {
             </Text>
           )}
 
-          <FeedstockInfo
-            details={details}
-            isProduction={isProduction}
-            datasets={datasets}
-            datasetsUrl={datasetsUrl}
-          />
+          <FeedstockInfo details={details} />
 
-          <RecipeRuns runs={recipe_runs} />
+          <Tabs isLazy isFitted colorScheme='teal' my={16}>
+            <TabList>
+              <Tab>Recipe Runs</Tab>
+              <Tab>
+                <GoDatabase />
+                <Text ml={2}>{`${datasets.length} Dataset${
+                  datasets.length > 1 ? 's' : ''
+                }`}</Text>
+              </Tab>
+            </TabList>
+            <TabPanels>
+              <TabPanel>
+                {' '}
+                <RecipeRuns runs={recipe_runs} />
+              </TabPanel>
+              <TabPanel>
+                <FeedstockDatasets
+                  isProduction={isProduction}
+                  datasets={datasets}
+                />
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
         </Container>
       </Box>
     </Layout>

@@ -1,14 +1,9 @@
 import { RecipeRunCard } from '@/components/dashboard'
-import { Heading, SimpleGrid } from '@chakra-ui/react'
-import React from 'react'
+import { SimpleGrid } from '@chakra-ui/react'
 
-export const RecipeRuns = ({ title = 'Recipe Runs', runs }) => {
+export const RecipeRuns = ({ runs }) => {
   return (
     <>
-      {' '}
-      <Heading my={4} as={'h3'}>
-        {title}
-      </Heading>
       <SimpleGrid
         columns={{ base: 1, md: 1, lg: 1 }}
         spacing={4}
