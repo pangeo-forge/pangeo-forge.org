@@ -1,5 +1,5 @@
 import { Link } from '@/components'
-import { RecipeRunCard } from '@/components/dashboard'
+import { FeedstockInfo, RecipeRuns } from '@/components/dashboard'
 import { Layout } from '@/components/layout'
 import { useFeedstock, useMeta } from '@/lib/endpoints'
 import { getProductionRunInfo } from '@/lib/recipe-run-utils'
@@ -8,16 +8,12 @@ import {
   Button,
   Container,
   Flex,
-  HStack,
-  Heading,
   Icon,
-  SimpleGrid,
   Skeleton,
   Text,
-  VStack,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { GoDatabase, GoRepo, GoTag } from 'react-icons/go'
+import { GoRepo, GoTag } from 'react-icons/go'
 
 const Feedstock = () => {
   const router = useRouter()
@@ -99,69 +95,14 @@ const Feedstock = () => {
             </Text>
           )}
 
-          <SimpleGrid
-            columns={{ base: 1, md: 1, lg: 2 }}
-            spacing={4}
-            my={8}
-            justifyContent={'space-between'}
-          >
-            {Object.keys(details).map((key, index) => (
-              <HStack key={index} align={'top'}>
-                {' '}
-                <VStack align={'start'}>
-                  <Text color={'gray.600'}>{key}</Text>
+          <FeedstockInfo
+            details={details}
+            isProduction={isProduction}
+            datasets={datasets}
+            datasetsUrl={datasetsUrl}
+          />
 
-                  <Box fontWeight={600} maxW={'90vw'}>
-                    {details[key]}
-                  </Box>
-                </VStack>
-              </HStack>
-            ))}
-            {isProduction && (
-              <VStack align={'start'}>
-                <Button
-                  as={Link}
-                  href={datasetsUrl}
-                  colorScheme='teal'
-                  variant='outline'
-                  fontSize={'lg'}
-                >
-                  {' '}
-                  <GoDatabase />
-                  <Text ml={2}>{`${datasets.length} dataset${
-                    datasets.length > 1 ? 's' : ''
-                  } for this feedstock`}</Text>
-                </Button>
-              </VStack>
-            )}
-          </SimpleGrid>
-
-          <Heading my={4} as={'h3'}>
-            Recipe Runs
-          </Heading>
-
-          <SimpleGrid
-            columns={{ base: 1, md: 1, lg: 1 }}
-            spacing={4}
-            my={8}
-            justifyContent={'space-between'}
-          >
-            {/* TODO: Add filter options */}
-            {recipe_runs
-              .sort((a, b) => a.started_at.localeCompare(b.started_at))
-              .reverse()
-              .map((recipe) => (
-                <RecipeRunCard
-                  key={recipe.id}
-                  recipe_id={recipe.recipe_id}
-                  id={recipe.id}
-                  started_at={recipe.started_at}
-                  status={recipe.status}
-                  version={recipe.version}
-                  message={recipe.message}
-                />
-              ))}
-          </SimpleGrid>
+          <RecipeRuns runs={recipe_runs} />
         </Container>
       </Box>
     </Layout>
