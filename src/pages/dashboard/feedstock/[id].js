@@ -2,6 +2,7 @@ import { Link } from '@/components'
 import {
   FeedstockDatasets,
   FeedstockInfo,
+  Providers,
   RecipeRuns,
 } from '@/components/dashboard'
 import { Layout } from '@/components/layout'
@@ -54,6 +55,8 @@ const Feedstock = () => {
       ),
       Bakery: meta.bakery ? meta.bakery.id : null,
       License: meta.provenance ? meta.provenance.license : null,
+      Providers: <Providers providers={meta.provenance.providers} />,
+      Maintainers: meta.maintainers ? meta.maintainers[0].name : null,
     }
   }
 
