@@ -76,6 +76,7 @@ const RecipeRun = () => {
           variant='outline'
           colorScheme='gray'
           fontWeight='body'
+          useExternalIcon
         >
           {recipeRun.head_sha.slice(0, 7)}
         </Badge>

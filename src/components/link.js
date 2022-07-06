@@ -1,3 +1,4 @@
+import { ExternalLinkIcon } from '@chakra-ui/icons'
 import { Link as ChakraLink } from '@chakra-ui/react'
 import NextLink from 'next/link'
 import React from 'react'
@@ -16,5 +17,10 @@ export const Link = React.forwardRef(function CustomLink(props, ref) {
     )
   }
 
-  return <ChakraLink isExternal {...props} ref={ref} />
+  return (
+    <ChakraLink isExternal {...props} ref={ref}>
+      {props.children}
+      {props.useExternalIcon && <ExternalLinkIcon mx='2px' />}
+    </ChakraLink>
+  )
 })
