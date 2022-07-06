@@ -53,6 +53,7 @@ const Feedstock = () => {
         </Flex>
       ),
       Bakery: meta.bakery ? meta.bakery.id : null,
+      License: meta.provenance ? meta.provenance.license : null,
     }
   }
 
