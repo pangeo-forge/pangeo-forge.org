@@ -25,8 +25,6 @@ export const FeedstockCard = ({ spec, id }) => {
   if (repoError) return <Box>{'error'}</Box>
   if (!repo) return <Skeleton minH={'100vh'}></Skeleton>
 
-  console.log(meta.title, spec)
-
   return (
     <LinkBox
       p={4}
