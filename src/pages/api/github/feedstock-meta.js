@@ -5,6 +5,7 @@ export const config = {
 export default async function handler(req, res) {
   const { searchParams } = new URL(req.url)
   const spec = searchParams.get('spec')
+
   const headers = {
     Accept: 'application/vnd.github.v3+json',
     Authorization: `token ${process.env.GITHUB_TOKEN}`,

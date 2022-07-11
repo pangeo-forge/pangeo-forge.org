@@ -7,7 +7,6 @@ import {
   Heading,
   SimpleGrid,
   Skeleton,
-  Stack,
   Text,
 } from '@chakra-ui/react'
 
@@ -16,7 +15,7 @@ const Feedstocks = () => {
 
   if (feedstocksError) {
     return (
-      <Layout>
+      <Layout menu={true}>
         <Box>Failed to load...</Box>
       </Layout>
     )

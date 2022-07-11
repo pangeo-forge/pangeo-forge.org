@@ -1,7 +1,6 @@
 import { Link } from '@/components'
-import { useRepo } from '@/lib/endpoints'
+import { useMeta, useRepo } from '@/lib/endpoints'
 import { TimeDeltaFormatter } from '@/lib/time-delta'
-import { getProductionRunInfo } from '@/lib/recipe-run-utils'
 import {
   Box,
   Heading,
@@ -11,13 +10,14 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react'
-import React from 'react'
 import { GoMarkGithub } from 'react-icons/go'
 
 export const FeedstockCard = ({ spec, id }) => {
   const href = `/dashboard/feedstock/${id}`
 
   const { repo, repoError } = useRepo(spec)
+
+  const { meta, metaError } = useMeta(spec)
 
   if (repoError) return <Box>{'error'}</Box>
   if (!repo) return <Skeleton minH={'100vh'}></Skeleton>
@@ -47,15 +47,20 @@ export const FeedstockCard = ({ spec, id }) => {
         >
           <Stack spacing={2}>
             <Heading as={'h3'} size='xs' textTransform='uppercase'>
-              {spec
-
-                .toLowerCase()
-                .replace('pangeo-forge/', '')
-                .replace('-feedstock', '')}
+              {meta.title
+                ? meta.title
+                : spec
+                    .toLowerCase()
+                    .replace('pangeo-forge/', '')
+                    .replace('-feedstock', '')}
             </Heading>
             <Box py={4}>
               <Text opacity={0.8} noOfLines={2}>
-                {repo.commit.message}
+                {meta.description
+                  ? meta.description
+                  : spec.includes('staged-recipes')
+                  ? 'A place to submit pangeo-forge recipes before they become fully fledged pangeo-forge feedstocks'
+                  : repo.commit.message}
               </Text>
             </Box>
 
