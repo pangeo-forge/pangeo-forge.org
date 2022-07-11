@@ -1,4 +1,5 @@
 import { Link } from '@/components'
+import { MaintainersGroup } from '@/components/dashboard'
 import { useMeta, useRepo } from '@/lib/endpoints'
 import { TimeDeltaFormatter } from '@/lib/time-delta'
 import {
@@ -66,20 +67,35 @@ export const FeedstockCard = ({ spec, id }) => {
               </Text>
             </Box>
 
-            <Stack justify={'left'} direction='row' spacing={2}>
-              <Text
-                _dark={{ color: 'teal.400' }}
-                fontSize='xs'
-                fontWeight='bold'
-                whiteSpace='break-spaces'
-                variant='outline'
-              >
-                {TimeDeltaFormatter(
-                  Date.now() - Date.parse(repo.commit.committer.date)
-                )}{' '}
-                via
-              </Text>
-              <GoMarkGithub size={20} />
+            <Stack
+              direction={{
+                base: 'column',
+                sm: 'column',
+                md: 'row',
+                lg: 'row',
+                xl: 'row',
+              }}
+              spacing={{ base: 4, sm: 12 }}
+              justify={'space-between'}
+              align={'center'}
+            >
+              <MaintainersGroup maintainers={meta.maintainers} />
+
+              <Stack justify={'left'} direction='row' spacing={2}>
+                <Text
+                  _dark={{ color: 'teal.400' }}
+                  fontSize='xs'
+                  fontWeight='bold'
+                  whiteSpace='break-spaces'
+                  variant='outline'
+                >
+                  {TimeDeltaFormatter(
+                    Date.now() - Date.parse(repo.commit.committer.date)
+                  )}{' '}
+                  via
+                </Text>
+                <GoMarkGithub size={20} />
+              </Stack>
             </Stack>
           </Stack>
         </LinkOverlay>
