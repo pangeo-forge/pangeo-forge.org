@@ -15,7 +15,9 @@ import { GoMarkGithub } from 'react-icons/go'
 export const FeedstockCard = ({ spec, id }) => {
   const href = `/dashboard/feedstock/${id}`
 
-  const { repo, repoError } = useRepo(spec)
+  const { repo, repoError } = useRepo(
+    `https://api.github.com/repos/${spec}/commits/HEAD`
+  )
 
   const { meta, metaError } = useMeta(spec)
 

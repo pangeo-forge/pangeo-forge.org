@@ -87,9 +87,9 @@ export const useStats = (key) => {
   }
 }
 
-export const useRepo = (spec) => {
+export const useRepo = (APIPath) => {
   const { data, error } = useSWR(
-    spec ? `/api/github/feedstock-meta?spec=${spec}` : null,
+    APIPath ? `/api/github/feedstock-meta?path=${APIPath}` : null,
     jsonFetcher
   )
   return {
