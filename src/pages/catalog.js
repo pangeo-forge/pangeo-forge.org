@@ -2,10 +2,10 @@ import { Link } from '@/components/'
 import { Layout } from '@/components/layout'
 import { useFeedstock, useFeedstocks, useMeta } from '@/lib/endpoints'
 import { getProductionRunInfo } from '@/lib/recipe-run-utils'
+import { AddIcon, MinusIcon } from '@chakra-ui/icons'
 import {
   Accordion,
   AccordionButton,
-  AccordionIcon,
   AccordionItem,
   AccordionPanel,
   Box,
@@ -45,35 +45,42 @@ const FeedstockRowAccordionItem = ({ feedstockId, feedstockSpec }) => {
 
   return (
     <AccordionItem>
-      <>
-        <AccordionButton>
-          <Box flex='1' textAlign='left'>
-            {meta.title}
-          </Box>
-          <AccordionIcon />
-        </AccordionButton>
-      </>
-      <AccordionPanel>
-        <List spacing={3} my={4}>
-          {isProduction &&
-            datasets.map((dataset) => (
-              <ListItem key={dataset}>
-                <ListIcon as={GoDatabase} color='green.500'></ListIcon>
-                {dataset}
-              </ListItem>
-            ))}
-        </List>
+      {({ isExpanded }) => (
+        <>
+          <AccordionButton>
+            <Box flex='1' textAlign='left'>
+              {meta.title}
+            </Box>
+            {isExpanded ? (
+              <MinusIcon fontSize='xl' />
+            ) : (
+              <AddIcon fontSize='xl' />
+            )}
+          </AccordionButton>
 
-        <Button
-          as={Link}
-          my={4}
-          href={`/dashboard/feedstock/${feedstockId}`}
-          colorScheme='teal'
-          variant='outline'
-        >
-          More Details
-        </Button>
-      </AccordionPanel>
+          <AccordionPanel>
+            <List spacing={3} my={4}>
+              {isProduction &&
+                datasets.map((dataset) => (
+                  <ListItem key={dataset}>
+                    <ListIcon as={GoDatabase} color='green.500'></ListIcon>
+                    {dataset}
+                  </ListItem>
+                ))}
+            </List>
+
+            <Button
+              as={Link}
+              my={4}
+              href={`/dashboard/feedstock/${feedstockId}`}
+              colorScheme='teal'
+              variant='outline'
+            >
+              More Details
+            </Button>
+          </AccordionPanel>
+        </>
+      )}
     </AccordionItem>
   )
 }
@@ -99,14 +106,20 @@ const Catalog = () => {
     <Layout>
       <Box as='section'>
         <Container maxW='container.xl' py={90}>
-          <Heading as={'h1'} size='2xl'>
+          <Heading as={'h2'} size='lg'>
             Catalog
           </Heading>
 
           <Accordion my={8} allowMultiple>
             {feedstocks
               .filter((feedstock) => !feedstock.spec.includes('staged-recipes'))
-              .sort((a, b) => a.spec.localeCompare(b.spec))
+              .sort((a, b) =>
+                a.spec
+                  .toLowerCase()
+                  .replace('pangeo-forge/', '')
+                  .replace('-feedstock', '')
+                  .localeCompare(b.spec)
+              )
               .map((feedstock) => (
                 <FeedstockRowAccordionItem
                   key={feedstock.id}

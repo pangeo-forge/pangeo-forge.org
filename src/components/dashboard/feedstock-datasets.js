@@ -19,31 +19,7 @@ export const FeedstockDatasets = ({ isProduction, datasets }) => {
         spacing={{ base: 4, sm: 12 }}
         justify={'space-between'}
         align={'left'}
-      >
-        {/* <Stack
-              spacing={4}
-              direction={{
-                base: 'column',
-                sm: 'row',
-                md: 'row',
-                lg: 'row',
-                xl: 'row',
-              }}
-            >
-              {Object.entries(urls).map(([name, url]) => (
-                <Button
-                  key={name}
-                  as={Link}
-                  href={url}
-                  p={2}
-                  colorScheme='teal'
-                  variant='outline'
-                >
-                  {name}
-                </Button>
-              ))}
-            </Stack> */}
-      </Stack>
+      ></Stack>
       <Box my={4}>
         <Alert status='info'>
           <AlertIcon />
