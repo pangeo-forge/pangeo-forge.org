@@ -25,6 +25,8 @@ export const FeedstockCard = ({ spec, id }) => {
   if (repoError) return <Box>{'error'}</Box>
   if (!repo) return <Skeleton minH={'100vh'}></Skeleton>
 
+  console.log(meta.title, spec)
+
   return (
     <LinkBox
       p={4}
@@ -50,7 +52,7 @@ export const FeedstockCard = ({ spec, id }) => {
         >
           <Stack spacing={2}>
             <Heading as={'h3'} size='xs' textTransform='uppercase'>
-              {meta.title
+              {'title' in meta
                 ? meta.title
                 : spec
                     .toLowerCase()
