@@ -24,7 +24,12 @@ export const Maintainers = ({ maintainers }) => {
 }
 
 export const MaintainersGroup = ({ maintainers }) => {
-  if (!maintainers) return null
+  if (!maintainers)
+    return (
+      <AvatarGroup size='md' max={5}>
+        {' '}
+      </AvatarGroup>
+    )
   return (
     <AvatarGroup size='md' max={5}>
       {maintainers.map((maintainer) => (

@@ -72,7 +72,7 @@ export const FeedstockCard = ({ spec, id }) => {
             <Stack
               direction={{
                 base: 'column',
-                sm: 'column',
+                sm: 'row',
                 md: 'row',
                 lg: 'row',
                 xl: 'row',
