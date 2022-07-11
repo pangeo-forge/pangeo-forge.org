@@ -16,6 +16,7 @@ import {
   ListIcon,
   ListItem,
   Skeleton,
+  Text,
 } from '@chakra-ui/react'
 import { GoDatabase } from 'react-icons/go'
 
@@ -59,12 +60,15 @@ const FeedstockRowAccordionItem = ({ feedstockId, feedstockSpec }) => {
           </AccordionButton>
 
           <AccordionPanel>
+            <Text opacity={0.8}>{meta.description}</Text>
+
             <List spacing={3} my={4}>
               {isProduction &&
                 datasets.map((dataset) => (
                   <ListItem key={dataset}>
                     <ListIcon as={GoDatabase} color='green.500'></ListIcon>
-                    {dataset}
+
+                    {dataset ? dataset.split('/').pop() : ''}
                   </ListItem>
                 ))}
             </List>
