@@ -1,8 +1,8 @@
 import { Button, useClipboard } from '@chakra-ui/react'
 import React from 'react'
 
-export const CopyButton = ({ code, ...props }) => {
-  const { hasCopied, onCopy } = useClipboard(code)
+export const CopyButton = ({ text, ...props }) => {
+  const { hasCopied, onCopy } = useClipboard(text)
 
   return (
     <Button

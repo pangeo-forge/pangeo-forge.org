@@ -1,4 +1,5 @@
 import { Link } from '@/components/'
+import { CopyButton } from '@/components/copy-button'
 import { Layout } from '@/components/layout'
 import { useFeedstock, useFeedstocks, useMeta } from '@/lib/endpoints'
 import { getProductionRunInfo } from '@/lib/recipe-run-utils'
@@ -11,6 +12,7 @@ import {
   Box,
   Button,
   Container,
+  Flex,
   Heading,
   List,
   ListIcon,
@@ -19,6 +21,24 @@ import {
   Text,
 } from '@chakra-ui/react'
 import { GoDatabase } from 'react-icons/go'
+
+const DatasetListItem = ({ dataset }) => {
+  return (
+    <ListItem key={dataset}>
+      <Flex align='center'>
+        <ListIcon as={GoDatabase} color='teal.500' />
+
+        {dataset ? dataset.split('/').pop() : ''}
+        <CopyButton
+          text={dataset}
+          position='relative'
+          ml={8}
+          colorScheme='teal'
+        />
+      </Flex>
+    </ListItem>
+  )
+}
 
 const FeedstockRowAccordionItem = ({ feedstockId, feedstockSpec }) => {
   const { meta, metaError } = useMeta(feedstockSpec)
@@ -65,11 +85,10 @@ const FeedstockRowAccordionItem = ({ feedstockId, feedstockSpec }) => {
             <List spacing={3} my={4}>
               {isProduction &&
                 datasets.map((dataset) => (
-                  <ListItem key={dataset}>
-                    <ListIcon as={GoDatabase} color='green.500'></ListIcon>
-
-                    {dataset ? dataset.split('/').pop() : ''}
-                  </ListItem>
+                  <DatasetListItem
+                    key={dataset}
+                    dataset={dataset}
+                  ></DatasetListItem>
                 ))}
             </List>
 

@@ -19,7 +19,7 @@ export const CodeBlock = ({ className, ...props }) => {
           />
         </Box>
 
-        <CopyButton top={4} code={props.children} />
+        <CopyButton top={4} text={props.children} />
       </Box>
     </Box>
   )
