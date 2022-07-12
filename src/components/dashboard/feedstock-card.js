@@ -22,8 +22,8 @@ export const FeedstockCard = ({ spec, id }) => {
 
   const { meta, metaError } = useMeta(spec)
 
-  if (repoError) return <Box>{'error'}</Box>
-  if (!repo) return <Skeleton minH={'100vh'}></Skeleton>
+  if (repoError || metaError) return <Box>{'error'}</Box>
+  if (!repo || !meta) return <Skeleton minH={'100vh'}></Skeleton>
 
   return (
     <LinkBox
@@ -50,7 +50,7 @@ export const FeedstockCard = ({ spec, id }) => {
         >
           <Stack spacing={2}>
             <Heading as={'h3'} size='xs' textTransform='uppercase'>
-              {'title' in meta
+              {meta.title
                 ? meta.title
                 : spec
                     .toLowerCase()
