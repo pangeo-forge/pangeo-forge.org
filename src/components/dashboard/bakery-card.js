@@ -1,5 +1,7 @@
+import { Link } from '@/components'
 import {
   Badge,
+  Box,
   Heading,
   LinkBox,
   LinkOverlay,
@@ -8,9 +10,8 @@ import {
   VStack,
   WrapItem,
 } from '@chakra-ui/react'
-import { BsGlobe2 } from 'react-icons/bs'
 import React from 'react'
-import { Link } from '@/components'
+import { BsGlobe2 } from 'react-icons/bs'
 
 export const BakeryCard = ({ name, region, description, id }) => {
   const href = `/dashboard/bakery/${id}`
@@ -40,9 +41,13 @@ export const BakeryCard = ({ name, region, description, id }) => {
             <Heading as={'h3'} size='sm' textTransform='uppercase'>
               {name}
             </Heading>
-            <Text lineHeight='tall' opacity={0.8}>
-              {description}
-            </Text>
+            <Box py={4}>
+              {' '}
+              <Text lineHeight='tall' opacity={0.8}>
+                {description}
+              </Text>
+            </Box>
+
             <Stack py={4} justify={'right'} direction='row' spacing={4}>
               <WrapItem overflow='hidden'>
                 <Badge

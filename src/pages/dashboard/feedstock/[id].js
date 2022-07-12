@@ -1,22 +1,30 @@
 import { Link } from '@/components'
-import { RecipeRunCard } from '@/components/dashboard'
+import {
+  FeedstockDatasets,
+  FeedstockInfo,
+  Maintainers,
+  Providers,
+  RecipeRuns,
+} from '@/components/dashboard'
 import { Layout } from '@/components/layout'
 import { useFeedstock, useMeta } from '@/lib/endpoints'
+import { getProductionRunInfo } from '@/lib/recipe-run-utils'
 import {
   Box,
   Button,
   Container,
   Flex,
-  HStack,
-  Heading,
   Icon,
-  SimpleGrid,
   Skeleton,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
   Text,
-  VStack,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { GoRepo, GoTag } from 'react-icons/go'
+import { GoDatabase, GoRepo, GoTag } from 'react-icons/go'
 
 const Feedstock = () => {
   const router = useRouter()
@@ -24,6 +32,7 @@ const Feedstock = () => {
 
   const { fs: { spec = '', recipe_runs = [] } = {}, fsError } = useFeedstock(id)
   const { meta, metaError } = useMeta(spec)
+
   const repoUrl = `https://github.com/${spec}`
 
   let details = {}
@@ -46,6 +55,9 @@ const Feedstock = () => {
         </Flex>
       ),
       Bakery: meta.bakery ? meta.bakery.id : null,
+      License: meta.provenance ? meta.provenance.license : null,
+      Providers: <Providers providers={meta.provenance.providers} />,
+      Maintainers: <Maintainers maintainers={meta.maintainers} />,
     }
   }
 
@@ -67,6 +79,10 @@ const Feedstock = () => {
       </Layout>
     )
 
+  const name = spec.replace('pangeo-forge/', '')
+
+  const { isProduction, datasets } = getProductionRunInfo(id, recipe_runs)
+
   return (
     <Layout>
       <Box as='section'>
@@ -80,62 +96,41 @@ const Feedstock = () => {
           >
             {' '}
             <GoRepo />
-            <Text ml={2}>{spec.replace('pangeo-forge/', '')}</Text>
+            <Text ml={2}>{name}</Text>
           </Button>
 
           {spec == 'pangeo-forge/staged-recipes' && (
-            <Text>
+            <Text my={4}>
               A place to submit pangeo-forge recipes before they become fully
               fledged pangeo-forge feedstocks.
             </Text>
           )}
 
-          <SimpleGrid
-            columns={{ base: 1, md: 1, lg: 2 }}
-            spacing={4}
-            mt={8}
-            justifyContent={'space-between'}
-          >
-            {Object.keys(details).map((key, index) => (
-              <HStack key={index} align={'top'}>
+          <FeedstockInfo details={details} />
+
+          <Tabs isLazy isFitted colorScheme='teal' my={16}>
+            <TabList>
+              <Tab>Recipe Runs</Tab>
+              <Tab>
+                <GoDatabase />
+                <Text ml={2}>{`${datasets.length} Dataset${
+                  datasets.length > 1 ? 's' : ''
+                }`}</Text>
+              </Tab>
+            </TabList>
+            <TabPanels>
+              <TabPanel>
                 {' '}
-                <VStack align={'start'}>
-                  <Text color={'gray.600'}>{key}</Text>
-
-                  <Box fontWeight={600} maxW={'90vw'}>
-                    {details[key]}
-                  </Box>
-                </VStack>
-              </HStack>
-            ))}
-          </SimpleGrid>
-
-          <Heading mt={8} as={'h3'}>
-            Recipe Runs
-          </Heading>
-
-          <SimpleGrid
-            columns={{ base: 1, md: 1, lg: 1 }}
-            spacing={4}
-            mt={8}
-            justifyContent={'space-between'}
-          >
-            {/* TODO: Add filter options */}
-            {recipe_runs
-              .sort((a, b) => a.started_at.localeCompare(b.started_at))
-              .reverse()
-              .map((recipe) => (
-                <RecipeRunCard
-                  key={recipe.id}
-                  recipe_id={recipe.recipe_id}
-                  id={recipe.id}
-                  started_at={recipe.started_at}
-                  status={recipe.status}
-                  version={recipe.version}
-                  message={recipe.message}
+                <RecipeRuns runs={recipe_runs} />
+              </TabPanel>
+              <TabPanel>
+                <FeedstockDatasets
+                  isProduction={isProduction}
+                  datasets={datasets}
                 />
-              ))}
-          </SimpleGrid>
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
         </Container>
       </Box>
     </Layout>

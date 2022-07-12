@@ -6,3 +6,5 @@ export { Layout } from '@/components/layout'
 export { Hero } from '@/components/hero'
 export { About } from '@/components/about'
 export { HowItWorks } from '@/components/how-it-works'
+
+export { CodeBlock } from '@/components/code-block'

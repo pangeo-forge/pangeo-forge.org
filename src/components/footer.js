@@ -23,6 +23,7 @@ export const Footer = () => {
         ),
       }}
       color={color}
+      mt={12}
     >
       <Container
         maxW='container.xl'

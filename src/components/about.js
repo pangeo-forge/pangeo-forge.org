@@ -1,6 +1,5 @@
 import { Link } from '@/components'
 import { Box, Container, Flex, Heading, Text } from '@chakra-ui/react'
-import React from 'react'
 
 export const About = () => {
   return (
@@ -15,6 +14,7 @@ export const About = () => {
             <Link
               href='https://en.wikipedia.org/wiki/Extract,_transform,_load'
               color={'blue.400'}
+              useExternalIcon
             >
               Extraction, Transformation, and Loading (ETL)
             </Link>
@@ -23,12 +23,17 @@ export const About = () => {
             <Link
               href='https://ieeexplore.ieee.org/abstract/document/9354557'
               color={'blue.400'}
+              useExternalIcon
             >
               {' '}
               analysis-ready, cloud-optimized (ARCO)
             </Link>{' '}
             format. Pangeo Forge is inspired directly by{' '}
-            <Link href='https://conda-forge.org/' color={'blue.400'}>
+            <Link
+              href='https://conda-forge.org/'
+              color={'blue.400'}
+              useExternalIcon
+            >
               Conda Forge
             </Link>
             , a community-led collection of recipes for building conda packages.

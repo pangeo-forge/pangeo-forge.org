@@ -20,11 +20,16 @@ const Bakeries = () => {
         <Box>Failed to load...</Box>
       </Layout>
     )
-  if (!bakeries) return <Layout menu={true}></Layout>
+  if (!bakeries)
+    return (
+      <Layout menu={true}>
+        <Skeleton minH={'100vh'}></Skeleton>
+      </Layout>
+    )
 
   return (
     <Layout menu={true}>
-      <Box as='section' mb={8}>
+      <Box as='section'>
         <Container maxW='container.xl' centerContent>
           <Heading as={'h3'} size='lg' mb={4}>
             Bakeries

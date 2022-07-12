@@ -1,9 +1,8 @@
 import { Link } from '@/components'
-import { FlowRun, StatusBadge } from '@/components/dashboard'
+import { FlowRunsAccordion, StatusBadge } from '@/components/dashboard'
 import { Layout } from '@/components/layout'
 import { usePrefect, useRecipeRun } from '@/lib/endpoints'
 import {
-  Accordion,
   Alert,
   AlertDescription,
   AlertIcon,
@@ -50,11 +49,7 @@ const RecipeRun = () => {
   if (!recipeRun)
     return (
       <Layout>
-        <Skeleton minH={'100vh'}>
-          <Box as='section'>
-            <Container maxW='container.xl' py={90}></Container>
-          </Box>
-        </Skeleton>
+        <Skeleton minH={'100vh'}></Skeleton>
       </Layout>
     )
 
@@ -81,6 +76,7 @@ const RecipeRun = () => {
           variant='outline'
           colorScheme='gray'
           fontWeight='body'
+          useExternalIcon
         >
           {recipeRun.head_sha.slice(0, 7)}
         </Badge>
@@ -168,14 +164,9 @@ const RecipeRun = () => {
               </Box>
             )}
             <Box>
-              <Accordion allowMultiple>
-                {prefect &&
-                  prefect.data?.flow_run.map((run, index) => (
-                    <FlowRun key={index} index={index} run={run}>
-                      {JSON.stringify(run)}
-                    </FlowRun>
-                  ))}
-              </Accordion>
+              {prefect && prefect.data && (
+                <FlowRunsAccordion runs={prefect.data.flow_run} />
+              )}
             </Box>
           </Box>
         </Container>
