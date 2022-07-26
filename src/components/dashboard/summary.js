@@ -38,7 +38,7 @@ export const Summary = () => {
   const borderColor = useColorModeValue('gray.800', 'gray.500')
   const feedstocks = useStats('feedstocks')
   const recipeRuns = useStats('recipe_runs')
-  const datasets = useStats('datasets')
+  const datasets = useStats('datasets?exclude_test_runs=true')
 
   const reports = [
     { label: 'Feedstocks', href: '/dashboard/feedstocks', stats: feedstocks },
