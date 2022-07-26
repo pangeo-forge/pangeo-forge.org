@@ -79,7 +79,9 @@ const Feedstock = () => {
       </Layout>
     )
 
-  const name = spec.replace('pangeo-forge/', '')
+  const name = spec
+    .replace('pangeo-forge/', '')
+    .replace(new RegExp('_', 'g'), '-')
 
   const { isProduction, datasets } = getProductionRunInfo(id, recipe_runs)
 
