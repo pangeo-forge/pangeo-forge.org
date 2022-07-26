@@ -61,6 +61,9 @@ export const Header = () => {
             display={{ base: 'flex', md: 'none' }}
           >
             <IconButton
+              _hover={{
+                textDecoration: 'none',
+              }}
               fontSize={'3xl'}
               onClick={onToggle}
               icon={isMobileNavOpen ? <CloseIcon /> : <HamburgerIcon />}
@@ -102,6 +105,9 @@ export const Header = () => {
             />
 
             <IconButton
+              _hover={{
+                textDecoration: 'none',
+              }}
               as={Link}
               href={'https://github.com/pangeo-forge'}
               size={'sm'}
@@ -111,6 +117,9 @@ export const Header = () => {
               fontSize={'2xl'}
             />
             <IconButton
+              _hover={{
+                textDecoration: 'none',
+              }}
               size={'sm'}
               variant={'ghost'}
               aria-label={'Toggle Color Mode'}

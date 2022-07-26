@@ -52,12 +52,7 @@ const FeedstockRowAccordionItem = ({ feedstockId, feedstockSpec }) => {
       </Layout>
     )
   }
-  if (!meta || !recipe_runs || !spec)
-    return (
-      <Layout>
-        <Skeleton minH={'100vh'}></Skeleton>
-      </Layout>
-    )
+  if (!meta || !recipe_runs || !spec) return <Layout></Layout>
 
   const { isProduction, datasets } = getProductionRunInfo(
     feedstockId,

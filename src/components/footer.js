@@ -50,12 +50,18 @@ export const Footer = () => {
             <ButtonGroup variant='outline'>
               <IconButton
                 as={Link}
+                _hover={{
+                  textDecoration: 'none',
+                }}
                 href='https://discourse.pangeo.io/'
                 aria-label='Discourse'
                 icon={<FaDiscourse />}
                 fontSize={'3xl'}
               />
               <IconButton
+                _hover={{
+                  textDecoration: 'none',
+                }}
                 as={Link}
                 href='https://github.com/pangeo-forge'
                 aria-label='GitHub'
@@ -63,6 +69,9 @@ export const Footer = () => {
                 fontSize={'3xl'}
               />
               <IconButton
+                _hover={{
+                  textDecoration: 'none',
+                }}
                 as={Link}
                 href='https://twitter.com/pangeo_data'
                 aria-label='Twitter'
