@@ -15,3 +15,5 @@ export { RecipeRunCard } from '@/components/dashboard/recipe-run-card'
 export { RecipeRuns } from '@/components/dashboard/recipe-runs'
 export { StatusBadge } from '@/components/dashboard/status-badge'
 export { Summary } from '@/components/dashboard/summary'
+
+export { StatusIndicatorIcon } from '@/components/dashboard/status-indicator-icon'

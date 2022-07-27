@@ -1,5 +1,5 @@
 import { Link } from '@/components'
-import { StatusBadge } from '@/components/dashboard'
+import { StatusBadge, StatusIndicatorIcon } from '@/components/dashboard'
 import { TimeDeltaFormatter } from '@/lib/time-delta'
 import {
   HStack,
@@ -10,7 +10,6 @@ import {
   Stack,
   Text,
 } from '@chakra-ui/react'
-import { FaCircle } from 'react-icons/fa'
 import { GiSandsOfTime } from 'react-icons/gi'
 import { GoCalendar, GoNote, GoTag } from 'react-icons/go'
 
@@ -23,12 +22,6 @@ export const RecipeRunCard = ({
   conclusion,
   version,
 }) => {
-  const statusIConColor = {
-    queued: 'yellow.400',
-    in_progress: 'orange.400',
-    completed: 'green.400',
-  }
-
   // TODO: have API return timestamps with UTC suffix
   // Here I'm mannually adding the +Z
   const timeSinceRun = TimeDeltaFormatter(
@@ -69,11 +62,7 @@ export const RecipeRunCard = ({
             justifyContent={'space-between'}
           >
             <HStack>
-              {/* <Icon
-                as={FaCircle}
-                fontSize={'2xl'}
-                color={statusIConColor[status]}
-              /> */}
+              <StatusIndicatorIcon status={status} conclusion={conclusion} />
 
               <Text maxW={'80vw'}>{recipe_id}</Text>
             </HStack>
