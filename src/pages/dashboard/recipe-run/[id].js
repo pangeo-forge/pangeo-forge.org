@@ -63,9 +63,14 @@ const RecipeRun = () => {
     details = {
       Name: recipeRun.recipe_id,
       'Started at': recipeRun.started_at,
-      Status: <StatusBadge status={recipeRun.status} />,
+      Status: (
+        <StatusBadge
+          status={recipeRun.status}
+          conclusion={recipeRun.conclusion}
+        />
+      ),
       Version: (
-        <Badge variant='outline' colorScheme='gray' fontWeight='body'>
+        <Badge variant='outline' colorScheme='gray' fontWeight='bold'>
           {recipeRun.version}
         </Badge>
       ),
@@ -75,7 +80,7 @@ const RecipeRun = () => {
           href={gitHubUrl}
           variant='outline'
           colorScheme='gray'
-          fontWeight='body'
+          fontWeight='bold'
           useExternalIcon
         >
           {recipeRun.head_sha.slice(0, 7)}

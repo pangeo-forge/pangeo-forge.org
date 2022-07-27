@@ -20,6 +20,7 @@ export const RecipeRunCard = ({
   started_at,
   message,
   status,
+  conclusion,
   version,
 }) => {
   const statusIConColor = {
@@ -68,11 +69,11 @@ export const RecipeRunCard = ({
             justifyContent={'space-between'}
           >
             <HStack>
-              <Icon
+              {/* <Icon
                 as={FaCircle}
                 fontSize={'2xl'}
                 color={statusIConColor[status]}
-              />
+              /> */}
 
               <Text maxW={'80vw'}>{recipe_id}</Text>
             </HStack>
@@ -101,7 +102,7 @@ export const RecipeRunCard = ({
               <Icon as={GiSandsOfTime} fontSize={'2xl'} />
               <Text>
                 {' '}
-                <StatusBadge status={status} />
+                <StatusBadge status={status} conclusion={conclusion} />
               </Text>
             </HStack>
             <HStack>

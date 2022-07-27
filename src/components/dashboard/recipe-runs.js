@@ -23,6 +23,7 @@ export const RecipeRuns = ({ runs }) => {
               status={recipe.status}
               version={recipe.version}
               message={recipe.message}
+              conclusion={recipe.conclusion}
             />
           ))}
       </SimpleGrid>
