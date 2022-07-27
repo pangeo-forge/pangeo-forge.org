@@ -11,9 +11,7 @@ import { FaCircle } from 'react-icons/fa'
 
 export const StatusIndicatorIcon = ({ status, conclusion, ...props }) => {
   if (status === 'queued') {
-    return (
-      <Icon as={FaCircle} fontSize={'2xl'} color={'yellow.500'} {...props} />
-    )
+    return <Icon as={FaCircle} fontSize={'2xl'} color={'gray.400'} {...props} />
   }
 
   if (status === 'in_progress') {
@@ -21,7 +19,7 @@ export const StatusIndicatorIcon = ({ status, conclusion, ...props }) => {
       <Icon
         as={BsFillRecordCircleFill}
         fontSize={'2xl'}
-        color={'orange.300'}
+        color={'yellow.500'}
         {...props}
       />
     )
@@ -34,7 +32,7 @@ export const StatusIndicatorIcon = ({ status, conclusion, ...props }) => {
           <Icon
             as={BsCheckCircleFill}
             fontSize={'2xl'}
-            color={'green.500'}
+            color={'green.400'}
             {...props}
           />
         )
@@ -44,7 +42,7 @@ export const StatusIndicatorIcon = ({ status, conclusion, ...props }) => {
           <Icon
             as={BsFillXCircleFill}
             fontSize={'2xl'}
-            color={'red.500'}
+            color={'red.400'}
             {...props}
           />
         )
@@ -61,12 +59,12 @@ export const StatusIndicatorIcon = ({ status, conclusion, ...props }) => {
 
       case 'neutral':
         return (
-          <Icon as={FaCircle} fontSize={'2xl'} color={'gray.500'} {...props} />
+          <Icon as={FaCircle} fontSize={'2xl'} color={'gray.400'} {...props} />
         )
 
       case 'stale':
         return (
-          <Icon as={FaCircle} fontSize={'2xl'} color={'gray.500'} {...props} />
+          <Icon as={FaCircle} fontSize={'2xl'} color={'gray.400'} {...props} />
         )
 
       case 'cancelled':
@@ -74,7 +72,7 @@ export const StatusIndicatorIcon = ({ status, conclusion, ...props }) => {
           <Icon
             as={BsFillExclamationOctagonFill}
             fontSize={'2xl'}
-            color={'gray.500'}
+            color={'gray.400'}
             {...props}
           />
         )
@@ -84,7 +82,7 @@ export const StatusIndicatorIcon = ({ status, conclusion, ...props }) => {
           <Icon
             as={BsFillSlashCircleFill}
             fontSize={'2xl'}
-            color={'gray.500'}
+            color={'gray.400'}
             {...props}
           />
         )
@@ -94,7 +92,7 @@ export const StatusIndicatorIcon = ({ status, conclusion, ...props }) => {
           <Icon
             as={BsFillDashCircleFill}
             fontSize={'2xl'}
-            color={'red.500'}
+            color={'red.400'}
             {...props}
           />
         )

@@ -2,11 +2,11 @@ import { Badge } from '@/components'
 
 export const StatusBadge = ({ status, conclusion }) => {
   if (status === 'queued') {
-    return <Badge colorScheme='yellow' text={'queued'} />
+    return <Badge colorScheme='gray' text={'queued'} />
   }
 
   if (status === 'in_progress') {
-    return <Badge colorScheme='orange' text={'in progress'} />
+    return <Badge colorScheme='yellow' text={'in progress'} />
   }
 
   if (status === 'completed') {
