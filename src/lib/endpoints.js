@@ -1,9 +1,18 @@
 import { jsonFetcher, yamlFetcher } from '@/lib/fetchers'
 import useSWR from 'swr'
+import { useRouter } from 'next/router'
 
-export const orchestratorEndpoint = 'api.pangeo-forge.org'
+function useOrchestratorEndpoint() {
+  const { query } = useRouter()
+  let endpoint = 'api.pangeo-forge.org'
+  if ('orchestratorEndpoint' in query) {
+    endpoint = query.orchestratorEndpoint
+  }
+  return endpoint
+}
 
 export const useFeedstocks = () => {
+  const orchestratorEndpoint = useOrchestratorEndpoint()
   const { data, error } = useSWR(
     `https://${orchestratorEndpoint}/feedstocks/`,
     jsonFetcher,
@@ -16,6 +25,7 @@ export const useFeedstocks = () => {
 }
 
 export const useFeedstock = (id) => {
+  const orchestratorEndpoint = useOrchestratorEndpoint()
   const { data, error } = useSWR(
     id ? `https://${orchestratorEndpoint}/feedstocks/${id}` : null,
     jsonFetcher,
@@ -28,6 +38,7 @@ export const useFeedstock = (id) => {
 }
 
 export const useBakeries = () => {
+  const orchestratorEndpoint = useOrchestratorEndpoint()
   const { data, error } = useSWR(
     `https://${orchestratorEndpoint}/bakeries/`,
     jsonFetcher,
@@ -40,6 +51,7 @@ export const useBakeries = () => {
 }
 
 export const useBakery = (id) => {
+  const orchestratorEndpoint = useOrchestratorEndpoint()
   const { data, error } = useSWR(
     id ? `https://${orchestratorEndpoint}/bakeries/${id}` : null,
     jsonFetcher,
@@ -52,6 +64,7 @@ export const useBakery = (id) => {
 }
 
 export const useRecipeRuns = () => {
+  const orchestratorEndpoint = useOrchestratorEndpoint()
   const { data, error } = useSWR(
     `https://${orchestratorEndpoint}/recipe_runs/`,
     jsonFetcher,
@@ -76,6 +89,7 @@ export const useRecipeRun = (id) => {
 }
 
 export const useStats = (key) => {
+  const orchestratorEndpoint = useOrchestratorEndpoint()
   const { data, error } = useSWR(
     key ? `https://${orchestratorEndpoint}/stats/${key}` : null,
     jsonFetcher,
