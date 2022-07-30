@@ -1,5 +1,5 @@
 import { Box } from 'theme-ui'
-import Link from 'next/link'
+import { LinkWithQuery } from '../lib/link'
 import { useRepo } from '../lib/endpoints'
 import { GoMarkGithub } from 'react-icons/go'
 import { TimeDeltaFormatter } from '../lib/time-delta'
@@ -16,7 +16,7 @@ const FeedstockCard = ({ props }) => {
   const href = '/dashboard/feedstock/' + id
 
   return (
-    <Link
+    <LinkWithQuery
       href={href}
       passHref
       sx={{
@@ -83,7 +83,7 @@ const FeedstockCard = ({ props }) => {
           </Box>
         </Box>
       </Box>
-    </Link>
+    </LinkWithQuery>
   )
 }
 
