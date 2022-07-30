@@ -8,9 +8,9 @@ export const Link = React.forwardRef(function CustomLink(props, ref) {
   const href = props.href
   const isInternalLink = href && (href.startsWith('/') || href.startsWith('#'))
   const { useExternalIcon, ...rest } = props
+  const { query } = useRouter()
 
   if (isInternalLink) {
-    const { query } = useRouter()
     let paramsToAppend = ''
     if ('orchestratorEndpoint' in query) {
       paramsToAppend = `?orchestratorEndpoint=${query.orchestratorEndpoint}`
