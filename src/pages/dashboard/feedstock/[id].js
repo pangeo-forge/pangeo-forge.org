@@ -60,7 +60,7 @@ const Feedstock = () => {
             description={meta.description}
             pangeo_forge_version={meta.pangeo_forge_version}
             pangeo_notebook_version={meta.pangeo_notebook_version}
-            bakery={meta.bakery ? meta.bakery.id : null}
+            bakery={meta.bakery?.id}
             license={meta.provenance ? meta.provenance.license : null}
             providers={meta.provenance ? meta.provenance.providers : null}
             maintainers={meta.maintainers ? meta.maintainers : null}
