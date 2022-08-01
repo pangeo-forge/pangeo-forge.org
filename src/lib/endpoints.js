@@ -4,6 +4,7 @@ import useSWR from 'swr'
 export const orchestratorEndpoint = 'api.pangeo-forge.org'
 
 // dedupe requests with the same key in a 2 minutes time span (https://swr.vercel.app/docs/options)
+// This allows us to avoid making requests for the same data (used on multiple pages e.g.feedstockInfo) multiple times
 const defaultDedupingInterval = 120000
 
 export const useFeedstocks = () => {
