@@ -77,6 +77,7 @@ export const useRecipeRuns = () => {
 }
 
 export const useRecipeRun = (id) => {
+  const orchestratorEndpoint = useOrchestratorEndpoint()
   const { data, error } = useSWR(
     id ? `https://${orchestratorEndpoint}/recipe_runs/${id}` : null,
     jsonFetcher,
