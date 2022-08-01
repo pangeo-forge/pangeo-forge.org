@@ -1,20 +1,15 @@
-import { Link } from '@/components'
 import {
   FeedstockDatasets,
   FeedstockInfo,
-  Maintainers,
-  Providers,
   RecipeRuns,
 } from '@/components/dashboard'
 import { Layout } from '@/components/layout'
 import { useFeedstock, useMeta } from '@/lib/endpoints'
+import { getName } from '@/lib/feedstock-utils'
 import { getProductionRunInfo } from '@/lib/recipe-run-utils'
 import {
   Box,
-  Button,
   Container,
-  Flex,
-  Icon,
   Skeleton,
   Tab,
   TabList,
@@ -24,7 +19,7 @@ import {
   Text,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { GoDatabase, GoRepo, GoTag } from 'react-icons/go'
+import { GoDatabase } from 'react-icons/go'
 
 const Feedstock = () => {
   const router = useRouter()
@@ -32,34 +27,6 @@ const Feedstock = () => {
 
   const { fs: { spec = '', recipe_runs = [] } = {}, fsError } = useFeedstock(id)
   const { meta, metaError } = useMeta(spec)
-
-  const repoUrl = `https://github.com/${spec}`
-
-  let details = {}
-
-  if (meta && !meta['404']) {
-    // these can be expanded once the meta.yaml file spec is stable
-    details = {
-      Title: meta.title,
-      Description: meta.description,
-      'Pangeo-Forge Version': (
-        <Flex>
-          <Icon as={GoTag} fontSize={'2xl'} />
-          <Text px={2}>{meta.pangeo_forge_version}</Text>
-        </Flex>
-      ),
-      'Pangeo Notebook Version': (
-        <Flex>
-          <Icon as={GoTag} fontSize={'2xl'} />
-          <Text px={2}>{meta.pangeo_notebook_version}</Text>
-        </Flex>
-      ),
-      Bakery: meta.bakery ? meta.bakery.id : null,
-      License: meta.provenance ? meta.provenance.license : null,
-      Providers: <Providers providers={meta.provenance.providers} />,
-      Maintainers: <Maintainers maintainers={meta.maintainers} />,
-    }
-  }
 
   if (fsError || metaError)
     return (
@@ -79,28 +46,13 @@ const Feedstock = () => {
       </Layout>
     )
 
-  const name = spec
-    .replace('pangeo-forge/', '')
-    .replace(new RegExp('_', 'g'), '-')
-
+  const name = getName(spec)
   const { isProduction, datasets } = getProductionRunInfo(id, recipe_runs)
 
   return (
     <Layout>
       <Box as='section'>
         <Container maxW='container.xl' mt={90}>
-          <Button
-            as={Link}
-            href={repoUrl}
-            fontSize={'2xl'}
-            colorScheme='teal'
-            variant='outline'
-          >
-            {' '}
-            <GoRepo />
-            <Text ml={2}>{name}</Text>
-          </Button>
-
           {spec == 'pangeo-forge/staged-recipes' && (
             <Text my={4}>
               A place to submit pangeo-forge recipes before they become fully
@@ -108,7 +60,18 @@ const Feedstock = () => {
             </Text>
           )}
 
-          <FeedstockInfo details={details} />
+          <FeedstockInfo
+            repo={spec}
+            name={name}
+            title={meta.title}
+            description={meta.description}
+            pangeo_forge_version={meta.pangeo_forge_version}
+            pangeo_notebook_version={meta.pangeo_notebook_version}
+            bakery={meta.bakery ? meta.bakery.id : null}
+            license={meta.provenance ? meta.provenance.license : null}
+            providers={meta.provenance.providers}
+            maintainers={meta.maintainers}
+          />
 
           <Tabs isLazy isFitted colorScheme='teal' my={16}>
             <TabList>
