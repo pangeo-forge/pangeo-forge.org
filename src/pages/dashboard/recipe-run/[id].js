@@ -11,8 +11,8 @@ import {
   Box,
   Button,
   Container,
-  HStack,
   Heading,
+  HStack,
   SimpleGrid,
   Skeleton,
   Stack,
@@ -33,7 +33,11 @@ const RecipeRun = () => {
     active = recipeRun.status != 'completed'
   }
 
-  const { prefect, prefectError } = usePrefect(id, active)
+  const {
+    prefect,
+    prefectError,
+    isLoading: prefectIsLoading,
+  } = usePrefect(id, active)
 
   if (recipeRunError) {
     return (
@@ -46,7 +50,7 @@ const RecipeRun = () => {
       </Layout>
     )
   }
-  if (isLoading)
+  if (isLoading || prefectIsLoading)
     return (
       <Layout>
         <Skeleton minH={'100vh'}></Skeleton>
