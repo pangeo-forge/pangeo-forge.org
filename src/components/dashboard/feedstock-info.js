@@ -68,10 +68,9 @@ export const FeedstockInfo = ({
           columns={{ base: 1, md: 2, lg: 3 }}
           spacing={{ base: 2, sm: 6 }}
           my={8}
-          justifyContent={'space-between'}
         >
           {Object.keys(details).map((key, index) => (
-            <HStack key={index} align={'top'}>
+            <HStack key={index} align={'top'} my={2}>
               {' '}
               <VStack align={'start'}>
                 <Text color={'gray.600'}>{key}</Text>

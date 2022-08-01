@@ -21,8 +21,8 @@ import {
   Box,
   Container,
   Divider,
-  Heading,
   HStack,
+  Heading,
   SimpleGrid,
   Skeleton,
   Text,
@@ -159,24 +159,23 @@ const RecipeRun = () => {
             Recipe Run Details
           </Heading>
 
-          <Box my={8}>
-            <SimpleGrid
-              columns={{ base: 1, md: 2, lg: 3 }}
-              spacing={{ base: 2, sm: 6 }}
-            >
-              {Object.keys(details).map((key, index) => (
-                <HStack key={index} align={'top'} py={2}>
-                  {' '}
-                  <VStack align={'start'}>
-                    <Text color={'gray.600'}>{key}</Text>
-                    <Text fontWeight={600} maxW={'90vw'}>
-                      {details[key]}
-                    </Text>
-                  </VStack>
-                </HStack>
-              ))}
-            </SimpleGrid>
-          </Box>
+          <SimpleGrid
+            columns={{ base: 1, md: 2, lg: 3 }}
+            spacing={{ base: 2, sm: 6 }}
+            my={8}
+          >
+            {Object.keys(details).map((key, index) => (
+              <HStack key={index} align={'top'} my={2}>
+                {' '}
+                <VStack align={'start'}>
+                  <Text color={'gray.600'}>{key}</Text>
+                  <Text fontWeight={600} maxW={'90vw'}>
+                    {details[key]}
+                  </Text>
+                </VStack>
+              </HStack>
+            ))}
+          </SimpleGrid>
 
           <Divider my={8} />
           <Box my={8}>
