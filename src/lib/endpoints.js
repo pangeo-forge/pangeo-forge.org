@@ -3,11 +3,14 @@ import useSWR from 'swr'
 
 export const orchestratorEndpoint = 'api.pangeo-forge.org'
 
+// dedupe requests with the same key in a 2 minutes time span (https://swr.vercel.app/docs/options)
+const defaultDedupingInterval = 120000
+
 export const useFeedstocks = () => {
   const { data, error } = useSWR(
     `https://${orchestratorEndpoint}/feedstocks/`,
     jsonFetcher,
-    { refreshInterval: 300000 }
+    { refreshInterval: 300000, dedupingInterval: defaultDedupingInterval }
   )
   return {
     feedstocks: data,
@@ -19,7 +22,7 @@ export const useFeedstock = (id) => {
   const { data, error } = useSWR(
     id ? `https://${orchestratorEndpoint}/feedstocks/${id}` : null,
     jsonFetcher,
-    { refreshInterval: 300000 }
+    { refreshInterval: 300000, dedupingInterval: defaultDedupingInterval }
   )
   return {
     fs: data,
@@ -31,7 +34,7 @@ export const useBakeries = () => {
   const { data, error } = useSWR(
     `https://${orchestratorEndpoint}/bakeries/`,
     jsonFetcher,
-    { refreshInterval: 3600000 }
+    { refreshInterval: 3600000, dedupingInterval: defaultDedupingInterval }
   )
   return {
     bakeries: data,
@@ -43,7 +46,7 @@ export const useBakery = (id) => {
   const { data, error } = useSWR(
     id ? `https://${orchestratorEndpoint}/bakeries/${id}` : null,
     jsonFetcher,
-    { refreshInterval: 3600000 }
+    { refreshInterval: 3600000, dedupingInterval: defaultDedupingInterval }
   )
   return {
     bakery: data,
@@ -90,7 +93,8 @@ export const useStats = (key) => {
 export const useRepo = (APIPath) => {
   const { data, error } = useSWR(
     APIPath ? `/api/github/feedstock-meta?path=${APIPath}` : null,
-    jsonFetcher
+    jsonFetcher,
+    { dedupingInterval: defaultDedupingInterval }
   )
   return {
     repo: data,
@@ -103,7 +107,8 @@ export const useMeta = (spec) => {
     spec
       ? `https://raw.githubusercontent.com/${spec}/main/feedstock/meta.yaml`
       : null,
-    yamlFetcher
+    yamlFetcher,
+    { dedupingInterval: defaultDedupingInterval }
   )
   return {
     meta: data,
