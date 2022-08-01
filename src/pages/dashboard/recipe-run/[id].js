@@ -25,7 +25,7 @@ const RecipeRun = () => {
   const router = useRouter()
   const { id } = router.query
 
-  const { recipeRun, recipeRunError } = useRecipeRun(id)
+  const { recipeRun, recipeRunError, isLoading } = useRecipeRun(id)
 
   let active = false
 
@@ -46,7 +46,7 @@ const RecipeRun = () => {
       </Layout>
     )
   }
-  if (!recipeRun)
+  if (isLoading)
     return (
       <Layout>
         <Skeleton minH={'100vh'}></Skeleton>

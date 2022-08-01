@@ -20,7 +20,7 @@ const Bakery = () => {
   const router = useRouter()
   const { id } = router.query
 
-  const { bakery, bakeryError } = useBakery(id)
+  const { bakery, bakeryError, isLoading } = useBakery(id)
 
   const repoUrl = 'https://github.com/pangeo-forge/pangeo-forge-gcs-bakery'
 
@@ -31,7 +31,7 @@ const Bakery = () => {
       </Layout>
     )
 
-  if (!bakery)
+  if (isLoading)
     return (
       <Layout>
         <Skeleton minH={'100vh'}></Skeleton>

@@ -15,6 +15,7 @@ export const useFeedstocks = () => {
   return {
     feedstocks: data,
     feedstocksError: error,
+    isLoading: !data && !error,
   }
 }
 
@@ -27,6 +28,7 @@ export const useFeedstock = (id) => {
   return {
     fs: data,
     fsError: error,
+    isLoading: !data && !error,
   }
 }
 
@@ -39,6 +41,7 @@ export const useBakeries = () => {
   return {
     bakeries: data,
     bakeriesError: error,
+    isLoading: !data && !error,
   }
 }
 
@@ -51,6 +54,7 @@ export const useBakery = (id) => {
   return {
     bakery: data,
     bakeryError: error,
+    isLoading: !data && !error,
   }
 }
 
@@ -63,6 +67,7 @@ export const useRecipeRuns = () => {
   return {
     recipeRuns: data,
     recipeRunsError: error,
+    isLoading: !data && !error,
   }
 }
 
@@ -75,6 +80,7 @@ export const useRecipeRun = (id) => {
   return {
     recipeRun: data,
     recipeRunError: error,
+    isLoading: !data && !error,
   }
 }
 
@@ -87,6 +93,7 @@ export const useStats = (key) => {
   return {
     stat: data,
     statError: error,
+    isLoading: !data && !error,
   }
 }
 
@@ -99,6 +106,7 @@ export const useRepo = (APIPath) => {
   return {
     repo: data,
     repoError: error,
+    isLoading: !data && !error,
   }
 }
 
@@ -113,6 +121,7 @@ export const useMeta = (spec) => {
   return {
     meta: data,
     metaError: error,
+    isLoading: !data && !error,
   }
 }
 
@@ -127,5 +136,6 @@ export const usePrefect = (id, active = true) => {
   return {
     prefect: data,
     prefectError: error,
+    isLoading: !data && !error,
   }
 }

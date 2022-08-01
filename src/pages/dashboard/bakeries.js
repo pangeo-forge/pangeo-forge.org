@@ -7,12 +7,11 @@ import {
   Heading,
   SimpleGrid,
   Skeleton,
-  Stack,
   Text,
 } from '@chakra-ui/react'
 
 const Bakeries = () => {
-  const { bakeries, bakeriesError } = useBakeries()
+  const { bakeries, bakeriesError, isLoading } = useBakeries()
 
   if (bakeriesError)
     return (
@@ -20,7 +19,7 @@ const Bakeries = () => {
         <Box>Failed to load...</Box>
       </Layout>
     )
-  if (!bakeries)
+  if (isLoading)
     return (
       <Layout menu={true}>
         <Skeleton minH={'100vh'}></Skeleton>
