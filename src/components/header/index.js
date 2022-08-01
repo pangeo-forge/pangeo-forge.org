@@ -2,6 +2,7 @@ import { Link } from '@/components'
 import { navItems as menuItems } from '@/components/header/data'
 import { DesktopNav } from '@/components/header/desktop-nav'
 import { MobileNav } from '@/components/header/mobile-nav'
+import { OrchestratorAlert } from '@/components/header/alert'
 import { CloseIcon, HamburgerIcon } from '@chakra-ui/icons'
 import {
   Box,
@@ -38,7 +39,7 @@ export const Header = () => {
 
   return (
     <Box>
-      <Flex
+      <Stack
         as={'header'}
         pos='fixed'
         top='0'
@@ -129,10 +130,11 @@ export const Header = () => {
             />
           </Stack>
         </Container>
-      </Flex>
       <Collapse in={isMobileNavOpen} animateOpacity>
         <MobileNav isOpen={isMobileNavOpen} navItems={navItems} />
       </Collapse>
+      <OrchestratorAlert />
+      </Stack>
     </Box>
   )
 }
