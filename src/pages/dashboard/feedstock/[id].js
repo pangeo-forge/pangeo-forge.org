@@ -53,13 +53,6 @@ const Feedstock = () => {
     <Layout>
       <Box as='section'>
         <Container maxW='container.xl' mt={90}>
-          {spec == 'pangeo-forge/staged-recipes' && (
-            <Text my={4}>
-              A place to submit pangeo-forge recipes before they become fully
-              fledged pangeo-forge feedstocks.
-            </Text>
-          )}
-
           <FeedstockInfo
             repo={spec}
             name={name}
@@ -69,8 +62,8 @@ const Feedstock = () => {
             pangeo_notebook_version={meta.pangeo_notebook_version}
             bakery={meta.bakery ? meta.bakery.id : null}
             license={meta.provenance ? meta.provenance.license : null}
-            providers={meta.provenance.providers}
-            maintainers={meta.maintainers}
+            providers={meta.provenance ? meta.provenance.providers : null}
+            maintainers={meta.maintainers ? meta.maintainers : null}
           />
 
           <Tabs isLazy isFitted colorScheme='teal' my={16}>

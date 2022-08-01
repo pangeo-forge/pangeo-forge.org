@@ -21,6 +21,7 @@ export const RecipeRunCard = ({
   status,
   conclusion,
   version,
+  feedstock_id,
 }) => {
   // TODO: have API return timestamps with UTC suffix
   // Here I'm mannually adding the +Z
@@ -28,7 +29,7 @@ export const RecipeRunCard = ({
     Date.now() - Date.parse(started_at + 'Z')
   )
 
-  const href = '/dashboard/recipe-run/' + id
+  const href = `/dashboard/recipe-run/${id}?feedstock_id=${feedstock_id}`
 
   return (
     <LinkBox

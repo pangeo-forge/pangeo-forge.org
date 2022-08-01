@@ -17,6 +17,7 @@ export const RecipeRuns = ({ runs }) => {
           .map((recipe) => (
             <RecipeRunCard
               key={recipe.id}
+              feedstock_id={recipe.feedstock_id}
               recipe_id={recipe.recipe_id}
               id={recipe.id}
               started_at={recipe.started_at}

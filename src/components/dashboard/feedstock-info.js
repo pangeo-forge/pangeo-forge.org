@@ -57,25 +57,33 @@ export const FeedstockInfo = ({
         <GoRepo />
         <Text ml={2}>{name}</Text>
       </Button>{' '}
-      <SimpleGrid
-        columns={{ base: 1, md: 2, lg: 2 }}
-        spacing={4}
-        my={8}
-        justifyContent={'space-between'}
-      >
-        {Object.keys(details).map((key, index) => (
-          <HStack key={index} align={'top'}>
-            {' '}
-            <VStack align={'start'}>
-              <Text color={'gray.600'}>{key}</Text>
+      {repo == 'pangeo-forge/staged-recipes' && (
+        <Text my={8}>
+          A place to submit pangeo-forge recipes before they become fully
+          fledged pangeo-forge feedstocks.
+        </Text>
+      )}
+      {repo !== 'pangeo-forge/staged-recipes' && (
+        <SimpleGrid
+          columns={{ base: 1, md: 2, lg: 3 }}
+          spacing={{ base: 2, sm: 6 }}
+          my={8}
+          justifyContent={'space-between'}
+        >
+          {Object.keys(details).map((key, index) => (
+            <HStack key={index} align={'top'}>
+              {' '}
+              <VStack align={'start'}>
+                <Text color={'gray.600'}>{key}</Text>
 
-              <Box fontWeight={600} maxW={'90vw'}>
-                {details[key]}
-              </Box>
-            </VStack>
-          </HStack>
-        ))}
-      </SimpleGrid>
+                <Box fontWeight={600} maxW={'90vw'}>
+                  {details[key]}
+                </Box>
+              </VStack>
+            </HStack>
+          ))}
+        </SimpleGrid>
+      )}
     </>
   )
 }

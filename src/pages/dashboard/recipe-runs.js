@@ -41,6 +41,7 @@ const RecipeRuns = () => {
               .map((recipe, index) => (
                 <RecipeRunCard
                   key={index}
+                  feedstock_id={recipe.feedstock_id}
                   recipe_id={recipe.recipe_id}
                   id={recipe.id}
                   started_at={recipe.started_at}

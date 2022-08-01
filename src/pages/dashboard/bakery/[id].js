@@ -83,7 +83,7 @@ const Bakery = () => {
                 .map((recipe, index) => (
                   <RecipeRunCard
                     key={index}
-                    recipe_id={recipe.recipe_id}
+                    feedstock_id={recipe.feedstock_id}
                     id={recipe.id}
                     started_at={recipe.started_at}
                     status={recipe.status}
