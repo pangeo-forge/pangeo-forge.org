@@ -1,24 +1,27 @@
-import React from 'react'
+import { Link } from '@/components/link'
 import { Alert, AlertDescription, AlertIcon } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 
-export const OrchestratorAlert = React.forwardRef(function CustomLink(
-  props,
-  ref
-) {
+export const OrchestratorAlert = () => {
   const { query } = useRouter()
-  if ('orchestratorEndpoint' in query) {
-    return (
-      <Alert status='warning' variant='solid'>
-        <AlertIcon />
-        <AlertDescription>
-          You are viewing a development version of this site, with data
-          populated from https://{query.orchestratorEndpoint}. For latest
-          version of the production site, navigate to{' '}
-          <a href='https://pangeo-forge.org/'>https://pangeo-forge.org/</a>.
-        </AlertDescription>
-      </Alert>
-    )
-  }
-  return null
-})
+
+  return (
+    <>
+      {query?.orchestratorEndpoint && (
+        <Alert status='warning' variant='solid'>
+          <AlertIcon />
+          <AlertDescription>
+            You are viewing a development version of this site, with data
+            populated from https://{query.orchestratorEndpoint}. For latest
+            version of the production site, navigate to{' '}
+            <Link href='https://pangeo-forge.org/'>
+              https://pangeo-forge.org/
+            </Link>
+            .
+          </AlertDescription>
+        </Alert>
+      )}
+    </>
+  )
+}
+
