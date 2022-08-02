@@ -1,8 +1,7 @@
-import { Link } from '@/components'
 import {
   FeedstockInfo,
   FlowRunsAccordion,
-  StatusBadge,
+  RecipeRunDetails,
 } from '@/components/dashboard'
 import { Layout } from '@/components/layout'
 import {
@@ -17,18 +16,12 @@ import {
   AlertDescription,
   AlertIcon,
   AlertTitle,
-  Badge,
   Box,
   Container,
   Divider,
-  HStack,
   Heading,
-  SimpleGrid,
   Skeleton,
-  Text,
-  VStack,
 } from '@chakra-ui/react'
-import { formatDistance } from 'date-fns'
 import { useRouter } from 'next/router'
 
 const RecipeRun = () => {
@@ -47,8 +40,6 @@ const RecipeRun = () => {
   } = useFeedstock(feedstock_id)
 
   const { meta, metaError, isLoading: metaIsLoading } = useMeta(spec)
-
-  const name = getName(spec)
 
   let active = false
 
@@ -82,83 +73,20 @@ const RecipeRun = () => {
     )
   }
 
-  let details = {}
-
-  if (recipeRun) {
-    details = {
-      Status: (
-        <StatusBadge
-          status={recipeRun.status}
-          conclusion={recipeRun.conclusion}
-        />
-      ),
-      ID: recipeRun.id,
-      Name: recipeRun.recipe_id,
-      'Started at': recipeRun.started_at,
-      'Finished at': recipeRun.completed_at ? recipeRun.completed_at : '-',
-      Duration: recipeRun.completed_at
-        ? formatDistance(
-            new Date(recipeRun.completed_at),
-            new Date(recipeRun.started_at)
-          )
-        : '-',
-
-      'Feedstock Dashboard': (
-        <Badge
-          as={Link}
-          href={`/dashboard/feedstock/${recipeRun.feedstock_id}`}
-          variant='outline'
-          colorScheme='teal'
-          fontWeight='bold'
-        >
-          {getName(recipeRun.feedstock.spec)}
-        </Badge>
-      ),
-      'Bakery Dashboard': (
-        <Badge
-          as={Link}
-          href={`/dashboard/bakery/${recipeRun.bakery_id}`}
-          variant='outline'
-          colorScheme='teal'
-          fontWeight='bold'
-        >
-          {recipeRun.bakery.name}
-        </Badge>
-      ),
-      Version: (
-        <Badge variant='outline' colorScheme='gray' fontWeight='bold'>
-          {recipeRun.version}
-        </Badge>
-      ),
-      'Git SHA': (
-        <Badge
-          as={Link}
-          href={`https://github.com/${recipeRun.feedstock.spec}/tree/${recipeRun.head_sha}`}
-          variant='outline'
-          colorScheme='gray'
-          fontWeight='bold'
-          useExternalIcon
-        >
-          {recipeRun.head_sha.slice(0, 7)}
-        </Badge>
-      ),
-    }
-  }
-
   return (
     <Layout>
       <Box as='section'>
         <Container maxW='container.xl' py={90}>
           <FeedstockInfo
             repo={spec}
-            name={name}
-            title={meta.title}
-            description={meta.description}
-            pangeo_forge_version={meta.pangeo_forge_version}
-            pangeo_notebook_version={meta.pangeo_notebook_version}
-            bakery={meta.bakery?.id}
-            license={meta.provenance?.license}
-            providers={meta.provenance?.providers}
+            name={spec ? getName(spec) : ''}
+            title={meta?.title}
+            description={meta?.description}
+            pangeo_forge_version={meta?.pangeo_forge_version}
+            pangeo_notebook_version={meta?.pangeo_notebook_version}
+            bakery={meta?.bakery?.id}
+            license={meta?.provenance?.license}
+            providers={meta?.provenance?.providers}
             maintainers={meta?.maintainers}
           />
           <Divider my={8} />
@@ -167,23 +95,20 @@ const RecipeRun = () => {
             Recipe Run Details
           </Heading>
 
-          <SimpleGrid
-            columns={{ base: 1, md: 2, lg: 3 }}
-            spacing={{ base: 2, sm: 6 }}
-            my={8}
-          >
-            {Object.keys(details).map((key, index) => (
-              <HStack key={index} align={'top'} my={2}>
-                {' '}
-                <VStack align={'start'}>
-                  <Text color={'gray.600'}>{key}</Text>
-                  <Text fontWeight={600} maxW={'90vw'}>
-                    {details[key]}
-                  </Text>
-                </VStack>
-              </HStack>
-            ))}
-          </SimpleGrid>
+          <RecipeRunDetails
+            id={recipeRun.id}
+            name={spec ? getName(spec) : ''}
+            started_at={recipeRun?.started_at}
+            completed_at={recipeRun?.completed_at}
+            spec={spec}
+            feedstock_id={feedstock_id}
+            bakery_id={recipeRun?.bakery_id}
+            bakery_name={recipeRun?.bakery.name}
+            version={recipeRun?.version}
+            head_sha={recipeRun?.head_sha}
+            status={recipeRun?.status}
+            conclusion={recipeRun?.conclusion}
+          />
 
           <Divider my={8} />
           <Box my={8}>
