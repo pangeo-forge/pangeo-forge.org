@@ -46,9 +46,13 @@ export const FlowRunsAccordion = ({ runs }) => {
   return (
     <Box my={8}>
       <Accordion allowMultiple>
-        {runs.map((run, index) => {
-          return <FlowRun key={index} index={index} run={run} />
-        })}
+        {runs && (
+          <>
+            {runs.map((run, index) => {
+              return <FlowRun key={index} index={index} run={run} />
+            })}
+          </>
+        )}
       </Accordion>
     </Box>
   )
