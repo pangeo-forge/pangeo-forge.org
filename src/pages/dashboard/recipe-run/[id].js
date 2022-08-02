@@ -34,12 +34,21 @@ import { useRouter } from 'next/router'
 const RecipeRun = () => {
   const router = useRouter()
   const { id, feedstock_id } = router.query
-  const { recipeRun, recipeRunError } = useRecipeRun(id)
+  const {
+    recipeRun,
+    recipeRunError,
+    isLoading: recipeIsLoading,
+  } = useRecipeRun(id)
 
-  const { fs: { spec = '', recipe_runs = [] } = {}, fsError } =
-    useFeedstock(feedstock_id)
+  const {
+    fs: { spec = '', recipe_runs = [] } = {},
+    fsError,
+    isLoading: feedstockIsLoading,
+  } = useFeedstock(feedstock_id)
 
-  const { meta, metaError } = useMeta(spec)
+  const { meta, metaError, isLoading: metaIsLoading } = useMeta(spec)
+
+  const name = getName(spec)
 
   let active = false
 
@@ -64,7 +73,8 @@ const RecipeRun = () => {
       </Layout>
     )
   }
-  if (!recipeRun || !meta || !prefect || !spec) {
+
+  if (metaIsLoading || feedstockIsLoading || prefectIsLoading) {
     return (
       <Layout>
         <Skeleton minH={'100vh'}></Skeleton>
@@ -72,13 +82,7 @@ const RecipeRun = () => {
     )
   }
 
-  const name = getName(spec)
-
   let details = {}
-
-  const feedstockUrl = `/dashboard/feedstock/${recipeRun.feedstock_id}`
-  const bakeryUrl = `/dashboard/bakery/${recipeRun.bakery_id}`
-  const gitHubUrl = `https://github.com/${recipeRun.feedstock.spec}/tree/${recipeRun.head_sha}`
 
   if (recipeRun) {
     details = {
@@ -102,7 +106,7 @@ const RecipeRun = () => {
       'Feedstock Dashboard': (
         <Badge
           as={Link}
-          href={feedstockUrl}
+          href={`/dashboard/feedstock/${recipeRun.feedstock_id}`}
           variant='outline'
           colorScheme='teal'
           fontWeight='bold'
@@ -113,7 +117,7 @@ const RecipeRun = () => {
       'Bakery Dashboard': (
         <Badge
           as={Link}
-          href={bakeryUrl}
+          href={`/dashboard/bakery/${recipeRun.bakery_id}`}
           variant='outline'
           colorScheme='teal'
           fontWeight='bold'
@@ -129,7 +133,7 @@ const RecipeRun = () => {
       'Git SHA': (
         <Badge
           as={Link}
-          href={gitHubUrl}
+          href={`https://github.com/${recipeRun.feedstock.spec}/tree/${recipeRun.head_sha}`}
           variant='outline'
           colorScheme='gray'
           fontWeight='bold'
