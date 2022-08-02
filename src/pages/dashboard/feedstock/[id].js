@@ -25,8 +25,12 @@ const Feedstock = () => {
   const router = useRouter()
   const { id } = router.query
 
-  const { fs: { spec = '', recipe_runs = [] } = {}, fsError } = useFeedstock(id)
-  const { meta, metaError } = useMeta(spec)
+  const {
+    fs: { spec = '', recipe_runs = [] } = {},
+    fsError,
+    isLoading: fsIsLoading,
+  } = useFeedstock(id)
+  const { meta, metaError, isLoading: metaIsLoading } = useMeta(spec)
 
   if (fsError || metaError)
     return (
@@ -39,7 +43,7 @@ const Feedstock = () => {
       </Layout>
     )
 
-  if (!spec || !meta)
+  if (fsIsLoading || metaIsLoading)
     return (
       <Layout>
         <Skeleton minH={'100vh'}></Skeleton>

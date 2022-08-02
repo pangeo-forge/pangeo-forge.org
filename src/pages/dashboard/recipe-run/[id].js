@@ -23,6 +23,7 @@ import {
   Divider,
   HStack,
   Heading,
+  HStack,
   SimpleGrid,
   Skeleton,
   Text,
@@ -47,7 +48,11 @@ const RecipeRun = () => {
     active = recipeRun.status != 'completed'
   }
 
-  const { prefect, prefectError } = usePrefect(id, active)
+  const {
+    prefect,
+    prefectError,
+    isLoading: prefectIsLoading,
+  } = usePrefect(id, active)
 
   if (recipeRunError || metaError || prefectError || fsError) {
     return (
