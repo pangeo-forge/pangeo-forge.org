@@ -11,8 +11,8 @@ import {
   Box,
   Button,
   Container,
-  HStack,
   Heading,
+  HStack,
   SimpleGrid,
   Skeleton,
   Stack,
@@ -25,7 +25,7 @@ const RecipeRun = () => {
   const router = useRouter()
   const { id } = router.query
 
-  const { recipeRun, recipeRunError } = useRecipeRun(id)
+  const { recipeRun, recipeRunError, isLoading } = useRecipeRun(id)
 
   let active = false
 
@@ -33,7 +33,11 @@ const RecipeRun = () => {
     active = recipeRun.status != 'completed'
   }
 
-  const { prefect, prefectError } = usePrefect(id, active)
+  const {
+    prefect,
+    prefectError,
+    isLoading: prefectIsLoading,
+  } = usePrefect(id, active)
 
   if (recipeRunError) {
     return (
@@ -46,7 +50,7 @@ const RecipeRun = () => {
       </Layout>
     )
   }
-  if (!recipeRun)
+  if (isLoading || prefectIsLoading)
     return (
       <Layout>
         <Skeleton minH={'100vh'}></Skeleton>
