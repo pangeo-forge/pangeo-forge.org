@@ -1,13 +1,12 @@
 import { LogLine } from '@/components/dashboard'
 import { AddIcon, MinusIcon } from '@chakra-ui/icons'
 import {
+  Accordion,
   AccordionButton,
   AccordionItem,
   AccordionPanel,
-  Accordion,
   Box,
 } from '@chakra-ui/react'
-import React from 'react'
 
 const FlowRun = ({ index, run }) => {
   return (
@@ -45,10 +44,16 @@ const FlowRun = ({ index, run }) => {
 
 export const FlowRunsAccordion = ({ runs }) => {
   return (
-    <Accordion allowMultiple>
-      {runs.map((run, index) => {
-        return <FlowRun key={index} index={index} run={run} />
-      })}
-    </Accordion>
+    <Box my={8}>
+      <Accordion allowMultiple>
+        {runs && (
+          <>
+            {runs.map((run, index) => {
+              return <FlowRun key={index} index={index} run={run} />
+            })}
+          </>
+        )}
+      </Accordion>
+    </Box>
   )
 }

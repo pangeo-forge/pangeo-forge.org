@@ -11,7 +11,7 @@ import {
 } from '@chakra-ui/react'
 
 const Feedstocks = () => {
-  const { feedstocks, feedstocksError } = useFeedstocks()
+  const { feedstocks, feedstocksError, isLoading } = useFeedstocks()
 
   if (feedstocksError) {
     return (
@@ -20,7 +20,7 @@ const Feedstocks = () => {
       </Layout>
     )
   }
-  if (!feedstocks)
+  if (isLoading)
     return (
       <Layout menu={true}>
         <Skeleton minH={'100vh'}></Skeleton>

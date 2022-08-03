@@ -11,16 +11,21 @@ function useOrchestratorEndpoint() {
   return endpoint
 }
 
+// dedupe requests with the same key in a 2 minutes time span (https://swr.vercel.app/docs/options)
+// This allows us to avoid making requests for the same data (used on multiple pages e.g.feedstockInfo) multiple times
+const defaultDedupingInterval = 120000
+
 export const useFeedstocks = () => {
   const orchestratorEndpoint = useOrchestratorEndpoint()
   const { data, error } = useSWR(
     `https://${orchestratorEndpoint}/feedstocks/`,
     jsonFetcher,
-    { refreshInterval: 300000 }
+    { refreshInterval: 300000, dedupingInterval: defaultDedupingInterval }
   )
   return {
     feedstocks: data,
     feedstocksError: error,
+    isLoading: !data && !error,
   }
 }
 
@@ -29,11 +34,12 @@ export const useFeedstock = (id) => {
   const { data, error } = useSWR(
     id ? `https://${orchestratorEndpoint}/feedstocks/${id}` : null,
     jsonFetcher,
-    { refreshInterval: 300000 }
+    { refreshInterval: 300000, dedupingInterval: defaultDedupingInterval }
   )
   return {
     fs: data,
     fsError: error,
+    isLoading: !data && !error,
   }
 }
 
@@ -42,11 +48,12 @@ export const useBakeries = () => {
   const { data, error } = useSWR(
     `https://${orchestratorEndpoint}/bakeries/`,
     jsonFetcher,
-    { refreshInterval: 3600000 }
+    { refreshInterval: 3600000, dedupingInterval: defaultDedupingInterval }
   )
   return {
     bakeries: data,
     bakeriesError: error,
+    isLoading: !data && !error,
   }
 }
 
@@ -55,11 +62,12 @@ export const useBakery = (id) => {
   const { data, error } = useSWR(
     id ? `https://${orchestratorEndpoint}/bakeries/${id}` : null,
     jsonFetcher,
-    { refreshInterval: 3600000 }
+    { refreshInterval: 3600000, dedupingInterval: defaultDedupingInterval }
   )
   return {
     bakery: data,
     bakeryError: error,
+    isLoading: !data && !error,
   }
 }
 
@@ -73,6 +81,7 @@ export const useRecipeRuns = () => {
   return {
     recipeRuns: data,
     recipeRunsError: error,
+    isLoading: !data && !error,
   }
 }
 
@@ -86,6 +95,7 @@ export const useRecipeRun = (id) => {
   return {
     recipeRun: data,
     recipeRunError: error,
+    isLoading: !data && !error,
   }
 }
 
@@ -99,17 +109,20 @@ export const useStats = (key) => {
   return {
     stat: data,
     statError: error,
+    isLoading: !data && !error,
   }
 }
 
 export const useRepo = (APIPath) => {
   const { data, error } = useSWR(
     APIPath ? `/api/github/feedstock-meta?path=${APIPath}` : null,
-    jsonFetcher
+    jsonFetcher,
+    { dedupingInterval: defaultDedupingInterval }
   )
   return {
     repo: data,
     repoError: error,
+    isLoading: !data && !error,
   }
 }
 
@@ -118,11 +131,13 @@ export const useMeta = (spec) => {
     spec
       ? `https://raw.githubusercontent.com/${spec}/main/feedstock/meta.yaml`
       : null,
-    yamlFetcher
+    yamlFetcher,
+    { dedupingInterval: defaultDedupingInterval }
   )
   return {
     meta: data,
     metaError: error,
+    isLoading: !data && !error,
   }
 }
 
@@ -137,5 +152,6 @@ export const usePrefect = (id, active = true) => {
   return {
     prefect: data,
     prefectError: error,
+    isLoading: !data && !error,
   }
 }

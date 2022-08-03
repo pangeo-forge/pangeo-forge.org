@@ -4,7 +4,7 @@ import { useRecipeRuns } from '@/lib/endpoints'
 import { Box, Container, Heading, SimpleGrid, Skeleton } from '@chakra-ui/react'
 
 const RecipeRuns = () => {
-  const { recipeRuns, recipeRunsError } = useRecipeRuns()
+  const { recipeRuns, recipeRunsError, isLoading } = useRecipeRuns()
 
   if (recipeRunsError) {
     return (
@@ -13,7 +13,7 @@ const RecipeRuns = () => {
       </Layout>
     )
   }
-  if (!recipeRuns)
+  if (isLoading)
     return (
       <Layout menu={true}>
         <Skeleton minH={'100vh'}></Skeleton>
@@ -41,6 +41,7 @@ const RecipeRuns = () => {
               .map((recipe, index) => (
                 <RecipeRunCard
                   key={index}
+                  feedstock_id={recipe.feedstock_id}
                   recipe_id={recipe.recipe_id}
                   id={recipe.id}
                   started_at={recipe.started_at}
