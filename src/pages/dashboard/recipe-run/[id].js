@@ -1,31 +1,45 @@
-import { Link } from '@/components'
-import { FlowRunsAccordion, StatusBadge } from '@/components/dashboard'
+import {
+  FeedstockInfo,
+  FlowRunsAccordion,
+  RecipeRunDetails,
+} from '@/components/dashboard'
 import { Layout } from '@/components/layout'
-import { usePrefect, useRecipeRun } from '@/lib/endpoints'
+import {
+  useFeedstock,
+  useMeta,
+  usePrefect,
+  useRecipeRun,
+} from '@/lib/endpoints'
+import { getName } from '@/lib/feedstock-utils'
 import {
   Alert,
   AlertDescription,
   AlertIcon,
   AlertTitle,
-  Badge,
   Box,
-  Button,
   Container,
+  Divider,
   Heading,
-  HStack,
-  SimpleGrid,
   Skeleton,
-  Stack,
-  Text,
-  VStack,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 
 const RecipeRun = () => {
   const router = useRouter()
-  const { id } = router.query
+  const { id, feedstock_id } = router.query
+  const {
+    recipeRun,
+    recipeRunError,
+    isLoading: recipeIsLoading,
+  } = useRecipeRun(id)
 
-  const { recipeRun, recipeRunError, isLoading } = useRecipeRun(id)
+  const {
+    fs: { spec = '', recipe_runs = [] } = {},
+    fsError,
+    isLoading: feedstockIsLoading,
+  } = useFeedstock(feedstock_id)
+
+  const { meta, metaError, isLoading: metaIsLoading } = useMeta(spec)
 
   let active = false
 
@@ -39,7 +53,7 @@ const RecipeRun = () => {
     isLoading: prefectIsLoading,
   } = usePrefect(id, active)
 
-  if (recipeRunError) {
+  if (recipeRunError || metaError || prefectError || fsError) {
     return (
       <Layout>
         <Box as='section'>
@@ -50,115 +64,49 @@ const RecipeRun = () => {
       </Layout>
     )
   }
-  if (isLoading || prefectIsLoading)
-    return (
-      <Layout>
-        <Skeleton minH={'100vh'}></Skeleton>
-      </Layout>
-    )
-
-  let details = {}
-
-  const feedstockUrl = `/dashboard/feedstock/${recipeRun.feedstock_id}`
-  const bakeryUrl = `/dashboard/bakery/${recipeRun.bakery_id}`
-  const gitHubUrl = `https://github.com/${recipeRun.feedstock.spec}/tree/${recipeRun.head_sha}`
-
-  if (recipeRun) {
-    details = {
-      Name: recipeRun.recipe_id,
-      'Started at': recipeRun.started_at,
-      Status: (
-        <StatusBadge
-          status={recipeRun.status}
-          conclusion={recipeRun.conclusion}
-        />
-      ),
-      Version: (
-        <Badge variant='outline' colorScheme='gray' fontWeight='bold'>
-          {recipeRun.version}
-        </Badge>
-      ),
-      'Git SHA': (
-        <Badge
-          as={Link}
-          href={gitHubUrl}
-          variant='outline'
-          colorScheme='gray'
-          fontWeight='bold'
-          useExternalIcon
-        >
-          {recipeRun.head_sha.slice(0, 7)}
-        </Badge>
-      ),
-    }
-  }
-
-  const urls = {
-    Bakery: bakeryUrl,
-    Feedstock: feedstockUrl,
-  }
 
   return (
     <Layout>
       <Box as='section'>
         <Container maxW='container.xl' py={90}>
-          <Stack
-            direction={{
-              base: 'column',
-              sm: 'column',
-              md: 'row',
-              lg: 'row',
-              xl: 'row',
-            }}
-            spacing={{ base: 4, sm: 12 }}
-            justify={'space-between'}
-            align={'left'}
-          >
-            <Heading as={'h3'} size='lg'>
-              Recipe Run: {recipeRun.id}
-            </Heading>
-            <Stack
-              spacing={4}
-              direction={{
-                base: 'column',
-                sm: 'row',
-                md: 'row',
-                lg: 'row',
-                xl: 'row',
-              }}
-            >
-              {Object.entries(urls).map(([name, url]) => (
-                <Button
-                  key={name}
-                  as={Link}
-                  href={url}
-                  p={2}
-                  colorScheme='teal'
-                  variant='outline'
-                >
-                  {name}
-                </Button>
-              ))}
-            </Stack>
-          </Stack>
+          <Skeleton isLoaded={!feedstockIsLoading}>
+            <FeedstockInfo
+              id={feedstock_id}
+              repo={spec}
+              name={spec ? getName(spec) : ''}
+              title={meta?.title}
+              description={meta?.description}
+              pangeo_forge_version={meta?.pangeo_forge_version}
+              pangeo_notebook_version={meta?.pangeo_notebook_version}
+              bakery={meta?.bakery?.id}
+              license={meta?.provenance?.license}
+              providers={meta?.provenance?.providers}
+              maintainers={meta?.maintainers}
+            />
+          </Skeleton>
+          <Divider my={8} />
 
-          <Box py={4}>
-            <SimpleGrid columns={{ base: 1, md: 1, lg: 2 }} spacing={1}>
-              {Object.keys(details).map((key, index) => (
-                <HStack key={index} align={'top'} py={2}>
-                  {' '}
-                  <VStack align={'start'}>
-                    <Text color={'gray.600'}>{key}</Text>
-                    <Text fontWeight={600} maxW={'90vw'}>
-                      {details[key]}
-                    </Text>
-                  </VStack>
-                </HStack>
-              ))}
-            </SimpleGrid>
-          </Box>
-          <Box>
-            <Heading as={'h3'} mb={4}>
+          <Heading as={'h3'} size='md'>
+            Recipe Run Details
+          </Heading>
+
+          <Skeleton isLoaded={!recipeIsLoading}>
+            <RecipeRunDetails
+              id={recipeRun?.id}
+              name={spec ? getName(spec) : ''}
+              started_at={recipeRun?.started_at}
+              completed_at={recipeRun?.completed_at}
+              spec={spec ? spec : ''}
+              version={recipeRun?.version}
+              head_sha={recipeRun?.head_sha}
+              status={recipeRun?.status}
+              conclusion={recipeRun?.conclusion}
+            />
+          </Skeleton>
+
+          <Divider my={8} />
+          <Box my={8}>
+            <Heading as={'h3'} my={4} size='md'>
               Logs
             </Heading>
             {prefectError && (
@@ -173,9 +121,9 @@ const RecipeRun = () => {
               </Box>
             )}
             <Box>
-              {prefect && prefect.data && (
-                <FlowRunsAccordion runs={prefect.data.flow_run} />
-              )}
+              <Skeleton isLoaded={!prefectIsLoading}>
+                <FlowRunsAccordion runs={prefect?.data?.flow_run} />
+              </Skeleton>
             </Box>
           </Box>
         </Container>
