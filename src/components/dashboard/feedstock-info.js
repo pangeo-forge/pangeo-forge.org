@@ -7,12 +7,15 @@ import {
   HStack,
   Icon,
   SimpleGrid,
+  Stack,
   Text,
   VStack,
 } from '@chakra-ui/react'
 import { GoRepo, GoTag } from 'react-icons/go'
+import { MdDynamicFeed } from 'react-icons/md'
 
 export const FeedstockInfo = ({
+  id,
   repo,
   name,
   title,
@@ -46,17 +49,42 @@ export const FeedstockInfo = ({
   }
   return (
     <>
-      <Button
-        as={Link}
-        href={`https://github.com/${repo}`}
-        fontSize={'2xl'}
-        colorScheme='teal'
-        variant='outline'
+      <Stack
+        justify={'center'}
+        spacing={{ base: '4', md: '8', lg: '12', xl: '16', '2xl': '24' }}
+        direction={{
+          base: 'column',
+          sm: 'row',
+          md: 'row',
+          lg: 'row',
+          xl: 'row',
+        }}
       >
-        {' '}
-        <GoRepo />
-        <Text ml={2}>{name}</Text>
-      </Button>{' '}
+        <Button
+          as={Link}
+          href={`/dashboard/feedstock/${id}`}
+          fontSize={'xl'}
+          colorScheme='teal'
+          variant='outline'
+        >
+          {' '}
+          <MdDynamicFeed />
+          <Text ml={2}>feedstock</Text>
+        </Button>
+
+        <Button
+          as={Link}
+          href={`https://github.com/${repo}`}
+          fontSize={'xl'}
+          colorScheme='teal'
+          variant='outline'
+          useExternalIcon
+        >
+          {' '}
+          <GoRepo />
+          <Text ml={2}>{name} repo</Text>
+        </Button>
+      </Stack>{' '}
       {repo == 'pangeo-forge/staged-recipes' && (
         <Text my={8}>
           A place to submit pangeo-forge recipes before they become fully

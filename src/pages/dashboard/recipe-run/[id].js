@@ -71,6 +71,7 @@ const RecipeRun = () => {
         <Container maxW='container.xl' py={90}>
           <Skeleton isLoaded={!feedstockIsLoading}>
             <FeedstockInfo
+              id={feedstock_id}
               repo={spec}
               name={spec ? getName(spec) : ''}
               title={meta?.title}
@@ -96,9 +97,6 @@ const RecipeRun = () => {
               started_at={recipeRun?.started_at}
               completed_at={recipeRun?.completed_at}
               spec={spec ? spec : ''}
-              feedstock_id={feedstock_id}
-              bakery_id={recipeRun?.bakery_id}
-              bakery_name={recipeRun?.bakery.name}
               version={recipeRun?.version}
               head_sha={recipeRun?.head_sha}
               status={recipeRun?.status}

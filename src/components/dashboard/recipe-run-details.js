@@ -9,9 +9,6 @@ export const RecipeRunDetails = ({
   started_at,
   completed_at,
   spec,
-  feedstock_id,
-  bakery_id,
-  bakery_name,
   version,
   head_sha,
   status,
@@ -27,28 +24,6 @@ export const RecipeRunDetails = ({
       ? formatDistance(new Date(completed_at), new Date(started_at))
       : '-',
 
-    'Feedstock Dashboard': (
-      <Badge
-        as={Link}
-        href={`/dashboard/feedstock/${feedstock_id}`}
-        variant='outline'
-        colorScheme='teal'
-        fontWeight='bold'
-      >
-        {name}
-      </Badge>
-    ),
-    'Bakery Dashboard': (
-      <Badge
-        as={Link}
-        href={`/dashboard/bakery/${bakery_id}`}
-        variant='outline'
-        colorScheme='teal'
-        fontWeight='bold'
-      >
-        {bakery_name}
-      </Badge>
-    ),
     Version: (
       <Badge variant='outline' colorScheme='gray' fontWeight='bold'>
         {version}

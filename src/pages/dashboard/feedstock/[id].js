@@ -51,6 +51,7 @@ const Feedstock = () => {
         <Container maxW='container.xl' mt={90}>
           <Skeleton isLoaded={!metaIsLoading}>
             <FeedstockInfo
+              id={id}
               repo={spec ? spec : ''}
               name={spec ? getName(spec) : ''}
               title={meta?.title}
