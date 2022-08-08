@@ -19,7 +19,7 @@
     "@emotion/styled": "^11.10.0",
     "@mdx-js/loader": "^2.1.1",
     "@mdx-js/react": "^1.6.22",
-    "@next/mdx": "^12.2.3",
+    "@next/mdx": "^12.2.4",
     "date-fns": "^2.29.1",
     "framer-motion": "^7.0.0",
     "graphql": "^16.5.0",
