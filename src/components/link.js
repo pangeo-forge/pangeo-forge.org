@@ -1,11 +1,11 @@
 import { ExternalLinkIcon } from '@chakra-ui/icons'
 import { Link as ChakraLink } from '@chakra-ui/react'
 import NextLink from 'next/link'
-import React from 'react'
 import { useRouter } from 'next/router'
+import React from 'react'
 
 export const Link = React.forwardRef(function CustomLink(props, ref) {
-  const href = props.href
+  let href = props.href
   const isInternalLink = href && (href.startsWith('/') || href.startsWith('#'))
   const { useExternalIcon, ...rest } = props
   const { query } = useRouter()
@@ -13,10 +13,22 @@ export const Link = React.forwardRef(function CustomLink(props, ref) {
   if (isInternalLink) {
     let paramsToAppend = ''
     if ('orchestratorEndpoint' in query) {
-      paramsToAppend = `?orchestratorEndpoint=${query.orchestratorEndpoint}`
+      paramsToAppend = `orchestratorEndpoint=${query.orchestratorEndpoint}`
     }
+
+    // Check if query parameters are empty
+    if (
+      query &&
+      Object.keys(query).length === 0 &&
+      Object.getPrototypeOf(query) === Object.prototype
+    ) {
+      href = `${href}?${paramsToAppend}`
+    } else {
+      href = `${href}&${paramsToAppend}`
+    }
+
     return (
-      <NextLink href={href + paramsToAppend} passHref>
+      <NextLink href={href} passHref>
         <ChakraLink ref={ref} {...rest}>
           {rest.children}
         </ChakraLink>

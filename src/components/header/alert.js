@@ -18,7 +18,7 @@ export const OrchestratorAlert = () => {
   } = useDisclosure({ defaultIsOpen: true })
 
   return isVisible ? (
-    <Box mt={14} align='center'>
+    <Box mt={14} align='stretch'>
       {query?.orchestratorEndpoint && (
         <Alert status='warning' variant='solid'>
           <AlertIcon />
