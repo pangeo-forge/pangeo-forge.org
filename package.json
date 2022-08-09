@@ -12,18 +12,18 @@
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
-    "@chakra-ui/icons": "^2.0.4",
-    "@chakra-ui/react": "^2.2.4",
+    "@chakra-ui/icons": "^2.0.6",
+    "@chakra-ui/react": "^2.2.6",
     "@chakra-ui/system": "^2.2.2",
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
     "@mdx-js/loader": "^2.1.1",
     "@mdx-js/react": "^1.6.22",
-    "@next/mdx": "^12.2.3",
+    "@next/mdx": "^12.2.4",
     "date-fns": "^2.29.1",
-    "framer-motion": "^6.5.1",
+    "framer-motion": "^7.0.0",
     "graphql": "^16.5.0",
-    "next": "^12.2.3",
+    "next": "^12.2.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.4.0",
@@ -34,7 +34,7 @@
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^3.3.0",
     "eslint": "8.21.0",
-    "eslint-config-next": "12.2.3",
+    "eslint-config-next": "12.2.4",
     "prettier": "^2.7.1"
   }
 }
