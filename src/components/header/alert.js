@@ -1,12 +1,24 @@
 import { Link } from '@/components/link'
-import { Alert, AlertDescription, AlertIcon } from '@chakra-ui/react'
+import {
+  Alert,
+  AlertDescription,
+  AlertIcon,
+  Box,
+  CloseButton,
+  useDisclosure,
+} from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 
 export const OrchestratorAlert = () => {
   const { query } = useRouter()
+  const {
+    isOpen: isVisible,
+    onClose,
+    onOpen,
+  } = useDisclosure({ defaultIsOpen: true })
 
-  return (
-    <>
+  return isVisible ? (
+    <Box mt={14} align='center'>
       {query?.orchestratorEndpoint && (
         <Alert status='warning' variant='solid'>
           <AlertIcon />
@@ -19,8 +31,17 @@ export const OrchestratorAlert = () => {
             </Link>
             .
           </AlertDescription>
+          <CloseButton
+            alignSelf='flex-start'
+            position='relative'
+            right={-1}
+            top={-1}
+            onClick={onClose}
+          />
         </Alert>
       )}
-    </>
+    </Box>
+  ) : (
+    <></>
   )
 }

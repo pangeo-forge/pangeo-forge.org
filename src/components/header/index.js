@@ -133,8 +133,8 @@ export const Header = () => {
         <Collapse in={isMobileNavOpen} animateOpacity>
           <MobileNav isOpen={isMobileNavOpen} navItems={navItems} />
         </Collapse>
-        <OrchestratorAlert />
       </Stack>
+      <OrchestratorAlert />
     </Box>
   )
 }
