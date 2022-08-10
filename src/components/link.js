@@ -6,25 +6,17 @@ import React from 'react'
 
 export const Link = React.forwardRef(function CustomLink(props, ref) {
   let href = props.href
+
   const isInternalLink = href && (href.startsWith('/') || href.startsWith('#'))
   const { useExternalIcon, ...rest } = props
+
   const { query } = useRouter()
 
   if (isInternalLink) {
-    let paramsToAppend = ''
-    if ('orchestratorEndpoint' in query) {
-      paramsToAppend = `orchestratorEndpoint=${query.orchestratorEndpoint}`
-    }
-
-    // Check if query parameters are empty
-    if (
-      query &&
-      Object.keys(query).length === 0 &&
-      Object.getPrototypeOf(query) === Object.prototype
-    ) {
-      href = `${href}?${paramsToAppend}`
-    } else {
-      href = `${href}&${paramsToAppend}`
+    if (query?.orchestratorEndpoint) {
+      href = href.includes('?')
+        ? `${href}&orchestratorEndpoint=${query.orchestratorEndpoint}`
+        : `${href}?orchestratorEndpoint=${query.orchestratorEndpoint}`
     }
 
     return (
