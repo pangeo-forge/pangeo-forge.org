@@ -39,7 +39,7 @@ export const Header = () => {
 
   return (
     <Box>
-      <Stack
+      <Flex
         as={'header'}
         pos='fixed'
         top='0'
@@ -133,7 +133,7 @@ export const Header = () => {
         <Collapse in={isMobileNavOpen} animateOpacity>
           <MobileNav isOpen={isMobileNavOpen} navItems={navItems} />
         </Collapse>
-      </Stack>
+      </Flex>
       <OrchestratorAlert />
     </Box>
   )

@@ -3,7 +3,6 @@ import {
   Alert,
   AlertDescription,
   AlertIcon,
-  Box,
   CloseButton,
   useDisclosure,
 } from '@chakra-ui/react'
@@ -19,9 +18,10 @@ export const OrchestratorAlert = () => {
   } = useDisclosure({ defaultIsOpen: true })
 
   return isVisible ? (
-    <Box mt={14}>
+    <>
       {query?.orchestratorEndpoint && (
         <Alert
+          mt={12}
           status='warning'
           variant='solid'
           alignItems='center'
@@ -44,8 +44,6 @@ export const OrchestratorAlert = () => {
           <CloseButton mx={4} onClick={onClose} />
         </Alert>
       )}
-    </Box>
-  ) : (
-    <></>
-  )
+    </>
+  ) : null
 }
