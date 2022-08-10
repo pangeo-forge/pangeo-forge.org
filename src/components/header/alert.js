@@ -11,6 +11,7 @@ import { useRouter } from 'next/router'
 
 export const OrchestratorAlert = () => {
   const { query } = useRouter()
+  const endpoint = `https://${query.orchestratorEndpoint}`
   const {
     isOpen: isVisible,
     onClose,
@@ -18,26 +19,29 @@ export const OrchestratorAlert = () => {
   } = useDisclosure({ defaultIsOpen: true })
 
   return isVisible ? (
-    <Box mt={14} align='stretch'>
+    <Box mt={14}>
       {query?.orchestratorEndpoint && (
-        <Alert status='warning' variant='solid'>
+        <Alert
+          status='warning'
+          variant='solid'
+          alignItems='center'
+          justifyContent='center'
+          textAlign='center'
+        >
           <AlertIcon />
           <AlertDescription>
             You are viewing a development version of this site, with data
-            populated from https://{query.orchestratorEndpoint}. For latest
-            version of the production site, navigate to{' '}
+            populated from{' '}
+            <Link href={endpoint} useExternalIcon>
+              {endpoint}
+            </Link>
+            . For latest version of the production site, navigate to{' '}
             <Link href='https://pangeo-forge.org/'>
               https://pangeo-forge.org/
             </Link>
             .
           </AlertDescription>
-          <CloseButton
-            alignSelf='flex-start'
-            position='relative'
-            right={-1}
-            top={-1}
-            onClick={onClose}
-          />
+          <CloseButton mx={4} onClick={onClose} />
         </Alert>
       )}
     </Box>
