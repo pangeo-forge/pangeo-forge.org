@@ -1,13 +1,19 @@
 import { jsonFetcher, yamlFetcher } from '@/lib/fetchers'
+import { useRouter } from 'next/router'
 import useSWR from 'swr'
 
-export const orchestratorEndpoint = 'api.pangeo-forge.org'
+function useOrchestratorEndpoint() {
+  const { query } = useRouter()
+  const endpoint = query?.orchestratorEndpoint || 'api.pangeo-forge.org'
+  return endpoint
+}
 
 // dedupe requests with the same key in a 2 minutes time span (https://swr.vercel.app/docs/options)
 // This allows us to avoid making requests for the same data (used on multiple pages e.g.feedstockInfo) multiple times
 const defaultDedupingInterval = 120000
 
 export const useFeedstocks = () => {
+  const orchestratorEndpoint = useOrchestratorEndpoint()
   const { data, error } = useSWR(
     `https://${orchestratorEndpoint}/feedstocks/`,
     jsonFetcher,
@@ -21,6 +27,7 @@ export const useFeedstocks = () => {
 }
 
 export const useFeedstock = (id) => {
+  const orchestratorEndpoint = useOrchestratorEndpoint()
   const { data, error } = useSWR(
     id ? `https://${orchestratorEndpoint}/feedstocks/${id}` : null,
     jsonFetcher,
@@ -34,6 +41,7 @@ export const useFeedstock = (id) => {
 }
 
 export const useBakeries = () => {
+  const orchestratorEndpoint = useOrchestratorEndpoint()
   const { data, error } = useSWR(
     `https://${orchestratorEndpoint}/bakeries/`,
     jsonFetcher,
@@ -47,6 +55,7 @@ export const useBakeries = () => {
 }
 
 export const useBakery = (id) => {
+  const orchestratorEndpoint = useOrchestratorEndpoint()
   const { data, error } = useSWR(
     id ? `https://${orchestratorEndpoint}/bakeries/${id}` : null,
     jsonFetcher,
@@ -60,6 +69,7 @@ export const useBakery = (id) => {
 }
 
 export const useRecipeRuns = () => {
+  const orchestratorEndpoint = useOrchestratorEndpoint()
   const { data, error } = useSWR(
     `https://${orchestratorEndpoint}/recipe_runs/`,
     jsonFetcher,
@@ -73,6 +83,7 @@ export const useRecipeRuns = () => {
 }
 
 export const useRecipeRun = (id) => {
+  const orchestratorEndpoint = useOrchestratorEndpoint()
   const { data, error } = useSWR(
     id ? `https://${orchestratorEndpoint}/recipe_runs/${id}` : null,
     jsonFetcher,
@@ -86,6 +97,7 @@ export const useRecipeRun = (id) => {
 }
 
 export const useStats = (key) => {
+  const orchestratorEndpoint = useOrchestratorEndpoint()
   const { data, error } = useSWR(
     key ? `https://${orchestratorEndpoint}/stats/${key}` : null,
     jsonFetcher,
