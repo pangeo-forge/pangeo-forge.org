@@ -2,7 +2,7 @@ import { jsonFetcher, yamlFetcher } from '@/lib/fetchers'
 import { useRouter } from 'next/router'
 import useSWR from 'swr'
 
-function useOrchestratorEndpoint() {
+export function useOrchestratorEndpoint() {
   const { query } = useRouter()
   const endpoint = query?.orchestratorEndpoint || 'api.pangeo-forge.org'
   return endpoint
