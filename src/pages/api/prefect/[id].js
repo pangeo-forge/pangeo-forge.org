@@ -1,4 +1,3 @@
-import { orchestratorEndpoint } from '@/lib/endpoints'
 import {
   ApolloClient,
   InMemoryCache,
@@ -6,6 +5,8 @@ import {
   gql,
 } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
+
+const orchestratorEndpoint = 'api.pangeo-forge.org'
 
 const QUERY = gql`
   query FlowRun($name: String!) {
