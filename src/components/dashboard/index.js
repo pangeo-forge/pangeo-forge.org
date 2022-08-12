@@ -4,6 +4,7 @@ export { FeedstockCard } from '@/components/dashboard/feedstock-card'
 export { FeedstockDatasets } from '@/components/dashboard/feedstock-datasets'
 export { FeedstockInfo } from '@/components/dashboard/feedstock-info'
 export { FlowRunsAccordion } from '@/components/dashboard/flow-runs-accordion'
+export { License } from '@/components/dashboard/license'
 export { LogLine } from '@/components/dashboard/log-line'
 export {
   Maintainers,

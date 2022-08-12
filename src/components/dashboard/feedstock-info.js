@@ -1,5 +1,5 @@
 import { Link } from '@/components'
-import { Maintainers, Providers } from '@/components/dashboard'
+import { License, Maintainers, Providers } from '@/components/dashboard'
 import {
   Box,
   Button,
@@ -24,6 +24,7 @@ export const FeedstockInfo = ({
   pangeo_notebook_version,
   bakery,
   license,
+  license_link,
   providers,
   maintainers,
 }) => {
@@ -43,7 +44,7 @@ export const FeedstockInfo = ({
       </Flex>
     ),
     Bakery: bakery,
-    License: license,
+    License: <License name={license} link={license_link} />,
     Providers: <Providers providers={providers} />,
     Maintainers: <Maintainers maintainers={maintainers} />,
   }

@@ -80,6 +80,7 @@ const RecipeRun = () => {
               pangeo_notebook_version={meta?.pangeo_notebook_version}
               bakery={meta?.bakery?.id}
               license={meta?.provenance?.license}
+              license_link={meta?.provenance?.license_link}
               providers={meta?.provenance?.providers}
               maintainers={meta?.maintainers}
             />
