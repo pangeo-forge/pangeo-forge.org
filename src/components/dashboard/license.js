@@ -1,4 +1,6 @@
 import { Link } from '@/components'
+import { Flex, Icon, Text } from '@chakra-ui/react'
+import { VscLaw } from 'react-icons/vsc'
 
 export const License = ({ name, link }) => {
   const href =
@@ -7,8 +9,11 @@ export const License = ({ name, link }) => {
   const text = name === 'proprietary' ? link?.title : name
 
   return (
-    <Link href={href} useExternalIcon>
-      {text}
-    </Link>
+    <Flex>
+      <Icon as={VscLaw} fontSize={'2xl'} />
+      <Text as={Link} href={href} useExternalIcon px={2}>
+        {text}
+      </Text>
+    </Flex>
   )
 }
