@@ -23,7 +23,7 @@ export default async function handler(req, res) {
       JSON.stringify({
         error: `failed to load data. ${err.message}`,
       }),
-      { status: 500 }
+      { status: 500 },
     )
   }
 }

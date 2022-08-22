@@ -26,7 +26,7 @@ export const RecipeRunCard = ({
   // TODO: have API return timestamps with UTC suffix
   // Here I'm mannually adding the +Z
   const timeSinceRun = TimeDeltaFormatter(
-    Date.now() - Date.parse(started_at + 'Z')
+    Date.now() - Date.parse(started_at + 'Z'),
   )
 
   const href = `/dashboard/recipe-run/${id}?feedstock_id=${feedstock_id}`

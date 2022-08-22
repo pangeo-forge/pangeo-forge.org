@@ -14,7 +14,7 @@ export const DesktopNav = ({ navItems, ...props }) => {
   const hoverColor = useColorModeValue('teal.300', 'teal.400')
   const popoverColor = useColorModeValue(
     'rgba(50, 33, 115, 0.9)',
-    'rgba(26, 32, 44, 0.8)'
+    'rgba(26, 32, 44, 0.8)',
   )
   const color = useColorModeValue('white.800', 'white.200')
 

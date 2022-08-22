@@ -30,7 +30,7 @@ export const Header = () => {
 
   const bg = useColorModeValue(
     'rgba(50, 33, 115, 0.9)',
-    'rgba(26, 32, 44, 0.8)'
+    'rgba(26, 32, 44, 0.8)',
   )
 
   const color = useColorModeValue('white', 'white')

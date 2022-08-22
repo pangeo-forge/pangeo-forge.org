@@ -11,7 +11,7 @@ import React from 'react'
 export const Hero = () => {
   const bg = useColorModeValue(
     'rgba(50, 33, 115, 0.9)',
-    'rgba(26, 32, 44, 0.8)'
+    'rgba(26, 32, 44, 0.8)',
   )
   return (
     <Box as='section' sx={{ bg: bg, color: 'invert' }}>
