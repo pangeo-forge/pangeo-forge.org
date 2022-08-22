@@ -17,7 +17,7 @@ export const FeedstockCard = ({ spec, id }) => {
   const href = `/dashboard/feedstock/${id}`
 
   const { repo, repoError } = useRepo(
-    `https://api.github.com/repos/${spec}/commits/HEAD`
+    `https://api.github.com/repos/${spec}/commits/HEAD`,
   )
 
   const { meta, metaError } = useMeta(spec)
@@ -90,7 +90,7 @@ export const FeedstockCard = ({ spec, id }) => {
                   variant='outline'
                 >
                   {TimeDeltaFormatter(
-                    Date.now() - Date.parse(repo.commit.committer.date)
+                    Date.now() - Date.parse(repo.commit.committer.date),
                   )}{' '}
                   via
                 </Text>

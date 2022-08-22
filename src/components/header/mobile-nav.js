@@ -72,7 +72,7 @@ const MobileNavItem = ({ href, children, label }) => {
 export const MobileNav = ({ isOpen, navItems }) => {
   const bg = useColorModeValue(
     'rgba(255, 255, 255, 0.8)',
-    'rgba(26, 32, 44, 0.8)'
+    'rgba(26, 32, 44, 0.8)',
   )
   if (!isOpen) return null
   return (

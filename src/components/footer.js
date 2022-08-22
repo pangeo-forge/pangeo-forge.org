@@ -19,7 +19,7 @@ export const Footer = () => {
       css={{
         backgroundColor: useColorModeValue(
           'rgba(50, 33, 115, 0.9)',
-          'rgba(26, 32, 44, 0.8)'
+          'rgba(26, 32, 44, 0.8)',
         ),
       }}
       color={color}

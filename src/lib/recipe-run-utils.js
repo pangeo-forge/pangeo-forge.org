@@ -31,7 +31,7 @@ export function getProductionRunInfo(id, runs) {
     isProduction = true
     datasetsUrl = `/dataset/${id}`
     datasets = [...new Set(datasets)].sort((a, b) =>
-      a.localeCompare(b, undefined, { sensitivity: 'base' })
+      a.localeCompare(b, undefined, { sensitivity: 'base' }),
     )
   }
 
@@ -50,9 +50,9 @@ export function groupProductionRuns(runs, key = 'feedstock_id') {
         [
           ...(entryMap.get(run[key]) || []),
           isSuccessfulProductionRun(run) ? run : undefined,
-        ].filter(Boolean)
+        ].filter(Boolean),
       ),
-    new Map()
+    new Map(),
   )
 
   groupedRuns = [...groupedRuns]

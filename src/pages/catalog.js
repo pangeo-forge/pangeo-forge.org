@@ -56,7 +56,7 @@ const FeedstockRowAccordionItem = ({ feedstockId, feedstockSpec }) => {
 
   const { isProduction, datasets } = getProductionRunInfo(
     feedstockId,
-    recipe_runs
+    recipe_runs,
   )
 
   return (
@@ -136,7 +136,7 @@ const Catalog = () => {
                   .toLowerCase()
                   .replace('pangeo-forge/', '')
                   .replace('-feedstock', '')
-                  .localeCompare(b.spec)
+                  .localeCompare(b.spec),
               )
               .map((feedstock) => (
                 <FeedstockRowAccordionItem

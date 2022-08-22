@@ -17,7 +17,7 @@ export const useFeedstocks = () => {
   const { data, error } = useSWR(
     `https://${orchestratorEndpoint}/feedstocks/`,
     jsonFetcher,
-    { refreshInterval: 300000, dedupingInterval: defaultDedupingInterval }
+    { refreshInterval: 300000, dedupingInterval: defaultDedupingInterval },
   )
   return {
     feedstocks: data,
@@ -31,7 +31,7 @@ export const useFeedstock = (id) => {
   const { data, error } = useSWR(
     id ? `https://${orchestratorEndpoint}/feedstocks/${id}` : null,
     jsonFetcher,
-    { refreshInterval: 300000, dedupingInterval: defaultDedupingInterval }
+    { refreshInterval: 300000, dedupingInterval: defaultDedupingInterval },
   )
   return {
     fs: data,
@@ -45,7 +45,7 @@ export const useBakeries = () => {
   const { data, error } = useSWR(
     `https://${orchestratorEndpoint}/bakeries/`,
     jsonFetcher,
-    { refreshInterval: 3600000, dedupingInterval: defaultDedupingInterval }
+    { refreshInterval: 3600000, dedupingInterval: defaultDedupingInterval },
   )
   return {
     bakeries: data,
@@ -59,7 +59,7 @@ export const useBakery = (id) => {
   const { data, error } = useSWR(
     id ? `https://${orchestratorEndpoint}/bakeries/${id}` : null,
     jsonFetcher,
-    { refreshInterval: 3600000, dedupingInterval: defaultDedupingInterval }
+    { refreshInterval: 3600000, dedupingInterval: defaultDedupingInterval },
   )
   return {
     bakery: data,
@@ -73,7 +73,7 @@ export const useRecipeRuns = () => {
   const { data, error } = useSWR(
     `https://${orchestratorEndpoint}/recipe_runs/`,
     jsonFetcher,
-    { refreshInterval: 10000 }
+    { refreshInterval: 10000 },
   )
   return {
     recipeRuns: data,
@@ -87,7 +87,7 @@ export const useRecipeRun = (id) => {
   const { data, error } = useSWR(
     id ? `https://${orchestratorEndpoint}/recipe_runs/${id}` : null,
     jsonFetcher,
-    { refreshInterval: 10000 }
+    { refreshInterval: 10000 },
   )
   return {
     recipeRun: data,
@@ -101,7 +101,7 @@ export const useStats = (key) => {
   const { data, error } = useSWR(
     key ? `https://${orchestratorEndpoint}/stats/${key}` : null,
     jsonFetcher,
-    { refreshInterval: 600000 }
+    { refreshInterval: 600000 },
   )
   return {
     stat: data,
@@ -114,7 +114,7 @@ export const useRepo = (APIPath) => {
   const { data, error } = useSWR(
     APIPath ? `/api/github/feedstock-meta?path=${APIPath}` : null,
     jsonFetcher,
-    { dedupingInterval: defaultDedupingInterval }
+    { dedupingInterval: defaultDedupingInterval },
   )
   return {
     repo: data,
@@ -129,7 +129,7 @@ export const useMeta = (spec) => {
       ? `https://raw.githubusercontent.com/${spec}/main/feedstock/meta.yaml`
       : null,
     yamlFetcher,
-    { dedupingInterval: defaultDedupingInterval }
+    { dedupingInterval: defaultDedupingInterval },
   )
   return {
     meta: data,
