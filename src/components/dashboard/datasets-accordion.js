@@ -1,4 +1,5 @@
 import { CodeBlock } from '@/components'
+import { useXarrayDatasetRepr } from '@/lib/endpoints'
 import { AddIcon, MinusIcon } from '@chakra-ui/icons'
 import {
   Accordion,
@@ -6,17 +7,20 @@ import {
   AccordionItem,
   AccordionPanel,
   Box,
+  Skeleton,
 } from '@chakra-ui/react'
-import React from 'react'
 
 export const DatasetCard = ({ dataset }) => {
   const parts = dataset.split('/')
   const name = parts[parts.length - 1]
+  const { repr, reprError, isLoading } = useXarrayDatasetRepr(dataset)
+
+  if (reprError) return <Box>Failed to load...</Box>
   const code = `import xarray as xr
 
 store = '${dataset}'
 ds = xr.open_dataset(store, engine='zarr', chunks={})
-print(ds)`
+ds`
   return (
     <AccordionItem>
       {({ isExpanded }) => (
@@ -37,6 +41,11 @@ print(ds)`
             <CodeBlock showLineNumbers language={'python'}>
               {code}
             </CodeBlock>
+            <Skeleton isLoaded={!isLoading}>
+              <Box>
+                <div dangerouslySetInnerHTML={{ __html: repr }} />
+              </Box>
+            </Skeleton>
           </AccordionPanel>
         </>
       )}

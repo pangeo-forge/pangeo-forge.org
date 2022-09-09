@@ -152,3 +152,16 @@ export const usePrefect = (id, active = true) => {
     isLoading: !data && !error,
   }
 }
+
+export const useXarrayDatasetRepr = (url) => {
+  const { data, error } = useSWR(
+    url ? `/api/repr/xarray?url=${url}` : null,
+    jsonFetcher,
+    { dedupingInterval: defaultDedupingInterval },
+  )
+  return {
+    repr: data?.html,
+    reprError: error,
+    isLoading: !data && !error,
+  }
+}
