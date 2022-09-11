@@ -15,7 +15,7 @@ import {
 export const DatasetCard = ({ dataset }) => {
   const parts = dataset.split('/')
   const name = parts[parts.length - 1]
-  const { repr, reprError, isLoading } = useXarrayDatasetRepr(`${dataset}df`)
+  const { repr, reprError, isLoading } = useXarrayDatasetRepr(dataset)
 
   if (reprError)
     return (
