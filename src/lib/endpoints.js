@@ -152,3 +152,17 @@ export const usePrefect = (id, active = true) => {
     isLoading: !data && !error,
   }
 }
+
+export const useXarrayDatasetRepr = (url) => {
+  const reprEndpoint = 'https://html-reprs.fly.dev'
+  const { data, error } = useSWR(
+    url ? `${reprEndpoint}/xarray/?url=${url}` : null,
+    jsonFetcher,
+    { dedupingInterval: defaultDedupingInterval },
+  )
+  return {
+    repr: data?.html,
+    reprError: error,
+    isLoading: !data && !error,
+  }
+}
