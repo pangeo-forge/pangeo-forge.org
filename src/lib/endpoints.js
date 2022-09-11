@@ -154,8 +154,9 @@ export const usePrefect = (id, active = true) => {
 }
 
 export const useXarrayDatasetRepr = (url) => {
+  const reprEndpoint = 'https://html-reprs.fly.dev'
   const { data, error } = useSWR(
-    url ? `/api/repr/xarray?url=${url}` : null,
+    url ? `${reprEndpoint}/xarray/?url=${url}` : null,
     jsonFetcher,
     { dedupingInterval: defaultDedupingInterval },
   )

@@ -6,6 +6,8 @@ import {
   AccordionButton,
   AccordionItem,
   AccordionPanel,
+  Alert,
+  AlertIcon,
   Box,
   Skeleton,
 } from '@chakra-ui/react'
@@ -13,9 +15,15 @@ import {
 export const DatasetCard = ({ dataset }) => {
   const parts = dataset.split('/')
   const name = parts[parts.length - 1]
-  const { repr, reprError, isLoading } = useXarrayDatasetRepr(dataset)
+  const { repr, reprError, isLoading } = useXarrayDatasetRepr(`${dataset}df`)
 
-  if (reprError) return <Box>Failed to load...</Box>
+  if (reprError)
+    return (
+      <Alert status='error' align='center' justifyContent='center'>
+        <AlertIcon />
+        {`Status Code: ${reprError.status}`} - {reprError.info?.detail}
+      </Alert>
+    )
   const code = `import xarray as xr
 
 store = '${dataset}'
