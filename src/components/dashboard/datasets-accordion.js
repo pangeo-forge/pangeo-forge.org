@@ -25,7 +25,7 @@ const DatasetRepr = ({ dataset }) => {
 
   return (
     <Skeleton isLoaded={!isLoading}>
-      <Box>
+      <Box my={4}>
         <div dangerouslySetInnerHTML={{ __html: repr }} />
       </Box>
     </Skeleton>
