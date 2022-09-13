@@ -12,9 +12,7 @@ import {
   Skeleton,
 } from '@chakra-ui/react'
 
-export const DatasetCard = ({ dataset }) => {
-  const parts = dataset.split('/')
-  const name = parts[parts.length - 1]
+const DatasetRepr = ({ dataset }) => {
   const { repr, reprError, isLoading } = useXarrayDatasetRepr(dataset)
 
   if (reprError)
@@ -24,6 +22,19 @@ export const DatasetCard = ({ dataset }) => {
         {`Status Code: ${reprError.status}`} - {reprError.info?.detail}
       </Alert>
     )
+
+  return (
+    <Skeleton isLoaded={!isLoading}>
+      <Box my={4}>
+        <div dangerouslySetInnerHTML={{ __html: repr }} />
+      </Box>
+    </Skeleton>
+  )
+}
+
+export const DatasetCard = ({ dataset }) => {
+  const parts = dataset.split('/')
+  const name = parts[parts.length - 1]
   const code = `import xarray as xr
 
 store = '${dataset}'
@@ -49,11 +60,7 @@ ds`
             <CodeBlock showLineNumbers language={'python'}>
               {code}
             </CodeBlock>
-            <Skeleton isLoaded={!isLoading}>
-              <Box>
-                <div dangerouslySetInnerHTML={{ __html: repr }} />
-              </Box>
-            </Skeleton>
+            <DatasetRepr dataset={dataset} />
           </AccordionPanel>
         </>
       )}

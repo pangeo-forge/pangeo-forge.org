@@ -154,7 +154,7 @@ export const usePrefect = (id, active = true) => {
 }
 
 export const useXarrayDatasetRepr = (url) => {
-  const reprEndpoint = 'https://html-reprs.fly.dev'
+  const reprEndpoint = 'https://api.pangeo-forge.org/repr'
   const { data, error } = useSWR(
     url ? `${reprEndpoint}/xarray/?url=${url}` : null,
     jsonFetcher,
