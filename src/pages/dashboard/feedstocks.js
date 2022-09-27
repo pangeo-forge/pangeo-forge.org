@@ -1,3 +1,4 @@
+import { Error } from '@/components'
 import { FeedstockCard } from '@/components/dashboard'
 import { Layout } from '@/components/layout'
 import { useFeedstocks } from '@/lib/endpoints'
@@ -16,7 +17,7 @@ const Feedstocks = () => {
   if (feedstocksError) {
     return (
       <Layout menu={true}>
-        <Box>Failed to load...</Box>
+        <Error status={feedstocksError.status} info={feedstocksError?.info} />
       </Layout>
     )
   }

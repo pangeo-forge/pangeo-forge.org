@@ -1,3 +1,4 @@
+import { Error } from '@/components'
 import { RecipeRunCard } from '@/components/dashboard'
 import { Layout } from '@/components/layout'
 import { useRecipeRuns } from '@/lib/endpoints'
@@ -9,7 +10,7 @@ const RecipeRuns = () => {
   if (recipeRunsError) {
     return (
       <Layout menu={true}>
-        <Box>Failed to load...</Box>
+        <Error status={recipeRunsError.status} info={recipeRunsError?.info} />
       </Layout>
     )
   }

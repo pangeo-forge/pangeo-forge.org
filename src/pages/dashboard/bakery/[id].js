@@ -1,4 +1,4 @@
-import { Link } from '@/components'
+import { Error, Link } from '@/components'
 import { RecipeRunCard } from '@/components/dashboard'
 import { Layout } from '@/components/layout'
 import { useBakery } from '@/lib/endpoints'
@@ -27,7 +27,7 @@ const Bakery = () => {
   if (bakeryError)
     return (
       <Layout>
-        <Box>Failed to load...</Box>
+        <Error status={bakeryError.status} info={bakeryError?.info} />
       </Layout>
     )
 

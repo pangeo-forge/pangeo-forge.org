@@ -1,3 +1,4 @@
+import { Error } from '@/components'
 import {
   FeedstockDatasets,
   FeedstockInfo,
@@ -37,7 +38,7 @@ const Feedstock = () => {
       <Layout>
         <Box as='section'>
           <Container maxW='container.xl' py={90}>
-            Failed to load...
+            <Error status={fsError.status} info={fsError?.info} />
           </Container>
         </Box>
       </Layout>

@@ -15,15 +15,6 @@ export default async function handler(req, res) {
   if (process.env.GITHUB_TOKEN)
     headers['Authorization'] = `token ${process.env.GITHUB_TOKEN}`
 
-  try {
-    const result = await fetch(requestURL, { headers })
-    return new Response(result.body, { status: result.status })
-  } catch (err) {
-    return new Response(
-      JSON.stringify({
-        error: `failed to load data. ${err.message}`,
-      }),
-      { status: 500 },
-    )
-  }
+  const result = await fetch(requestURL, { headers })
+  return new Response(result.body, { status: result.status })
 }

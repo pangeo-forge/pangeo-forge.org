@@ -1,4 +1,4 @@
-import { Link } from '@/components'
+import { Error, Link } from '@/components'
 import { MaintainersGroup } from '@/components/dashboard'
 import { useMeta, useRepo } from '@/lib/endpoints'
 import { TimeDeltaFormatter } from '@/lib/time-delta'
@@ -22,7 +22,13 @@ export const FeedstockCard = ({ spec, id }) => {
 
   const { meta, metaError } = useMeta(spec)
 
-  if (repoError || metaError) return <Box>{'error'}</Box>
+  if (repoError || metaError)
+    return (
+      <Error
+        status={repoError?.status || metaError?.status}
+        info={repoError?.info || metaError?.info}
+      />
+    )
   if (!repo || !meta) return <Skeleton minH={'100vh'}></Skeleton>
 
   return (
