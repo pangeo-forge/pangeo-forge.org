@@ -2,14 +2,7 @@ import { Error } from '@/components'
 import { FeedstockCard } from '@/components/dashboard'
 import { Layout } from '@/components/layout'
 import { useFeedstocks } from '@/lib/endpoints'
-import {
-  Box,
-  Container,
-  Heading,
-  SimpleGrid,
-  Skeleton,
-  Text,
-} from '@chakra-ui/react'
+import { Box, Container, Heading, SimpleGrid, Text } from '@chakra-ui/react'
 
 const Feedstocks = () => {
   const { feedstocks, feedstocksError, isLoading } = useFeedstocks()
@@ -25,12 +18,6 @@ const Feedstocks = () => {
       </Layout>
     )
   }
-  if (isLoading)
-    return (
-      <Layout menu={true}>
-        <Skeleton minH={'100vh'}></Skeleton>
-      </Layout>
-    )
 
   return (
     <Layout menu={true}>
@@ -51,9 +38,10 @@ const Feedstocks = () => {
             justifyContent={'space-between'}
           >
             {feedstocks
-              .filter((feedstock) => !feedstock.spec.includes('staged-recipes'))
+              ?.filter(
+                (feedstock) => !feedstock.spec.includes('staged-recipes'),
+              )
               .sort((a, b) => a.spec.localeCompare(b.spec))
-
               .map((feedstock) => (
                 <FeedstockCard
                   spec={feedstock.spec}
@@ -74,7 +62,7 @@ const Feedstocks = () => {
             justifyContent={'space-between'}
           >
             {feedstocks
-              .filter((feedstock) => feedstock.spec.includes('staged-recipes'))
+              ?.filter((feedstock) => feedstock.spec.includes('staged-recipes'))
               .sort((a, b) => a.spec.localeCompare(b.spec))
               .map((feedstock) => (
                 <FeedstockCard

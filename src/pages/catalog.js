@@ -41,9 +41,12 @@ const DatasetListItem = ({ dataset }) => {
 }
 
 const FeedstockRowAccordionItem = ({ feedstockId, feedstockSpec }) => {
-  const { meta, metaError } = useMeta(feedstockSpec)
-  const { fs: { spec = '', recipe_runs = [] } = {}, fsError } =
-    useFeedstock(feedstockId)
+  const { meta, metaError, isLoading: metaIsLoading } = useMeta(feedstockSpec)
+  const {
+    fs: { spec = '', recipe_runs = [] } = {},
+    fsError,
+    isLoading: fsIsLoading,
+  } = useFeedstock(feedstockId)
 
   if (metaError || fsError) {
     return (
@@ -67,40 +70,43 @@ const FeedstockRowAccordionItem = ({ feedstockId, feedstockSpec }) => {
     <AccordionItem>
       {({ isExpanded }) => (
         <>
-          <AccordionButton>
-            <Box flex='1' textAlign='left'>
-              {meta.title}
-            </Box>
-            {isExpanded ? (
-              <MinusIcon fontSize='xl' />
-            ) : (
-              <AddIcon fontSize='xl' />
-            )}
-          </AccordionButton>
+          <Skeleton isLoaded={!metaIsLoading && !fsIsLoading}>
+            <AccordionButton>
+              <Box flex='1' textAlign='left'>
+                {meta.title}
+              </Box>
 
-          <AccordionPanel>
-            <Text opacity={0.8}>{meta.description}</Text>
+              {isExpanded ? (
+                <MinusIcon fontSize='xl' />
+              ) : (
+                <AddIcon fontSize='xl' />
+              )}
+            </AccordionButton>
 
-            <List spacing={3} my={4}>
-              {isProduction &&
-                datasets.map((dataset) => (
-                  <DatasetListItem
-                    key={dataset}
-                    dataset={dataset}
-                  ></DatasetListItem>
-                ))}
-            </List>
+            <AccordionPanel>
+              <Text opacity={0.8}>{meta.description}</Text>
 
-            <Button
-              as={Link}
-              my={4}
-              href={`/dashboard/feedstock/${feedstockId}`}
-              colorScheme='teal'
-              variant='outline'
-            >
-              More Details
-            </Button>
-          </AccordionPanel>
+              <List spacing={3} my={4}>
+                {isProduction &&
+                  datasets.map((dataset) => (
+                    <DatasetListItem
+                      key={dataset}
+                      dataset={dataset}
+                    ></DatasetListItem>
+                  ))}
+              </List>
+
+              <Button
+                as={Link}
+                my={4}
+                href={`/dashboard/feedstock/${feedstockId}`}
+                colorScheme='teal'
+                variant='outline'
+              >
+                More Details
+              </Button>
+            </AccordionPanel>
+          </Skeleton>
         </>
       )}
     </AccordionItem>
@@ -108,7 +114,7 @@ const FeedstockRowAccordionItem = ({ feedstockId, feedstockSpec }) => {
 }
 
 const Catalog = () => {
-  const { feedstocks, feedstocksError } = useFeedstocks()
+  const { feedstocks, feedstocksError, isLoading } = useFeedstocks()
 
   if (feedstocksError) {
     return (
@@ -121,12 +127,6 @@ const Catalog = () => {
       </Layout>
     )
   }
-  if (!feedstocks)
-    return (
-      <Layout>
-        <Skeleton minH={'100vh'}></Skeleton>
-      </Layout>
-    )
 
   return (
     <Layout>
@@ -136,24 +136,28 @@ const Catalog = () => {
             Catalog
           </Heading>
 
-          <Accordion my={8} allowMultiple>
-            {feedstocks
-              .filter((feedstock) => !feedstock.spec.includes('staged-recipes'))
-              .sort((a, b) =>
-                a.spec
-                  .toLowerCase()
-                  .replace('pangeo-forge/', '')
-                  .replace('-feedstock', '')
-                  .localeCompare(b.spec),
-              )
-              .map((feedstock) => (
-                <FeedstockRowAccordionItem
-                  key={feedstock.id}
-                  feedstockId={feedstock.id}
-                  feedstockSpec={feedstock.spec}
-                ></FeedstockRowAccordionItem>
-              ))}
-          </Accordion>
+          <Skeleton isLoaded={!isLoading}>
+            <Accordion my={8} allowMultiple>
+              {feedstocks
+                ?.filter(
+                  (feedstock) => !feedstock.spec.includes('staged-recipes'),
+                )
+                .sort((a, b) =>
+                  a.spec
+                    .toLowerCase()
+                    .replace('pangeo-forge/', '')
+                    .replace('-feedstock', '')
+                    .localeCompare(b.spec),
+                )
+                .map((feedstock) => (
+                  <FeedstockRowAccordionItem
+                    key={feedstock.id}
+                    feedstockId={feedstock.id}
+                    feedstockSpec={feedstock.spec}
+                  ></FeedstockRowAccordionItem>
+                ))}
+            </Accordion>
+          </Skeleton>
         </Container>
       </Box>
     </Layout>

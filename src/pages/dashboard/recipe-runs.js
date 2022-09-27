@@ -2,7 +2,7 @@ import { Error } from '@/components'
 import { RecipeRunCard } from '@/components/dashboard'
 import { Layout } from '@/components/layout'
 import { useRecipeRuns } from '@/lib/endpoints'
-import { Box, Container, Heading, SimpleGrid, Skeleton } from '@chakra-ui/react'
+import { Box, Container, Heading, SimpleGrid } from '@chakra-ui/react'
 
 const RecipeRuns = () => {
   const { recipeRuns, recipeRunsError, isLoading } = useRecipeRuns()
@@ -18,12 +18,6 @@ const RecipeRuns = () => {
       </Layout>
     )
   }
-  if (isLoading)
-    return (
-      <Layout menu={true}>
-        <Skeleton minH={'100vh'}></Skeleton>
-      </Layout>
-    )
 
   return (
     <Layout menu={true}>
@@ -40,7 +34,7 @@ const RecipeRuns = () => {
             justifyContent={'space-between'}
           >
             {recipeRuns
-              .sort((a, b) => a.recipe_id.localeCompare(b.recipe_id))
+              ?.sort((a, b) => a.recipe_id.localeCompare(b.recipe_id))
               .sort((a, b) => a.started_at.localeCompare(b.started_at))
               .reverse()
               .map((recipe, index) => (

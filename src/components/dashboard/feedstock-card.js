@@ -16,11 +16,13 @@ import { GoMarkGithub } from 'react-icons/go'
 export const FeedstockCard = ({ spec, id }) => {
   const href = `/dashboard/feedstock/${id}`
 
-  const { repo, repoError } = useRepo(
-    `https://api.github.com/repos/${spec}/commits/HEAD`,
-  )
+  const {
+    repo,
+    repoError,
+    isLoading: repoIsLoading,
+  } = useRepo(`https://api.github.com/repos/${spec}/commits/HEAD`)
 
-  const { meta, metaError } = useMeta(spec)
+  const { meta, metaError, isLoading: metaIsLoading } = useMeta(spec)
 
   if (repoError || metaError)
     return (
@@ -30,7 +32,6 @@ export const FeedstockCard = ({ spec, id }) => {
         message={repoError?.message || metaError?.message}
       />
     )
-  if (!repo || !meta) return <Skeleton minH={'100vh'}></Skeleton>
 
   return (
     <LinkBox
@@ -56,22 +57,26 @@ export const FeedstockCard = ({ spec, id }) => {
           justify={'left'}
         >
           <Stack spacing={2}>
-            <Heading as={'h3'} size='xs' textTransform='uppercase'>
-              {meta.title
-                ? meta.title
-                : spec
-                    .toLowerCase()
-                    .replace('pangeo-forge/', '')
-                    .replace('-feedstock', '')}
-            </Heading>
+            <Skeleton isLoaded={!metaIsLoading}>
+              <Heading as={'h3'} size='xs' textTransform='uppercase'>
+                {meta?.title
+                  ? meta.title
+                  : spec
+                      .toLowerCase()
+                      .replace('pangeo-forge/', '')
+                      .replace('-feedstock', '')}
+              </Heading>
+            </Skeleton>
             <Box py={4}>
-              <Text opacity={0.8} noOfLines={2}>
-                {meta.description
-                  ? meta.description
-                  : spec.includes('staged-recipes')
-                  ? 'A place to submit pangeo-forge recipes before they become fully fledged pangeo-forge feedstocks'
-                  : repo.commit.message}
-              </Text>
+              <Skeleton isLoaded={!metaIsLoading && !repoIsLoading}>
+                <Text opacity={0.8} noOfLines={2}>
+                  {meta?.description
+                    ? meta.description
+                    : spec.includes('staged-recipes')
+                    ? 'A place to submit pangeo-forge recipes before they become fully fledged pangeo-forge feedstocks'
+                    : repo?.commit.message}
+                </Text>
+              </Skeleton>
             </Box>
 
             <Stack
@@ -86,21 +91,25 @@ export const FeedstockCard = ({ spec, id }) => {
               justify={'space-between'}
               align={'center'}
             >
-              <MaintainersGroup maintainers={meta.maintainers} />
+              <Skeleton isLoaded={!metaIsLoading}>
+                <MaintainersGroup maintainers={meta?.maintainers} />
+              </Skeleton>
 
               <Stack justify={'left'} direction='row' spacing={2}>
-                <Text
-                  _dark={{ color: 'teal.400' }}
-                  fontSize='xs'
-                  fontWeight='bold'
-                  whiteSpace='break-spaces'
-                  variant='outline'
-                >
-                  {TimeDeltaFormatter(
-                    Date.now() - Date.parse(repo.commit.committer.date),
-                  )}{' '}
-                  via
-                </Text>
+                <Skeleton isLoaded={!repoIsLoading}>
+                  <Text
+                    _dark={{ color: 'teal.400' }}
+                    fontSize='xs'
+                    fontWeight='bold'
+                    whiteSpace='break-spaces'
+                    variant='outline'
+                  >
+                    {TimeDeltaFormatter(
+                      Date.now() - Date.parse(repo?.commit.committer.date),
+                    )}{' '}
+                    via
+                  </Text>
+                </Skeleton>
                 <GoMarkGithub size={20} />
               </Stack>
             </Stack>
