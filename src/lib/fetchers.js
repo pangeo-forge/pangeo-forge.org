@@ -6,7 +6,7 @@ export const jsonFetcher = async (url) => {
   // we still try to parse and throw it.
   if (!response.ok) {
     const error = new Error(
-      `An error occurred while fetching the data from URL: ${url}`,
+      `An error occurred while fetching data from URL: ${url}`,
     )
     // Attach extra info to the error object.
     error.info = await response.json()
