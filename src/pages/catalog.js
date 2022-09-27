@@ -48,7 +48,11 @@ const FeedstockRowAccordionItem = ({ feedstockId, feedstockSpec }) => {
   if (metaError || fsError) {
     return (
       <Layout>
-        <Error status={metaError.status} info={metaError?.info} />
+        <Error
+          status={metaError.status}
+          info={metaError?.info}
+          message={metaError?.message}
+        />
       </Layout>
     )
   }

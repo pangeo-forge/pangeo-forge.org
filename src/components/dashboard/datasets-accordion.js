@@ -14,7 +14,13 @@ const DatasetRepr = ({ dataset }) => {
   const { repr, reprError, isLoading } = useXarrayDatasetRepr(dataset)
 
   if (reprError)
-    return <Error status={reprError?.status} detail={reprError?.info} />
+    return (
+      <Error
+        status={reprError?.status}
+        info={reprError?.info}
+        message={reprError?.message}
+      />
+    )
 
   return (
     <Skeleton isLoaded={!isLoading}>

@@ -27,7 +27,11 @@ const Bakery = () => {
   if (bakeryError)
     return (
       <Layout>
-        <Error status={bakeryError.status} info={bakeryError?.info} />
+        <Error
+          status={bakeryError.status}
+          info={bakeryError?.info}
+          message={bakeryError?.message}
+        />
       </Layout>
     )
 

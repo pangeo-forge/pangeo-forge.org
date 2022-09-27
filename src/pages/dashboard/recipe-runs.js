@@ -10,7 +10,11 @@ const RecipeRuns = () => {
   if (recipeRunsError) {
     return (
       <Layout menu={true}>
-        <Error status={recipeRunsError.status} info={recipeRunsError?.info} />
+        <Error
+          status={recipeRunsError.status}
+          info={recipeRunsError?.info}
+          message={recipeRunsError?.message}
+        />
       </Layout>
     )
   }

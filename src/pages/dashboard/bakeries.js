@@ -17,7 +17,11 @@ const Bakeries = () => {
   if (bakeriesError)
     return (
       <Layout menu={true}>
-        <Error status={bakeriesError.status} info={bakeriesError?.info} />
+        <Error
+          status={bakeriesError.status}
+          info={bakeriesError?.info}
+          message={bakeriesError?.message}
+        />
       </Layout>
     )
   if (isLoading)

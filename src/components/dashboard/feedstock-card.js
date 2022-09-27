@@ -27,6 +27,7 @@ export const FeedstockCard = ({ spec, id }) => {
       <Error
         status={repoError?.status || metaError?.status}
         info={repoError?.info || metaError?.info}
+        message={repoError?.message || metaError?.message}
       />
     )
   if (!repo || !meta) return <Skeleton minH={'100vh'}></Skeleton>
