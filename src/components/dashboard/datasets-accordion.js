@@ -1,4 +1,4 @@
-import { CodeBlock } from '@/components'
+import { CodeBlock, Error } from '@/components'
 import { useXarrayDatasetRepr } from '@/lib/endpoints'
 import { AddIcon, MinusIcon } from '@chakra-ui/icons'
 import {
@@ -6,8 +6,6 @@ import {
   AccordionButton,
   AccordionItem,
   AccordionPanel,
-  Alert,
-  AlertIcon,
   Box,
   Skeleton,
 } from '@chakra-ui/react'
@@ -17,10 +15,11 @@ const DatasetRepr = ({ dataset }) => {
 
   if (reprError)
     return (
-      <Alert status='error' align='center' justifyContent='center'>
-        <AlertIcon />
-        {`Status Code: ${reprError.status}`} - {reprError.info?.detail}
-      </Alert>
+      <Error
+        status={reprError?.status}
+        info={reprError?.info}
+        message={reprError?.message}
+      />
     )
 
   return (

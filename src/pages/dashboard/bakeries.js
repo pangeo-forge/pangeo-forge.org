@@ -1,3 +1,4 @@
+import { Error } from '@/components'
 import { BakeryCard } from '@/components/dashboard'
 import { Layout } from '@/components/layout'
 import { useBakeries } from '@/lib/endpoints'
@@ -16,7 +17,11 @@ const Bakeries = () => {
   if (bakeriesError)
     return (
       <Layout menu={true}>
-        <Box>Failed to load...</Box>
+        <Error
+          status={bakeriesError.status}
+          info={bakeriesError?.info}
+          message={bakeriesError?.message}
+        />
       </Layout>
     )
   if (isLoading)

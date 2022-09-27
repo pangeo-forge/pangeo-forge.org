@@ -1,4 +1,4 @@
-import { Link } from '@/components/'
+import { Error, Link } from '@/components/'
 import { CopyButton } from '@/components/copy-button'
 import { Layout } from '@/components/layout'
 import { useFeedstock, useFeedstocks, useMeta } from '@/lib/endpoints'
@@ -48,7 +48,11 @@ const FeedstockRowAccordionItem = ({ feedstockId, feedstockSpec }) => {
   if (metaError || fsError) {
     return (
       <Layout>
-        <Box>Failed to load...</Box>
+        <Error
+          status={metaError.status}
+          info={metaError?.info}
+          message={metaError?.message}
+        />
       </Layout>
     )
   }
@@ -109,7 +113,11 @@ const Catalog = () => {
   if (feedstocksError) {
     return (
       <Layout>
-        <Box>Failed to load...</Box>
+        <Error
+          status={feedstocksError.status}
+          info={feedstocksError?.info}
+          message={feedstocksError?.message}
+        />
       </Layout>
     )
   }
