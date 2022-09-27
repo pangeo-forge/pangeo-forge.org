@@ -2,14 +2,7 @@ import { Error } from '@/components'
 import { BakeryCard } from '@/components/dashboard'
 import { Layout } from '@/components/layout'
 import { useBakeries } from '@/lib/endpoints'
-import {
-  Box,
-  Container,
-  Heading,
-  SimpleGrid,
-  Skeleton,
-  Text,
-} from '@chakra-ui/react'
+import { Box, Container, Heading, SimpleGrid, Text } from '@chakra-ui/react'
 
 const Bakeries = () => {
   const { bakeries, bakeriesError, isLoading } = useBakeries()
@@ -22,12 +15,6 @@ const Bakeries = () => {
           info={bakeriesError?.info}
           message={bakeriesError?.message}
         />
-      </Layout>
-    )
-  if (isLoading)
-    return (
-      <Layout menu={true}>
-        <Skeleton minH={'100vh'}></Skeleton>
       </Layout>
     )
 
@@ -51,7 +38,7 @@ const Bakeries = () => {
             spacing={4}
             justifyContent={'space-between'}
           >
-            {bakeries.map((bakery, index) => (
+            {bakeries?.map((bakery, index) => (
               <BakeryCard
                 key={index}
                 name={bakery.name}
