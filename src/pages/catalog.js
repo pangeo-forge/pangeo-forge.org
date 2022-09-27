@@ -113,7 +113,11 @@ const Catalog = () => {
   if (feedstocksError) {
     return (
       <Layout>
-        <Error status={feedstocksError.status} info={feedstocksError?.info} />
+        <Error
+          status={feedstocksError.status}
+          info={feedstocksError?.info}
+          message={feedstocksError?.message}
+        />
       </Layout>
     )
   }
