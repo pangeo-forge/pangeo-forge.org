@@ -74,27 +74,27 @@ const Feedstock = () => {
 
           <Tabs isLazy isFitted colorScheme='teal' variant={'enclosed'} my={16}>
             <TabList>
-              <Tab _selected={selectedColor}>Recipe Runs</Tab>
               <Tab _selected={selectedColor}>
                 <GoDatabase />
                 <Text ml={2}>{`${datasets?.length} Dataset${
                   datasets?.length > 1 ? 's' : ''
                 }`}</Text>
               </Tab>
+              <Tab _selected={selectedColor}>Recipe Runs</Tab>
             </TabList>
             <TabPanels>
-              <TabPanel>
-                {' '}
-                <Skeleton isLoaded={!feedstockIsLoading}>
-                  <RecipeRuns runs={recipe_runs} />
-                </Skeleton>
-              </TabPanel>
               <TabPanel>
                 <Skeleton isLoaded={!feedstockIsLoading}>
                   <FeedstockDatasets
                     isProduction={isProduction}
                     datasets={datasets}
                   />
+                </Skeleton>
+              </TabPanel>
+              <TabPanel>
+                {' '}
+                <Skeleton isLoaded={!feedstockIsLoading}>
+                  <RecipeRuns runs={recipe_runs} />
                 </Skeleton>
               </TabPanel>
             </TabPanels>
