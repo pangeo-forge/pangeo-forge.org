@@ -113,12 +113,14 @@ const RecipeRun = () => {
 
           <Divider my={8} />
 
-          <Heading as={'h3'} size='md'>
+          <Heading as={'h3'} my={4} size='md'>
             Dataset
           </Heading>
 
           <Skeleton isLoaded={!recipeIsLoading}>
-            <DatasetRepr dataset={recipeRun?.dataset_public_url} />
+            {recipeRun?.dataset_public_url !== null && (
+              <DatasetRepr dataset={recipeRun?.dataset_public_url} />
+            )}
           </Skeleton>
 
           <Divider my={8} />
