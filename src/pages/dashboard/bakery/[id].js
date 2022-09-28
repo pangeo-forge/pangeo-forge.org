@@ -28,7 +28,7 @@ const Bakery = () => {
     return (
       <Layout>
         <Error
-          status={bakeryError.status}
+          status={bakeryError?.status}
           info={bakeryError?.info}
           message={bakeryError?.message}
         />

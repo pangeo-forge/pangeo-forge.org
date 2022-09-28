@@ -60,7 +60,7 @@ const RecipeRun = () => {
         <Box as='section'>
           <Container maxW='container.xl' py={90}>
             <Error
-              status={recipeRunError.status}
+              status={recipeRunError?.status}
               info={recipeRunError?.info}
               message={recipeRunError?.message}
             />

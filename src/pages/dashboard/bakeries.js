@@ -11,7 +11,7 @@ const Bakeries = () => {
     return (
       <Layout menu={true}>
         <Error
-          status={bakeriesError.status}
+          status={bakeriesError?.status}
           info={bakeriesError?.info}
           message={bakeriesError?.message}
         />

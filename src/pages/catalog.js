@@ -52,7 +52,7 @@ const FeedstockRowAccordionItem = ({ feedstockId, feedstockSpec }) => {
     return (
       <Layout>
         <Error
-          status={metaError.status}
+          status={metaError?.status}
           info={metaError?.info}
           message={metaError?.message}
         />
@@ -120,7 +120,7 @@ const Catalog = () => {
     return (
       <Layout>
         <Error
-          status={feedstocksError.status}
+          status={feedstocksError?.status}
           info={feedstocksError?.info}
           message={feedstocksError?.message}
         />

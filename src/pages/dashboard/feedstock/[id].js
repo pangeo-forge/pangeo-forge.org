@@ -39,7 +39,7 @@ const Feedstock = () => {
         <Box as='section'>
           <Container maxW='container.xl' py={90}>
             <Error
-              status={fsError.status}
+              status={fsError?.status}
               info={fsError?.info}
               message={fsError?.message}
             />
