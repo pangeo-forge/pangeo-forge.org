@@ -1,5 +1,5 @@
-import { CodeBlock, Error } from '@/components'
-import { useXarrayDatasetRepr } from '@/lib/endpoints'
+import { DatasetRepr } from '@/components/dataset'
+import { getDatasetName } from '@/lib/dataset-utils'
 import { AddIcon, MinusIcon } from '@chakra-ui/icons'
 import {
   Accordion,
@@ -7,40 +7,11 @@ import {
   AccordionItem,
   AccordionPanel,
   Box,
-  Skeleton,
 } from '@chakra-ui/react'
 
-const DatasetRepr = ({ dataset }) => {
-  const { repr, reprError, isLoading } = useXarrayDatasetRepr(dataset)
-
-  if (reprError)
-    return (
-      <Error
-        status={reprError?.status}
-        info={reprError?.info}
-        message={reprError?.message}
-      />
-    )
-
-  return (
-    <Skeleton isLoaded={!isLoading}>
-      <Box my={4}>
-        <div dangerouslySetInnerHTML={{ __html: repr }} />
-      </Box>
-    </Skeleton>
-  )
-}
-
 export const DatasetCard = ({ dataset }) => {
-  const name = dataset
-    .split('/')
-    .filter((elem) => elem)
-    .slice(-1)
-  const code = `import xarray as xr
+  const name = getDatasetName(dataset)
 
-store = '${dataset}'
-ds = xr.open_dataset(store, engine='zarr', chunks={})
-ds`
   return (
     <AccordionItem>
       {({ isExpanded }) => (
@@ -58,9 +29,6 @@ ds`
           </AccordionButton>
 
           <AccordionPanel pb={4}>
-            <CodeBlock showLineNumbers language={'python'}>
-              {code}
-            </CodeBlock>
             <DatasetRepr dataset={dataset} />
           </AccordionPanel>
         </>

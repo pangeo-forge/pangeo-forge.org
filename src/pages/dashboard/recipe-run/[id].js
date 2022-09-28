@@ -4,6 +4,7 @@ import {
   FlowRunsAccordion,
   RecipeRunDetails,
 } from '@/components/dashboard'
+import { DatasetRepr } from '@/components/dataset'
 import { Layout } from '@/components/layout'
 import {
   useFeedstock,
@@ -108,6 +109,18 @@ const RecipeRun = () => {
               status={recipeRun?.status}
               conclusion={recipeRun?.conclusion}
             />
+          </Skeleton>
+
+          <Divider my={8} />
+
+          <Heading as={'h3'} my={4} size='md'>
+            Dataset
+          </Heading>
+
+          <Skeleton isLoaded={!recipeIsLoading}>
+            {recipeRun?.dataset_public_url !== null && (
+              <DatasetRepr dataset={recipeRun?.dataset_public_url} />
+            )}
           </Skeleton>
 
           <Divider my={8} />
