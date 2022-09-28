@@ -32,8 +32,10 @@ const DatasetRepr = ({ dataset }) => {
 }
 
 export const DatasetCard = ({ dataset }) => {
-  const parts = dataset.split('/')
-  const name = parts[parts.length - 1]
+  const name = dataset
+    .split('/')
+    .filter((elem) => elem)
+    .slice(-1)
   const code = `import xarray as xr
 
 store = '${dataset}'
