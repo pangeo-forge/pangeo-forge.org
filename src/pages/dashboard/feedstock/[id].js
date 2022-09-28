@@ -20,7 +20,7 @@ import {
   Text,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { GoDatabase } from 'react-icons/go'
+import { GoDatabase, GoTerminal } from 'react-icons/go'
 
 const Feedstock = () => {
   const router = useRouter()
@@ -49,6 +49,7 @@ const Feedstock = () => {
     )
 
   const { isProduction, datasets } = getProductionRunInfo(id, recipe_runs)
+  const selectedColor = { color: 'white', bg: 'teal.500' }
 
   return (
     <Layout>
@@ -71,29 +72,34 @@ const Feedstock = () => {
             />
           </Skeleton>
 
-          <Tabs isLazy isFitted colorScheme='teal' my={16}>
+          <Tabs isLazy isFitted colorScheme='teal' variant={'enclosed'} my={16}>
             <TabList>
-              <Tab>Recipe Runs</Tab>
-              <Tab>
+              <Tab _selected={selectedColor}>
                 <GoDatabase />
                 <Text ml={2}>{`${datasets?.length} Dataset${
                   datasets?.length > 1 ? 's' : ''
                 }`}</Text>
               </Tab>
+              <Tab _selected={selectedColor}>
+                <GoTerminal />
+                <Text ml={2}>{`${recipe_runs?.length} Recipe Run${
+                  recipe_runs?.length > 1 ? 's' : ''
+                }`}</Text>
+              </Tab>
             </TabList>
             <TabPanels>
-              <TabPanel>
-                {' '}
-                <Skeleton isLoaded={!feedstockIsLoading}>
-                  <RecipeRuns runs={recipe_runs} />
-                </Skeleton>
-              </TabPanel>
               <TabPanel>
                 <Skeleton isLoaded={!feedstockIsLoading}>
                   <FeedstockDatasets
                     isProduction={isProduction}
                     datasets={datasets}
                   />
+                </Skeleton>
+              </TabPanel>
+              <TabPanel>
+                {' '}
+                <Skeleton isLoaded={!feedstockIsLoading}>
+                  <RecipeRuns runs={recipe_runs} />
                 </Skeleton>
               </TabPanel>
             </TabPanels>
