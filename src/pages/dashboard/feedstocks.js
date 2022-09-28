@@ -11,7 +11,7 @@ const Feedstocks = () => {
     return (
       <Layout menu={true}>
         <Error
-          status={feedstocksError.status}
+          status={feedstocksError?.status}
           info={feedstocksError?.info}
           message={feedstocksError?.message}
         />

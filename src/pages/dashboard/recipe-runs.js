@@ -11,7 +11,7 @@ const RecipeRuns = () => {
     return (
       <Layout menu={true}>
         <Error
-          status={recipeRunsError.status}
+          status={recipeRunsError?.status}
           info={recipeRunsError?.info}
           message={recipeRunsError?.message}
         />
