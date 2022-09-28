@@ -30,6 +30,8 @@ export const Menu = () => {
   const [activeTab, setActiveTab] = React.useState(tabs[router.route].index)
   const onChange = (index) => setActiveTab(index)
 
+  const selectedColor = { color: 'white', bg: 'teal.500' }
+
   return (
     <Box as='section' mt={50}>
       <Container maxW='container.xl' py={8} centerContent>
@@ -41,11 +43,12 @@ export const Menu = () => {
           onChange={onChange}
           index={activeTab}
           defaultIndex={activeTab}
+          variant={'enclosed'}
         >
           <TabList>
             {Object.keys(tabs).map((key) => (
               <Link key={key} href={key}>
-                <Tab>{tabs[key].label}</Tab>
+                <Tab _selected={selectedColor}>{tabs[key].label}</Tab>
               </Link>
             ))}
           </TabList>

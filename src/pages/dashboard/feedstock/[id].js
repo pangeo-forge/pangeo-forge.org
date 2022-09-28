@@ -49,6 +49,7 @@ const Feedstock = () => {
     )
 
   const { isProduction, datasets } = getProductionRunInfo(id, recipe_runs)
+  const selectedColor = { color: 'white', bg: 'teal.500' }
 
   return (
     <Layout>
@@ -71,10 +72,10 @@ const Feedstock = () => {
             />
           </Skeleton>
 
-          <Tabs isLazy isFitted colorScheme='teal' my={16}>
+          <Tabs isLazy isFitted colorScheme='teal' variant={'enclosed'} my={16}>
             <TabList>
-              <Tab>Recipe Runs</Tab>
-              <Tab>
+              <Tab _selected={selectedColor}>Recipe Runs</Tab>
+              <Tab _selected={selectedColor}>
                 <GoDatabase />
                 <Text ml={2}>{`${datasets?.length} Dataset${
                   datasets?.length > 1 ? 's' : ''
