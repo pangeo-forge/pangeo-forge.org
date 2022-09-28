@@ -20,7 +20,7 @@ import {
   Text,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
-import { GoDatabase } from 'react-icons/go'
+import { GoDatabase, GoTerminal } from 'react-icons/go'
 
 const Feedstock = () => {
   const router = useRouter()
@@ -80,7 +80,12 @@ const Feedstock = () => {
                   datasets?.length > 1 ? 's' : ''
                 }`}</Text>
               </Tab>
-              <Tab _selected={selectedColor}>Recipe Runs</Tab>
+              <Tab _selected={selectedColor}>
+                <GoTerminal />
+                <Text ml={2}>{`${recipe_runs?.length} Recipe Run${
+                  recipe_runs?.length > 1 ? 's' : ''
+                }`}</Text>
+              </Tab>
             </TabList>
             <TabPanels>
               <TabPanel>
