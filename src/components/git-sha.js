@@ -12,6 +12,7 @@ export const GitSHA = () => {
       align='center'
       as={Link}
       href={`https://github.com/${owner}/${slug}/tree/${sha}`}
+      fontSize='sm'
     >
       <IoGitBranchOutline />
       <Text ml={1}>{sha.substring(0, 7)}</Text>
