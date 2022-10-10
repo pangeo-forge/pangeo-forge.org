@@ -5,9 +5,8 @@ import {
   RecipeRuns,
 } from '@/components/dashboard'
 import { Layout } from '@/components/layout'
-import { useFeedstock, useMeta } from '@/lib/endpoints'
+import { useFeedstock, useFeedstockDatasets, useMeta } from '@/lib/endpoints'
 import { getName } from '@/lib/feedstock-utils'
-import { getProductionRunInfo } from '@/lib/recipe-run-utils'
 import {
   Box,
   Container,
@@ -27,28 +26,37 @@ const Feedstock = () => {
   const { id } = router.query
 
   const {
+    datasets,
+    datasetsError,
+    isLoading: datasetsAreLoading,
+  } = useFeedstockDatasets(id)
+  const {
     fs: { spec = '', recipe_runs = [] } = {},
     fsError,
     isLoading: feedstockIsLoading,
   } = useFeedstock(id)
+
   const { meta, metaError, isLoading: metaIsLoading } = useMeta(spec)
 
-  if (fsError || metaError)
+  if (fsError || metaError || datasetsError)
     return (
       <Layout>
         <Box as='section'>
           <Container maxW='container.xl' py={90}>
             <Error
-              status={fsError?.status}
-              info={fsError?.info}
-              message={fsError?.message}
+              status={
+                fsError?.status || metaError?.status || datasetsError?.status
+              }
+              info={fsError?.info || metaError?.info || datasetsError?.info}
+              message={
+                fsError?.message || metaError?.message || datasetsError?.message
+              }
             />
           </Container>
         </Box>
       </Layout>
     )
 
-  const { isProduction, datasets } = getProductionRunInfo(id, recipe_runs)
   const selectedColor = { color: 'white', bg: 'teal.500' }
 
   return (
@@ -76,24 +84,25 @@ const Feedstock = () => {
             <TabList>
               <Tab _selected={selectedColor}>
                 <GoDatabase />
-                <Text ml={2}>{`${datasets?.length} Dataset${
-                  datasets?.length > 1 ? 's' : ''
-                }`}</Text>
+                <Skeleton isLoaded={!datasetsAreLoading}>
+                  <Text ml={2}>{`${datasets?.length} Dataset${
+                    datasets?.length > 1 ? 's' : ''
+                  }`}</Text>
+                </Skeleton>
               </Tab>
               <Tab _selected={selectedColor}>
                 <GoTerminal />
-                <Text ml={2}>{`${recipe_runs?.length} Recipe Run${
-                  recipe_runs?.length > 1 ? 's' : ''
-                }`}</Text>
+                <Skeleton isLoaded={!feedstockIsLoading}>
+                  <Text ml={2}>{`${recipe_runs?.length} Recipe Run${
+                    recipe_runs?.length > 1 ? 's' : ''
+                  }`}</Text>
+                </Skeleton>
               </Tab>
             </TabList>
             <TabPanels>
               <TabPanel>
-                <Skeleton isLoaded={!feedstockIsLoading}>
-                  <FeedstockDatasets
-                    isProduction={isProduction}
-                    datasets={datasets}
-                  />
+                <Skeleton isLoaded={!datasetsAreLoading}>
+                  <FeedstockDatasets datasets={datasets} />
                 </Skeleton>
               </TabPanel>
               <TabPanel>
