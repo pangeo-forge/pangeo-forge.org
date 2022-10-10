@@ -1,4 +1,4 @@
-import { Link } from '@/components'
+import { Link, GitSHA } from '@/components'
 import { Vercel } from '@/components/vercel'
 import {
   Box,
@@ -84,6 +84,8 @@ export const Footer = () => {
             &copy; {new Date().getFullYear()} The Pangeo Community. Apache 2.0
             Licensed.
           </Text>
+
+          <GitSHA />
         </Stack>
 
         <Container py={4} centerContent>
