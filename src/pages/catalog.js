@@ -1,6 +1,7 @@
 import { Error, Link } from '@/components/'
 import { CopyButton } from '@/components/copy-button'
 import { Layout } from '@/components/layout'
+import { getDatasetName } from '@/lib/dataset-utils'
 import {
   useFeedstock,
   useFeedstockDatasets,
@@ -32,7 +33,7 @@ const DatasetListItem = ({ dataset }) => {
       <Flex align='center'>
         <ListIcon as={GoDatabase} color='teal.500' />
 
-        {dataset ? dataset.split('/').pop() : ''}
+        {dataset ? getDatasetName(dataset) : ''}
         <CopyButton
           text={dataset}
           position='relative'
