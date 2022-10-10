@@ -1,8 +1,12 @@
 import { Error, Link } from '@/components/'
 import { CopyButton } from '@/components/copy-button'
 import { Layout } from '@/components/layout'
-import { useFeedstock, useFeedstocks, useMeta } from '@/lib/endpoints'
-import { getProductionRunInfo } from '@/lib/recipe-run-utils'
+import {
+  useFeedstock,
+  useFeedstockDatasets,
+  useFeedstocks,
+  useMeta,
+} from '@/lib/endpoints'
 import { AddIcon, MinusIcon } from '@chakra-ui/icons'
 import {
   Accordion,
@@ -41,6 +45,11 @@ const DatasetListItem = ({ dataset }) => {
 }
 
 const FeedstockRowAccordionItem = ({ feedstockId, feedstockSpec }) => {
+  const {
+    datasets,
+    datasetsError,
+    isLoading: datasetsAreLoading,
+  } = useFeedstockDatasets(feedstockId)
   const { meta, metaError, isLoading: metaIsLoading } = useMeta(feedstockSpec)
   const {
     fs: { spec = '', recipe_runs = [] } = {},
@@ -48,68 +57,74 @@ const FeedstockRowAccordionItem = ({ feedstockId, feedstockSpec }) => {
     isLoading: fsIsLoading,
   } = useFeedstock(feedstockId)
 
-  if (metaError || fsError) {
+  if (metaError || fsError || datasetsError) {
     return (
       <Layout>
         <Error
-          status={metaError?.status}
-          info={metaError?.info}
-          message={metaError?.message}
+          status={
+            metaError?.status || fs.Error?.status || datasetsError?.status
+          }
+          info={metaError?.info || fs.Error?.info || datasetsError?.info}
+          message={
+            metaError?.message || fs.Error?.message || datasetsError?.message
+          }
         />
       </Layout>
     )
   }
-  if (!meta || !recipe_runs || !spec) return <Layout></Layout>
-
-  const { isProduction, datasets } = getProductionRunInfo(
-    feedstockId,
-    recipe_runs,
-  )
 
   return (
-    <AccordionItem>
-      {({ isExpanded }) => (
-        <>
-          <Skeleton isLoaded={!metaIsLoading && !fsIsLoading}>
-            <AccordionButton>
-              <Box flex='1' textAlign='left'>
-                {meta.title}
-              </Box>
+    <>
+      {' '}
+      {datasets?.length > 0 ? (
+        <AccordionItem>
+          {({ isExpanded }) => (
+            <>
+              <Skeleton isLoaded={!metaIsLoading && !fsIsLoading}>
+                <AccordionButton>
+                  <Box flex='1' textAlign='left'>
+                    {meta?.title}
+                  </Box>
 
-              {isExpanded ? (
-                <MinusIcon fontSize='xl' />
-              ) : (
-                <AddIcon fontSize='xl' />
-              )}
-            </AccordionButton>
+                  {isExpanded ? (
+                    <MinusIcon fontSize='xl' />
+                  ) : (
+                    <AddIcon fontSize='xl' />
+                  )}
+                </AccordionButton>
 
-            <AccordionPanel>
-              <Text opacity={0.8}>{meta.description}</Text>
+                <AccordionPanel>
+                  <Text opacity={0.8}>{meta?.description}</Text>
 
-              <List spacing={3} my={4}>
-                {isProduction &&
-                  datasets.map((dataset) => (
-                    <DatasetListItem
-                      key={dataset}
-                      dataset={dataset}
-                    ></DatasetListItem>
-                  ))}
-              </List>
+                  <Skeleton isLoaded={!datasetsAreLoading}>
+                    <List spacing={3} my={4}>
+                      {datasets?.map((dataset, index) => (
+                        <DatasetListItem
+                          key={index}
+                          dataset={dataset?.dataset_public_url}
+                        ></DatasetListItem>
+                      ))}
+                    </List>
+                  </Skeleton>
 
-              <Button
-                as={Link}
-                my={4}
-                href={`/dashboard/feedstock/${feedstockId}`}
-                colorScheme='teal'
-                variant='outline'
-              >
-                More Details
-              </Button>
-            </AccordionPanel>
-          </Skeleton>
-        </>
+                  <Button
+                    as={Link}
+                    my={4}
+                    href={`/dashboard/feedstock/${feedstockId}`}
+                    colorScheme='teal'
+                    variant='outline'
+                  >
+                    More Details
+                  </Button>
+                </AccordionPanel>
+              </Skeleton>
+            </>
+          )}
+        </AccordionItem>
+      ) : (
+        <></>
       )}
-    </AccordionItem>
+    </>
   )
 }
 

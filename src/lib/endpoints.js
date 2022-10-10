@@ -82,6 +82,27 @@ export const useRecipeRuns = () => {
   }
 }
 
+export const useFeedstockDatasets = (id, type = 'production') => {
+  const orchestratorEndpoint = useOrchestratorEndpoint()
+  const { data, error } = useSWR(
+    id
+      ? `https://${orchestratorEndpoint}/feedstocks/${id}/datasets?type=${type}`
+      : null,
+    jsonFetcher,
+    { refreshInterval: 300000, dedupingInterval: defaultDedupingInterval },
+  )
+  return {
+    datasets: data?.sort((a, b) =>
+      a.dataset_public_url > b.dataset_public_url
+        ? 1
+        : b.dataset_public_url > a.dataset_public_url
+        ? -1
+        : 0,
+    ),
+    datasetsError: error,
+    isLoading: !data && !error,
+  }
+}
 export const useRecipeRun = (id) => {
   const orchestratorEndpoint = useOrchestratorEndpoint()
   const { data, error } = useSWR(

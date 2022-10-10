@@ -40,8 +40,8 @@ export const DatasetCard = ({ dataset }) => {
 export const DatasetsAccordion = ({ datasets }) => {
   return (
     <Accordion allowMultiple>
-      {datasets.map((dataset, index) => {
-        return <DatasetCard key={index} dataset={dataset} />
+      {datasets?.map((dataset, index) => {
+        return <DatasetCard key={index} dataset={dataset?.dataset_public_url} />
       })}
     </Accordion>
   )

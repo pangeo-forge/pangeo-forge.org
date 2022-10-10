@@ -2,7 +2,7 @@ import { Link } from '@/components'
 import { DatasetsAccordion } from '@/components/dashboard'
 import { Alert, AlertIcon, Box, Stack, Text } from '@chakra-ui/react'
 
-export const FeedstockDatasets = ({ isProduction, datasets }) => {
+export const FeedstockDatasets = ({ datasets }) => {
   const myBinderLink =
     'https://mybinder.org/v2/gh/pangeo-forge/sandbox/binder?urlpath=git-pull%3Frepo%3Dhttps%253A%252F%252Fgithub.com%252Fpangeo-forge%252Fsandbox%26urlpath%3Dlab%252Ftree%252Fsandbox%252Fscratch.ipynb%26branch%3Dmain'
   return (
@@ -35,7 +35,7 @@ export const FeedstockDatasets = ({ isProduction, datasets }) => {
         </Alert>
       </Box>
       <Stack my={8}>
-        {isProduction && <DatasetsAccordion datasets={datasets} />}
+        <DatasetsAccordion datasets={datasets} />
       </Stack>
     </>
   )
