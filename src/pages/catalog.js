@@ -74,50 +74,57 @@ const FeedstockRowAccordionItem = ({ feedstockId, feedstockSpec }) => {
   }
 
   return (
-    <AccordionItem>
-      {({ isExpanded }) => (
-        <>
-          <Skeleton isLoaded={!metaIsLoading && !fsIsLoading}>
-            <AccordionButton>
-              <Box flex='1' textAlign='left'>
-                {meta?.title}
-              </Box>
+    <>
+      {' '}
+      {datasets?.length > 0 ? (
+        <AccordionItem>
+          {({ isExpanded }) => (
+            <>
+              <Skeleton isLoaded={!metaIsLoading && !fsIsLoading}>
+                <AccordionButton>
+                  <Box flex='1' textAlign='left'>
+                    {meta?.title}
+                  </Box>
 
-              {isExpanded ? (
-                <MinusIcon fontSize='xl' />
-              ) : (
-                <AddIcon fontSize='xl' />
-              )}
-            </AccordionButton>
+                  {isExpanded ? (
+                    <MinusIcon fontSize='xl' />
+                  ) : (
+                    <AddIcon fontSize='xl' />
+                  )}
+                </AccordionButton>
 
-            <AccordionPanel>
-              <Text opacity={0.8}>{meta?.description}</Text>
+                <AccordionPanel>
+                  <Text opacity={0.8}>{meta?.description}</Text>
 
-              <Skeleton isLoaded={!datasetsAreLoading}>
-                <List spacing={3} my={4}>
-                  {datasets?.map((dataset, index) => (
-                    <DatasetListItem
-                      key={index}
-                      dataset={dataset?.dataset_public_url}
-                    ></DatasetListItem>
-                  ))}
-                </List>
+                  <Skeleton isLoaded={!datasetsAreLoading}>
+                    <List spacing={3} my={4}>
+                      {datasets?.map((dataset, index) => (
+                        <DatasetListItem
+                          key={index}
+                          dataset={dataset?.dataset_public_url}
+                        ></DatasetListItem>
+                      ))}
+                    </List>
+                  </Skeleton>
+
+                  <Button
+                    as={Link}
+                    my={4}
+                    href={`/dashboard/feedstock/${feedstockId}`}
+                    colorScheme='teal'
+                    variant='outline'
+                  >
+                    More Details
+                  </Button>
+                </AccordionPanel>
               </Skeleton>
-
-              <Button
-                as={Link}
-                my={4}
-                href={`/dashboard/feedstock/${feedstockId}`}
-                colorScheme='teal'
-                variant='outline'
-              >
-                More Details
-              </Button>
-            </AccordionPanel>
-          </Skeleton>
-        </>
+            </>
+          )}
+        </AccordionItem>
+      ) : (
+        <></>
       )}
-    </AccordionItem>
+    </>
   )
 }
 
