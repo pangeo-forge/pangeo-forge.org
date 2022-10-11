@@ -21,7 +21,6 @@ import {
   SimpleGrid,
   Skeleton,
   Table,
-  TableCaption,
   TableContainer,
   Tbody,
   Td,
@@ -62,6 +61,24 @@ const Feedstock = ({ id, spec }) => {
     )
   }
 
+  const image =
+    meta?.image ||
+    'https://images.unsplash.com/photo-1454789476662-53eb23ba5907?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=752&q=80'
+
+  const colors = [
+    'gray',
+    'red',
+    'orange',
+    'yellow',
+    'green',
+    'teal',
+    'blue',
+    'cyan',
+    'purple',
+    'pink',
+  ]
+  const color = colors[id % colors.length]
+
   return (
     <>
       {' '}
@@ -69,19 +86,29 @@ const Feedstock = ({ id, spec }) => {
         <Box>
           <Flex alignItems={'center'} justifyContent={'space-between'}></Flex>
           <Box
-            pos='relative'
-            h='200px'
-            bgImage="linear-gradient(rgba(255, 0, 0, 0.127),rgba(255, 0, 0, 0.1)) , url('')"
+            bgImage={`url(${image})`}
+            position={'relative'}
+            h={'200px'}
+            filter={'grayscale(100%)'}
+            backgroundSize={'cover'}
+            backgroundPosition={'center'}
           ></Box>
           <Box>
-            <Accordion allowMultiple>
+            <Accordion
+              allowMultiple
+              bg={`${color}.400`}
+              opacity={0.8}
+              mixBlendMode={'dodge'}
+            >
               <AccordionItem>
                 {({ isExpanded }) => (
                   <>
                     <AccordionButton>
                       <Box flex='1' textAlign='left'>
                         <Skeleton isLoaded={!metaIsLoading}>
-                          <Text>{meta?.title}</Text>
+                          <Text fontWeight={600} opacity={1}>
+                            {meta?.title}
+                          </Text>
                         </Skeleton>
                       </Box>
 
@@ -94,24 +121,20 @@ const Feedstock = ({ id, spec }) => {
 
                     <AccordionPanel pb={4}>
                       <Skeleton isLoaded={!metaIsLoading}>
-                        <Text opacity={0.8}>{meta?.description}</Text>
+                        <Text>{meta?.description}</Text>
                       </Skeleton>
 
-                      <TableContainer my={4}>
-                        <Table variant='striped' size='sm'>
-                          <TableCaption></TableCaption>
+                      <TableContainer mt={4}>
+                        <Table variant='simple' size='sm'>
                           <Thead>
                             <Tr>
-                              <Th></Th>
-                              <Th></Th>
-                              <Th></Th>
+                              <Th />
+                              <Th />
                             </Tr>
                           </Thead>
                           <Tbody>
                             <Tr>
-                              <Td>License</Td>
-                              <Td>:</Td>
-
+                              <Td>License: </Td>
                               <Td>
                                 <Skeleton isLoaded={!metaIsLoading}>
                                   <License
@@ -123,9 +146,7 @@ const Feedstock = ({ id, spec }) => {
                             </Tr>
 
                             <Tr>
-                              <Td>Last Updated</Td>
-                              <Td>:</Td>
-
+                              <Td>Last Updated: </Td>
                               <Td>
                                 <Skeleton isLoaded={!repoIsLoading}>
                                   {repo?.commit.committer.date}{' '}
@@ -134,9 +155,7 @@ const Feedstock = ({ id, spec }) => {
                             </Tr>
 
                             <Tr>
-                              <Td>Dataset Count</Td>
-                              <Td>:</Td>
-
+                              <Td>Dataset Count:</Td>
                               <Td>
                                 <Skeleton isLoaded={!datasetsAreLoading}>
                                   {datasets?.length}{' '}
