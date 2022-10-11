@@ -89,7 +89,6 @@ const Feedstock = ({ id, spec }) => {
             bgImage={`url(${image})`}
             position={'relative'}
             h={'200px'}
-            filter={'grayscale(100%)'}
             backgroundSize={'cover'}
             backgroundPosition={'center'}
           ></Box>
@@ -175,7 +174,7 @@ const Feedstock = ({ id, spec }) => {
               as={Link}
               my={2}
               href={`/dashboard/feedstock/${id}`}
-              colorScheme='teal'
+              colorScheme={color}
               variant='outline'
               size='sm'
             >
