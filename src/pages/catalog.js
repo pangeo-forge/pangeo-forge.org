@@ -1,12 +1,11 @@
 import { Error, Link } from '@/components/'
-import { CopyButton } from '@/components/copy-button'
+import { License } from '@/components/dashboard'
 import { Layout } from '@/components/layout'
-import { getDatasetName } from '@/lib/dataset-utils'
 import {
-  useFeedstock,
   useFeedstockDatasets,
   useFeedstocks,
   useMeta,
+  useRepo,
 } from '@/lib/endpoints'
 import { AddIcon, MinusIcon } from '@chakra-ui/icons'
 import {
@@ -19,55 +18,44 @@ import {
   Container,
   Flex,
   Heading,
-  List,
-  ListIcon,
-  ListItem,
+  SimpleGrid,
   Skeleton,
+  Table,
+  TableCaption,
+  TableContainer,
+  Tbody,
+  Td,
   Text,
+  Th,
+  Thead,
+  Tr,
 } from '@chakra-ui/react'
-import { GoDatabase } from 'react-icons/go'
 
-const DatasetListItem = ({ dataset }) => {
-  return (
-    <ListItem key={dataset}>
-      <Flex align='center'>
-        <ListIcon as={GoDatabase} color='teal.500' />
-
-        {dataset ? getDatasetName(dataset) : ''}
-        <CopyButton
-          text={dataset}
-          position='relative'
-          ml={8}
-          colorScheme='teal'
-        />
-      </Flex>
-    </ListItem>
-  )
-}
-
-const FeedstockRowAccordionItem = ({ feedstockId, feedstockSpec }) => {
+const Feedstock = ({ id, spec }) => {
   const {
     datasets,
     datasetsError,
     isLoading: datasetsAreLoading,
-  } = useFeedstockDatasets(feedstockId)
-  const { meta, metaError, isLoading: metaIsLoading } = useMeta(feedstockSpec)
-  const {
-    fs: { spec = '', recipe_runs = [] } = {},
-    fsError,
-    isLoading: fsIsLoading,
-  } = useFeedstock(feedstockId)
+  } = useFeedstockDatasets(id)
 
-  if (metaError || fsError || datasetsError) {
+  const {
+    repo,
+    repoError,
+    isLoading: repoIsLoading,
+  } = useRepo(`https://api.github.com/repos/${spec}/commits/HEAD`)
+
+  const { meta, metaError, isLoading: metaIsLoading } = useMeta(spec)
+
+  if (metaError || repoError || datasetsError) {
     return (
       <Layout>
         <Error
           status={
-            metaError?.status || fs.Error?.status || datasetsError?.status
+            metaError?.status || repoError?.status || datasetsError?.status
           }
-          info={metaError?.info || fs.Error?.info || datasetsError?.info}
+          info={metaError?.info || repoError?.info || datasetsError?.info}
           message={
-            metaError?.message || fs.Error?.message || datasetsError?.message
+            metaError?.message || repoError?.message || datasetsError?.message
           }
         />
       </Layout>
@@ -78,50 +66,104 @@ const FeedstockRowAccordionItem = ({ feedstockId, feedstockSpec }) => {
     <>
       {' '}
       {datasets?.length > 0 ? (
-        <AccordionItem>
-          {({ isExpanded }) => (
-            <>
-              <Skeleton isLoaded={!metaIsLoading && !fsIsLoading}>
-                <AccordionButton>
-                  <Box flex='1' textAlign='left'>
-                    {meta?.title}
-                  </Box>
+        <Box>
+          <Flex alignItems={'center'} justifyContent={'space-between'}></Flex>
+          <Box
+            pos='relative'
+            h='200px'
+            bgImage="linear-gradient(rgba(255, 0, 0, 0.127),rgba(255, 0, 0, 0.1)) , url('')"
+          ></Box>
+          <Box>
+            <Accordion allowMultiple>
+              <AccordionItem>
+                {({ isExpanded }) => (
+                  <>
+                    <AccordionButton>
+                      <Box flex='1' textAlign='left'>
+                        <Skeleton isLoaded={!metaIsLoading}>
+                          <Text>{meta?.title}</Text>
+                        </Skeleton>
+                      </Box>
 
-                  {isExpanded ? (
-                    <MinusIcon fontSize='xl' />
-                  ) : (
-                    <AddIcon fontSize='xl' />
-                  )}
-                </AccordionButton>
+                      {isExpanded ? (
+                        <MinusIcon fontSize='xl' />
+                      ) : (
+                        <AddIcon fontSize='xl' />
+                      )}
+                    </AccordionButton>
 
-                <AccordionPanel>
-                  <Text opacity={0.8}>{meta?.description}</Text>
+                    <AccordionPanel pb={4}>
+                      <Skeleton isLoaded={!metaIsLoading}>
+                        <Text opacity={0.8}>{meta?.description}</Text>
+                      </Skeleton>
 
-                  <Skeleton isLoaded={!datasetsAreLoading}>
-                    <List spacing={3} my={4}>
-                      {datasets?.map((dataset, index) => (
-                        <DatasetListItem
-                          key={index}
-                          dataset={dataset?.dataset_public_url}
-                        ></DatasetListItem>
-                      ))}
-                    </List>
-                  </Skeleton>
+                      <TableContainer my={4}>
+                        <Table variant='striped' size='sm'>
+                          <TableCaption></TableCaption>
+                          <Thead>
+                            <Tr>
+                              <Th></Th>
+                              <Th></Th>
+                              <Th></Th>
+                            </Tr>
+                          </Thead>
+                          <Tbody>
+                            <Tr>
+                              <Td>License</Td>
+                              <Td>:</Td>
 
-                  <Button
-                    as={Link}
-                    my={4}
-                    href={`/dashboard/feedstock/${feedstockId}`}
-                    colorScheme='teal'
-                    variant='outline'
-                  >
-                    More Details
-                  </Button>
-                </AccordionPanel>
-              </Skeleton>
-            </>
-          )}
-        </AccordionItem>
+                              <Td>
+                                <Skeleton isLoaded={!metaIsLoading}>
+                                  <License
+                                    name={meta?.provenance?.license}
+                                    link={meta?.provenance?.license_link}
+                                  />
+                                </Skeleton>
+                              </Td>
+                            </Tr>
+
+                            <Tr>
+                              <Td>Last Updated</Td>
+                              <Td>:</Td>
+
+                              <Td>
+                                <Skeleton isLoaded={!repoIsLoading}>
+                                  {repo?.commit.committer.date}{' '}
+                                </Skeleton>
+                              </Td>
+                            </Tr>
+
+                            <Tr>
+                              <Td>Dataset Count</Td>
+                              <Td>:</Td>
+
+                              <Td>
+                                <Skeleton isLoaded={!datasetsAreLoading}>
+                                  {datasets?.length}{' '}
+                                </Skeleton>
+                              </Td>
+                            </Tr>
+                          </Tbody>
+                        </Table>
+                      </TableContainer>
+                    </AccordionPanel>
+                  </>
+                )}
+              </AccordionItem>
+            </Accordion>
+
+            <Button
+              as={Link}
+              my={2}
+              href={`/dashboard/feedstock/${id}`}
+              colorScheme='teal'
+              variant='outline'
+              size='sm'
+            >
+              Browse Datasets
+            </Button>
+          </Box>
+        </Box>
       ) : (
         <></>
       )}
@@ -153,7 +195,12 @@ const Catalog = () => {
           </Heading>
 
           <Skeleton isLoaded={!isLoading}>
-            <Accordion my={8} allowMultiple>
+            <SimpleGrid
+              my={8}
+              columns={{ base: 1, md: 2, lg: 3 }}
+              spacing={4}
+              justifyContent={'space-between'}
+            >
               {feedstocks
                 ?.filter(
                   (feedstock) => !feedstock.spec.includes('staged-recipes'),
@@ -166,13 +213,13 @@ const Catalog = () => {
                     .localeCompare(b.spec),
                 )
                 .map((feedstock) => (
-                  <FeedstockRowAccordionItem
+                  <Feedstock
                     key={feedstock.id}
-                    feedstockId={feedstock.id}
-                    feedstockSpec={feedstock.spec}
-                  ></FeedstockRowAccordionItem>
+                    id={feedstock.id}
+                    spec={feedstock.spec}
+                  ></Feedstock>
                 ))}
-            </Accordion>
+            </SimpleGrid>
           </Skeleton>
         </Container>
       </Box>
