@@ -16,7 +16,6 @@ import {
   Box,
   Button,
   Container,
-  Flex,
   Heading,
   SimpleGrid,
   Skeleton,
@@ -28,9 +27,11 @@ import {
   Th,
   Thead,
   Tr,
+  useColorModeValue,
 } from '@chakra-ui/react'
 
-const Feedstock = ({ id, spec }) => {
+const Feedstock = ({ id, spec, arrayIndex }) => {
+  const bgWeight = useColorModeValue(100, 500)
   const {
     datasets,
     datasetsError,
@@ -61,12 +62,19 @@ const Feedstock = ({ id, spec }) => {
     )
   }
 
+  const placeholderImages = [
+    'https://images.unsplash.com/photo-1563974318767-a4de855d7b43?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2074&q=80',
+    'https://images.unsplash.com/photo-1454789476662-53eb23ba5907?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=752&q=80',
+    'https://images.unsplash.com/photo-1584267759777-8a74a4f72a91?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjh8fG1ldGVvcm9sb2d5fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+    'https://images.unsplash.com/photo-1513553404607-988bf2703777?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=736&q=80',
+    'https://images.unsplash.com/photo-1583325958573-3c89e40551ad?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80',
+    'https://images.unsplash.com/photo-1580193813605-a5c78b4ee01a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80',
+  ]
+
   const image =
-    meta?.image ||
-    'https://images.unsplash.com/photo-1454789476662-53eb23ba5907?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=752&q=80'
+    meta?.image || placeholderImages[arrayIndex % placeholderImages.length]
 
   const colors = [
-    'gray',
     'red',
     'orange',
     'yellow',
@@ -77,29 +85,36 @@ const Feedstock = ({ id, spec }) => {
     'purple',
     'pink',
   ]
-  const color = colors[id % colors.length]
+  const color = colors[arrayIndex % colors.length]
 
   return (
     <>
       {' '}
       {datasets?.length > 0 ? (
         <Box>
-          <Flex alignItems={'center'} justifyContent={'space-between'}></Flex>
-          <Box
-            bgImage={`url(${image})`}
-            position={'relative'}
-            h={'200px'}
-            backgroundSize={'cover'}
-            backgroundPosition={'center'}
-          ></Box>
-          <Box>
-            <Accordion
-              allowMultiple
+          <Box position={'relative'} h={'200px'} w={'100%'}>
+            <Box
+              bgImage={`url(${image})`}
+              position={'absolute'}
+              h={'200px'}
+              w={'100%'}
+              filter={'grayscale(100%)'}
+              backgroundSize={'cover'}
+            />
+
+            <Box
               bg={`${color}.400`}
+              h={'200px'}
+              w={'100%'}
+              position={'absolute'}
               opacity={0.8}
               mixBlendMode={'dodge'}
-            >
-              <AccordionItem>
+            />
+          </Box>
+
+          <Box>
+            <Accordion allowMultiple bg={`${color}.${bgWeight}`}>
+              <AccordionItem borderWidth={0}>
                 {({ isExpanded }) => (
                   <>
                     <AccordionButton>
@@ -124,7 +139,7 @@ const Feedstock = ({ id, spec }) => {
                       </Skeleton>
 
                       <TableContainer mt={4}>
-                        <Table variant='simple' size='sm'>
+                        <Table variant='simple' size='sm' colorScheme={color}>
                           <Thead>
                             <Tr>
                               <Th />
@@ -230,11 +245,12 @@ const Catalog = () => {
                     .replace('-feedstock', '')
                     .localeCompare(b.spec),
                 )
-                .map((feedstock) => (
+                .map((feedstock, index) => (
                   <Feedstock
                     key={feedstock.id}
                     id={feedstock.id}
                     spec={feedstock.spec}
+                    arrayIndex={index}
                   ></Feedstock>
                 ))}
             </SimpleGrid>
