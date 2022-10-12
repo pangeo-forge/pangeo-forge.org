@@ -1,12 +1,11 @@
 import { Error, Link } from '@/components/'
-import { CopyButton } from '@/components/copy-button'
+import { License } from '@/components/dashboard'
 import { Layout } from '@/components/layout'
-import { getDatasetName } from '@/lib/dataset-utils'
 import {
-  useFeedstock,
   useFeedstockDatasets,
   useFeedstocks,
   useMeta,
+  useRepo,
 } from '@/lib/endpoints'
 import { AddIcon, MinusIcon } from '@chakra-ui/icons'
 import {
@@ -17,111 +16,187 @@ import {
   Box,
   Button,
   Container,
-  Flex,
   Heading,
-  List,
-  ListIcon,
-  ListItem,
+  SimpleGrid,
   Skeleton,
+  Table,
+  TableContainer,
+  Tbody,
+  Td,
   Text,
+  Th,
+  Thead,
+  Tr,
+  useColorModeValue,
 } from '@chakra-ui/react'
-import { GoDatabase } from 'react-icons/go'
 
-const DatasetListItem = ({ dataset }) => {
-  return (
-    <ListItem key={dataset}>
-      <Flex align='center'>
-        <ListIcon as={GoDatabase} color='teal.500' />
-
-        {dataset ? getDatasetName(dataset) : ''}
-        <CopyButton
-          text={dataset}
-          position='relative'
-          ml={8}
-          colorScheme='teal'
-        />
-      </Flex>
-    </ListItem>
-  )
-}
-
-const FeedstockRowAccordionItem = ({ feedstockId, feedstockSpec }) => {
+const Feedstock = ({ id, spec, arrayIndex }) => {
+  const bgWeight = useColorModeValue(100, 500)
   const {
     datasets,
     datasetsError,
     isLoading: datasetsAreLoading,
-  } = useFeedstockDatasets(feedstockId)
-  const { meta, metaError, isLoading: metaIsLoading } = useMeta(feedstockSpec)
-  const {
-    fs: { spec = '', recipe_runs = [] } = {},
-    fsError,
-    isLoading: fsIsLoading,
-  } = useFeedstock(feedstockId)
+  } = useFeedstockDatasets(id)
 
-  if (metaError || fsError || datasetsError) {
+  const {
+    repo,
+    repoError,
+    isLoading: repoIsLoading,
+  } = useRepo(`https://api.github.com/repos/${spec}/commits/HEAD`)
+
+  const { meta, metaError, isLoading: metaIsLoading } = useMeta(spec)
+
+  if (metaError || repoError || datasetsError) {
     return (
       <Layout>
         <Error
           status={
-            metaError?.status || fs.Error?.status || datasetsError?.status
+            metaError?.status || repoError?.status || datasetsError?.status
           }
-          info={metaError?.info || fs.Error?.info || datasetsError?.info}
+          info={metaError?.info || repoError?.info || datasetsError?.info}
           message={
-            metaError?.message || fs.Error?.message || datasetsError?.message
+            metaError?.message || repoError?.message || datasetsError?.message
           }
         />
       </Layout>
     )
   }
 
+  const placeholderImages = [
+    'https://images.unsplash.com/photo-1563974318767-a4de855d7b43?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2074&q=80',
+    'https://images.unsplash.com/photo-1454789476662-53eb23ba5907?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=752&q=80',
+    'https://images.unsplash.com/photo-1584267759777-8a74a4f72a91?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjh8fG1ldGVvcm9sb2d5fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60',
+    'https://images.unsplash.com/photo-1513553404607-988bf2703777?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=736&q=80',
+    'https://images.unsplash.com/photo-1583325958573-3c89e40551ad?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80',
+    'https://images.unsplash.com/photo-1580193813605-a5c78b4ee01a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80',
+  ]
+
+  const image =
+    meta?.image || placeholderImages[arrayIndex % placeholderImages.length]
+
+  const colors = [
+    'red',
+    'orange',
+    'yellow',
+    'green',
+    'teal',
+    'blue',
+    'cyan',
+    'purple',
+    'pink',
+  ]
+  const color = colors[arrayIndex % colors.length]
+
   return (
     <>
       {' '}
       {datasets?.length > 0 ? (
-        <AccordionItem>
-          {({ isExpanded }) => (
-            <>
-              <Skeleton isLoaded={!metaIsLoading && !fsIsLoading}>
-                <AccordionButton>
-                  <Box flex='1' textAlign='left'>
-                    {meta?.title}
-                  </Box>
+        <Box>
+          <Box position={'relative'} h={'200px'} w={'100%'}>
+            <Box
+              bgImage={`url(${image})`}
+              position={'absolute'}
+              h={'200px'}
+              w={'100%'}
+              filter={'grayscale(100%)'}
+              backgroundSize={'cover'}
+            />
 
-                  {isExpanded ? (
-                    <MinusIcon fontSize='xl' />
-                  ) : (
-                    <AddIcon fontSize='xl' />
-                  )}
-                </AccordionButton>
+            <Box
+              bg={`${color}.400`}
+              h={'200px'}
+              w={'100%'}
+              position={'absolute'}
+              opacity={0.8}
+              mixBlendMode={'dodge'}
+            />
+          </Box>
 
-                <AccordionPanel>
-                  <Text opacity={0.8}>{meta?.description}</Text>
+          <Box>
+            <Accordion allowMultiple bg={`${color}.${bgWeight}`}>
+              <AccordionItem borderWidth={0}>
+                {({ isExpanded }) => (
+                  <>
+                    <AccordionButton>
+                      <Box flex='1' textAlign='left'>
+                        <Skeleton isLoaded={!metaIsLoading}>
+                          <Text fontWeight={600} opacity={1}>
+                            {meta?.title}
+                          </Text>
+                        </Skeleton>
+                      </Box>
 
-                  <Skeleton isLoaded={!datasetsAreLoading}>
-                    <List spacing={3} my={4}>
-                      {datasets?.map((dataset, index) => (
-                        <DatasetListItem
-                          key={index}
-                          dataset={dataset?.dataset_public_url}
-                        ></DatasetListItem>
-                      ))}
-                    </List>
-                  </Skeleton>
+                      {isExpanded ? (
+                        <MinusIcon fontSize='xl' />
+                      ) : (
+                        <AddIcon fontSize='xl' />
+                      )}
+                    </AccordionButton>
 
-                  <Button
-                    as={Link}
-                    my={4}
-                    href={`/dashboard/feedstock/${feedstockId}`}
-                    colorScheme='teal'
-                    variant='outline'
-                  >
-                    More Details
-                  </Button>
-                </AccordionPanel>
-              </Skeleton>
-            </>
-          )}
-        </AccordionItem>
+                    <AccordionPanel pb={4}>
+                      <Skeleton isLoaded={!metaIsLoading}>
+                        <Text>{meta?.description}</Text>
+                      </Skeleton>
+
+                      <TableContainer mt={4}>
+                        <Table variant='simple' size='sm' colorScheme={color}>
+                          <Thead>
+                            <Tr>
+                              <Th />
+                              <Th />
+                            </Tr>
+                          </Thead>
+                          <Tbody>
+                            <Tr>
+                              <Td>License: </Td>
+                              <Td>
+                                <Skeleton isLoaded={!metaIsLoading}>
+                                  <License
+                                    name={meta?.provenance?.license}
+                                    link={meta?.provenance?.license_link}
+                                  />
+                                </Skeleton>
+                              </Td>
+                            </Tr>
+
+                            <Tr>
+                              <Td>Last Updated: </Td>
+                              <Td>
+                                <Skeleton isLoaded={!repoIsLoading}>
+                                  {repo?.commit.committer.date}{' '}
+                                </Skeleton>
+                              </Td>
+                            </Tr>
+
+                            <Tr>
+                              <Td>Dataset Count:</Td>
+                              <Td>
+                                <Skeleton isLoaded={!datasetsAreLoading}>
+                                  {datasets?.length}{' '}
+                                </Skeleton>
+                              </Td>
+                            </Tr>
+                          </Tbody>
+                        </Table>
+                      </TableContainer>
+                    </AccordionPanel>
+                  </>
+                )}
+              </AccordionItem>
+            </Accordion>
+
+            <Button
+              as={Link}
+              my={2}
+              href={`/dashboard/feedstock/${id}`}
+              colorScheme={color}
+              variant='outline'
+              size='sm'
+            >
+              Browse Datasets
+            </Button>
+          </Box>
+        </Box>
       ) : (
         <></>
       )}
@@ -153,7 +228,12 @@ const Catalog = () => {
           </Heading>
 
           <Skeleton isLoaded={!isLoading}>
-            <Accordion my={8} allowMultiple>
+            <SimpleGrid
+              my={8}
+              columns={{ base: 1, md: 2, lg: 3 }}
+              spacing={4}
+              justifyContent={'space-between'}
+            >
               {feedstocks
                 ?.filter(
                   (feedstock) => !feedstock.spec.includes('staged-recipes'),
@@ -165,14 +245,15 @@ const Catalog = () => {
                     .replace('-feedstock', '')
                     .localeCompare(b.spec),
                 )
-                .map((feedstock) => (
-                  <FeedstockRowAccordionItem
+                .map((feedstock, index) => (
+                  <Feedstock
                     key={feedstock.id}
-                    feedstockId={feedstock.id}
-                    feedstockSpec={feedstock.spec}
-                  ></FeedstockRowAccordionItem>
+                    id={feedstock.id}
+                    spec={feedstock.spec}
+                    arrayIndex={index}
+                  ></Feedstock>
                 ))}
-            </Accordion>
+            </SimpleGrid>
           </Skeleton>
         </Container>
       </Box>
