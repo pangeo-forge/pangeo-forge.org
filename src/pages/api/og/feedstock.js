@@ -42,6 +42,10 @@ export default async function handler(req) {
       )
 
       runs = result?.recipe_runs?.length
+
+      datasets = await jsonFetcher(
+        `https://api.pangeo-forge.org/feedstocks/${id}/datasets?type=production`,
+      )
     }
 
     const labelStyle = {
