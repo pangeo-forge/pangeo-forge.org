@@ -50,12 +50,14 @@ export default async function handler(req) {
 
     const labelStyle = {
       textTransform: 'uppercase',
-      letterSpacing: '0.05em',
+      letterSpacing: '0.06em',
     }
 
     const valueStyle = {
       fontSize: 24,
-      margin: '5px 10px 20px 0px',
+      margin: '-10px 0px 10px 0px',
+      whiteSpace: 'normal',
+      wordWrap: 'break-all',
     }
 
     const avatarStyle = {
