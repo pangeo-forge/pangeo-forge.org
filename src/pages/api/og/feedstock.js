@@ -13,10 +13,35 @@ export default async function handler(req) {
     const owner = searchParams.get('owner') || 'pangeo-forge'
     const spec = `${owner}/${repo}`
     const url = `https://raw.githubusercontent.com/${spec}/main/feedstock/meta.yaml`
-    const result = await yamlFetcher(url)
+    const meta = await yamlFetcher(url)
+    const result = await jsonFetcher(
+      `https://api.pangeo-forge.org/feedstocks/${id}/`,
+    )
+
     const datasets = await jsonFetcher(
       `https://api.pangeo-forge.org/feedstocks/${id}/datasets?type=production`,
     )
+
+    const labelStyle = {
+      textTransform: 'uppercase',
+      letterSpacing: '0.05em',
+      fontSize: '0.5em',
+    }
+
+    const valueStyle = {
+      fontSize: '0.9em',
+      fontWeight: 600,
+      margin: '5px 10px 20px 0px',
+    }
+
+    const avatarStyle = {
+      top: 0,
+      left: 0,
+      width: '72px',
+      height: '72px',
+      borderRadius: '20%',
+      margin: '10px',
+    }
 
     return new ImageResponse(
       (
@@ -25,64 +50,117 @@ export default async function handler(req) {
             display: 'flex',
             height: '100%',
             width: '100%',
-            alignItems: 'center',
-            justifyContent: 'center',
+            alignItems: 'stretch',
+            justifyContent: 'space-between',
             flexDirection: 'column',
-            backgroundImage: 'url(https://source.unsplash.com/1L71sPT5XKc)',
-            fontSize: 32,
-            letterSpacing: -2,
-            fontWeight: 400,
+            backgroundColor: '#473681',
+            boxSizing: 'border-box',
+            color: '#fff',
+            padding: '8em',
           }}
         >
           <div
             style={{
               display: 'flex',
-              flexDirection: 'column',
-              color: 'rgba(255, 255, 255, 1)',
+              flexDirection: 'row',
+              justifyContent: 'space-between',
             }}
           >
             <div
               style={{
                 display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+                alignItems: 'flex-start',
               }}
             >
               <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <h1 style={{}}>Feedstock: {result.title}</h1>
-                <p>Bakery: {result.bakery.id}</p>
-                <div
-                  style={{
-                    display: 'flex',
-                  }}
-                >
-                  <p style={{ marginRight: 5 }}>Maintainers: </p>
-                  {result.maintainers.map((maintainer) => (
-                    <span
-                      key={maintainer.github}
-                      style={{
-                        position: 'relative',
-                        border: '0.5px solid',
-                        borderRadius: '50%',
-                        overflow: 'hidden',
-                        width: '100px',
-                      }}
-                    >
-                      <img
-                        style={{
-                          width: '100px',
-                          height: '100px',
-                        }}
-                        src={`https://github.com/${maintainer.github}.png`}
-                      />
-                    </span>
-                  ))}
-                </div>
-                <p>License: {result.provenance.license}</p>
-                <p>Dataset Count: {datasets.length}</p>
+                <p style={labelStyle}>Title</p>
+                <p style={valueStyle}>{meta.title}</p>
               </div>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <p style={labelStyle}>Feedstock</p>
+                <p style={valueStyle}>{spec}</p>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <p style={labelStyle}>Bakery</p>
+                <p style={valueStyle}>{meta.bakery.id}</p>
+              </div>
+            </div>
+            <div style={{ display: 'flex' }}>
               <img
-                src='https://pangeo-forge.org/pangeo-forge-logo-white.png'
-                style={{}}
+                style={{ width: '340px', height: '250px' }}
+                src='https://github.com/pangeo-forge/pangeo-forge.org/blob/main/public/pangeo-forge-logo-white.png?raw=true'
               />
+            </div>
+          </div>
+          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <div
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between',
+              }}
+            >
+              <p style={labelStyle}>Maintainers</p>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  margin: '0px 0px 0px 0px',
+                }}
+              >
+                {meta?.maintainers?.map((maintainer) => (
+                  <img
+                    key={maintainer.github}
+                    style={avatarStyle}
+                    src={`https://github.com/${maintainer.github}.png`}
+                  />
+                ))}
+              </div>
+            </div>
+            <div style={{ display: 'flex' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  margin: '0px 10px',
+                }}
+              >
+                <p style={labelStyle}>Datasets</p>
+                <p style={valueStyle}>{datasets ? datasets?.length : '-'}</p>
+              </div>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  margin: '0px 10px',
+                }}
+              >
+                <p style={labelStyle}>Recipe Runs</p>
+                <p style={valueStyle}>{result?.recipe_runs?.length}</p>
+              </div>
+              <div
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                  margin: '0px 10px',
+                }}
+              >
+                <p style={labelStyle}>License</p>
+                <p style={valueStyle}>
+                  {meta.provenance.license_link
+                    ? meta.provenance?.license_link?.title
+                    : meta.provenance?.license}
+                </p>
+              </div>
             </div>
           </div>
         </div>
