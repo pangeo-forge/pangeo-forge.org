@@ -1,4 +1,3 @@
-import { theme } from '@/theme'
 import Head from 'next/head'
 
 const makeTitle = (title, name) =>
@@ -37,22 +36,9 @@ export const Meta = ({
         <meta key='tw_img' name='twitter:image' content={image} />
       </>
     )}
-    <meta
-      key='theme_color'
-      name='theme-color'
-      //content={theme.colors.primary}
-    />
-    <meta
-      key='tile_color'
-      name='msapplication-TileColor'
-      //content={theme.colors.primary}
-    />
-    <link
-      key='safari_icon'
-      rel='mask-icon'
-      href={`${url}/favicon.ico`}
-      //color={theme.colors.primary}
-    />
+    <meta key='theme_color' name='theme-color' />
+    <meta key='tile_color' name='msapplication-TileColor' />
+    <link key='safari_icon' rel='mask-icon' href={`${url}/favicon.ico`} />
     <link
       key='apple_icon'
       rel='apple-touch-icon'
@@ -73,7 +59,6 @@ export const Meta = ({
       sizes='16x16'
       href={`/favicon.ico`}
     />
-    {/* <link key='manifest' rel='manifest' href={`${url}/site.webmanifest`} /> */}
     {children}
   </Head>
 )

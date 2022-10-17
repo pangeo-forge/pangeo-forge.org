@@ -12,22 +12,18 @@ export default async function handler(req) {
     let title
     let bakery
     let meta
-    let spec
     let runs
 
     const { searchParams } = new URL(req.url)
     const id = searchParams.get('id')
-    const repo = searchParams.get('repo')
-    const owner = searchParams.get('owner') || 'pangeo-forge'
+    const spec = searchParams.get('spec')
 
-    if (id === '1' || repo.includes('staged-recipes')) {
+    if (id === '1' || spec.toLowerCase().includes('staged-recipes')) {
       license = '-'
       title = 'Staged Recipes'
-      spec = 'pangeo-forge/staged-recipes'
       bakery = 'pangeo-ldeo-nsf-earthcube'
       runs = '-'
     } else {
-      spec = `${owner}/${repo}`
       const url = `https://raw.githubusercontent.com/${spec}/main/feedstock/meta.yaml`
       meta = await yamlFetcher(url)
       license = meta.provenance.license_link

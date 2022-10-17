@@ -20,9 +20,16 @@ import {
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { GoDatabase, GoTerminal } from 'react-icons/go'
+import React from 'react'
 
 const Feedstock = () => {
   const router = useRouter()
+
+  const [url, setUrl] = React.useState('https://pangeo-forge.org')
+  React.useEffect(() => {
+    setUrl(window.location.href)
+  }, [])
+
   const { id } = router.query
 
   const {
@@ -40,7 +47,11 @@ const Feedstock = () => {
 
   if (fsError || metaError || datasetsError)
     return (
-      <Layout>
+      <Layout
+        title={meta?.title}
+        description={meta?.description}
+        image={`${url}/api/og/feedstock?id=${id}&spec=${spec}`}
+      >
         <Box as='section'>
           <Container maxW='container.xl' py={90}>
             <Error
@@ -60,7 +71,11 @@ const Feedstock = () => {
   const selectedColor = { color: 'white', bg: 'teal.500' }
 
   return (
-    <Layout>
+    <Layout
+      title={meta?.title}
+      description={meta?.description}
+      image={`${url}/api/og/feedstock?id=${id}&spec=${spec}`}
+    >
       <Box as='section'>
         <Container maxW='container.xl' mt={90}>
           <Skeleton isLoaded={!metaIsLoading}>
