@@ -7,20 +7,42 @@ export const config = {
 
 export default async function handler(req) {
   try {
+    let datasets
+    let license
+    let title
+    let bakery
+    let meta
+    let spec
+    let runs
+
     const { searchParams } = new URL(req.url)
     const id = searchParams.get('id')
     const repo = searchParams.get('repo')
     const owner = searchParams.get('owner') || 'pangeo-forge'
-    const spec = `${owner}/${repo}`
-    const url = `https://raw.githubusercontent.com/${spec}/main/feedstock/meta.yaml`
-    const meta = await yamlFetcher(url)
-    const result = await jsonFetcher(
-      `https://api.pangeo-forge.org/feedstocks/${id}/`,
-    )
 
-    const datasets = await jsonFetcher(
-      `https://api.pangeo-forge.org/feedstocks/${id}/datasets?type=production`,
-    )
+    if (id === '1' || repo.includes('staged-recipes')) {
+      license = '-'
+      title = 'Staged Recipes'
+      spec = 'pangeo-forge/staged-recipes'
+      bakery = 'pangeo-ldeo-nsf-earthcube'
+      runs = '-'
+    } else {
+      spec = `${owner}/${repo}`
+      const url = `https://raw.githubusercontent.com/${spec}/main/feedstock/meta.yaml`
+      meta = await yamlFetcher(url)
+      license = meta.provenance.license_link
+        ? meta.provenance?.license_link?.title
+        : meta.provenance?.license
+
+      bakery = meta.bakery.id
+      title = meta.title
+
+      const result = await jsonFetcher(
+        `https://api.pangeo-forge.org/feedstocks/${id}/`,
+      )
+
+      runs = result?.recipe_runs?.length
+    }
 
     const labelStyle = {
       textTransform: 'uppercase',
@@ -70,12 +92,12 @@ export default async function handler(req) {
                 flexDirection: 'column',
                 justifyContent: 'space-between',
                 alignItems: 'flex-start',
-                width: '66%',
+                width: '67%',
               }}
             >
               <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <p style={labelStyle}>Title</p>
-                <p style={valueStyle}>{meta.title}</p>
+                <p style={valueStyle}>{title}</p>
               </div>
               <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <p style={labelStyle}>Feedstock</p>
@@ -83,13 +105,13 @@ export default async function handler(req) {
               </div>
               <div style={{ display: 'flex', flexDirection: 'column' }}>
                 <p style={labelStyle}>Bakery</p>
-                <p style={valueStyle}>{meta.bakery.id}</p>
+                <p style={valueStyle}>{bakery}</p>
               </div>
             </div>
             <div style={{ display: 'flex' }}>
               <img
                 style={{ width: '340px', height: '250px' }}
-                src='https://github.com/pangeo-forge/pangeo-forge.org/blob/main/public/pangeo-forge-logo-white.png?raw=true'
+                src='https://raw.githubusercontent.com/pangeo-forge/pangeo-forge.org/main/public/pangeo-forge-logo-white.png'
               />
             </div>
           </div>
@@ -142,7 +164,7 @@ export default async function handler(req) {
                 }}
               >
                 <p style={labelStyle}>Recipe Runs</p>
-                <p style={valueStyle}>{result?.recipe_runs?.length}</p>
+                <p style={valueStyle}>{runs}</p>
               </div>
               <div
                 style={{
@@ -154,11 +176,7 @@ export default async function handler(req) {
                 }}
               >
                 <p style={labelStyle}>License</p>
-                <p style={valueStyle}>
-                  {meta.provenance.license_link
-                    ? meta.provenance?.license_link?.title
-                    : meta.provenance?.license}
-                </p>
+                <p style={valueStyle}>{license}</p>
               </div>
             </div>
           </div>
