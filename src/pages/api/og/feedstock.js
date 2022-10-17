@@ -66,7 +66,6 @@ export default async function handler(req) {
       width: '72px',
       height: '72px',
       borderRadius: '20%',
-      margin: '10px',
     }
 
     return new ImageResponse(
@@ -147,7 +146,13 @@ export default async function handler(req) {
                 ))}
               </div>
             </div>
-            <div style={{ display: 'flex' }}>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}
+            >
               <div
                 style={{
                   display: 'flex',
