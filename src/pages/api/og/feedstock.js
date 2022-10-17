@@ -25,12 +25,10 @@ export default async function handler(req) {
     const labelStyle = {
       textTransform: 'uppercase',
       letterSpacing: '0.05em',
-      fontSize: '0.5em',
     }
 
     const valueStyle = {
-      fontSize: '0.9em',
-      fontWeight: 600,
+      fontSize: 24,
       margin: '5px 10px 20px 0px',
     }
 
@@ -56,7 +54,7 @@ export default async function handler(req) {
             backgroundColor: '#473681',
             boxSizing: 'border-box',
             color: '#fff',
-            padding: '8em',
+            padding: '5em',
           }}
         >
           <div
@@ -72,6 +70,7 @@ export default async function handler(req) {
                 flexDirection: 'column',
                 justifyContent: 'space-between',
                 alignItems: 'flex-start',
+                width: '66%',
               }}
             >
               <div style={{ display: 'flex', flexDirection: 'column' }}>
