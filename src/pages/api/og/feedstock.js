@@ -8,43 +8,35 @@ export const config = {
 
 export default async function handler(req) {
   try {
-    let datasets
-    let license
-    let title
-    let bakery
-    let meta
-    let spec
-    let runs
-
     const { searchParams } = new URL(req.url)
     const id = searchParams.get('id')
+    const spec = searchParams.get('repo')
+    const name = getName(spec)
 
-    if (id === '1') {
-      license = '-'
-      title = 'Staged Recipes'
-      spec = 'pangeo-forge/staged-recipes'
-      bakery = 'pangeo-ldeo-nsf-earthcube'
-      runs = '-'
-    } else {
-      const specs = await jsonFetcher(`https://api.pangeo-forge.org/feedstocks`)
-      spec = specs.find((entry) => entry.id === parseInt(id)).spec
+    const meta = spec.toLowerCase().includes('staged-recipes')
+      ? {}
+      : await yamlFetcher(
+          `https://raw.githubusercontent.com/${spec}/main/feedstock/meta.yaml`,
+        )
 
-      const url = `https://raw.githubusercontent.com/${spec}/main/feedstock/meta.yaml`
-      meta = await yamlFetcher(url)
-      license = meta.provenance?.license_link
+    const title = searchParams.get('title') || meta?.title || '-'
+
+    const bakery = meta?.bakery?.id || '-'
+    const license =
+      searchParams.get('license') || meta.provenance?.license_link
         ? meta.provenance?.license_link?.title
-        : meta.provenance?.license
-      bakery = meta.bakery.id
-      title = meta.title
+        : meta.provenance?.license || '-'
 
-      const result = await jsonFetcher(
-        `https://api.pangeo-forge.org/feedstocks/${id}/`,
-      )
-      runs = result?.recipe_runs?.length
-      datasets = await jsonFetcher(
-        `https://api.pangeo-forge.org/feedstocks/${id}/datasets?type=production`,
-      )
-    }
+    const endpoint =
+      searchParams.get('endpoint') || 'https://api.pangeo-forge.org'
+    const recipeRuns = await jsonFetcher(`${endpoint}/feedstocks/${id}/`)
+    const runs = recipeRuns?.recipe_runs?.length || 0
+    const data = await jsonFetcher(
+      `${endpoint}/feedstocks/${id}/datasets?type=production`,
+    )
+    const datasets = data?.length || 0
+
+    const maintainers = meta?.maintainers
 
     const labelStyle = {
       fontSize: 24,
@@ -122,7 +114,7 @@ export default async function handler(req) {
               </div>
               <div style={wrapperStyle}>
                 <p style={labelStyle}>Feedstock</p>
-                <p style={valueStyle}>{getName(spec)}</p>
+                <p style={valueStyle}>{name}</p>
               </div>
               <div style={wrapperStyle}>
                 <p style={labelStyle}>Bakery</p>
@@ -154,7 +146,7 @@ export default async function handler(req) {
                   margin: '0px 0px 0px 0px',
                 }}
               >
-                {meta?.maintainers?.map((maintainer, i) => (
+                {maintainers?.map((maintainer, i) => (
                   <img
                     key={maintainer.github}
                     style={{
@@ -184,7 +176,7 @@ export default async function handler(req) {
                 }}
               >
                 <p style={labelStyle}>Datasets</p>
-                <p style={metadataStyle}>{datasets ? datasets?.length : '-'}</p>
+                <p style={metadataStyle}>{datasets}</p>
               </div>
               <div
                 style={{
