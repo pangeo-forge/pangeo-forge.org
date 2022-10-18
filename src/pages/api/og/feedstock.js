@@ -1,3 +1,4 @@
+import { getName } from '@/lib/feedstock-utils'
 import { jsonFetcher, yamlFetcher } from '@/lib/fetchers'
 import { ImageResponse } from '@vercel/og'
 
@@ -34,26 +35,44 @@ export default async function handler(req) {
       title = meta.title
 
       const result = await jsonFetcher(
-        `https://api.pangeo-forge.org/feedstocks/${id}/`,
+        `https://api.pangeo-forge.org/feedstocks/${id}/`
       )
 
       runs = result?.recipe_runs?.length
 
       datasets = await jsonFetcher(
-        `https://api.pangeo-forge.org/feedstocks/${id}/datasets?type=production`,
+        `https://api.pangeo-forge.org/feedstocks/${id}/datasets?type=production`
       )
     }
 
     const labelStyle = {
+      fontSize: 24,
       textTransform: 'uppercase',
       letterSpacing: '0.06em',
     }
 
+    const wrapperStyle = {
+      display: 'flex',
+      flexDirection: 'column',
+      width: '100%',
+    }
+
     const valueStyle = {
-      fontSize: 24,
+      fontSize: 52,
+      margin: '-24px 0px 10px 0px',
+      width: '100%',
+      overflow: 'hidden',
+      whiteSpace: 'nowrap',
+      textOverflow: 'ellipsis',
+    }
+
+    const metadataStyle = {
+      fontSize: 36,
       margin: '-10px 0px 10px 0px',
-      whiteSpace: 'normal',
-      wordWrap: 'break-all',
+      width: '100%',
+      overflow: 'hidden',
+      whiteSpace: 'nowrap',
+      textOverflow: 'ellipsis',
     }
 
     const avatarStyle = {
@@ -77,7 +96,7 @@ export default async function handler(req) {
             backgroundColor: '#473681',
             boxSizing: 'border-box',
             color: '#fff',
-            padding: '5em',
+            padding: '74px',
           }}
         >
           <div
@@ -96,20 +115,21 @@ export default async function handler(req) {
                 width: '67%',
               }}
             >
-              <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <div style={{ ...wrapperStyle, marginTop: '-24px' }}>
                 <p style={labelStyle}>Title</p>
                 <p style={valueStyle}>{title}</p>
               </div>
-              <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <div style={wrapperStyle}>
                 <p style={labelStyle}>Feedstock</p>
-                <p style={valueStyle}>{spec}</p>
+                <p style={valueStyle}>{getName(spec)}</p>
               </div>
-              <div style={{ display: 'flex', flexDirection: 'column' }}>
+              <div style={wrapperStyle}>
                 <p style={labelStyle}>Bakery</p>
                 <p style={valueStyle}>{bakery}</p>
               </div>
             </div>
-            <div style={{ display: 'flex' }}>
+
+            <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
               <img
                 style={{ width: '340px', height: '250px' }}
                 src='https://raw.githubusercontent.com/pangeo-forge/pangeo-forge.org/main/public/pangeo-forge-logo-white.png'
@@ -122,68 +142,72 @@ export default async function handler(req) {
                 display: 'flex',
                 flexDirection: 'column',
                 justifyContent: 'space-between',
+                width: '40%',
               }}
             >
               <p style={labelStyle}>Maintainers</p>
               <div
                 style={{
                   display: 'flex',
-                  justifyContent: 'space-between',
                   alignItems: 'center',
                   margin: '0px 0px 0px 0px',
                 }}
               >
-                {meta?.maintainers?.map((maintainer) => (
+                {meta?.maintainers?.map((maintainer, i) => (
                   <img
                     key={maintainer.github}
-                    style={avatarStyle}
+                    style={{
+                      ...avatarStyle,
+                      marginLeft: i > 0 ? '16px' : 0,
+                    }}
                     src={`https://github.com/${maintainer.github}.png`}
                   />
                 ))}
               </div>
             </div>
+
             <div
               style={{
                 display: 'flex',
-                justifyContent: 'space-between',
-                alignItems: 'center',
+                alignItems: 'flex-start',
+                width: '60%',
               }}
             >
               <div
                 style={{
                   display: 'flex',
+                  width: '28%',
                   flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
+                  alignItems: 'flex-start',
                   margin: '0px 10px',
                 }}
               >
                 <p style={labelStyle}>Datasets</p>
-                <p style={valueStyle}>{datasets ? datasets?.length : '-'}</p>
+                <p style={metadataStyle}>{datasets ? datasets?.length : '-'}</p>
               </div>
               <div
                 style={{
                   display: 'flex',
+                  width: '38%',
                   flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
+                  alignItems: 'flex-start',
                   margin: '0px 10px',
                 }}
               >
                 <p style={labelStyle}>Recipe Runs</p>
-                <p style={valueStyle}>{runs}</p>
+                <p style={metadataStyle}>{runs}</p>
               </div>
               <div
                 style={{
                   display: 'flex',
+                  width: '33%',
                   flexDirection: 'column',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
+                  alignItems: 'flex-start',
                   margin: '0px 10px',
                 }}
               >
                 <p style={labelStyle}>License</p>
-                <p style={valueStyle}>{license}</p>
+                <p style={metadataStyle}>{license}</p>
               </div>
             </div>
           </div>
@@ -192,7 +216,7 @@ export default async function handler(req) {
       {
         width: 1200,
         height: 630,
-      },
+      }
     )
   } catch (error) {
     console.log(`Error: ${error.message}`)
