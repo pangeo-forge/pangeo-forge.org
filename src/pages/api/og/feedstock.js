@@ -13,33 +13,34 @@ export default async function handler(req) {
     let title
     let bakery
     let meta
+    let spec
     let runs
 
     const { searchParams } = new URL(req.url)
     const id = searchParams.get('id')
-    const spec = searchParams.get('spec')
 
-    if (id === '1' || spec.toLowerCase().includes('staged-recipes')) {
+    if (id === '1') {
       license = '-'
       title = 'Staged Recipes'
+      spec = 'pangeo-forge/staged-recipes'
       bakery = 'pangeo-ldeo-nsf-earthcube'
       runs = '-'
     } else {
+      const specs = await jsonFetcher(`https://api.pangeo-forge.org/feedstocks`)
+      spec = specs.find((entry) => entry.id === parseInt(id)).spec
+
       const url = `https://raw.githubusercontent.com/${spec}/main/feedstock/meta.yaml`
       meta = await yamlFetcher(url)
-      license = meta.provenance.license_link
+      license = meta.provenance?.license_link
         ? meta.provenance?.license_link?.title
         : meta.provenance?.license
-
       bakery = meta.bakery.id
       title = meta.title
 
       const result = await jsonFetcher(
         `https://api.pangeo-forge.org/feedstocks/${id}/`,
       )
-
       runs = result?.recipe_runs?.length
-
       datasets = await jsonFetcher(
         `https://api.pangeo-forge.org/feedstocks/${id}/datasets?type=production`,
       )

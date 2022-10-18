@@ -49,7 +49,7 @@ const Feedstock = () => {
       <Layout
         title={meta?.title}
         description={meta?.description}
-        image={`${url}/api/og/feedstock?id=${id}&spec=${spec}`}
+        image={`${url}/api/og/feedstock?id=${id}`}
         url={`${url}/feedstock/${id}`}
       >
         <Box as='section'>
