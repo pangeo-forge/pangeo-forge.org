@@ -27,7 +27,7 @@ const Feedstock = () => {
   const url =
     process.env.NEXT_PUBLIC_VERCEL_ENV === 'production'
       ? 'https://pangeo-forge.org'
-      : process.env.NEXT_VERCEL_URL
+      : process.env.NEXT_PUBLIC_VERCEL_URL
 
   const { id } = router.query
 
@@ -50,6 +50,7 @@ const Feedstock = () => {
         title={meta?.title}
         description={meta?.description}
         image={`${url}/api/og/feedstock?id=${id}&spec=${spec}`}
+        url={`${url}/feedstock/${id}`}
       >
         <Box as='section'>
           <Container maxW='container.xl' py={90}>
