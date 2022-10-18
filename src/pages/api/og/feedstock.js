@@ -35,13 +35,13 @@ export default async function handler(req) {
       title = meta.title
 
       const result = await jsonFetcher(
-        `https://api.pangeo-forge.org/feedstocks/${id}/`
+        `https://api.pangeo-forge.org/feedstocks/${id}/`,
       )
 
       runs = result?.recipe_runs?.length
 
       datasets = await jsonFetcher(
-        `https://api.pangeo-forge.org/feedstocks/${id}/datasets?type=production`
+        `https://api.pangeo-forge.org/feedstocks/${id}/datasets?type=production`,
       )
     }
 
@@ -216,7 +216,7 @@ export default async function handler(req) {
       {
         width: 1200,
         height: 630,
-      }
+      },
     )
   } catch (error) {
     console.log(`Error: ${error.message}`)
