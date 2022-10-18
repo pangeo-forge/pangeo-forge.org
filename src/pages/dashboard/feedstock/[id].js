@@ -49,26 +49,30 @@ const Feedstock = () => {
 
   if (fsError || metaError || datasetsError)
     return (
-      <Layout
-        title={meta?.title}
-        description={meta?.description}
-        image={`/api/og/feedstock?id=${id}`}
-        url={`${url}/feedstock/${id}`}
-      >
-        <Box as='section'>
-          <Container maxW='container.xl' py={90}>
-            <Error
-              status={
-                fsError?.status || metaError?.status || datasetsError?.status
-              }
-              info={fsError?.info || metaError?.info || datasetsError?.info}
-              message={
-                fsError?.message || metaError?.message || datasetsError?.message
-              }
-            />
-          </Container>
-        </Box>
-      </Layout>
+      <Skeleton isLoaded={!metaIsLoading}>
+        <Layout
+          title={meta?.title}
+          description={meta?.description}
+          image={`/api/og/feedstock?id=${id}`}
+          url={`${url}/feedstock/${id}`}
+        >
+          <Box as='section'>
+            <Container maxW='container.xl' py={90}>
+              <Error
+                status={
+                  fsError?.status || metaError?.status || datasetsError?.status
+                }
+                info={fsError?.info || metaError?.info || datasetsError?.info}
+                message={
+                  fsError?.message ||
+                  metaError?.message ||
+                  datasetsError?.message
+                }
+              />
+            </Container>
+          </Box>
+        </Layout>
+      </Skeleton>
     )
 
   const selectedColor = { color: 'white', bg: 'teal.500' }
