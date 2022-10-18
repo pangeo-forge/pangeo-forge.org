@@ -21,10 +21,23 @@ import {
 } from '@chakra-ui/react'
 import { GoDatabase, GoTerminal } from 'react-icons/go'
 
-export const getServerSideProps = async (context) => {
-  const id = context.params.id
+export async function getServerSideProps({ res, params }) {
+  // Enable caching
+  // docs: https://nextjs.org/docs/basic-features/data-fetching/get-server-side-props#caching-with-server-side-rendering-ssr
+
+  // This value is considered fresh for 3600 seconds (maxage=3600).
+  // If a request is repeated within the next 3600 seconds, the previously
+  // cached value will still be fresh. If the request is repeated after, it will request the
+  // data again from the server.
+
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=3600, stale-while-revalidate=3700',
+  )
+
+  const id = params.id
   const endpoint =
-    context.params?.orchestratorEndpoint || 'https://api.pangeo-forge.org'
+    params?.orchestratorEndpoint || 'https://api.pangeo-forge.org'
   const specs = await jsonFetcher(`${endpoint}/feedstocks`)
   const spec = specs.find((entry) => entry.id === parseInt(id)).spec
 
