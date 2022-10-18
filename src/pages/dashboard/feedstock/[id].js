@@ -24,10 +24,13 @@ import { GoDatabase, GoTerminal } from 'react-icons/go'
 const Feedstock = () => {
   const router = useRouter()
 
-  const url =
-    process.env.NEXT_PUBLIC_VERCEL_ENV === 'production'
-      ? 'https://pangeo-forge.org'
-      : process.env.NEXT_PUBLIC_VERCEL_URL
+  let url = 'https://pangeo-forge.org'
+  if (
+    process.env.NEXT_PUBLIC_VERCEL_URL &&
+    process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production'
+  ) {
+    url = process.env.NEXT_PUBLIC_VERCEL_URL
+  }
 
   const { id } = router.query
 
