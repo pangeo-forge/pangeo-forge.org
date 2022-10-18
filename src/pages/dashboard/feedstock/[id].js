@@ -20,15 +20,14 @@ import {
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { GoDatabase, GoTerminal } from 'react-icons/go'
-import React from 'react'
 
 const Feedstock = () => {
   const router = useRouter()
 
-  const [url, setUrl] = React.useState('https://pangeo-forge.org')
-  React.useEffect(() => {
-    setUrl(window.location.href)
-  }, [])
+  const url =
+    process.env.NEXT_PUBLIC_VERCEL_ENV === 'production'
+      ? 'https://pangeo-forge.org'
+      : process.env.NEXT_VERCEL_URL
 
   const { id } = router.query
 
@@ -75,6 +74,7 @@ const Feedstock = () => {
       title={meta?.title}
       description={meta?.description}
       image={`${url}/api/og/feedstock?id=${id}&spec=${spec}`}
+      url={`${url}/feedstock/${id}`}
     >
       <Box as='section'>
         <Container maxW='container.xl' mt={90}>
