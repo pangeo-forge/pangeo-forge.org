@@ -52,7 +52,7 @@ const Feedstock = () => {
       <Layout
         title={meta?.title}
         description={meta?.description}
-        image={`${url}/api/og/feedstock?id=${id}`}
+        image={`/api/og/feedstock?id=${id}`}
         url={`${url}/feedstock/${id}`}
       >
         <Box as='section'>
@@ -77,7 +77,7 @@ const Feedstock = () => {
     <Layout
       title={meta?.title}
       description={meta?.description}
-      image={`${url}/api/og/feedstock?id=${id}&spec=${spec}`}
+      image={`/api/og/feedstock?id=${id}`}
       url={`${url}/feedstock/${id}`}
     >
       <Box as='section'>
