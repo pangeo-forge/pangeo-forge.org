@@ -7,6 +7,7 @@ import {
 import { Layout } from '@/components/layout'
 import { useFeedstock, useFeedstockDatasets, useMeta } from '@/lib/endpoints'
 import { getName } from '@/lib/feedstock-utils'
+import { jsonFetcher, yamlFetcher } from '@/lib/fetchers'
 import {
   Box,
   Container,
@@ -18,12 +19,24 @@ import {
   Tabs,
   Text,
 } from '@chakra-ui/react'
-import { useRouter } from 'next/router'
 import { GoDatabase, GoTerminal } from 'react-icons/go'
 
-const Feedstock = () => {
-  const router = useRouter()
+export const getServerSideProps = async (context) => {
+  const id = context.params.id
+  const specs = await jsonFetcher(`https://api.pangeo-forge.org/feedstocks`)
+  const spec = specs.find((entry) => entry.id === parseInt(id)).spec
+  const url = `https://raw.githubusercontent.com/${spec}/main/feedstock/meta.yaml`
+  const meta = await yamlFetcher(url)
+  return {
+    props: {
+      id: id,
+      title: meta.title,
+      description: meta.description,
+    },
+  }
+}
 
+const Feedstock = ({ id, title, description }) => {
   let url = 'https://pangeo-forge.org'
   if (
     process.env.NEXT_PUBLIC_VERCEL_URL &&
@@ -31,8 +44,6 @@ const Feedstock = () => {
   ) {
     url = process.env.NEXT_PUBLIC_VERCEL_URL
   }
-
-  const { id } = router.query
 
   const {
     datasets,
@@ -49,38 +60,34 @@ const Feedstock = () => {
 
   if (fsError || metaError || datasetsError)
     return (
-      <Skeleton isLoaded={!metaIsLoading}>
-        <Layout
-          title={meta?.title}
-          description={meta?.description}
-          image={`/api/og/feedstock?id=${id}`}
-          url={`${url}/feedstock/${id}`}
-        >
-          <Box as='section'>
-            <Container maxW='container.xl' py={90}>
-              <Error
-                status={
-                  fsError?.status || metaError?.status || datasetsError?.status
-                }
-                info={fsError?.info || metaError?.info || datasetsError?.info}
-                message={
-                  fsError?.message ||
-                  metaError?.message ||
-                  datasetsError?.message
-                }
-              />
-            </Container>
-          </Box>
-        </Layout>
-      </Skeleton>
+      <Layout
+        title={title}
+        description={description}
+        image={`/api/og/feedstock?id=${id}`}
+        url={`${url}/feedstock/${id}`}
+      >
+        <Box as='section'>
+          <Container maxW='container.xl' py={90}>
+            <Error
+              status={
+                fsError?.status || metaError?.status || datasetsError?.status
+              }
+              info={fsError?.info || metaError?.info || datasetsError?.info}
+              message={
+                fsError?.message || metaError?.message || datasetsError?.message
+              }
+            />
+          </Container>
+        </Box>
+      </Layout>
     )
 
   const selectedColor = { color: 'white', bg: 'teal.500' }
 
   return (
     <Layout
-      title={meta?.title}
-      description={meta?.description}
+      title={title}
+      description={description}
       image={`/api/og/feedstock?id=${id}`}
       url={`${url}/feedstock/${id}`}
     >
@@ -102,6 +109,8 @@ const Feedstock = () => {
               maintainers={meta?.maintainers}
             />
           </Skeleton>
+
+          {JSON.stringify(id)}
 
           <Tabs isLazy isFitted colorScheme='teal' variant={'enclosed'} my={16}>
             <TabList>
