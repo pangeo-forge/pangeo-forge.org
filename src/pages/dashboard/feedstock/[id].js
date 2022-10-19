@@ -74,7 +74,7 @@ const Feedstock = ({ id, repo, endpoint, meta }) => {
     process.env.NEXT_PUBLIC_VERCEL_URL &&
     process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production'
   ) {
-    url = process.env.NEXT_PUBLIC_VERCEL_URL
+    url = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
   }
 
   const {
@@ -103,8 +103,8 @@ const Feedstock = ({ id, repo, endpoint, meta }) => {
         name={meta?.title}
         title={meta?.title}
         description={meta?.description}
-        image={`https://${url}/api/og/feedstock?${paramsString}`}
-        url={`https://${url}/feedstock/${id}`}
+        image={`${url}/api/og/feedstock?${paramsString}`}
+        url={`${url}/feedstock/${id}`}
       >
         <Box as='section'>
           <Container maxW='container.xl' py={90}>
@@ -125,8 +125,8 @@ const Feedstock = ({ id, repo, endpoint, meta }) => {
       name={meta?.title}
       title={meta?.title}
       description={meta?.description}
-      image={`https://${url}/api/og/feedstock?${paramsString}`}
-      url={`https://${url}/feedstock/${id}`}
+      image={`${url}/api/og/feedstock?${paramsString}`}
+      url={`${url}/feedstock/${id}`}
     >
       <Box as='section'>
         <Container maxW='container.xl' mt={90}>
