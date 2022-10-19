@@ -1,7 +1,7 @@
 import Head from 'next/head'
 
 const makeTitle = (title, name) =>
-  title === name ? title : `${title} – ${name}`
+  title === name ? title : `${title} / ${name}`
 
 export const Meta = ({
   title = 'Pangeo-Forge',

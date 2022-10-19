@@ -100,9 +100,10 @@ const Feedstock = ({ id, repo, endpoint, meta }) => {
   if (fsError || datasetsError)
     return (
       <Layout
+        name={meta?.title}
         title={meta?.title}
         description={meta?.description}
-        image={`/api/og/feedstock?${paramsString}`}
+        image={`${url}/api/og/feedstock?${paramsString}`}
         url={`${url}/feedstock/${id}`}
       >
         <Box as='section'>
@@ -121,9 +122,10 @@ const Feedstock = ({ id, repo, endpoint, meta }) => {
 
   return (
     <Layout
+      name={meta?.title}
       title={meta?.title}
       description={meta?.description}
-      image={`/api/og/feedstock?${paramsString}`}
+      image={`${url}/api/og/feedstock?${paramsString}`}
       url={`${url}/feedstock/${id}`}
     >
       <Box as='section'>
