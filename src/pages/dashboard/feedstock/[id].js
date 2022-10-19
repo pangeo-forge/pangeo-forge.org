@@ -103,8 +103,8 @@ const Feedstock = ({ id, repo, endpoint, meta }) => {
         name={meta?.title}
         title={meta?.title}
         description={meta?.description}
-        image={`${url}/api/og/feedstock?${paramsString}`}
-        url={`${url}/feedstock/${id}`}
+        image={`https://${url}/api/og/feedstock?${paramsString}`}
+        url={`https://${url}/feedstock/${id}`}
       >
         <Box as='section'>
           <Container maxW='container.xl' py={90}>
@@ -125,8 +125,8 @@ const Feedstock = ({ id, repo, endpoint, meta }) => {
       name={meta?.title}
       title={meta?.title}
       description={meta?.description}
-      image={`${url}/api/og/feedstock?${paramsString}`}
-      url={`${url}/feedstock/${id}`}
+      image={`https://${url}/api/og/feedstock?${paramsString}`}
+      url={`https://${url}/feedstock/${id}`}
     >
       <Box as='section'>
         <Container maxW='container.xl' mt={90}>
