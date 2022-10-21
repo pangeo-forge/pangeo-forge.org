@@ -91,14 +91,23 @@ export const useFeedstockDatasets = (id, type = 'production') => {
     jsonFetcher,
     { refreshInterval: 300000, dedupingInterval: defaultDedupingInterval },
   )
+
+  // sort values by latest run id first and remove duplicates entries
+
   return {
-    datasets: data?.sort((a, b) =>
-      a.dataset_public_url > b.dataset_public_url
-        ? 1
-        : b.dataset_public_url > a.dataset_public_url
-        ? -1
-        : 0,
-    ),
+    datasets: data
+      ?.sort((a, b) => b.id - a.id)
+      ?.reduce((acc, curr) => {
+        const x = acc.find(
+          (item) => item.dataset_public_url === curr.dataset_public_url,
+        )
+        if (!x) {
+          return acc.concat([curr])
+        } else {
+          return acc
+        }
+      }, []),
+
     datasetsError: error,
     isLoading: !data && !error,
   }
