@@ -1659,13 +1659,13 @@
     "@typescript-eslint/types" "5.28.0"
     eslint-visitor-keys "^3.3.0"
 
-"@vercel/og@^0.0.17":
-  version "0.0.17"
-  resolved "https://registry.yarnpkg.com/@vercel/og/-/og-0.0.17.tgz#c69c26cfb63d5a8049721e0d618c715afba46e44"
-  integrity sha512-HeeMEvW7eSDvtTw/6oUhFGjXedhNYi0MY8MM7Cob5O5fcX01Qa7T7PNFhsik/DWA+jtudsnHhxB1SzPAfixyxw==
+"@vercel/og@^0.0.20":
+  version "0.0.20"
+  resolved "https://registry.yarnpkg.com/@vercel/og/-/og-0.0.20.tgz#fe586d153e492edd87fe2bc2671ba223072bd47a"
+  integrity sha512-089P+TfqWz0xBxjOvOhkZIDDtfrLcye94H4IZ+SqxoGPWpNGXaBvRJER/z5SoJxJRcCAL8tPiK5zdjRskM6tLw==
   dependencies:
     "@resvg/resvg-wasm" "2.0.0-alpha.4"
-    satori "0.0.39"
+    satori "0.0.43"
     yoga-wasm-web "0.1.2"
 
 "@wry/context@^0.6.0":
@@ -2161,6 +2161,11 @@ electron-to-chromium@^1.4.147:
   version "1.4.157"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.4.157.tgz#25799684ed6f2be52bee2b716f9de257b24f3ba7"
   integrity sha512-gteFnXPKsDAdm1U5vVuyrLnKOaR/x/SY+HjUQoHypLUYWJt4RaWU3PaiTBEkRDJh8/Zd8KC/EFjV+uPaHsjKFA==
+
+emoji-regex@^10.2.1:
+  version "10.2.1"
+  resolved "https://registry.yarnpkg.com/emoji-regex/-/emoji-regex-10.2.1.tgz#a41c330d957191efd3d9dfe6e1e8e1e9ab048b3f"
+  integrity sha512-97g6QgOk8zlDRdgq1WxwgTMgEWGVAQvB5Fdpgc1MkNy56la5SKP9GsMXKDOdqwn90/41a8yPwIGk1Y6WVbeMQA==
 
 emoji-regex@^9.2.2:
   version "9.2.2"
@@ -4214,15 +4219,16 @@ safe-buffer@~5.1.1:
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.2.tgz#991ec69d296e0313747d59bdfd2b745c35f8828d"
   integrity sha512-Gd2UZBJDkXlY7GbJxfsE8/nvKkUEU1G38c1siN6QP6a9PT9MmHB8GnpscSmMJSoF8LOIrt8ud/wPtojys4G6+g==
 
-satori@0.0.39:
-  version "0.0.39"
-  resolved "https://registry.yarnpkg.com/satori/-/satori-0.0.39.tgz#aabc3714c9d8a91aecccd94da9da760e55f4f27e"
-  integrity sha512-wbuh5cIUri2vB1FFHk0Z13ZutBJJWf+sr0SqrObt0Mv7NnsCcrNNVNFI2/faIzYZu+CA2dNfIsNv96raYcQt8A==
+satori@0.0.43:
+  version "0.0.43"
+  resolved "https://registry.yarnpkg.com/satori/-/satori-0.0.43.tgz#865b80feed473fc254e389fa7c0bd4c1d8e9aad7"
+  integrity sha512-SzYwr+LsELWRJU9KMviEOE9TdShry+R5AdS54YQvgAVKFDN4yniAIzwQk1/z2TtIx0ceUT9zTeosWAoWvJBEtQ==
   dependencies:
     "@shuding/opentype.js" "1.4.0-beta.0"
     css-background-parser "^0.1.0"
     css-box-shadow "1.0.0-3"
     css-to-react-native "^3.0.0"
+    emoji-regex "^10.2.1"
     postcss-value-parser "^4.2.0"
     yoga-layout-prebuilt "^1.10.0"
 
