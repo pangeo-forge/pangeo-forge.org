@@ -2,13 +2,13 @@ import { Link } from '@/components'
 import { DesktopSubNav } from '@/components/header/desktop-sub-nav'
 import {
   Box,
+  Button,
   Popover,
   PopoverContent,
   PopoverTrigger,
   Stack,
   useColorModeValue,
 } from '@chakra-ui/react'
-import React from 'react'
 
 export const DesktopNav = ({ navItems, ...props }) => {
   const hoverColor = useColorModeValue('teal.300', 'teal.400')
@@ -24,10 +24,12 @@ export const DesktopNav = ({ navItems, ...props }) => {
         <Box key={item.label}>
           <Popover trigger={'hover'} placement={'bottom-start'}>
             <PopoverTrigger>
-              <Link
+              <Button
+                variant={'link'}
+                as={Link}
                 p={2}
                 href={item.href ?? '#'}
-                fontSize={'sm'}
+                fontSize={'md'}
                 fontWeight={500}
                 color={color}
                 _hover={{
@@ -36,7 +38,7 @@ export const DesktopNav = ({ navItems, ...props }) => {
                 }}
               >
                 {item.label}
-              </Link>
+              </Button>
             </PopoverTrigger>
 
             {item.children && (

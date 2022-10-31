@@ -20,11 +20,9 @@ export const Link = React.forwardRef(function CustomLink(props, ref) {
     }
 
     return (
-      <NextLink href={href} passHref>
-        <ChakraLink ref={ref} {...rest}>
-          {rest.children}
-        </ChakraLink>
-      </NextLink>
+      <ChakraLink as={NextLink} ref={ref} {...rest} href={href} passHref>
+        {rest.children}
+      </ChakraLink>
     )
   }
 
