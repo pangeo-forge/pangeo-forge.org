@@ -50,11 +50,11 @@ export const Summary = () => {
       <Container maxW='container.xl'>
         <SimpleGrid columns={{ base: 1, md: 3 }} gap={{ base: '5', md: '6' }}>
           {reports.map(({ label, href, stats }) => (
-            <Link
+            <Stat
               pt={[1]}
               pb={[2]}
               textAlign={'center'}
-              as={Stat}
+              as={Link}
               transitionProperty='all'
               transitionDuration='slower'
               transitionTimingFunction='ease-out'

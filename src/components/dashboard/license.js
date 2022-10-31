@@ -1,5 +1,4 @@
 import { Link } from '@/components'
-import { Text } from '@chakra-ui/react'
 
 export const License = ({ name, link }) => {
   const href =
@@ -9,9 +8,9 @@ export const License = ({ name, link }) => {
 
   return (
     <>
-      <Text as={Link} href={href} useExternalIcon>
+      <Link href={href} useExternalIcon>
         {text}
-      </Text>
+      </Link>
     </>
   )
 }
