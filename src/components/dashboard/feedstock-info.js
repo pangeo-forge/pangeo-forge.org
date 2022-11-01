@@ -3,15 +3,14 @@ import { License, Maintainers, Providers } from '@/components/dashboard'
 import {
   Box,
   Button,
-  Flex,
+  Heading,
   HStack,
-  Icon,
   SimpleGrid,
   Stack,
   Text,
   VStack,
 } from '@chakra-ui/react'
-import { GoRepo, GoTag } from 'react-icons/go'
+import { GoRepo } from 'react-icons/go'
 import { MdDynamicFeed } from 'react-icons/md'
 
 export const FeedstockInfo = ({
@@ -20,8 +19,6 @@ export const FeedstockInfo = ({
   name,
   title,
   description,
-  pangeo_forge_version,
-  pangeo_notebook_version,
   bakery,
   license,
   license_link,
@@ -31,18 +28,6 @@ export const FeedstockInfo = ({
   const details = {
     Title: title,
     Description: description,
-    'Pangeo-Forge Version': (
-      <Flex>
-        <Icon as={GoTag} fontSize={'2xl'} />
-        <Text px={2}>{pangeo_forge_version}</Text>
-      </Flex>
-    ),
-    'Pangeo Notebook Version': (
-      <Flex>
-        <Icon as={GoTag} fontSize={'2xl'} />
-        <Text px={2}>{pangeo_notebook_version}</Text>
-      </Flex>
-    ),
     Bakery: bakery,
     License: <License name={license} link={license_link} />,
     Providers: <Providers providers={providers} />,
@@ -50,7 +35,11 @@ export const FeedstockInfo = ({
   }
   return (
     <>
+      <Heading my={2} as={'h1'} size='2xl' align={'center'}>
+        {name?.split('-feedstock')[0]}
+      </Heading>
       <Stack
+        my={8}
         justify={'center'}
         spacing={{ base: '4', md: '8', lg: '12', xl: '16', '2xl': '24' }}
         direction={{
@@ -83,7 +72,7 @@ export const FeedstockInfo = ({
         >
           {' '}
           <GoRepo />
-          <Text ml={2}>{name} repo</Text>
+          <Text ml={2}>repository</Text>
         </Button>
       </Stack>{' '}
       {repo == 'pangeo-forge/staged-recipes' && (

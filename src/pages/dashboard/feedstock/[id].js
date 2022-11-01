@@ -131,8 +131,6 @@ const Feedstock = ({ id, repo, endpoint, meta }) => {
             name={spec ? getName(spec) : ''}
             title={meta?.title}
             description={meta?.description}
-            pangeo_forge_version={meta?.pangeo_forge_version}
-            pangeo_notebook_version={meta?.pangeo_notebook_version}
             bakery={meta?.bakery?.id}
             license={meta?.provenance?.license}
             license_link={meta?.provenance?.license_link}
