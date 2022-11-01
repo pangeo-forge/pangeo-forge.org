@@ -4,16 +4,13 @@ import { getRootURL } from '@/lib/seo-utils'
 import { Box, Flex } from '@chakra-ui/react'
 import { NextSeo } from 'next-seo'
 
-const url = getRootURL()
-
 export const Layout = ({
   children,
   menu = null,
   title = 'Pangeo-Forge',
-  name = 'Pangeo-Forge',
   description = 'A cloud-native data repository for ocean, weather, and climate science.',
-  image = `${url}/pangeo-forge.org/pangeo-forge-logo-white.png`,
-  url = url,
+  image = `${getRootURL()}/pangeo-forge.org/pangeo-forge-logo-white.png`,
+  url = getRootURL(),
 }) => {
   return (
     <>
