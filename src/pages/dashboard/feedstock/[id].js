@@ -8,6 +8,7 @@ import { Layout } from '@/components/layout'
 import { useFeedstock, useFeedstockDatasets } from '@/lib/endpoints'
 import { getName } from '@/lib/feedstock-utils'
 import { jsonFetcher, yamlFetcher } from '@/lib/fetchers'
+import { getRootURL } from '@/lib/seo-utils'
 import {
   Box,
   Container,
@@ -69,13 +70,7 @@ export async function getServerSideProps({ res, params }) {
 }
 
 const Feedstock = ({ id, repo, endpoint, meta }) => {
-  let url = 'https://pangeo-forge.org'
-  if (
-    process.env.NEXT_PUBLIC_VERCEL_URL &&
-    process.env.NEXT_PUBLIC_VERCEL_ENV !== 'production'
-  ) {
-    url = `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
-  }
+  const url = getRootURL()
 
   const {
     datasets,

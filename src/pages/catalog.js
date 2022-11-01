@@ -7,6 +7,7 @@ import {
   useMeta,
   useRepo,
 } from '@/lib/endpoints'
+import { getRootURL } from '@/lib/seo-utils'
 import { AddIcon, MinusIcon } from '@chakra-ui/icons'
 import {
   Accordion,
@@ -220,7 +221,11 @@ const Catalog = () => {
   }
 
   return (
-    <Layout>
+    <Layout
+      title={'Pangeo-Forge Catalog'}
+      description={'A public catalog of datasets produced via Pangeo-Forge'}
+      url={`${getRootURL()}/catalog`}
+    >
       <Box as='section'>
         <Container maxW='container.xl' py={90}>
           <Heading as={'h2'} size='lg'>

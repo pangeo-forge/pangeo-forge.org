@@ -1,24 +1,34 @@
-import { Footer, Header, Meta } from '@/components'
+import { Footer, Header } from '@/components'
 import { Menu } from '@/components/dashboard'
+import { getRootURL } from '@/lib/seo-utils'
 import { Box, Flex } from '@chakra-ui/react'
-import Head from 'next/head'
+import { NextSeo } from 'next-seo'
+
 export const Layout = ({
   children,
   menu = null,
   title = 'Pangeo-Forge',
-  name = 'Pangeo-Forge',
   description = 'A cloud-native data repository for ocean, weather, and climate science.',
-  image = 'pangeo-forge.org/pangeo-forge-logo-white.png', // social card image URL
-  url = 'pangeo-forge.org',
+  image = `${getRootURL()}/pangeo-forge-logo-white.png`,
+  url = getRootURL(),
 }) => {
   return (
     <>
-      <Meta
+      <NextSeo
         title={title}
-        name={name}
         description={description}
-        image={image}
-        url={url}
+        canonical={url}
+        openGraph={{
+          url: url,
+          title: title,
+          description: description,
+          images: [{ url: image, alt: title }],
+        }}
+        twitter={{
+          handle: '@pangeo_data',
+          site: '@pangeo_data',
+          cardType: 'summary_large_image',
+        }}
       />
 
       <Flex

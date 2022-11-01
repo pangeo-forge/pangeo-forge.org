@@ -2,6 +2,7 @@ import { Error } from '@/components'
 import { FeedstockCard } from '@/components/dashboard'
 import { Layout } from '@/components/layout'
 import { useFeedstocks } from '@/lib/endpoints'
+import { getRootURL } from '@/lib/seo-utils'
 import { Box, Container, Heading, SimpleGrid, Text } from '@chakra-ui/react'
 
 const Feedstocks = () => {
@@ -20,7 +21,14 @@ const Feedstocks = () => {
   }
 
   return (
-    <Layout menu={true}>
+    <Layout
+      title={'Pangeo-Forge Feedstocks'}
+      description={
+        'Feedstocks are recipes that are managed and executed by Pangeo Forge cloud automation.'
+      }
+      url={`${getRootURL()}/dashboard/feedstocks`}
+      menu={true}
+    >
       <Box as='section'>
         <Container maxW='container.xl' centerContent>
           <Heading as={'h3'} size='lg' mb={4}>

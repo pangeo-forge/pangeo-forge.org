@@ -2,6 +2,7 @@ import { Error } from '@/components'
 import { RecipeRunCard } from '@/components/dashboard'
 import { Layout } from '@/components/layout'
 import { useRecipeRuns } from '@/lib/endpoints'
+import { getRootURL } from '@/lib/seo-utils'
 import { Box, Container, Heading, SimpleGrid } from '@chakra-ui/react'
 
 const RecipeRuns = () => {
@@ -20,7 +21,14 @@ const RecipeRuns = () => {
   }
 
   return (
-    <Layout menu={true}>
+    <Layout
+      title={'Pangeo-Forge Recipe Runs'}
+      description={
+        'Recipe runs are the execution of a recipe. They are triggered by a GitHub workflow.'
+      }
+      url={`${getRootURL()}/dashboard/recipe-runs`}
+      menu={true}
+    >
       <Box as='section'>
         <Container maxW='container.xl' centerContent>
           <Heading as={'h3'} size='lg' mb={4}>
