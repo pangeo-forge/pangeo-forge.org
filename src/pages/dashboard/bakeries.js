@@ -2,6 +2,7 @@ import { Error } from '@/components'
 import { BakeryCard } from '@/components/dashboard'
 import { Layout } from '@/components/layout'
 import { useBakeries } from '@/lib/endpoints'
+import { getRootURL } from '@/lib/seo-utils'
 import { Box, Container, Heading, SimpleGrid, Text } from '@chakra-ui/react'
 
 const Bakeries = () => {

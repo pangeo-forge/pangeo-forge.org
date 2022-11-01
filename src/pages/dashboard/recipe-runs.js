@@ -2,6 +2,7 @@ import { Error } from '@/components'
 import { RecipeRunCard } from '@/components/dashboard'
 import { Layout } from '@/components/layout'
 import { useRecipeRuns } from '@/lib/endpoints'
+import { getRootURL } from '@/lib/seo-utils'
 import { Box, Container, Heading, SimpleGrid } from '@chakra-ui/react'
 
 const RecipeRuns = () => {

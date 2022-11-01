@@ -13,6 +13,7 @@ import {
   useRecipeRun,
 } from '@/lib/endpoints'
 import { getName } from '@/lib/feedstock-utils'
+import { getRootURL } from '@/lib/seo-utils'
 import {
   Alert,
   AlertDescription,
