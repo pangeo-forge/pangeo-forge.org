@@ -19,7 +19,14 @@ const Bakeries = () => {
     )
 
   return (
-    <Layout menu={true}>
+    <Layout
+      title={'Pangeo-Forge Bakeries'}
+      description={
+        'Bakeries turn recipes into data. They do the heavy lifting of actually executing the recipes: extracting data from its source, transforming it, and loading it into its target destination. Bakeries are controlled by triggers from GitHub workflows.'
+      }
+      url={`${getRootURL()}/dashboard/bakeries`}
+      menu={true}
+    >
       <Box as='section'>
         <Container maxW='container.xl' centerContent>
           <Heading as={'h3'} size='lg' mb={4}>

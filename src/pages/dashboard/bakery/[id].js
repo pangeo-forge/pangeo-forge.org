@@ -2,6 +2,7 @@ import { Error, Link } from '@/components'
 import { RecipeRunCard } from '@/components/dashboard'
 import { Layout } from '@/components/layout'
 import { useBakery } from '@/lib/endpoints'
+import { getRootURL } from '@/lib/seo-utils'
 import {
   Box,
   Container,
@@ -36,7 +37,13 @@ const Bakery = () => {
     )
 
   return (
-    <Layout>
+    <Layout
+      title={'Pangeo-Forge Bakery'}
+      description={
+        'A Bakery turns recipes into data. It does the heavy lifting of actually executing the recipes.'
+      }
+      url={`${getRootURL()}/dashboard/bakery${id}`}
+    >
       <Box as='section'>
         <Container maxW='container.xl' py={90}>
           <Skeleton isLoaded={!isLoading}>

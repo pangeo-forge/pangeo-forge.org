@@ -72,7 +72,11 @@ const RecipeRun = () => {
   }
 
   return (
-    <Layout>
+    <Layout
+      title={'Pangeo-Forge Recipe Run'}
+      description={'Pangeo-Forge Recipe Run'}
+      url={`${getRootURL()}/recipe-run/${id}`}
+    >
       <Box as='section'>
         <Container maxW='container.xl' py={90}>
           <Skeleton isLoaded={!feedstockIsLoading}>
