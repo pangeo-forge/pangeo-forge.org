@@ -227,10 +227,14 @@ const Catalog = () => {
       url={`${getRootURL()}/catalog`}
     >
       <Box as='section'>
-        <Container maxW='container.xl' py={90}>
-          <Heading as={'h2'} size='lg'>
+        <Container maxW='container.xl' py={90} centerContent>
+          <Heading as={'h1'} size='2xl' my={4}>
             Catalog
           </Heading>
+
+          <Text>
+            This is a public catalog of datasets produced via Pangeo-Forge.
+          </Text>
 
           <Skeleton isLoaded={!isLoading}>
             <SimpleGrid
