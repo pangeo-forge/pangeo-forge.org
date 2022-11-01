@@ -9,7 +9,7 @@ export const Layout = ({
   menu = null,
   title = 'Pangeo-Forge',
   description = 'A cloud-native data repository for ocean, weather, and climate science.',
-  image = `${getRootURL()}/pangeo-forge.org/pangeo-forge-logo-white.png`,
+  image = `${getRootURL()}/pangeo-forge-logo-white.png`,
   url = getRootURL(),
 }) => {
   return (
