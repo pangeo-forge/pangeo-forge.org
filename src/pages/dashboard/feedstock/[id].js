@@ -127,12 +127,10 @@ const Feedstock = ({ id, repo, endpoint, meta }) => {
         <Container maxW='container.xl' mt={90}>
           <FeedstockInfo
             id={id}
-            repo={spec ? spec : ''}
-            name={spec ? getName(spec) : ''}
+            repo={repo ? repo : ''}
+            name={repo ? getName(repo) : ''}
             title={meta?.title}
             description={meta?.description}
-            pangeo_forge_version={meta?.pangeo_forge_version}
-            pangeo_notebook_version={meta?.pangeo_notebook_version}
             bakery={meta?.bakery?.id}
             license={meta?.provenance?.license}
             license_link={meta?.provenance?.license_link}

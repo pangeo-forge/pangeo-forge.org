@@ -30,7 +30,7 @@ const Bakeries = () => {
     >
       <Box as='section'>
         <Container maxW='container.xl' centerContent>
-          <Heading as={'h3'} size='lg' mb={4}>
+          <Heading as={'h1'} size='2xl' mb={4}>
             Bakeries
           </Heading>
           <Text>

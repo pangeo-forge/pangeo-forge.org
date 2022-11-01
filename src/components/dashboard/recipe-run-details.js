@@ -9,7 +9,6 @@ export const RecipeRunDetails = ({
   started_at,
   completed_at,
   spec,
-  version,
   head_sha,
   status,
   conclusion,
@@ -23,12 +22,6 @@ export const RecipeRunDetails = ({
     Duration: completed_at
       ? formatDistance(new Date(completed_at), new Date(started_at))
       : '-',
-
-    Version: (
-      <Badge variant='outline' colorScheme='gray' fontWeight='bold'>
-        {version}
-      </Badge>
-    ),
     'Git SHA': (
       <Badge
         as={Link}

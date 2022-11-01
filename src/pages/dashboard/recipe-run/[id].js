@@ -87,8 +87,6 @@ const RecipeRun = () => {
               name={spec ? getName(spec) : ''}
               title={meta?.title}
               description={meta?.description}
-              pangeo_forge_version={meta?.pangeo_forge_version}
-              pangeo_notebook_version={meta?.pangeo_notebook_version}
               bakery={meta?.bakery?.id}
               license={meta?.provenance?.license}
               license_link={meta?.provenance?.license_link}
@@ -109,7 +107,6 @@ const RecipeRun = () => {
               started_at={recipeRun?.started_at}
               completed_at={recipeRun?.completed_at}
               spec={spec ? spec : ''}
-              version={recipeRun?.version}
               head_sha={recipeRun?.head_sha}
               status={recipeRun?.status}
               conclusion={recipeRun?.conclusion}
