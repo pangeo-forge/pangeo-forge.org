@@ -1,7 +1,10 @@
 import { Footer, Header } from '@/components'
 import { Menu } from '@/components/dashboard'
+import { getRootURL } from '@/lib/seo-utils'
 import { Box, Flex } from '@chakra-ui/react'
 import { NextSeo } from 'next-seo'
+
+const url = getRootURL()
 
 export const Layout = ({
   children,
@@ -9,8 +12,8 @@ export const Layout = ({
   title = 'Pangeo-Forge',
   name = 'Pangeo-Forge',
   description = 'A cloud-native data repository for ocean, weather, and climate science.',
-  image = 'pangeo-forge.org/pangeo-forge-logo-white.png', // social card image URL
-  url = 'pangeo-forge.org',
+  image = `${url}/pangeo-forge.org/pangeo-forge-logo-white.png`,
+  url = url,
 }) => {
   return (
     <>
@@ -22,7 +25,7 @@ export const Layout = ({
           url: url,
           title: title,
           description: description,
-          images: [{ url: image, alt: name }],
+          images: [{ url: image, alt: title }],
         }}
         twitter={{
           handle: '@pangeo_data',
