@@ -127,8 +127,8 @@ const Feedstock = ({ id, repo, endpoint, meta }) => {
         <Container maxW='container.xl' mt={90}>
           <FeedstockInfo
             id={id}
-            repo={spec ? spec : ''}
-            name={spec ? getName(spec) : ''}
+            repo={repo ? repo : ''}
+            name={repo ? getName(repo) : ''}
             title={meta?.title}
             description={meta?.description}
             bakery={meta?.bakery?.id}
