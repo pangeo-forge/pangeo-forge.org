@@ -20,7 +20,7 @@
     "@mdx-js/loader": "^2.1.5",
     "@mdx-js/react": "^2.1.5",
     "@next/mdx": "^13.0.4",
-    "@vercel/og": "^0.0.20",
+    "@vercel/og": "^0.0.21",
     "date-fns": "^2.29.3",
     "framer-motion": "^7.6.14",
     "graphql": "^16.6.0",
