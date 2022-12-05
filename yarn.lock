@@ -946,6 +946,14 @@
     csstype "^3.0.11"
     lodash.mergewith "4.6.2"
 
+"@chakra-ui/styled-system@2.4.0":
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/@chakra-ui/styled-system/-/styled-system-2.4.0.tgz#4b50079606331e4e8fda7ea59da9db51b446d40c"
+  integrity sha512-G4HpbFERq4C1cBwKNDNkpCiliOICLXjYwKI/e/6hxNY+GlPxt8BCzz3uhd3vmEoG2vRM4qjidlVjphhWsf6vRQ==
+  dependencies:
+    csstype "^3.0.11"
+    lodash.mergewith "4.6.2"
+
 "@chakra-ui/switch@2.0.16":
   version "2.0.16"
   resolved "https://registry.yarnpkg.com/@chakra-ui/switch/-/switch-2.0.16.tgz#b8d1275d723d384a22fe8900fc2913a808b8ceaa"
@@ -953,7 +961,7 @@
   dependencies:
     "@chakra-ui/checkbox" "2.2.4"
 
-"@chakra-ui/system@2.3.3", "@chakra-ui/system@^2.3.1":
+"@chakra-ui/system@2.3.3":
   version "2.3.3"
   resolved "https://registry.yarnpkg.com/@chakra-ui/system/-/system-2.3.3.tgz#1557f573a3394e375411631b0836f0e79c9f68f9"
   integrity sha512-nOEXC08d4PiK/4QwSV4tnci2SoWjDHEVSveWW9qoRRr1iZUbQffpwYyJY4pBpPJE7CsA2w3GXK7NdMFRwPtamQ==
@@ -962,6 +970,18 @@
     "@chakra-ui/react-utils" "2.0.9"
     "@chakra-ui/styled-system" "2.3.5"
     "@chakra-ui/theme-utils" "2.0.4"
+    "@chakra-ui/utils" "2.0.12"
+    react-fast-compare "3.2.0"
+
+"@chakra-ui/system@^2.3.4":
+  version "2.3.4"
+  resolved "https://registry.yarnpkg.com/@chakra-ui/system/-/system-2.3.4.tgz#425bf7eebf61bd92aa68f60a6b62c380274fbe4e"
+  integrity sha512-/2m8hFfFzOMO2OlwHxTWqINOBJMjxWwU5V/AcB7C0qS51Dcj9c7kupilM6QdqiOLLdMS7mIVRSYr8jn8gMw9fA==
+  dependencies:
+    "@chakra-ui/color-mode" "2.1.10"
+    "@chakra-ui/react-utils" "2.0.9"
+    "@chakra-ui/styled-system" "2.4.0"
+    "@chakra-ui/theme-utils" "2.0.5"
     "@chakra-ui/utils" "2.0.12"
     react-fast-compare "3.2.0"
 
@@ -1009,6 +1029,14 @@
     "@chakra-ui/anatomy" "2.1.0"
     "@ctrl/tinycolor" "^3.4.0"
 
+"@chakra-ui/theme-tools@2.0.14":
+  version "2.0.14"
+  resolved "https://registry.yarnpkg.com/@chakra-ui/theme-tools/-/theme-tools-2.0.14.tgz#6c523284ab384ca57a3aef1fcfa7c32ed357fbde"
+  integrity sha512-lVcDmq5pyU0QbsIFKjt/iVUFDap7di2QHvPvGChA1YSjtg1PtuUi+BxEXWzp3Nfgw/N4rMvlBs+S0ynJypdwbg==
+  dependencies:
+    "@chakra-ui/anatomy" "2.1.0"
+    color2k "^2.0.0"
+
 "@chakra-ui/theme-utils@2.0.4":
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/@chakra-ui/theme-utils/-/theme-utils-2.0.4.tgz#7357dd03734bc74d3a8be09db19d6b73c8f34075"
@@ -1018,6 +1046,15 @@
     "@chakra-ui/theme" "2.2.1"
     lodash.mergewith "4.6.2"
 
+"@chakra-ui/theme-utils@2.0.5":
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/@chakra-ui/theme-utils/-/theme-utils-2.0.5.tgz#ad1e53fc7f71326d15b9b01a157c7e2a029f3dda"
+  integrity sha512-QQowSM8fvQlTmT0w9wtqUlWOB4i+9eA7P4XRm4bfhBMZ7XpK4ctV95sPeGqaXVccsz5m0q1AuGWa+j6eMCbrrg==
+  dependencies:
+    "@chakra-ui/styled-system" "2.4.0"
+    "@chakra-ui/theme" "2.2.2"
+    lodash.mergewith "4.6.2"
+
 "@chakra-ui/theme@2.2.1":
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/@chakra-ui/theme/-/theme-2.2.1.tgz#83f5e484640bf8d97075f9fa3ca41f02c5caf3f7"
@@ -1025,6 +1062,14 @@
   dependencies:
     "@chakra-ui/anatomy" "2.1.0"
     "@chakra-ui/theme-tools" "2.0.13"
+
+"@chakra-ui/theme@2.2.2":
+  version "2.2.2"
+  resolved "https://registry.yarnpkg.com/@chakra-ui/theme/-/theme-2.2.2.tgz#5ea69adde78ee6ea59f9dce674947ed8be2ebc62"
+  integrity sha512-7DlOQiXmnaqYyqXwqmfFSCWGkUonuqmNC5mmUCwxI435KgHNCaE2bIm6DI7N2NcIcuVcfc8Vn0UqrDoGU3zJBg==
+  dependencies:
+    "@chakra-ui/anatomy" "2.1.0"
+    "@chakra-ui/theme-tools" "2.0.14"
 
 "@chakra-ui/toast@4.0.3":
   version "4.0.3"
@@ -2066,6 +2111,11 @@ color-name@~1.1.4:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/color-name/-/color-name-1.1.4.tgz#c2a09a87acbde69543de6f63fa3995c826c536a2"
   integrity sha512-dOy+3AuW3a2wNbZHIuMZpTcgjGuLU/uBL/ubcZF9OXbDo8ff4O8yVp5Bf0efS8uEoYo5q4Fx7dY9OgQGXgAsQA==
+
+color2k@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/color2k/-/color2k-2.0.0.tgz#86992c82e248c29f524023ed0822bc152c4fa670"
+  integrity sha512-DWX9eXOC4fbJNiuvdH4QSHvvfLWyFo9TuFp7V9OzdsbPAdrWAuYc8qvFP2bIQ/LKh4LrAVnJ6vhiQYPvAHdtTg==
 
 comma-separated-tokens@^1.0.0:
   version "1.0.8"
