@@ -19,7 +19,7 @@
     "@emotion/styled": "^11.10.5",
     "@mdx-js/loader": "^2.1.5",
     "@mdx-js/react": "^2.1.5",
-    "@next/mdx": "^13.0.6",
+    "@next/mdx": "^13.0.7",
     "@vercel/og": "^0.0.21",
     "date-fns": "^2.29.3",
     "framer-motion": "^7.7.0",
