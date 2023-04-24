@@ -31,7 +31,7 @@
     "react-icons": "^4.8.0",
     "react-router-dom": "^6.9.0",
     "react-syntax-highlighter": "^15.5.0",
-    "swr": "^2.1.0"
+    "swr": "^2.1.4"
   },
   "devDependencies": {
     "@trivago/prettier-plugin-sort-imports": "^4.1.1",
