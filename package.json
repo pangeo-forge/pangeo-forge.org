@@ -22,7 +22,7 @@
     "@next/mdx": "^13.4.4",
     "@vercel/og": "^0.5.0",
     "date-fns": "^2.29.3",
-    "framer-motion": "^10.12.5",
+    "framer-motion": "^10.12.16",
     "graphql": "^16.6.0",
     "next": "^13.4.4",
     "next-seo": "^6.0.0",
