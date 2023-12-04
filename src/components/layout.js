@@ -1,5 +1,4 @@
 import { Footer, Header } from '@/components'
-import { Menu } from '@/components/dashboard'
 import { getRootURL } from '@/lib/seo-utils'
 import { Box, Flex } from '@chakra-ui/react'
 import { NextSeo } from 'next-seo'
