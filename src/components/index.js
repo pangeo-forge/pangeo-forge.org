@@ -1,5 +1,6 @@
 export { About } from '@/components/about'
 export { Badge } from '@/components/badge'
+export { Catalogs } from '@/components/catalogs'
 export { CodeBlock } from '@/components/code-block'
 export { Error } from '@/components/error'
 export { Footer } from '@/components/footer'

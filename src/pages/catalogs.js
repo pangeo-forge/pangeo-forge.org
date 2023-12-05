@@ -1,7 +1,11 @@
-import { Layout } from '@/components'
+import { Catalogs, Layout } from '@/components'
 
-const Index = () => {
-  return <Layout></Layout>
+const C = () => {
+  return (
+    <Layout>
+      <Catalogs />
+    </Layout>
+  )
 }
 
-export default Index
+export default C
