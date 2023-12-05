@@ -1,10 +1,7 @@
 import { Layout } from '@/components'
 
 const Index = () => {
-  return (
-    <Layout>
-    </Layout>
-  )
+  return <Layout></Layout>
 }
 
 export default Index
