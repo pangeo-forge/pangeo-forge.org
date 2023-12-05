@@ -19,17 +19,16 @@ export const Hero = () => {
       <Container maxW='container.xl' py={90} centerContent>
         <Flex direction='column'>
           <Image src='/pangeo-forge-logo-white.png' alt='Pangeo-Forge logo' />
-          <Text
+        </Flex>
+        <Text
             textTransform={'uppercase'}
             color={'white'}
             opacity={0.8}
             align={'center'}
           >
             {' '}
-            A cloud-native data repository for ocean, weather, and climate
-            science
+            Cloud-native data for ocean, weather, and climate science
           </Text>
-        </Flex>
       </Container>
     </Box>
   )
