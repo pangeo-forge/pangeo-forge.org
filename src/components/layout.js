@@ -38,7 +38,7 @@ export const Layout = ({
       >
         <Box>
           <Header />
-          {menu && <Menu />}
+          {menu}
           {children}
         </Box>
         <Footer />
