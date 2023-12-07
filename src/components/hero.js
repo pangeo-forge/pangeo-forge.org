@@ -21,14 +21,14 @@ export const Hero = () => {
           <Image src='/pangeo-forge-logo-white.png' alt='Pangeo-Forge logo' />
         </Flex>
         <Text
-            textTransform={'uppercase'}
-            color={'white'}
-            opacity={0.8}
-            align={'center'}
-          >
-            {' '}
-            Cloud-native data for ocean, weather, and climate science
-          </Text>
+          textTransform={'uppercase'}
+          color={'white'}
+          opacity={0.8}
+          align={'center'}
+        >
+          {' '}
+          Cloud-native data for ocean, weather, and climate science
+        </Text>
       </Container>
     </Box>
   )
